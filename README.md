@@ -1,6 +1,6 @@
 # BookTeca
 <p align="center">
-  <img width="460" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/imagenesWeb/logoBookTeca.png">
+  <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/imagenesWeb/logo.png">
 </p>
 
 ## Indice
