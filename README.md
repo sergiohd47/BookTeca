@@ -1,5 +1,8 @@
 # BookTeca
-![Alt text](https://github.com/sergiohd47/BookTeca/blob/master/imagenesWeb/logoBookTeca.png)
+<p align="center">
+  <img width="460" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/imagenesWeb/logoBookTeca.png">
+</p>
+
 ## Indice
 - [Introduccion](#id1)
 - [Primera fase](#id2) 
