@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import dad.web.bookteca.clases.Libro;
+import dad.web.bookteca.clases.Revista;
 
 @Controller
 public class inicioController {
@@ -19,9 +20,17 @@ public class inicioController {
 		listaLibros.add(libro1);
 		listaLibros.add(libro2);
 		listaLibros.add(libro3);
+		ArrayList<Revista> listaRevistas=new ArrayList<>();
+		Revista revista1=new Revista(1,"GQ", "Editorial GQ",123,null );
+		Revista revista2=new Revista(2,"FHM", "Editorial FHM",35,null );
+		Revista revista3=new Revista(3,"MasQueCoches", "Editorial MasQueCoches",77,null );
+		listaRevistas.add(revista1);
+		listaRevistas.add(revista2);
+		listaRevistas.add(revista3);
 		model.addAttribute("visibleIniciarSesion", true);
 		model.addAttribute("visibleCerrarSesion", false);
 		model.addAttribute("listaLibros",listaLibros);
+		model.addAttribute("listaRevistas",listaRevistas);
 		return "index";
 	}
 

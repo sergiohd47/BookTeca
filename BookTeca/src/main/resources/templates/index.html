@@ -69,13 +69,22 @@
 					iniciar sesion</p>
 				<!-- AÑADIR BOTON AQUI DE INICIO DE SESION O DE REGISTRO-->
 				<p class="lead">LIBROS:</p>
-				<table>
+				<table class="lead">
 					{{#listaLibros}}
 					<tr>
 						<td>{{-index}}</td>
 						<td>{{.}}</td>
 					</tr>
 					{{/listaLibros}}
+				</table>
+				<p class="lead">REVISTAS:</p>
+				<table class="lead">
+					{{#listaRevistas}}
+					<tr>
+						<td>{{-index}}</td>
+						<td>{{.}}</td>
+					</tr>
+					{{/listaRevistas}}
 				</table>
 			</div>
 		</div>
