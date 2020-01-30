@@ -1,6 +1,7 @@
 package dad.web.bookteca.clases;
 
 public class SalaTrabajoGrupo {
+	
 	private int id;
 	private int capacidad;
 	private String localizacion;
@@ -16,20 +17,23 @@ public class SalaTrabajoGrupo {
 	public int getId() {
 		return id;
 	}
+	
 	public int getCapacidad() {
 		return capacidad;
 	}
+	
 	public String getLocalizacion() {
 		return localizacion;
 	}
+	
 	public boolean isCompartida() {
 		return compartida;
 	}
 	
 	@Override
 	public String toString() {
-		return "SalaTrabajoGrupo [id=" + id + ", capacidad=" + capacidad + ", localizacion=" + localizacion
-				+ ", compartida=" + compartida + "]";
+		return "SalaTrabajoGrupo [id=" + id + ", capacidad=" + capacidad + ", localizacion=" + 
+				localizacion + ", compartida=" + compartida + "]";
 	}
 
 }

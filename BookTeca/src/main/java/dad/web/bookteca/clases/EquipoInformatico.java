@@ -1,6 +1,7 @@
 package dad.web.bookteca.clases;
 
 public class EquipoInformatico {
+	
 	private int id;
 	private String sistemaOperativo;
 	private String localizacion;
@@ -15,24 +16,18 @@ public class EquipoInformatico {
 		return id;
 	}
 
-
 	public String getSistemaOperativo() {
 		return sistemaOperativo;
 	}
-
 
 	public String getLocalizacion() {
 		return localizacion;
 	}
 
-
 	@Override
 	public String toString() {
-		return "EquipoInformatico [id=" + id + ", sistemaOperativo=" + sistemaOperativo + ", localizacion="
-				+ localizacion + "]";
+		return "EquipoInformatico [id=" + id + ", sistemaOperativo=" + sistemaOperativo + 
+				", localizacion=" + localizacion + "]";
 	}
-	
-	
-	
 
 }
