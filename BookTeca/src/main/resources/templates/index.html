@@ -44,13 +44,13 @@
 					{{#visibleIniciarSesion}}
 					<li class="nav-item"><a class="nav-link" href="inciarSesion">Iniciar
 							Sesion</a></li>
-					<li class="nav-item"><a class="nav-link" href="inciarSesion">Registrate
+					<li class="nav-item"><a class="nav-link" href="registro">Registrate
 							</a></li> 
 					{{/visibleIniciarSesion}} 
 					{{#visibleCerrarSesion}}
 					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi
 							Perfil</a></li>
-					<li class="nav-item"><a class="nav-link" href="cerrarSesion">Cerrar
+					<li class="nav-item"><a class="nav-link" href="/">Cerrar
 							Sesion</a></li> 
 					{{/visibleCerrarSesion}}
 				</ul>
@@ -62,29 +62,60 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<h1 class="mt-5">BOOKTECA</h1>
-				<p class="lead">Amplia coleccion de recursos al alcance de tu
-					mano</p>
+				<h1 class="mt-5"></h1>
+				<img src="imagenes/logoBookTeca.png" width="600" height="341">
+				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu
+					mano</h1>
 				<p class="lead">Para profundizar mas en los recursos, no dude en
 					iniciar sesion</p>
-				<!-- AÑADIR BOTON AQUI DE INICIO DE SESION O DE REGISTRO-->
-				<p class="lead">LIBROS:</p>
-				<table class="lead">
-					{{#listaLibros}}
+				<a href="iniciarSesion" class="btn btn-success">INICIAR SESION</a>
+				<a href="registro" class="btn btn-success">REGISTRARSE</a>
+				<h1 class="mt-5"></h1>
+				<h1 class="mt-5">LIBROS</h1>
+				<table border class="lead">
 					<tr>
-						<td>{{-index}}</td>
-						<td>{{.}}</td>
+						<th>NOMBRE</th>
+						<th>AUTOR</th>
+						<th>EDITORIAL</th>
+						<th>NUMERO EJEMPLARES</th>
+						<th>GENEROS</th>
+						{{#visibleCerrarSesion}}
+						<th>RESERVAR</th>
+						{{/visibleCerrarSesion}}
 					</tr>
-					{{/listaLibros}}
+					<tr>
+						<td>{{nombreLibro}}</td>
+						<td>{{autorLibro}}</td>
+						<td>{{editorialLibro}}</td>
+						<td>{{numeroEjemplaresLibro}}</td>
+						<td>null</td>
+						{{#visibleCerrarSesion}}
+						<td href="reservar" class="btn btn-success">RESERVAR</td>
+						{{/visibleCerrarSesion}}
+					</tr>
 				</table>
-				<p class="lead">REVISTAS:</p>
-				<table class="lead">
-					{{#listaRevistas}}
+				<h1 class="mt-5">REVISTAS</h1>
+				<table border class="lead">
 					<tr>
-						<td>{{-index}}</td>
-						<td>{{.}}</td>
+						<th>NOMBRE</th>
+						<th>EDITORIAL</th>
+						<th>FASCICULOS</th>
+						<th>NUMERO EJEMPLARES</th>
+						<th>GENEROS</th>
+						{{#visibleCerrarSesion}}
+						<th>RESERVAR</th>
+						{{/visibleCerrarSesion}}
 					</tr>
-					{{/listaRevistas}}
+					<tr>
+						<td>{{nombreRevista}}</td>
+						<td>{{editorialRevista}}</td>
+						<td>{{fasciculoRevista}}</td>
+						<td>{{numeroEjemplaresRevista}}</td>
+						<td>null</td>
+						{{#visibleCerrarSesion}}
+						<td href="reservar" class="btn btn-success">RESERVAR</td>
+						{{/visibleCerrarSesion}}
+					</tr>
 				</table>
 			</div>
 		</div>
