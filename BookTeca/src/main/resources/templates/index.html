@@ -3,7 +3,6 @@
 <html lang="es">
 
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -72,46 +71,48 @@
 				<a href="registro" class="btn btn-success">REGISTRARSE</a>
 				<h1 class="mt-5"></h1>
 				<h1 class="mt-5">LIBROS</h1>
+				<p class="lead">El libro destacado del dia es:</p>
 				<table border class="lead">
 					<tr>
 						<th>NOMBRE</th>
 						<th>AUTOR</th>
 						<th>EDITORIAL</th>
 						<th>NUMERO EJEMPLARES</th>
-						<th>GENEROS</th>
+						<th>GENERO</th>
 						{{#visibleCerrarSesion}}
 						<th>RESERVAR</th>
 						{{/visibleCerrarSesion}}
 					</tr>
 					<tr>
-						<td>{{nombreLibro}}</td>
-						<td>{{autorLibro}}</td>
-						<td>{{editorialLibro}}</td>
-						<td>{{numeroEjemplaresLibro}}</td>
-						<td>null</td>
+						<td>{{nombreLibroDestacado}}</td>
+						<td>{{autorLibroDestacado}}</td>
+						<td>{{editorialLibroDestacado}}</td>
+						<td>{{numeroEjemplaresLibroDestacado}}</td>
+						<td>{{generoLibroDestacado}}</td>
 						{{#visibleCerrarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
 						{{/visibleCerrarSesion}}
 					</tr>
 				</table>
 				<h1 class="mt-5">REVISTAS</h1>
+				<p class="lead">La revista destacada del dia es:</p>
 				<table border class="lead">
 					<tr>
 						<th>NOMBRE</th>
 						<th>EDITORIAL</th>
 						<th>FASCICULOS</th>
 						<th>NUMERO EJEMPLARES</th>
-						<th>GENEROS</th>
+						<th>GENERO</th>
 						{{#visibleCerrarSesion}}
 						<th>RESERVAR</th>
 						{{/visibleCerrarSesion}}
 					</tr>
 					<tr>
-						<td>{{nombreRevista}}</td>
-						<td>{{editorialRevista}}</td>
-						<td>{{fasciculoRevista}}</td>
-						<td>{{numeroEjemplaresRevista}}</td>
-						<td>null</td>
+						<td>{{nombreRevistaDestacada}}</td>
+						<td>{{editorialRevistaDestacada}}</td>
+						<td>{{fasciculoRevistaDestacada}}</td>
+						<td>{{numeroEjemplaresRevistaDestacada}}</td>
+						<td>{{generoRevistaDestacada}}</td>
 						{{#visibleCerrarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
 						{{/visibleCerrarSesion}}
@@ -124,7 +125,5 @@
 	<!-- Bootstrap core JavaScript -->
 	<script src="vendor/jquery/jquery.slim.min.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
 </body>
-
 </html>

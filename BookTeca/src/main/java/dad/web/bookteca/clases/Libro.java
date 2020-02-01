@@ -9,15 +9,15 @@ public class Libro {
 	private String autor;
 	private String editorial;
 	private int numeroEjemplares;
-	private ArrayList<String> generos=new ArrayList<>();
+	private String genero;
 	
-	public Libro(int id, String nombre, String autor, String editorial, int numeroEjemplares, ArrayList<String> generos) {
+	public Libro(int id, String nombre, String autor, String editorial, int numeroEjemplares, String genero) {
 		this.id=id;
 		this.nombre=nombre;
 		this.autor=autor;
 		this.editorial=editorial;
 		this.numeroEjemplares=numeroEjemplares;
-		this.generos=generos;
+		this.genero=genero;
 	}
 	
 	public int getId() {
@@ -32,8 +32,8 @@ public class Libro {
 		return autor;
 	}
 	
-	public ArrayList<String> getGeneros() {
-		return generos;
+	public String getGenero() {
+		return genero;
 	}
 	
 
@@ -53,7 +53,7 @@ public class Libro {
 	@Override
 	public String toString() {
 		return "Libro [id=" + id + ", nombre=" + nombre + ", autor=" + autor + ", editorial=" + editorial
-				+ ", numeroEjemplares=" + numeroEjemplares + ", generos=" + generos + "]";
+				+ ", numeroEjemplares=" + numeroEjemplares + ", generos=" + genero + "]";
 	}
 	
 	

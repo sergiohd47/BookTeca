@@ -1553,3 +1553,66 @@ Binding(COMMAND+SHIFT+T,
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2020-02-01 10:33:42.634
 !MESSAGE Exception caught during execution of command '[git, --version]' in '/usr/bin', return code '1', error message 'xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
 '
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:41.978
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:41.979
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@5bca851[org.springframework.tooling.boot.ls:1.2.1.201901241129(id=615)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:41.986
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:42.461
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:46.454
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.jmtFTFUY
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:46.455
+!MESSAGE subscribing to classpath changes: sts4.classpath.jmtFTFUY
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:46.456
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:46.456
+!MESSAGE subsribers = [sts4.classpath.jmtFTFUY]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:46.457
+!MESSAGE Sending initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:46.459
+!MESSAGE project BookTeca ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:46.460
+!MESSAGE Sending initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:46.460
+!MESSAGE Preparing classpath changed notification BookTeca
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:46.460
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.jmtFTFUY => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:46.461
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:46.472
+!MESSAGE classpath=74 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:46.473
+!MESSAGE executing callback sts4.classpath.jmtFTFUY BookTeca false 74
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 10:35:46.505
+!MESSAGE executing callback sts4.classpath.jmtFTFUY SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 11:57:40.779
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.jmtFTFUY
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 11:57:40.785
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.jmtFTFUY
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 11:57:40.785
+!MESSAGE subsribers = null
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-01 11:57:40.785
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.jmtFTFUY => OK
