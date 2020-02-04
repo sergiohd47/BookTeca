@@ -8,15 +8,13 @@ public class Revista {
 	private String nombre;
 	private String editorial;
 	private int fasciculo;
-	private int numeroEjemplares;
 	private String genero;
 	
-	public Revista(int id, String nombre, String editorial, int fasciculo, int numeroEjemplares, String genero) {
+	public Revista(int id, String nombre, String editorial, int fasciculo, String genero) {
 		this.id = id;
 		this.nombre = nombre;
 		this.editorial = editorial;
 		this.fasciculo = fasciculo;
-		this.numeroEjemplares=numeroEjemplares;
 		this.genero = genero;
 	}
 	
@@ -40,18 +38,10 @@ public class Revista {
 		return genero;
 	}
 
-	public int getNumeroEjemplares() {
-		return numeroEjemplares;
-	}
-
-	public void setNumeroEjemplares(int numeroEjemplares) {
-		this.numeroEjemplares = numeroEjemplares;
-	}
-
 	@Override
 	public String toString() {
 		return "Revista [id=" + id + ", nombre=" + nombre + ", editorial=" + editorial + ", fasciculo=" + fasciculo
-				+ ", numeroEjemplares=" + numeroEjemplares + ", generos=" + genero + "]";
+				+ ", generos=" + genero + "]";
 	}
 	
 	

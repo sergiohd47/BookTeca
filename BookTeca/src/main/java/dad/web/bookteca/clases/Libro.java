@@ -8,15 +8,14 @@ public class Libro {
 	private String nombre;
 	private String autor;
 	private String editorial;
-	private int numeroEjemplares;
 	private String genero;
 	
-	public Libro(int id, String nombre, String autor, String editorial, int numeroEjemplares, String genero) {
+	public Libro(int id, String nombre, String autor, String editorial, String genero) {
 		this.id=id;
 		this.nombre=nombre;
 		this.autor=autor;
 		this.editorial=editorial;
-		this.numeroEjemplares=numeroEjemplares;
+
 		this.genero=genero;
 	}
 	
@@ -37,15 +36,6 @@ public class Libro {
 	}
 	
 
-	
-	public int getNumeroEjemplares() {
-		return numeroEjemplares;
-	}
-
-	public void setNumeroEjemplares(int numeroEjemplares) {
-		this.numeroEjemplares = numeroEjemplares;
-	}
-
 	public String getEditorial() {
 		return editorial;
 	}
@@ -53,7 +43,7 @@ public class Libro {
 	@Override
 	public String toString() {
 		return "Libro [id=" + id + ", nombre=" + nombre + ", autor=" + autor + ", editorial=" + editorial
-				+ ", numeroEjemplares=" + numeroEjemplares + ", generos=" + genero + "]";
+				+ ", generos=" + genero + "]";
 	}
 	
 	
