@@ -8,7 +8,7 @@
 <meta name="description" content="Pagina web BookTeca">
 <meta name="author" content="Dani, Borja y Sergio">
 
-<title>Libros - BookTeca</title>
+<title>Inicio - BookTeca</title>
 
 <!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,27 +28,21 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="/">Inicio
-					</a></li>
-					<li class="nav-item active"><a class="nav-link" href="#">Libros
+					<li class="nav-item active"><a class="nav-link" href="#">Inicio
 							<span class="sr-only">(current)</span>
 					</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="buscadorRevistas">Revistas</a></li>
+					<li class="nav-item"><a class="nav-link" href="buscadorLibros">Libros</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="buscadorRevistas">Revistas</a>
+					</li>
 					<li class="nav-item"><a class="nav-link"
 						href="reservaSalaTrabajoGrupo">Sala Trabajo En Grupo</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="reservaEquipoInformatico">Equipos Informaticos</a></li>
-					{{#visibleCerrarSesion}}
+						href="reservaEquipoInformatico">Equipos Informaticos</a></li> 
 					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi
 							Perfil</a></li>
 					<li class="nav-item"><a class="nav-link" href="/">Cerrar
 							Sesion</a></li> 
-					{{/visibleCerrarSesion}}
-					{{#visibleIniciarSesion}}
-					<li class="nav-item"><a class="nav-link" href="iniciarSesion">Iniciar Sesion</a></li>
-					<li class="nav-item"><a class="nav-link" href="registro">Registro</a></li> 
-					{{/visibleIniciarSesion}}
 				</ul>
 			</div>
 		</div>
@@ -62,40 +56,9 @@
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
 				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu
 					mano</h1>
-				<p class="lead">Aqui encontraras el buscador de libros de
-					nuestra biblioteca</p>
 				<h1 class="mt-5"></h1>
-				<form>
-					<div>
-						<label for="busquedaTitulo">Busqueda por titulo: </label> <input type="search"
-							id="tituloLibro" name="tituloLibro"
-							placeholder="Escribe el nombre del libro" required
-							size="30">
-						<button>BUSCAR</button>
-						<span class="validity"></span>
-					</div>
-				</form>
-				<form>
-					<div>
-						<label for="busquedaAutor">Busqueda por autor: </label> <input type="search"
-							id="autorLibro" name="autorLibro"
-							placeholder="Escribe el nombre del autor" required
-							size="30">
-						<button>BUSCAR</button>
-						<span class="validity"></span>
-					</div>
-				</form>
-				<form>
-					<div>
-						<label for="busquedaGenero">Busqueda por genero: </label> <input type="search"
-							id="generoLibro" name="generoLibro"
-							placeholder="Escribe el genero del libro" required
-							size="30">
-						<button>BUSCAR</button>
-						<span class="validity"></span>
-					</div>
-				</form>
-				<h1 class="mt-5">RESULTADO DE TU BUSQUEDA</h1>
+				<h1 class="mt-5">LIBROS</h1>
+				<p class="lead">El libro destacado del dia es:</p>
 				<table border class="lead">
 					<tr>
 						<th>NOMBRE</th>
@@ -103,19 +66,35 @@
 						<th>EDITORIAL</th>
 						<th>NUMERO EJEMPLARES</th>
 						<th>GENERO</th>
-						{{#visibleCerrarSesion}}
 						<th>RESERVAR</th>
-						{{/visibleCerrarSesion}}
 					</tr>
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						{{#visibleCerrarSesion}}
+						<td>{{nombreLibroDestacado}}</td>
+						<td>{{autorLibroDestacado}}</td>
+						<td>{{editorialLibroDestacado}}</td>
+						<td>{{numeroEjemplaresLibroDestacado}}</td>
+						<td>{{generoLibroDestacado}}</td>
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
-						{{/visibleCerrarSesion}}
+					</tr>
+				</table>
+				<h1 class="mt-5">REVISTAS</h1>
+				<p class="lead">La revista destacada del dia es:</p>
+				<table border class="lead">
+					<tr>
+						<th>NOMBRE</th>
+						<th>EDITORIAL</th>
+						<th>FASCICULOS</th>
+						<th>NUMERO EJEMPLARES</th>
+						<th>GENERO</th>
+						<th>RESERVAR</th>
+					</tr>
+					<tr>
+						<td>{{nombreRevistaDestacada}}</td>
+						<td>{{editorialRevistaDestacada}}</td>
+						<td>{{fasciculoRevistaDestacada}}</td>
+						<td>{{numeroEjemplaresRevistaDestacada}}</td>
+						<td>{{generoRevistaDestacada}}</td>
+						<td href="reservar" class="btn btn-success">RESERVAR</td>
 					</tr>
 				</table>
 			</div>
