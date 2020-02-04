@@ -1784,3 +1784,45 @@ Caused by: java.lang.NullPointerException
 	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
 	at org.eclipse.e4.core.internal.di.MethodRequestor.execute(MethodRequestor.java:58)
 	... 61 more
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-04 14:43:05.380
+!MESSAGE Preparing classpath changed notification BookTeca
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-04 14:43:05.381
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-04 14:43:05.383
+!MESSAGE classpath=99 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-04 14:43:05.383
+!MESSAGE executing callback sts4.classpath.DkgZhWzy BookTeca false 99
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-04 14:43:05.495
+!MESSAGE executing callback sts4.classpath.DkgZhWzy SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-04 14:43:11.400
+!MESSAGE Preparing classpath changed notification BookTeca
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-04 14:43:11.401
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-04 14:43:11.406
+!MESSAGE classpath=99 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-04 14:43:11.407
+!MESSAGE executing callback sts4.classpath.DkgZhWzy BookTeca false 99
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-04 14:43:11.422
+!MESSAGE executing callback sts4.classpath.DkgZhWzy SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-04 14:43:26.155
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.DkgZhWzy
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-04 14:43:26.156
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.DkgZhWzy
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-04 14:43:26.156
+!MESSAGE subsribers = null
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-04 14:43:26.156
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.DkgZhWzy => OK
