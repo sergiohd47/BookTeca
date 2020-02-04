@@ -69,5 +69,8 @@ public class inicioController {
 		
 		return "index";
 	}
+	
+	
+	
 
 }

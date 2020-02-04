@@ -1,5 +1,6 @@
 package dad.web.bookteca.clases;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class Revista {
@@ -10,12 +11,18 @@ public class Revista {
 	private int fasciculo;
 	private String genero;
 	
+	private boolean disponible;
+	private int idUsuario;
+	private Date fecInicio;
+	private Date fecFin;
+	
 	public Revista(int id, String nombre, String editorial, int fasciculo, String genero) {
 		this.id = id;
 		this.nombre = nombre;
 		this.editorial = editorial;
 		this.fasciculo = fasciculo;
 		this.genero = genero;
+		this.disponible = true;
 	}
 	
 	public int getId() {
@@ -36,6 +43,29 @@ public class Revista {
 	
 	public String getGenero() {
 		return genero;
+	}
+	
+	public boolean isDisponible() {
+		return disponible;
+	}
+
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+	
+	public Date getFecInicio() {
+		return fecInicio;
+	}
+
+	public Date getFecFin() {
+		return fecFin;
+	}
+
+	public void reservar(int idUsuario, Date inicio, Date fin) {
+		this.disponible = false;
+		this.idUsuario = idUsuario;
+		this.fecInicio = inicio;
+		this.fecFin = fin;
 	}
 
 	@Override

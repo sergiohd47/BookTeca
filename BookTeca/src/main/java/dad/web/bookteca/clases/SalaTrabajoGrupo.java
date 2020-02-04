@@ -7,11 +7,15 @@ public class SalaTrabajoGrupo {
 	private String localizacion;
 	private boolean compartida;
 	
+	private boolean disponible;
+	private int idUsuario;
+	
 	public SalaTrabajoGrupo(int id, int capacidad, String localizacion, boolean compartida) {
 		this.id = id;
 		this.capacidad = capacidad;
 		this.localizacion = localizacion;
 		this.compartida = compartida;
+		this.disponible = true;
 	}
 	
 	public int getId() {
@@ -28,6 +32,19 @@ public class SalaTrabajoGrupo {
 	
 	public boolean isCompartida() {
 		return compartida;
+	}
+	
+	public boolean isDisponible() {
+		return disponible;
+	}
+
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+	
+	public void reservar(int idUsuario) {
+		this.disponible = false;
+		this.idUsuario = idUsuario;
 	}
 	
 	@Override
