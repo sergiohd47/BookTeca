@@ -2,27 +2,38 @@
 @import url('bootstrap.min.css');
 
 body,html{
-	margin: 0;
-	padding: 0;
-	widht: 100%;
-	height: 100%;
-	position: relative;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-image: url("../imagenes/sesionUsuario.jpg");
+    background-size: 100%;
 }
 
-.signin{
-	border: 1px solid #E1E1E1;
-	border-radius: 5px;
-	padding: 17px;
-	width: 300px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
+#signin{
+    margin: 0 auto;
+    border-radius: 5px;
+    padding: 17px;
+    border: 1px solid #E1E1E1;
+    width: 200px;
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    background: grey;
 }
 
-@media (max-width: 400px){
-	.signin{
-		width: 90%;
-		height: 90%;
-	}
+input{
+	font-family: inherit;
+	font-size: 100%;
+	width : 150px;
+  	padding: 0;
+  	margin: 0;
+  	box-sizing: border-box;
+}
+
+#button-sesion{
+	bold;
+	background: #0099CC;
 }
