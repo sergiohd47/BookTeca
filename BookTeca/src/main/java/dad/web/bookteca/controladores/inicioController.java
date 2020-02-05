@@ -129,7 +129,20 @@ public class inicioController {
 		//model.addAttribute("visibleCerrarSesion",false);
 		model.addAttribute("visibleIniciarSesion",true);
 		return "buscadorRevistas";
-		
+	}
+	@RequestMapping("/reservaSalaTrabajoGrupo")
+	public String reservaSalaTrabajoGrupo(Model model) {
+		//NO HA INICIADO SESION
+		//model.addAttribute("visibleCerrarSesion",false);
+		model.addAttribute("visibleIniciarSesion",true);
+		return "reservaSalaTrabajoGrupo";
+	}
+	@RequestMapping("/reservaEquipoInformatico")
+	public String reservaEquipoInformatico(Model model) {
+		//NO HA INICIADO SESION
+		//model.addAttribute("visibleCerrarSesion",false);
+		model.addAttribute("visibleIniciarSesion",true);
+		return "reservaEquipoInformatico";
 	}
 	
 	

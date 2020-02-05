@@ -2014,3 +2014,54 @@ Binding(COMMAND+SHIFT+T,
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:16:46.294
 !MESSAGE executing callback sts4.classpath.OgRlgAvU SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:05.241
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.OgRlgAvU
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:05.247
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.OgRlgAvU
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:05.247
+!MESSAGE subsribers = null
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:05.247
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.OgRlgAvU => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:30.558
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.KJaKBaLp
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:30.559
+!MESSAGE subscribing to classpath changes: sts4.classpath.KJaKBaLp
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:30.559
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:30.559
+!MESSAGE subsribers = [sts4.classpath.KJaKBaLp]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:30.559
+!MESSAGE Sending initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:30.560
+!MESSAGE project BookTeca ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:30.560
+!MESSAGE Preparing classpath changed notification BookTeca
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:30.561
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:30.562
+!MESSAGE Sending initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:30.562
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.KJaKBaLp => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:30.564
+!MESSAGE classpath=99 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:30.564
+!MESSAGE executing callback sts4.classpath.KJaKBaLp BookTeca false 99
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:30.613
+!MESSAGE executing callback sts4.classpath.KJaKBaLp SUCCESS [done]
