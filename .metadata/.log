@@ -2065,3 +2065,66 @@ Binding(COMMAND+SHIFT+T,
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:35:30.613
 !MESSAGE executing callback sts4.classpath.KJaKBaLp SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:45:58.122
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.KJaKBaLp
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:45:58.127
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.KJaKBaLp
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:45:58.128
+!MESSAGE subsribers = null
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:45:58.128
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.KJaKBaLp => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:46:04.858
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.ataovBnW
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:46:04.858
+!MESSAGE subscribing to classpath changes: sts4.classpath.ataovBnW
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:46:04.858
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:46:04.858
+!MESSAGE subsribers = [sts4.classpath.ataovBnW]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:46:04.859
+!MESSAGE Sending initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:46:04.859
+!MESSAGE project BookTeca ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:46:04.860
+!MESSAGE Sending initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:46:04.860
+!MESSAGE Preparing classpath changed notification BookTeca
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:46:04.860
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.ataovBnW => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:46:04.860
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:46:04.862
+!MESSAGE classpath=99 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:46:04.862
+!MESSAGE executing callback sts4.classpath.ataovBnW BookTeca false 99
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 10:46:04.906
+!MESSAGE executing callback sts4.classpath.ataovBnW SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 11:02:51.553
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.ataovBnW
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 11:02:51.559
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.ataovBnW
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 11:02:51.560
+!MESSAGE subsribers = null
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-05 11:02:51.560
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.ataovBnW => OK

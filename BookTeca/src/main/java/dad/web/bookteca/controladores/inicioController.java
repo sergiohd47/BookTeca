@@ -144,7 +144,10 @@ public class inicioController {
 		model.addAttribute("visibleIniciarSesion",true);
 		return "reservaEquipoInformatico";
 	}
-	
+	@RequestMapping("/registro")
+	public String registro(Model model) {
+		return "registro";
+	}
 	
 	
 
