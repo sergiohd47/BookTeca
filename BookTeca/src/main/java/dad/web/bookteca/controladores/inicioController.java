@@ -66,7 +66,7 @@ public class inicioController {
 	}
 	@RequestMapping("/iniciarSesion")
 	public String iniciarSesion(Model model) {
-		return "iniciarSesion";
+		return "iniciarSesionNuevo";
 	}
 	@RequestMapping("/sesionIniciada")
 	public String sesionIniciada(Model model) {
