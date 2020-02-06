@@ -268,9 +268,29 @@ public class inicioController {
 	}
 	@RequestMapping("/editarPerfil")
 	public String editarPerfil(Model model) {
+		model.addAttribute("usuarioAdmin", true);
 		return "editarPerfil";
 	}
-	
+	@RequestMapping("/añadirRevista")
+	public String añadirRevista(Model model) {
+		return "añadirRevista";
+	}
+	@RequestMapping("/añadirSalaTrabajoGrupo")
+	public String añadirSala(Model model) {
+		return "añadirSalaTrabajoGrupo";
+	}
+	@RequestMapping("/añadirEquipoInformatico")
+	public String añadirEquipoInformatico(Model model) {
+		return "añadirEquipoInformatico";
+	}
+	@RequestMapping("/añadirLibro")
+	public String añadirLibro(Model model) {
+		return "añadirLibro";
+	}
+	@RequestMapping("/administrarUsuarios")
+	public String administrarUsuarios(Model model) {
+		return "administrarUsuarios";
+	}
 	
 
 }

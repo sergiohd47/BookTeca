@@ -2251,3 +2251,54 @@ Binding(COMMAND+SHIFT+T,
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2020-02-06 11:13:09.926
 !MESSAGE Exception caught during execution of command '[git, --version]' in '/usr/bin', return code '1', error message 'xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
 '
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:51.498
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:51.499
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@c09be0d[org.springframework.tooling.boot.ls:1.2.1.201901241129(id=615)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:51.508
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:51.974
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:55.966
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.UrycVwXg
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:55.966
+!MESSAGE subscribing to classpath changes: sts4.classpath.UrycVwXg
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:55.967
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:55.968
+!MESSAGE subsribers = [sts4.classpath.UrycVwXg]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:55.969
+!MESSAGE Sending initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:55.971
+!MESSAGE project BookTeca ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:55.972
+!MESSAGE Sending initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:55.973
+!MESSAGE Preparing classpath changed notification BookTeca
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:55.973
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.UrycVwXg => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:55.973
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:55.981
+!MESSAGE classpath=99 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:55.981
+!MESSAGE executing callback sts4.classpath.UrycVwXg BookTeca false 99
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-06 11:28:56.020
+!MESSAGE executing callback sts4.classpath.UrycVwXg SUCCESS [done]
