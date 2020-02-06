@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, 
+		maximum-scale=1.0, minimum-scale=1.0">
+<title>Añadir Sala Trabajo Grupo - BookTeca</title>
+<link rel="stylesheet" href="../css/signinstyles.css">
+</head>
+<body>
+	<h1 class="mt-5">Zona Administracion de Salas</h1>
+	<p class="lead">Desde aqui puedes añadir Salas de Trabajo en Grupo</p>
+	<form id="signin" action="/añadirSalaTrabajoGrupo" method="post">
+		<div class="form-sesion">
+			<p>
+				<label><b>Capacidad</b></label><br> <input type="number"
+					name="capacidadNuevaSala" required placeholder="2">
+			</p>
+			<p>
+				<label><b>Localizacion</b></label><br> <input type="text"
+					name="localizacionNuevaSala" required placeholder="Planta 0">
+			</p>
+			<p>
+				<label><b>Compartida</b></label><br>
+				<input type="checkbox" name="compartidaSi" value="compartidaSi"> Si<br>
+				<input type="checkbox" name="compartidaNo" value="compartidaNo"> No<br>
+			</p>
+
+			<p>
+				<input id="button-sesion" type="submit" value="Añadir">
+			</p>
+		</div>
+	</form>
+</body>
+</html>

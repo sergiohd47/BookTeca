@@ -55,6 +55,17 @@
 				<h1 class="mt-5"></h1>
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
 				<h1 class="mt-5">Mi Perfil</h1>
+				{{#usuarioAdmin}}
+				<h1 class="mt-5">Zona Administracion</h1>
+				<p class="lead">Desde aqui puedes administrar los diferentes recursos de la coleccion</p>
+				<a href="añadirLibro" class="btn btn-success">AÑADIR LIBRO</a>
+				<a href="añadirRevista" class="btn btn-success">AÑADIR REVISTA</a>
+				<a href="añadirSalaTrabajoGrupo" class="btn btn-success">AÑADIR SALA</a>
+				<a href="añadirEquipoInformatico" class="btn btn-success">AÑADIR EQUIPO INFORMATICO</a>
+				<p class="lead">En esta parte puedes administrar los diferentes usuario, borrando o cambiandole el rol</p>
+				<a href="administrarUsuarios" class="btn btn-success">ADMINISTRAR USUARIOS</a>
+				<h1 class="mt-5"></h1>
+				{{/usuarioAdmin}}
 				<p class="lead">Desde aqui, puedes mirar el estado de tus reservas o editar tu perfil</p>
 				<a href="editarPerfil" class="btn btn-success">EDITAR PERFIL</a>
 				<h1 class="mt-5"></h1>
