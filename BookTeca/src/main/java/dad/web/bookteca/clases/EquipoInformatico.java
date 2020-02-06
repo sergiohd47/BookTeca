@@ -1,15 +1,20 @@
 package dad.web.bookteca.clases;
 
 import java.sql.Date;
+import javax.persistence.*;
 
+@Entity
 public class EquipoInformatico {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String sistemaOperativo;
 	private String localizacion;
 	
 	private boolean disponible;
-	private int idUsuario;
+	@OneToOne(cascade=CascadeType.ALL)
+	private Usuario idUsuario;
 	private Date fechaReserva;
 	
 	public EquipoInformatico(int id, String sistemaOperativo, String localizacion) {
@@ -34,7 +39,7 @@ public class EquipoInformatico {
 		return disponible;
 	}
 
-	public int getIdUsuario() {
+	public Usuario getIdUsuario() {
 		return idUsuario;
 	}
 	
@@ -42,7 +47,7 @@ public class EquipoInformatico {
 		return fechaReserva;
 	}
 
-	public void reservar(int idUsuario, Date reserva) {
+	public void reservar(Usuario idUsuario, Date reserva) {
 		this.disponible = false;
 		this.idUsuario = idUsuario;
 		this.fechaReserva = reserva;

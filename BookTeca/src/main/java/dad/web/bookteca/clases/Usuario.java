@@ -1,40 +1,48 @@
 package dad.web.bookteca.clases;
 
 import java.util.ArrayList;
+import javax.persistence.*;
 
+@Entity
 public class Usuario {
 	
 	private final int MAX = 3;
 	
-	private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private String email;;
 	private String nombre;
 	private String apellidos;
-	private ArrayList<Libro> librosReservados;
-	private ArrayList<Revista> revistasReservadas;
-	private int puestoInformatico;
-	private int salaTrabajoGrupo;
+	@OneToMany(mappedBy="idUsuario")
+	private ArrayList<Libro> librosReservados = new ArrayList<>(MAX);
+	@OneToMany(mappedBy="idUsuario")
+	private ArrayList<Revista> revistasReservadas = new ArrayList<>(MAX);
+	@OneToOne(mappedBy="idUsuario")
+	private EquipoInformatico puestoInformatico;
+	@OneToOne(mappedBy="idUsuario")
+	private SalaTrabajoGrupo salaTrabajoGrupo;
 	private boolean administrador;
 	
-	public Usuario(int id, String nombre, String apellidos, boolean admin) {
-		this.id = id;
+	public Usuario(String email, String nombre, String apellidos, boolean admin) {
+		this.email = email;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.administrador = admin;
 	}
 
-	public int getId() {
-		return id;
+	public String getEmail() {
+		return this.email;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	public int getSalaTrabajoGrupo() {
+	public SalaTrabajoGrupo getSalaTrabajoGrupo() {
 		return salaTrabajoGrupo;
 	}
 
-	public void setSalaTrabajoGrupo(int salaTrabajoGrupo) {
+	public void setSalaTrabajoGrupo(SalaTrabajoGrupo salaTrabajoGrupo) {
 		this.salaTrabajoGrupo = salaTrabajoGrupo;
 	}
 
@@ -90,11 +98,11 @@ public class Usuario {
 		this.revistasReservadas.remove(revista);
 	}
 
-	public int getPuestoInformatico() {
+	public EquipoInformatico getPuestoInformatico() {
 		return puestoInformatico;
 	}
 
-	public void setPuestoInformatico(int puestoInformatico) {
+	public void setPuestoInformatico(EquipoInformatico puestoInformatico) {
 		this.puestoInformatico = puestoInformatico;
 	}
 	
@@ -110,7 +118,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + 
+		return "Usuario [email=" + email + ", nombre=" + nombre + ", apellidos=" + apellidos + 
 				", librosReservados=" + librosReservados + ", revistasReservadas=" + revistasReservadas + 
 				", puestoInformatico=" + puestoInformatico + "]";
 	}

@@ -1,10 +1,13 @@
 package dad.web.bookteca.clases;
 
 import java.sql.Date;
-import java.util.ArrayList;
+import javax.persistence.*;
 
+@Entity
 public class Libro {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nombre;
 	private String autor;
@@ -12,11 +15,13 @@ public class Libro {
 	private String genero;
 	
 	private boolean disponible;
-	private int idUsuario;
+	@ManyToOne
+	private Usuario idUsuario;
 	private Date fecInicio;
 	private Date fecFin;
 	
-	
+	//ConstructorBBDD
+	protected Libro() {}
 	
 	public Libro(int id, String nombre, String autor, String editorial, String genero ) {
 		this.id=id;
@@ -52,7 +57,7 @@ public class Libro {
 		return disponible;
 	}
 
-	public int getIdUsuario() {
+	public Usuario getIdUsuario() {
 		return idUsuario;
 	}
 	
@@ -64,7 +69,7 @@ public class Libro {
 		return fecFin;
 	}
 
-	public void reservar(int idUsuario, Date inicio, Date fin) {
+	public void reservar(Usuario idUsuario, Date inicio, Date fin) {
 		this.disponible = false;
 		this.idUsuario = idUsuario;
 		this.fecInicio = inicio;

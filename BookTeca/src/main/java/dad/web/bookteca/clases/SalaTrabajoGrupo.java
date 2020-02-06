@@ -1,5 +1,10 @@
 package dad.web.bookteca.clases;
 
+import java.sql.Date;
+
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
+
 public class SalaTrabajoGrupo {
 	
 	private int id;
@@ -8,7 +13,9 @@ public class SalaTrabajoGrupo {
 	private boolean compartida;
 	
 	private boolean disponible;
-	private int idUsuario;
+	@OneToOne(cascade=CascadeType.ALL)
+	private Usuario idUsuario;
+	private Date fechaReserva;
 	
 	public SalaTrabajoGrupo(int id, int capacidad, String localizacion, boolean compartida) {
 		this.id = id;
@@ -38,11 +45,11 @@ public class SalaTrabajoGrupo {
 		return disponible;
 	}
 
-	public int getIdUsuario() {
+	public Usuario getIdUsuario() {
 		return idUsuario;
 	}
 	
-	public void reservar(int idUsuario) {
+	public void reservar(Usuario idUsuario) {
 		this.disponible = false;
 		this.idUsuario = idUsuario;
 	}
