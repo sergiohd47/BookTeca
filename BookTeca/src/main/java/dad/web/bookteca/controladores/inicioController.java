@@ -264,13 +264,34 @@ public class inicioController {
 		model.addAttribute("localizacionEquipo", equipoEscogido.getLocalizacion());
 		model.addAttribute("diaFinReservaEquipo", "8.02.2020");
 		
+		//EL USUARIO ES ADMINISTRADOR
+		model.addAttribute("usuarioAdmin", true);
 		return "miPerfil";
 	}
 	@RequestMapping("/editarPerfil")
 	public String editarPerfil(Model model) {
 		return "editarPerfil";
 	}
-	
+	@RequestMapping("/añadirRevista")
+	public String añadirRevista(Model model) {
+		return "añadirRevista";
+	}
+	@RequestMapping("/añadirSalaTrabajoGrupo")
+	public String añadirSala(Model model) {
+		return "añadirSalaTrabajoGrupo";
+	}
+	@RequestMapping("/añadirEquipoInformatico")
+	public String añadirEquipoInformatico(Model model) {
+		return "añadirEquipoInformatico";
+	}
+	@RequestMapping("/añadirLibro")
+	public String añadirLibro(Model model) {
+		return "añadirLibro";
+	}
+	@RequestMapping("/administrarUsuarios")
+	public String administrarUsuarios(Model model) {
+		return "administrarUsuarios";
+	}
 	
 
 }

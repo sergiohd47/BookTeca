@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Pagina web BookTeca">
+<meta name="author" content="Dani, Borja y Sergio">
+
+<title>Administrar Usuarios - BookTeca</title>
+
+<!-- Bootstrap core CSS -->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+		<div class="container">
+			<a class="navbar-brand" href="#">BookTeca</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
+	</nav>
+
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h1 class="mt-5"></h1>
+				<img src="imagenes/logoBookTeca.png" width="600" height="341">
+				<h1 class="mt-5">Zona Administracion de Usuarios</h1>
+				<p class="lead">Desde aqui puedes hacer administracion a los usuarios</p>
+				<form>
+					<div>
+						<label for="busquedaTitulo">Busqueda por email: </label> <input type="search"
+							id="emailUsuario" name="emailUsuario"
+							placeholder="Escribe el email del usuario" required
+							size="30">
+						<button>BUSCAR</button>
+						<span class="validity"></span>
+					</div>
+				</form>
+				<h1 class="mt-5">RESULTADO DE TU BUSQUEDA</h1>
+				<table border class="lead">
+					<tr>
+						<th>NOMBRE COMPLETO</th>
+						<th>CORREO</th>
+						<th>ADMINISTRADOR</th>
+						<th></th>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td href="adminUsuarios" id="hacerAdmin" class="btn btn-success">CAMBIAR ROL</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="vendor/jquery/jquery.slim.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
