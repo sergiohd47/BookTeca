@@ -68,7 +68,7 @@ public class inicioController {
 	}
 	@RequestMapping("/iniciarSesion")
 	public String iniciarSesion(Model model) {
-		return "iniciarSesion";
+		return "iniciarSesionNuevo";
 	}
 	@RequestMapping("/sesionIniciada")
 	public String sesionIniciada(Model model) {
@@ -264,11 +264,12 @@ public class inicioController {
 		model.addAttribute("localizacionEquipo", equipoEscogido.getLocalizacion());
 		model.addAttribute("diaFinReservaEquipo", "8.02.2020");
 		
+		//EL USUARIO ES ADMINISTRADOR
+		model.addAttribute("usuarioAdmin", true);
 		return "miPerfil";
 	}
 	@RequestMapping("/editarPerfil")
 	public String editarPerfil(Model model) {
-		model.addAttribute("usuarioAdmin", true);
 		return "editarPerfil";
 	}
 	@RequestMapping("/añadirRevista")
