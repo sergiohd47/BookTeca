@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, user-scalable=no, initial-scale=1.0, 
+		maximum-scale=1.0, minimum-scale=1.0">
+<title>Añadir Equipo Informatico - BookTeca</title>
+<link rel="stylesheet" href="../css/signinstyles.css">
+</head>
+<body>
+	<h1 class="mt-5">Zona Administracion de Equipos Informaticos</h1>
+	<p class="lead">Desde aqui puedes añadir Equipos Informaticos</p>
+	<form id="signin" action="/añadirEquipoInformatico" method="post">
+		<div class="form-sesion">
+			<p>
+				<label><b>Sistema Operativo</b></label><br> <input type="text"
+					name="soNuevoEquipo" required placeholder="Mac OSX">
+			</p>
+			<p>
+				<label><b>Localizacion</b></label><br> <input type="text"
+					name="localizacionNuevoEquipo" required placeholder="Equipo 29">
+			</p>
+			<p>
+				<input id="button-sesion" type="submit" value="Añadir">
+			</p>
+		</div>
+	</form>
+</body>
+</html>
