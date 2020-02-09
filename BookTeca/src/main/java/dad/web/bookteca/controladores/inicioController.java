@@ -66,19 +66,21 @@ public class inicioController {
 		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 		Random randomPick=new Random();
 		Libro libroEscogido=listaLibros.get(randomPick.nextInt(listaLibros.size()));
+		int idLibro=libroEscogido.getId();
 		model.addAttribute("nombreLibroDestacado",libroEscogido.getNombre());
 		model.addAttribute("autorLibroDestacado",libroEscogido.getAutor());
 		model.addAttribute("editorialLibroDestacado",libroEscogido.getEditorial());
 		model.addAttribute("generoLibroDestacado",libroEscogido.getGenero());
-		model.addAttribute("numeroEjemplaresLibroDestacado",3); //luego se saca de la base de datos
+		model.addAttribute("numeroEjemplaresLibroDestacado",libros.buscarPorId(idLibro).size()); //luego se saca de la base de datos
 		
 		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
 		Revista revistaEscogida=listaRevistas.get(randomPick.nextInt(listaRevistas.size()));
+		int idRevista=revistaEscogida.getId();
 		model.addAttribute("nombreRevistaDestacada",revistaEscogida.getNombre());
 		model.addAttribute("editorialRevistaDestacada",revistaEscogida.getEditorial());
 		model.addAttribute("fasciculoRevistaDestacada",revistaEscogida.getFasciculo());
 		model.addAttribute("generoRevistaDestacada",revistaEscogida.getGenero());
-		model.addAttribute("numeroEjemplaresRevistaDestacada",3); //luego se saca de la base de datos
+		model.addAttribute("numeroEjemplaresRevistaDestacada",revistas.buscarPorId(idRevista).size()); //luego se saca de la base de datos
 		
 		//NO HA INICIADO SESION
 		model.addAttribute("visibleIniciarSesion", true);
@@ -95,19 +97,21 @@ public class inicioController {
 		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 		Random randomPick=new Random();
 		Libro libroEscogido=listaLibros.get(randomPick.nextInt(listaLibros.size()));
+		int idLibro=libroEscogido.getId();
 		model.addAttribute("nombreLibroDestacado",libroEscogido.getNombre());
 		model.addAttribute("autorLibroDestacado",libroEscogido.getAutor());
 		model.addAttribute("editorialLibroDestacado",libroEscogido.getEditorial());
 		model.addAttribute("generoLibroDestacado",libroEscogido.getGenero());
-		model.addAttribute("numeroEjemplaresLibroDestacado",libros.count()); //luego se saca de la base de datos
+		model.addAttribute("numeroEjemplaresLibroDestacado",libros.buscarPorId(idLibro).size()); //luego se saca de la base de datos
 		
 		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
 		Revista revistaEscogida=listaRevistas.get(randomPick.nextInt(listaRevistas.size()));
+		int idRevista=revistaEscogida.getId();
 		model.addAttribute("nombreRevistaDestacada",revistaEscogida.getNombre());
 		model.addAttribute("editorialRevistaDestacada",revistaEscogida.getEditorial());
 		model.addAttribute("fasciculoRevistaDestacada",revistaEscogida.getFasciculo());
 		model.addAttribute("generoRevistaDestacada",revistaEscogida.getGenero());
-		model.addAttribute("numeroEjemplaresRevistaDestacada",revistas.count()); //luego se saca de la base de datos
+		model.addAttribute("numeroEjemplaresRevistaDestacada",revistas.buscarPorId(idRevista).size()); //luego se saca de la base de datos
 		return "sesionIniciada";
 	}
 	@RequestMapping("/buscadorLibros")

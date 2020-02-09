@@ -3908,3 +3908,8 @@ java.io.IOException: Invalid argument
 2020-02-09 18:39:55,077 [Worker-16: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 49 resources
 2020-02-09 18:39:55,081 [Worker-16: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2020-02-09 18:39:55,081 [Worker-16: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/BookTeca/src/test/resources
+2020-02-09 18:50:36,049 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-02-09 18:50:36,058 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-02-09 18:50:36,064 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 49 resources
+2020-02-09 18:50:36,070 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-02-09 18:50:36,070 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/BookTeca/src/test/resources
