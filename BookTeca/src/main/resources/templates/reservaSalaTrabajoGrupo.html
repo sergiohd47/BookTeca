@@ -74,14 +74,16 @@
 						<th>RESERVAR</th>
 						{{/visibleCerrarSesion}}
 					</tr>
+					{{#listaSTG}}
 					<tr>
-						<td>{{capacidadSala}}</td>
-						<td>{{localizacionSala}}</td>
-						<td>{{compartidaSala}}</td>
+						<td>{{capacidad}}</td>
+						<td>{{localizacion}}</td>
+						<td>{{compartida}}</td>
 						{{#visibleCerrarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
 						{{/visibleCerrarSesion}}
 					</tr>
+					{{/listaSTG}}
 				</table>
 			</div>
 		</div>

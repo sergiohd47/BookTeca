@@ -73,13 +73,15 @@
 						<th>RESERVAR</th>
 						{{/visibleCerrarSesion}}
 					</tr>
+					{{#listaEquipo}}
 					<tr>
-						<td>{{sistemaOperativoEquipo}}</td>
-						<td>{{localizacionEquipo}}</td>
+						<td>{{sistemaOperativo}}</td>
+						<td>{{localizacion}}</td>
 						{{#visibleCerrarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
 						{{/visibleCerrarSesion}}
 					</tr>
+					{{/listaEquipo}}
 				</table>
 			</div>
 		</div>

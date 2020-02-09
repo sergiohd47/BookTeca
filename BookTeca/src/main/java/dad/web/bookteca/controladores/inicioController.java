@@ -19,7 +19,7 @@ import dad.web.bookteca.basedatos.*;
 
 @Controller
 public class inicioController {
-	protected final int NUMERO_RECURSOS_MAIN=3;
+	protected final int NUMERO_RECURSOS_MAIN=3; //NUMERO DE LIBROS Y REVISTAS QUE SE MUESTRAN EN LA PANTALLA DE INICIO
 	@Autowired
 	private RepositorioEquiposInformaticos equiposInformaticos;
 	@Autowired
@@ -129,15 +129,7 @@ public class inicioController {
 	@RequestMapping("/reservaSalaTrabajoGrupo")
 	public String reservaSalaTrabajoGrupo(Model model) {
 		ArrayList<SalaTrabajoGrupo> listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findAll();
-		Random randomPick=new Random();
-		SalaTrabajoGrupo salaEscogida=listaSTG.get(randomPick.nextInt(listaSTG.size()));
-		model.addAttribute("capacidadSala",salaEscogida.getCapacidad());
-		model.addAttribute("localizacionSala", salaEscogida.getLocalizacion());
-		if(salaEscogida.isCompartida()) {
-			model.addAttribute("compartidaSala", "Si");
-		}else {
-			model.addAttribute("compartidaSala", "No");
-		}
+		model.addAttribute("listaSTG",listaSTG);
 		//NO HA INICIADO SESION
 		//model.addAttribute("visibleCerrarSesion",false);
 		model.addAttribute("visibleIniciarSesion",true);
@@ -146,10 +138,7 @@ public class inicioController {
 	@RequestMapping("/reservaEquipoInformatico")
 	public String reservaEquipoInformatico(Model model) {
 		ArrayList<EquipoInformatico> listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findAll();
-		Random randomPick=new Random();
-		EquipoInformatico equipoEscogido=listaEquipo.get(randomPick.nextInt(listaEquipo.size()));
-		model.addAttribute("sistemaOperativoEquipo", equipoEscogido.getSistemaOperativo());
-		model.addAttribute("localizacionEquipo", equipoEscogido.getLocalizacion());
+		model.addAttribute("listaEquipo",listaEquipo);
 		//NO HA INICIADO SESION
 		//model.addAttribute("visibleCerrarSesion",false);
 		model.addAttribute("visibleIniciarSesion",true);
