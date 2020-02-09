@@ -8,10 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import dad.web.bookteca.clases.Usuario;
 
 public interface RepositorioUsuarios extends JpaRepository<Usuario, Integer>{
-	@Query(value="select usuario from Usuario usuario where usuario.administrador=?1")
-	ArrayList<Usuario> buscarAdministradoresOUsuarios(boolean esAdmin);
-	@Query(value="select usuario from Usuario usuario where usuario.email=?1")
-	Usuario buscarPorCorreo(String email);
-	@Query(value="select usuario from Usuario usuario where usuario.nombre=?1")
-	ArrayList<Usuario> buscarPorNombre(String nombre);
+	
+	ArrayList<Usuario> findByEsAdmin(boolean esAdmin);
+	
+	Usuario findByEmail(String email);
+	
+	ArrayList<Usuario> findByNombre(String nombre);
 }

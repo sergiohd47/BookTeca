@@ -71,7 +71,7 @@ public class inicioController {
 		model.addAttribute("autorLibroDestacado",libroEscogido.getAutor());
 		model.addAttribute("editorialLibroDestacado",libroEscogido.getEditorial());
 		model.addAttribute("generoLibroDestacado",libroEscogido.getGenero());
-		model.addAttribute("numeroEjemplaresLibroDestacado",libros.buscarPorId(idLibro).size()); //luego se saca de la base de datos
+		model.addAttribute("numeroEjemplaresLibroDestacado",libros.findById(idLibro).size()); //luego se saca de la base de datos
 		
 		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
 		Revista revistaEscogida=listaRevistas.get(randomPick.nextInt(listaRevistas.size()));
@@ -80,7 +80,7 @@ public class inicioController {
 		model.addAttribute("editorialRevistaDestacada",revistaEscogida.getEditorial());
 		model.addAttribute("fasciculoRevistaDestacada",revistaEscogida.getFasciculo());
 		model.addAttribute("generoRevistaDestacada",revistaEscogida.getGenero());
-		model.addAttribute("numeroEjemplaresRevistaDestacada",revistas.buscarPorId(idRevista).size()); //luego se saca de la base de datos
+		model.addAttribute("numeroEjemplaresRevistaDestacada",revistas.findById(idRevista).size()); //luego se saca de la base de datos
 		
 		//NO HA INICIADO SESION
 		model.addAttribute("visibleIniciarSesion", true);
@@ -102,7 +102,7 @@ public class inicioController {
 		model.addAttribute("autorLibroDestacado",libroEscogido.getAutor());
 		model.addAttribute("editorialLibroDestacado",libroEscogido.getEditorial());
 		model.addAttribute("generoLibroDestacado",libroEscogido.getGenero());
-		model.addAttribute("numeroEjemplaresLibroDestacado",libros.buscarPorId(idLibro).size()); //luego se saca de la base de datos
+		model.addAttribute("numeroEjemplaresLibroDestacado",libros.findById(idLibro).size()); //luego se saca de la base de datos
 		
 		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
 		Revista revistaEscogida=listaRevistas.get(randomPick.nextInt(listaRevistas.size()));
@@ -111,7 +111,7 @@ public class inicioController {
 		model.addAttribute("editorialRevistaDestacada",revistaEscogida.getEditorial());
 		model.addAttribute("fasciculoRevistaDestacada",revistaEscogida.getFasciculo());
 		model.addAttribute("generoRevistaDestacada",revistaEscogida.getGenero());
-		model.addAttribute("numeroEjemplaresRevistaDestacada",revistas.buscarPorId(idRevista).size()); //luego se saca de la base de datos
+		model.addAttribute("numeroEjemplaresRevistaDestacada",revistas.findById(idRevista).size()); //luego se saca de la base de datos
 		return "sesionIniciada";
 	}
 	@RequestMapping("/buscadorLibros")

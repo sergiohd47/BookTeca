@@ -8,16 +8,16 @@ import dad.web.bookteca.clases.Libro;
 
 public interface RepositorioLibros extends JpaRepository<Libro, Integer> {
 
-	@Query(value="select libro from Libro libro where libro.titulo=?1")
-	ArrayList<Libro> buscarPorNombre(String titulo);
-	@Query(value="select libro from Libro libro where libro.autor=?1")
-	ArrayList<Libro> buscarPorAutor(String autor);
-	@Query(value="select libro from Libro libro where libro.editorial=?1")
-	ArrayList<Libro> buscarPorEditorial(String editorial);
+	ArrayList<Libro> findByNombre(String nombre);
+	
+	ArrayList<Libro> findByAutor(String autor);
+	
+	ArrayList<Libro> findByEditorial(String editorial);
 	
 	
-	ArrayList<Libro> buscarPorId(int id);
+	ArrayList<Libro> findById(int id);
 	
-	Libro buscarPorUsuario(int idUsuario);
+	Libro findByIdUsuario(int idUsuario);
+	
 	
 }
