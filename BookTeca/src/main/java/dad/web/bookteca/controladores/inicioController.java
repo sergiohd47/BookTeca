@@ -3,6 +3,7 @@ package dad.web.bookteca.controladores;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +13,22 @@ import dad.web.bookteca.clases.Libro;
 import dad.web.bookteca.clases.Revista;
 import dad.web.bookteca.clases.SalaTrabajoGrupo;
 
+import dad.web.bookteca.basedatos.*;
+
 @Controller
 public class inicioController {
+	@Autowired
+	private RepositorioEquiposInformaticos equiposInformaticos;
+	@Autowired
+	private RepositorioLibros libros;
+	@Autowired
+	private RepositorioRevistas revistas;
+	@Autowired
+	private RepositorioSalasDeTrabajo salasTrabajoGrupo;
+	@Autowired
+	private RepositorioUsuarios usuarios;
+	
+	
 	@RequestMapping("/")
 	public String inicio(Model model) {
 		ArrayList<Libro> listaLibros=new ArrayList<>();
