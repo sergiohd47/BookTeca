@@ -19,6 +19,7 @@ import dad.web.bookteca.basedatos.*;
 
 @Controller
 public class inicioController {
+	protected final int NUMERO_RECURSOS_MAIN=3;
 	@Autowired
 	private RepositorioEquiposInformaticos equiposInformaticos;
 	@Autowired
@@ -66,14 +67,14 @@ public class inicioController {
 		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 		ArrayList<Libro> listaLibrosDestacados=new ArrayList<>();
 		Random randomPick=new Random();
-		for(int i=0;i<3;i++) {
+		for(int i=0;i<NUMERO_RECURSOS_MAIN;i++) {
 			listaLibrosDestacados.add(listaLibros.get(randomPick.nextInt(listaLibros.size())));
 		}
 		model.addAttribute("listaLibrosDestacados",listaLibrosDestacados);
 		
 		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
 		ArrayList<Revista> listaRevistasDestacadas=new ArrayList<>();
-		for(int i=0;i<3;i++) {
+		for(int i=0;i<NUMERO_RECURSOS_MAIN;i++) {
 			listaRevistasDestacadas.add(listaRevistas.get(randomPick.nextInt(listaRevistas.size())));
 		}
 		model.addAttribute("listaRevistaDestacadas",listaRevistasDestacadas);
