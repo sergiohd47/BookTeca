@@ -3,6 +3,8 @@ package dad.web.bookteca.controladores;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,38 +30,40 @@ public class inicioController {
 	@Autowired
 	private RepositorioUsuarios usuarios;
 	
-	
+	@PostConstruct
+	public void init() {
+		//LIBROS
+		libros.save(new Libro("Caperucita Roja", "Sergio","Anaya","Infantil" ));
+		libros.save(new Libro("Los Tres Cerditos", "Borja","El Mundo","Infantil"));
+		libros.save(new Libro("La Vuelta Al Mundo En 80 Dias", "Dani","Santillana","Viajes"));
+		libros.save(new Libro("Constitucion Española","Indef","España","Institucional"));
+		libros.save(new Libro("Derecho Mercantil Español","Cristina","AAA","Educativo"));
+		libros.save(new Libro("Caperucita Roja", "Sergio","Anaya","Infantil" ));
+		libros.save(new Libro("Caperucita Roja", "Sergio","Anaya","Infantil" ));
+		libros.save(new Libro("La Vuelta Al Mundo En 80 Dias", "Dani","Santillana","Viajes" ));
+		
+		//REVISTAS
+		revistas.save(new Revista("GQ", "Editorial GQ",123,"Actualidad" ));
+		revistas.save(new Revista("FHM", "Editorial FHM",35,"Erotica"));
+		revistas.save(new Revista("MasQueCoches", "Editorial MasQueCoches",77,"Automovil" ));
+		revistas.save(new Revista("AutoSport", "Editorial AutoSport",23,"Automovil" ));
+		revistas.save(new Revista("MuyInteresante", "Editorial MuyInteresante",456,"Intelectual" ));
+		
+		//SALAS
+		salasTrabajoGrupo.save(new SalaTrabajoGrupo(16,"Planta 1",true));
+		salasTrabajoGrupo.save(new SalaTrabajoGrupo(3,"Planta 0",false));
+		salasTrabajoGrupo.save(new SalaTrabajoGrupo(10,"Planta 2",true));
+		salasTrabajoGrupo.save(new SalaTrabajoGrupo(5,"Planta 0",false));
+		
+		//EQUIPO INFORMATICO
+		equiposInformaticos.save(new EquipoInformatico("MacOSX","Equipo 45"));
+		equiposInformaticos.save(new EquipoInformatico("Linux","Equipo 32"));
+		equiposInformaticos.save(new EquipoInformatico("Windows","Equipo 2"));
+		equiposInformaticos.save(new EquipoInformatico("MacOSX","Equipo 1"));
+	}
 	@RequestMapping("/")
 	public String inicio(Model model) {
-		ArrayList<Libro> listaLibros=new ArrayList<>();
-		Libro libro1=new Libro(1,"Caperucita Roja", "Sergio","Anaya","Infantil" );
-		Libro libro2=new Libro(2,"Los Tres Cerditos", "Borja","El Mundo","Infantil");
-		Libro libro3=new Libro(3,"La Vuelta Al Mundo En 80 Dias", "Dani","Santillana","Viajes" );
-		Libro libro4=new Libro(4,"Constitucion Española","Indef","España","Institucional");
-		Libro libro5=new Libro(5,"Derecho Mercantil Español","Cristina","AAA","Educativo");
-		Libro libro6=new Libro(6,"Caperucita Roja", "Sergio","Anaya","Infantil" );
-		Libro libro7=new Libro(7,"Caperucita Roja", "Sergio","Anaya","Infantil" );
-		Libro libro8=new Libro(8,"La Vuelta Al Mundo En 80 Dias", "Dani","Santillana","Viajes" );
-		listaLibros.add(libro1);
-		listaLibros.add(libro2);
-		listaLibros.add(libro3);
-		listaLibros.add(libro4);
-		listaLibros.add(libro5);
-		listaLibros.add(libro6);
-		listaLibros.add(libro7);
-		listaLibros.add(libro8);
-		ArrayList<Revista> listaRevistas=new ArrayList<>();
-		Revista revista1=new Revista(1,"GQ", "Editorial GQ",123,"Actualidad" );
-		Revista revista2=new Revista(2,"FHM", "Editorial FHM",35,"Erotica");
-		Revista revista3=new Revista(3,"MasQueCoches", "Editorial MasQueCoches",77,"Automovil" );
-		Revista revista4=new Revista(4,"AutoSport", "Editorial AutoSport",23,"Automovil" );
-		Revista revista5=new Revista(5,"MuyInteresante", "Editorial MuyInteresante",456,"Intelectual" );
-		listaRevistas.add(revista1);
-		listaRevistas.add(revista2);
-		listaRevistas.add(revista3);
-		listaRevistas.add(revista4);
-		listaRevistas.add(revista5);
-		
+		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 		Random randomPick=new Random();
 		Libro libroEscogido=listaLibros.get(randomPick.nextInt(listaLibros.size()));
 		model.addAttribute("nombreLibroDestacado",libroEscogido.getNombre());
@@ -68,6 +72,7 @@ public class inicioController {
 		model.addAttribute("generoLibroDestacado",libroEscogido.getGenero());
 		model.addAttribute("numeroEjemplaresLibroDestacado",3); //luego se saca de la base de datos
 		
+		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
 		Revista revistaEscogida=listaRevistas.get(randomPick.nextInt(listaRevistas.size()));
 		model.addAttribute("nombreRevistaDestacada",revistaEscogida.getNombre());
 		model.addAttribute("editorialRevistaDestacada",revistaEscogida.getEditorial());
@@ -87,49 +92,22 @@ public class inicioController {
 	}
 	@RequestMapping("/sesionIniciada")
 	public String sesionIniciada(Model model) {
-		ArrayList<Libro> listaLibros=new ArrayList<>();
-		Libro libro1=new Libro(1,"Caperucita Roja", "Sergio","Anaya","Infantil" );
-		Libro libro2=new Libro(2,"Los Tres Cerditos", "Borja","El Mundo","Infantil");
-		Libro libro3=new Libro(3,"La Vuelta Al Mundo En 80 Dias", "Dani","Santillana","Viajes" );
-		Libro libro4=new Libro(4,"Constitucion Española","Indef","España","Institucional");
-		Libro libro5=new Libro(5,"Derecho Mercantil Español","Cristina","AAA","Educativo");
-		Libro libro6=new Libro(6,"Caperucita Roja", "Sergio","Anaya","Infantil" );
-		Libro libro7=new Libro(7,"Caperucita Roja", "Sergio","Anaya","Infantil" );
-		Libro libro8=new Libro(8,"La Vuelta Al Mundo En 80 Dias", "Dani","Santillana","Viajes" );
-		listaLibros.add(libro1);
-		listaLibros.add(libro2);
-		listaLibros.add(libro3);
-		listaLibros.add(libro4);
-		listaLibros.add(libro5);
-		listaLibros.add(libro6);
-		listaLibros.add(libro7);
-		listaLibros.add(libro8);
-		ArrayList<Revista> listaRevistas=new ArrayList<>();
-		Revista revista1=new Revista(1,"GQ", "Editorial GQ",123,"Actualidad" );
-		Revista revista2=new Revista(2,"FHM", "Editorial FHM",35,"Erotica");
-		Revista revista3=new Revista(3,"MasQueCoches", "Editorial MasQueCoches",77,"Automovil" );
-		Revista revista4=new Revista(4,"AutoSport", "Editorial AutoSport",23,"Automovil" );
-		Revista revista5=new Revista(5,"MuyInteresante", "Editorial MuyInteresante",456,"Intelectual" );
-		listaRevistas.add(revista1);
-		listaRevistas.add(revista2);
-		listaRevistas.add(revista3);
-		listaRevistas.add(revista4);
-		listaRevistas.add(revista5);
-		
+		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 		Random randomPick=new Random();
 		Libro libroEscogido=listaLibros.get(randomPick.nextInt(listaLibros.size()));
 		model.addAttribute("nombreLibroDestacado",libroEscogido.getNombre());
 		model.addAttribute("autorLibroDestacado",libroEscogido.getAutor());
 		model.addAttribute("editorialLibroDestacado",libroEscogido.getEditorial());
 		model.addAttribute("generoLibroDestacado",libroEscogido.getGenero());
-		model.addAttribute("numeroEjemplaresLibroDestacado",3); //luego se saca de la base de datos
+		model.addAttribute("numeroEjemplaresLibroDestacado",libros.count()); //luego se saca de la base de datos
 		
+		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
 		Revista revistaEscogida=listaRevistas.get(randomPick.nextInt(listaRevistas.size()));
 		model.addAttribute("nombreRevistaDestacada",revistaEscogida.getNombre());
 		model.addAttribute("editorialRevistaDestacada",revistaEscogida.getEditorial());
 		model.addAttribute("fasciculoRevistaDestacada",revistaEscogida.getFasciculo());
 		model.addAttribute("generoRevistaDestacada",revistaEscogida.getGenero());
-		model.addAttribute("numeroEjemplaresRevistaDestacada",3); //luego se saca de la base de datos
+		model.addAttribute("numeroEjemplaresRevistaDestacada",revistas.count()); //luego se saca de la base de datos
 		return "sesionIniciada";
 	}
 	@RequestMapping("/buscadorLibros")
@@ -149,15 +127,7 @@ public class inicioController {
 	}
 	@RequestMapping("/reservaSalaTrabajoGrupo")
 	public String reservaSalaTrabajoGrupo(Model model) {
-		ArrayList<SalaTrabajoGrupo> listaSTG=new ArrayList<>();
-		SalaTrabajoGrupo sala1=new SalaTrabajoGrupo(1,16,"Planta 1",true);
-		SalaTrabajoGrupo sala2=new SalaTrabajoGrupo(2,3,"Planta 0",false);
-		SalaTrabajoGrupo sala3=new SalaTrabajoGrupo(3,10,"Planta 2",true);
-		SalaTrabajoGrupo sala4=new SalaTrabajoGrupo(4,5,"Planta 0",false);
-		listaSTG.add(sala1);
-		listaSTG.add(sala2);
-		listaSTG.add(sala3);
-		listaSTG.add(sala4);
+		ArrayList<SalaTrabajoGrupo> listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findAll();
 		Random randomPick=new Random();
 		SalaTrabajoGrupo salaEscogida=listaSTG.get(randomPick.nextInt(listaSTG.size()));
 		model.addAttribute("capacidadSala",salaEscogida.getCapacidad());
@@ -174,15 +144,7 @@ public class inicioController {
 	}
 	@RequestMapping("/reservaEquipoInformatico")
 	public String reservaEquipoInformatico(Model model) {
-		ArrayList<EquipoInformatico> listaEquipo=new ArrayList<>();
-		EquipoInformatico equipo1=new EquipoInformatico(1,"MacOSX","Equipo 45");
-		EquipoInformatico equipo2=new EquipoInformatico(2,"Linux","Equipo 32");
-		EquipoInformatico equipo3=new EquipoInformatico(3,"Windows","Equipo 2");
-		EquipoInformatico equipo4=new EquipoInformatico(4,"MacOSX","Equipo 1");
-		listaEquipo.add(equipo1);
-		listaEquipo.add(equipo2);
-		listaEquipo.add(equipo3);
-		listaEquipo.add(equipo4);
+		ArrayList<EquipoInformatico> listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findAll();
 		Random randomPick=new Random();
 		EquipoInformatico equipoEscogido=listaEquipo.get(randomPick.nextInt(listaEquipo.size()));
 		model.addAttribute("sistemaOperativoEquipo", equipoEscogido.getSistemaOperativo());
@@ -199,57 +161,7 @@ public class inicioController {
 	@RequestMapping("/miPerfil")
 	public String miPerfil(Model model) {
 		Random randomPick=new Random();
-		
-		ArrayList<Libro> listaLibros=new ArrayList<>();
-		Libro libro1=new Libro(1,"Caperucita Roja", "Sergio","Anaya","Infantil" );
-		Libro libro2=new Libro(2,"Los Tres Cerditos", "Borja","El Mundo","Infantil");
-		Libro libro3=new Libro(3,"La Vuelta Al Mundo En 80 Dias", "Dani","Santillana","Viajes" );
-		Libro libro4=new Libro(4,"Constitucion Española","Indef","España","Institucional");
-		Libro libro5=new Libro(5,"Derecho Mercantil Español","Cristina","AAA","Educativo");
-		Libro libro6=new Libro(6,"Caperucita Roja", "Sergio","Anaya","Infantil" );
-		Libro libro7=new Libro(7,"Caperucita Roja", "Sergio","Anaya","Infantil" );
-		Libro libro8=new Libro(8,"La Vuelta Al Mundo En 80 Dias", "Dani","Santillana","Viajes" );
-		listaLibros.add(libro1);
-		listaLibros.add(libro2);
-		listaLibros.add(libro3);
-		listaLibros.add(libro4);
-		listaLibros.add(libro5);
-		listaLibros.add(libro6);
-		listaLibros.add(libro7);
-		listaLibros.add(libro8);
-		
-		ArrayList<Revista> listaRevistas=new ArrayList<>();
-		Revista revista1=new Revista(1,"GQ", "Editorial GQ",123,"Actualidad" );
-		Revista revista2=new Revista(2,"FHM", "Editorial FHM",35,"Erotica");
-		Revista revista3=new Revista(3,"MasQueCoches", "Editorial MasQueCoches",77,"Automovil" );
-		Revista revista4=new Revista(4,"AutoSport", "Editorial AutoSport",23,"Automovil" );
-		Revista revista5=new Revista(5,"MuyInteresante", "Editorial MuyInteresante",456,"Intelectual" );
-		listaRevistas.add(revista1);
-		listaRevistas.add(revista2);
-		listaRevistas.add(revista3);
-		listaRevistas.add(revista4);
-		listaRevistas.add(revista5);
-		
-		ArrayList<SalaTrabajoGrupo> listaSTG=new ArrayList<>();
-		SalaTrabajoGrupo sala1=new SalaTrabajoGrupo(1,16,"Planta 1",true);
-		SalaTrabajoGrupo sala2=new SalaTrabajoGrupo(2,3,"Planta 0",false);
-		SalaTrabajoGrupo sala3=new SalaTrabajoGrupo(3,10,"Planta 2",true);
-		SalaTrabajoGrupo sala4=new SalaTrabajoGrupo(4,5,"Planta 0",false);
-		listaSTG.add(sala1);
-		listaSTG.add(sala2);
-		listaSTG.add(sala3);
-		listaSTG.add(sala4);
-		
-		ArrayList<EquipoInformatico> listaEquipo=new ArrayList<>();
-		EquipoInformatico equipo1=new EquipoInformatico(1,"MacOSX","Equipo 45");
-		EquipoInformatico equipo2=new EquipoInformatico(2,"Linux","Equipo 32");
-		EquipoInformatico equipo3=new EquipoInformatico(3,"Windows","Equipo 2");
-		EquipoInformatico equipo4=new EquipoInformatico(4,"MacOSX","Equipo 1");
-		listaEquipo.add(equipo1);
-		listaEquipo.add(equipo2);
-		listaEquipo.add(equipo3);
-		listaEquipo.add(equipo4);
-		
+		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 		Libro libroEscogido=listaLibros.get(randomPick.nextInt(listaLibros.size()));
 		model.addAttribute("nombreLibro", libroEscogido.getNombre());
 		model.addAttribute("autorLibro", libroEscogido.getAutor());
@@ -257,6 +169,7 @@ public class inicioController {
 		model.addAttribute("generoLibro", libroEscogido.getGenero());
 		model.addAttribute("diaFinReservaLibro", "3.03.2020");
 		
+		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
 		Revista revistaEscogida=listaRevistas.get(randomPick.nextInt(listaRevistas.size()));
 		model.addAttribute("nombreRevista", revistaEscogida.getNombre());
 		model.addAttribute("editorialRevista", revistaEscogida.getEditorial());
@@ -264,6 +177,7 @@ public class inicioController {
 		model.addAttribute("generoRevista", revistaEscogida.getGenero());
 		model.addAttribute("diaFinReservaRevista", "18.02.2020");
 		
+		ArrayList<SalaTrabajoGrupo> listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findAll();
 		SalaTrabajoGrupo salaEscogida=listaSTG.get(randomPick.nextInt(listaSTG.size()));
 		model.addAttribute("capacidadSala", salaEscogida.getCapacidad());
 		model.addAttribute("localizacionSala", salaEscogida.getLocalizacion());
@@ -274,6 +188,7 @@ public class inicioController {
 		}
 		model.addAttribute("diaFinReservaSala", "5.02.2020");
 		
+		ArrayList<EquipoInformatico> listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findAll();
 		EquipoInformatico equipoEscogido=listaEquipo.get(randomPick.nextInt(listaEquipo.size()));
 		model.addAttribute("sistemaOperativoEquipo", equipoEscogido.getSistemaOperativo());
 		model.addAttribute("localizacionEquipo", equipoEscogido.getLocalizacion());

@@ -20,8 +20,7 @@ public class Revista {
 	private Date fecInicio;
 	private Date fecFin;
 	
-	public Revista(int id, String nombre, String editorial, int fasciculo, String genero) {
-		this.id = id;
+	public Revista(String nombre, String editorial, int fasciculo, String genero) {
 		this.nombre = nombre;
 		this.editorial = editorial;
 		this.fasciculo = fasciculo;

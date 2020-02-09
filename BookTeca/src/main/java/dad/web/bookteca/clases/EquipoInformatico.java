@@ -17,8 +17,7 @@ public class EquipoInformatico {
 	private Usuario idUsuario;
 	private Date fechaReserva;
 	
-	public EquipoInformatico(int id, String sistemaOperativo, String localizacion) {
-		this.id = id;
+	public EquipoInformatico(String sistemaOperativo, String localizacion) {
 		this.sistemaOperativo = sistemaOperativo;
 		this.localizacion = localizacion;
 	}

@@ -23,8 +23,7 @@ public class Libro {
 	//ConstructorBBDD
 	protected Libro() {}
 	
-	public Libro(int id, String nombre, String autor, String editorial, String genero ) {
-		this.id=id;
+	public Libro(String nombre, String autor, String editorial, String genero ) {
 		this.nombre=nombre;
 		this.autor=autor;
 		this.editorial=editorial;

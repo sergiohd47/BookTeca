@@ -17,8 +17,7 @@ public class SalaTrabajoGrupo {
 	private Usuario idUsuario;
 	private Date fechaReserva;
 	
-	public SalaTrabajoGrupo(int id, int capacidad, String localizacion, boolean compartida) {
-		this.id = id;
+	public SalaTrabajoGrupo(int capacidad, String localizacion, boolean compartida) {
 		this.capacidad = capacidad;
 		this.localizacion = localizacion;
 		this.compartida = compartida;
