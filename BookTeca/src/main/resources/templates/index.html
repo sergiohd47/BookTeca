@@ -79,22 +79,22 @@
 						<th>NOMBRE</th>
 						<th>AUTOR</th>
 						<th>EDITORIAL</th>
-						<th>NUMERO EJEMPLARES</th>
 						<th>GENERO</th>
 						{{#visibleCerrarSesion}}
 						<th>RESERVAR</th>
 						{{/visibleCerrarSesion}}
 					</tr>
+					{{#listaLibrosDestacados}}
 					<tr>
-						<td>{{nombreLibroDestacado}}</td>
-						<td>{{autorLibroDestacado}}</td>
-						<td>{{editorialLibroDestacado}}</td>
-						<td>{{numeroEjemplaresLibroDestacado}}</td>
-						<td>{{generoLibroDestacado}}</td>
+						<td>{{nombre}}</td>
+						<td>{{autor}}</td>
+						<td>{{editorial}}</td>
+						<td>{{genero}}</td>
 						{{#visibleCerrarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
 						{{/visibleCerrarSesion}}
 					</tr>
+					{{/listaLibrosDestacados}}
 				</table>
 				<h1 class="mt-5">REVISTAS</h1>
 				<p class="lead">La revista destacada del dia es:</p>
@@ -103,22 +103,22 @@
 						<th>NOMBRE</th>
 						<th>EDITORIAL</th>
 						<th>FASCICULOS</th>
-						<th>NUMERO EJEMPLARES</th>
 						<th>GENERO</th>
 						{{#visibleCerrarSesion}}
 						<th>RESERVAR</th>
 						{{/visibleCerrarSesion}}
 					</tr>
+					{{#listaRevistasDestacadas}}
 					<tr>
-						<td>{{nombreRevistaDestacada}}</td>
-						<td>{{editorialRevistaDestacada}}</td>
-						<td>{{fasciculoRevistaDestacada}}</td>
-						<td>{{numeroEjemplaresRevistaDestacada}}</td>
-						<td>{{generoRevistaDestacada}}</td>
+						<td>{{nombre}}</td>
+						<td>{{editorial}}</td>
+						<td>{{fasciculo}}</td>
+						<td>{{genero}}</td>
 						{{#visibleCerrarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
 						{{/visibleCerrarSesion}}
 					</tr>
+					{{/listaRevistasDestacadas}}
 				</table>
 			</div>
 		</div>

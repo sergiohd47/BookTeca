@@ -64,23 +64,19 @@ public class inicioController {
 	@RequestMapping("/")
 	public String inicio(Model model) {
 		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
+		ArrayList<Libro> listaLibrosDestacados=new ArrayList<>();
 		Random randomPick=new Random();
-		Libro libroEscogido=listaLibros.get(randomPick.nextInt(listaLibros.size()));
-		int idLibro=libroEscogido.getId();
-		model.addAttribute("nombreLibroDestacado",libroEscogido.getNombre());
-		model.addAttribute("autorLibroDestacado",libroEscogido.getAutor());
-		model.addAttribute("editorialLibroDestacado",libroEscogido.getEditorial());
-		model.addAttribute("generoLibroDestacado",libroEscogido.getGenero());
-		model.addAttribute("numeroEjemplaresLibroDestacado",libros.findById(idLibro).size()); //luego se saca de la base de datos
+		for(int i=0;i<3;i++) {
+			listaLibrosDestacados.add(listaLibros.get(randomPick.nextInt(listaLibros.size())));
+		}
+		model.addAttribute("listaLibrosDestacados",listaLibrosDestacados);
 		
 		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
-		Revista revistaEscogida=listaRevistas.get(randomPick.nextInt(listaRevistas.size()));
-		int idRevista=revistaEscogida.getId();
-		model.addAttribute("nombreRevistaDestacada",revistaEscogida.getNombre());
-		model.addAttribute("editorialRevistaDestacada",revistaEscogida.getEditorial());
-		model.addAttribute("fasciculoRevistaDestacada",revistaEscogida.getFasciculo());
-		model.addAttribute("generoRevistaDestacada",revistaEscogida.getGenero());
-		model.addAttribute("numeroEjemplaresRevistaDestacada",revistas.findById(idRevista).size()); //luego se saca de la base de datos
+		ArrayList<Revista> listaRevistasDestacadas=new ArrayList<>();
+		for(int i=0;i<3;i++) {
+			listaRevistasDestacadas.add(listaRevistas.get(randomPick.nextInt(listaRevistas.size())));
+		}
+		model.addAttribute("listaRevistaDestacadas",listaRevistasDestacadas);
 		
 		//NO HA INICIADO SESION
 		model.addAttribute("visibleIniciarSesion", true);

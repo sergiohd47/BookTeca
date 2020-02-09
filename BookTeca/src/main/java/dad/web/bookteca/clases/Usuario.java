@@ -1,6 +1,8 @@
 package dad.web.bookteca.clases;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,9 +16,9 @@ public class Usuario {
 	private String nombre;
 	private String apellidos;
 	@OneToMany(mappedBy="idUsuario")
-	private ArrayList<Libro> librosReservados = new ArrayList<>(MAX);
+	private List<Libro> librosReservados = new ArrayList<>(MAX);
 	@OneToMany(mappedBy="idUsuario")
-	private ArrayList<Revista> revistasReservadas = new ArrayList<>(MAX);
+	private List<Revista> revistasReservadas = new ArrayList<>(MAX);
 	@OneToOne(mappedBy="idUsuario")
 	private EquipoInformatico puestoInformatico;
 	@OneToOne(mappedBy="idUsuario")
@@ -66,7 +68,7 @@ public class Usuario {
 		this.apellidos = apellidos;
 	}
 
-	public ArrayList<Libro> getLibrosReservados() {
+	public List<Libro> getLibrosReservados() {
 		return librosReservados;
 	}
 
@@ -82,7 +84,7 @@ public class Usuario {
 		this.librosReservados.remove(libro);
 	}
 
-	public ArrayList<Revista> getRevistasReservadas() {
+	public List<Revista> getRevistasReservadas() {
 		return revistasReservadas;
 	}
 
