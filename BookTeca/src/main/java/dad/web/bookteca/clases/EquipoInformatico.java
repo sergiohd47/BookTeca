@@ -14,7 +14,7 @@ public class EquipoInformatico {
 	private String localizacion;
 	private boolean disponible;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(mappedBy="puestoInformatico")
 	private Usuario idUsuario;
 	
 	private Date fechaReserva;

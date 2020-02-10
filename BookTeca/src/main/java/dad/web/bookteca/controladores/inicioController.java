@@ -40,21 +40,21 @@ public class inicioController {
 	@PostConstruct
 	public void init() {
 		//LIBROS
-		libros.save(new Libro("Caperucita Roja", "Sergio","Anaya","Infantil" ));
+		libros.save(new Libro("Caperucita Roja", "Sergio","Anaya","Infantil"));
 		libros.save(new Libro("Los Tres Cerditos", "Borja","El Mundo","Infantil"));
 		libros.save(new Libro("La Vuelta Al Mundo En 80 Dias", "Dani","Santillana","Viajes"));
 		libros.save(new Libro("Constitucion Española","Indef","España","Institucional"));
 		libros.save(new Libro("Derecho Mercantil Español","Cristina","AAA","Educativo"));
-		libros.save(new Libro("Caperucita Roja", "Sergio","Anaya","Infantil" ));
-		libros.save(new Libro("Caperucita Roja", "Sergio","Anaya","Infantil" ));
-		libros.save(new Libro("La Vuelta Al Mundo En 80 Dias", "Dani","Santillana","Viajes" ));
+		libros.save(new Libro("Caperucita Roja", "Sergio","Anaya","Infantil"));
+		libros.save(new Libro("Caperucita Roja", "Sergio","Anaya","Infantil"));
+		libros.save(new Libro("La Vuelta Al Mundo En 80 Dias", "Dani","Santillana","Viajes"));
 		
 		//REVISTAS
-		revistas.save(new Revista("GQ", "Editorial GQ",123,"Actualidad" ));
+		revistas.save(new Revista("GQ", "Editorial GQ",123,"Actualidad"));
 		revistas.save(new Revista("FHM", "Editorial FHM",35,"Erotica"));
-		revistas.save(new Revista("MasQueCoches", "Editorial MasQueCoches",77,"Automovil" ));
-		revistas.save(new Revista("AutoSport", "Editorial AutoSport",23,"Automovil" ));
-		revistas.save(new Revista("MuyInteresante", "Editorial MuyInteresante",456,"Intelectual" ));
+		revistas.save(new Revista("MasQueCoches", "Editorial MasQueCoches",77,"Automovil"));
+		revistas.save(new Revista("AutoSport", "Editorial AutoSport",23,"Automovil"));
+		revistas.save(new Revista("MuyInteresante", "Editorial MuyInteresante",456,"Intelectual"));
 		
 		//SALAS
 		salasTrabajoGrupo.save(new SalaTrabajoGrupo(16,"Planta 1",true));
@@ -164,7 +164,8 @@ public class inicioController {
 	}
 	
 	@RequestMapping("/registro")
-	public String registro(Model model) {
+	public String registro(Model model, Usuario usuario) {
+		usuarios.save(usuario);
 		return "registro";
 	}
 	
@@ -210,27 +211,32 @@ public class inicioController {
 	}
 	
 	@RequestMapping("/editarPerfil")
-	public String editarPerfil(Model model) {
+	public String editarPerfil(Model model, Usuario usuario) {
+		usuarios.save(usuario);
 		return "editarPerfil";
 	}
 	
 	@RequestMapping("/añadirRevista")
-	public String añadirRevista(Model model) {
+	public String añadirRevista(Model model, Revista revista) {
+		revistas.save(revista);
 		return "añadirRevista";
 	}
 	
 	@RequestMapping("/añadirSalaTrabajoGrupo")
-	public String añadirSala(Model model) {
+	public String añadirSala(Model model, SalaTrabajoGrupo sala) {
+		salasTrabajoGrupo.save(sala);
 		return "añadirSalaTrabajoGrupo";
 	}
 	
 	@RequestMapping("/añadirEquipoInformatico")
-	public String añadirEquipoInformatico(Model model) {
+	public String añadirEquipoInformatico(Model model, EquipoInformatico equipo) {
+		equiposInformaticos.save(equipo);
 		return "añadirEquipoInformatico";
 	}
 	
 	@RequestMapping("/añadirLibro")
-	public String añadirLibro(Model model) {
+	public String añadirLibro(Model model, Libro libro) {
+		libros.save(libro);
 		return "añadirLibro";
 	}
 	
@@ -238,6 +244,5 @@ public class inicioController {
 	public String administrarUsuarios(Model model) {
 		return "administrarUsuarios";
 	}
-	
 
 }

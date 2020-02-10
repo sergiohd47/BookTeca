@@ -9,7 +9,7 @@ import dad.web.bookteca.clases.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
-	ArrayList<Usuario> findByEsAdmin(boolean esAdmin);
+	ArrayList<Usuario> findByAdministrador(boolean administrador);
 	
 	Usuario findByEmail(String email);
 	

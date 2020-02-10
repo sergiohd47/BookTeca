@@ -3,11 +3,13 @@ package dad.web.bookteca.clases;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+@Entity
 public class SalaTrabajoGrupo {
 	
 	@Id
@@ -18,8 +20,8 @@ public class SalaTrabajoGrupo {
 	private String localizacion;
 	private boolean compartida;
 	private boolean disponible;
-	
-	@OneToOne(cascade = CascadeType.ALL)
+		
+	@OneToOne(mappedBy="salaTrabajo")
 	private Usuario idUsuario;
 	
 	private Date fechaReserva;

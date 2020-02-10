@@ -19,17 +19,17 @@ public class Usuario {
 	private String apellidos;
 	private String contrasenya;
 	
-	@OneToMany(mappedBy = "idUsuario")
+	@OneToMany(mappedBy="idUsuario")
 	private List<Libro> librosReservados = new ArrayList<>(MAX);
 	
-	@OneToMany(mappedBy = "idUsuario")
+	@OneToMany(mappedBy="idUsuario")
 	private List<Revista> revistasReservadas = new ArrayList<>(MAX);
 	
-	@OneToOne(mappedBy = "idUsuario")
+	@OneToOne(cascade = CascadeType.ALL)
 	private EquipoInformatico puestoInformatico;
 	
-	@OneToOne(mappedBy = "idUsuario")
-	private SalaTrabajoGrupo salaTrabajoGrupo;
+	@OneToOne(cascade=CascadeType.ALL)
+	private SalaTrabajoGrupo salaTrabajo;
 	
 	private boolean administrador;
 	
@@ -59,12 +59,12 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public SalaTrabajoGrupo getSalaTrabajoGrupo() {
-		return salaTrabajoGrupo;
+	public SalaTrabajoGrupo getSalaTrabajo() {
+		return salaTrabajo;
 	}
 
-	public void setSalaTrabajoGrupo(SalaTrabajoGrupo salaTrabajoGrupo) {
-		this.salaTrabajoGrupo = salaTrabajoGrupo;
+	public void setSalaTrabajoGrupo(SalaTrabajoGrupo salaTrabajo) {
+		this.salaTrabajo = salaTrabajo;
 	}
 
 	public String getNombre() {
