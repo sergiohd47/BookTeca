@@ -14,7 +14,7 @@ import dad.web.bookteca.clases.EquipoInformatico;
 import dad.web.bookteca.clases.Libro;
 import dad.web.bookteca.clases.Revista;
 import dad.web.bookteca.clases.SalaTrabajoGrupo;
-
+import dad.web.bookteca.clases.Usuario;
 import dad.web.bookteca.basedatos.*;
 
 @Controller
@@ -67,6 +67,11 @@ public class inicioController {
 		equiposInformaticos.save(new EquipoInformatico("Linux","Equipo 32"));
 		equiposInformaticos.save(new EquipoInformatico("Windows","Equipo 2"));
 		equiposInformaticos.save(new EquipoInformatico("MacOSX","Equipo 1"));
+		
+		//USUARIOS
+		usuarios.save(new Usuario("Borja","Martin Alonso","G07martin","bormaral13@gmail.com",false));
+		usuarios.save(new Usuario("Sergio","Hernandez Dominguez","HDsergii47","sergiohd47@gmail.com",true));
+		usuarios.save(new Usuario("Daniel","Molina Ballesteros","Daany10","dmolinaballesteros@gmail.com",false));
 	}
 	
 	@RequestMapping("/")

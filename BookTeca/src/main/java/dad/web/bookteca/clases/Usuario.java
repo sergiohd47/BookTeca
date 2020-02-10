@@ -19,24 +19,27 @@ public class Usuario {
 	private String apellidos;
 	private String contrasenya;
 	
-	@OneToMany(mappedBy="idUsuario")
+	@OneToMany(mappedBy = "idUsuario")
 	private List<Libro> librosReservados = new ArrayList<>(MAX);
 	
-	@OneToMany(mappedBy="idUsuario")
+	@OneToMany(mappedBy = "idUsuario")
 	private List<Revista> revistasReservadas = new ArrayList<>(MAX);
 	
-	@OneToOne(mappedBy="idUsuario")
+	@OneToOne(mappedBy = "idUsuario")
 	private EquipoInformatico puestoInformatico;
 	
-	@OneToOne(mappedBy="idUsuario")
+	@OneToOne(mappedBy = "idUsuario")
 	private SalaTrabajoGrupo salaTrabajoGrupo;
 	
 	private boolean administrador;
 	
-	public Usuario(String email, String nombre, String apellidos, boolean admin) {
-		this.email = email;
+	protected Usuario() {}
+	
+	public Usuario(String nombre, String apellidos, String contrasenya, String email, boolean admin) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
+		this.contrasenya = contrasenya;
+		this.email = email;
 		this.administrador = admin;
 	}
 	

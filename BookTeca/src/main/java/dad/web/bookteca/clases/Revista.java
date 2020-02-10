@@ -22,6 +22,8 @@ public class Revista {
 	private Date fecInicio;
 	private Date fecFin;
 	
+	protected Revista() {}
+	
 	public Revista(String nombre, String editorial, int fasciculo, String genero) {
 		this.nombre = nombre;
 		this.editorial = editorial;

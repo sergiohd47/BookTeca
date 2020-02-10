@@ -19,10 +19,12 @@ public class SalaTrabajoGrupo {
 	private boolean compartida;
 	private boolean disponible;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario idUsuario;
 	
 	private Date fechaReserva;
+	
+	protected SalaTrabajoGrupo() {}
 	
 	public SalaTrabajoGrupo(int capacidad, String localizacion, boolean compartida) {
 		this.capacidad = capacidad;

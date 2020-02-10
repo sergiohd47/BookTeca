@@ -14,10 +14,12 @@ public class EquipoInformatico {
 	private String localizacion;
 	private boolean disponible;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario idUsuario;
 	
 	private Date fechaReserva;
+	
+	protected EquipoInformatico() {}
 	
 	public EquipoInformatico(String sistemaOperativo, String localizacion) {
 		this.sistemaOperativo = sistemaOperativo;
