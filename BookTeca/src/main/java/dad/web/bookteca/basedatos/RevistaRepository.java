@@ -7,13 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 
 import dad.web.bookteca.clases.Revista;
 
-public interface RepositorioRevistas extends JpaRepository<Revista, Integer>{
+public interface RevistaRepository extends JpaRepository<Revista, Long>{
 	
 	ArrayList<Revista> findByNombre(String nombre);
 	
 	ArrayList<Revista> findByEditorial(String editorial);
 	
-	ArrayList<Revista> findById(int id);
+	ArrayList<Revista> findById(long id);
 	
-	Revista findByIdUsuario(int idUsuario);
+	Revista findByIdUsuario(long idUsuario);
 }

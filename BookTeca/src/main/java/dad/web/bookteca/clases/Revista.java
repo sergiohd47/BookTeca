@@ -8,15 +8,17 @@ public class Revista {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
+	
 	private String nombre;
 	private String editorial;
 	private int fasciculo;
 	private String genero;
-	
 	private boolean disponible;
+	
 	@ManyToOne
 	private Usuario idUsuario;
+	
 	private Date fecInicio;
 	private Date fecFin;
 	
@@ -28,7 +30,7 @@ public class Revista {
 		this.disponible = true;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 	

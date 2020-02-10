@@ -8,13 +8,15 @@ public class EquipoInformatico {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
+	
 	private String sistemaOperativo;
 	private String localizacion;
-	
 	private boolean disponible;
+	
 	@OneToOne(cascade=CascadeType.ALL)
 	private Usuario idUsuario;
+	
 	private Date fechaReserva;
 	
 	public EquipoInformatico(String sistemaOperativo, String localizacion) {
@@ -22,7 +24,7 @@ public class EquipoInformatico {
 		this.localizacion = localizacion;
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

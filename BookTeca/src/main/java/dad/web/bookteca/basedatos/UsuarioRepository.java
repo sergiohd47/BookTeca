@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import dad.web.bookteca.clases.Usuario;
 
-public interface RepositorioUsuarios extends JpaRepository<Usuario, Integer>{
+public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
 	ArrayList<Usuario> findByEsAdmin(boolean esAdmin);
 	

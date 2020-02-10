@@ -12,17 +12,25 @@ public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String email;;
+	private long id;
+	
+	private String email;
 	private String nombre;
 	private String apellidos;
+	private String contrasenya;
+	
 	@OneToMany(mappedBy="idUsuario")
 	private List<Libro> librosReservados = new ArrayList<>(MAX);
+	
 	@OneToMany(mappedBy="idUsuario")
 	private List<Revista> revistasReservadas = new ArrayList<>(MAX);
+	
 	@OneToOne(mappedBy="idUsuario")
 	private EquipoInformatico puestoInformatico;
+	
 	@OneToOne(mappedBy="idUsuario")
 	private SalaTrabajoGrupo salaTrabajoGrupo;
+	
 	private boolean administrador;
 	
 	public Usuario(String email, String nombre, String apellidos, boolean admin) {
@@ -30,6 +38,14 @@ public class Usuario {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.administrador = admin;
+	}
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getEmail() {
@@ -60,6 +76,14 @@ public class Usuario {
 		return apellidos;
 	}
 	
+	public String getContrasenya() {
+		return contrasenya;
+	}
+
+	public void setContrasenya(String contrasenya) {
+		this.contrasenya = contrasenya;
+	}
+
 	public boolean getAdministrador() {
 		return administrador;
 	}
@@ -120,9 +144,9 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [email=" + email + ", nombre=" + nombre + ", apellidos=" + apellidos + 
-				", librosReservados=" + librosReservados + ", revistasReservadas=" + revistasReservadas + 
-				", puestoInformatico=" + puestoInformatico + "]";
+		return "Usuario [email=" + email + ", nombre=" + nombre + ", apellidos=" + apellidos + ", contraseña=" + 
+				contrasenya + ", librosReservados=" + librosReservados + ", revistasReservadas=" + 
+				revistasReservadas + ", puestoInformatico=" + puestoInformatico + "]";
 	}
 	
 	

@@ -8,15 +8,17 @@ public class Libro {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private long id;
+	
 	private String nombre;
 	private String autor;
 	private String editorial;
 	private String genero;
-	
 	private boolean disponible;
+	
 	@ManyToOne
 	private Usuario idUsuario;
+	
 	private Date fecInicio;
 	private Date fecFin;
 	
@@ -32,7 +34,7 @@ public class Libro {
 		
 	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 	

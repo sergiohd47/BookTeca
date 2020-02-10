@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import dad.web.bookteca.clases.SalaTrabajoGrupo;;;
 
-public interface RepositorioSalasDeTrabajo extends JpaRepository<SalaTrabajoGrupo, Integer>{
+public interface SalaTrabajoGrupoRepository extends JpaRepository<SalaTrabajoGrupo, Long>{
 	
 	ArrayList<SalaTrabajoGrupo> findByDisponible(boolean disponible);
 	

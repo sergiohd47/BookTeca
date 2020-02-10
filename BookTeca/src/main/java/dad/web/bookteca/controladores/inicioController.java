@@ -19,17 +19,23 @@ import dad.web.bookteca.basedatos.*;
 
 @Controller
 public class inicioController {
+	
 	protected final int NUMERO_RECURSOS_MAIN=3; //NUMERO DE LIBROS Y REVISTAS QUE SE MUESTRAN EN LA PANTALLA DE INICIO
+	
 	@Autowired
-	private RepositorioEquiposInformaticos equiposInformaticos;
+	private EquipoInformaticoRepository equiposInformaticos;
+	
 	@Autowired
-	private RepositorioLibros libros;
+	private LibroRepository libros;
+	
 	@Autowired
-	private RepositorioRevistas revistas;
+	private RevistaRepository revistas;
+	
 	@Autowired
-	private RepositorioSalasDeTrabajo salasTrabajoGrupo;
+	private SalaTrabajoGrupoRepository salasTrabajoGrupo;
+	
 	@Autowired
-	private RepositorioUsuarios usuarios;
+	private UsuarioRepository usuarios;
 	
 	@PostConstruct
 	public void init() {
@@ -62,6 +68,7 @@ public class inicioController {
 		equiposInformaticos.save(new EquipoInformatico("Windows","Equipo 2"));
 		equiposInformaticos.save(new EquipoInformatico("MacOSX","Equipo 1"));
 	}
+	
 	@RequestMapping("/")
 	public String inicio(Model model) {
 		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
@@ -85,16 +92,18 @@ public class inicioController {
 		
 		return "index";
 	}
+	
 	@RequestMapping("/iniciarSesion")
 	public String iniciarSesion(Model model) {
 		return "iniciarSesionNuevo";
 	}
+	
 	@RequestMapping("/sesionIniciada")
 	public String sesionIniciada(Model model) {
 		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 		Random randomPick=new Random();
 		Libro libroEscogido=listaLibros.get(randomPick.nextInt(listaLibros.size()));
-		int idLibro=libroEscogido.getId();
+		long idLibro=libroEscogido.getId();
 		model.addAttribute("nombreLibroDestacado",libroEscogido.getNombre());
 		model.addAttribute("autorLibroDestacado",libroEscogido.getAutor());
 		model.addAttribute("editorialLibroDestacado",libroEscogido.getEditorial());
@@ -103,7 +112,7 @@ public class inicioController {
 		
 		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
 		Revista revistaEscogida=listaRevistas.get(randomPick.nextInt(listaRevistas.size()));
-		int idRevista=revistaEscogida.getId();
+		long idRevista=revistaEscogida.getId();
 		model.addAttribute("nombreRevistaDestacada",revistaEscogida.getNombre());
 		model.addAttribute("editorialRevistaDestacada",revistaEscogida.getEditorial());
 		model.addAttribute("fasciculoRevistaDestacada",revistaEscogida.getFasciculo());
@@ -111,6 +120,7 @@ public class inicioController {
 		model.addAttribute("numeroEjemplaresRevistaDestacada",revistas.findById(idRevista).size()); //luego se saca de la base de datos
 		return "sesionIniciada";
 	}
+	
 	@RequestMapping("/buscadorLibros")
 	public String buscadorLibros(Model model) {
 		//NO HA INICIADO SESION
@@ -119,6 +129,7 @@ public class inicioController {
 		return "buscadorLibros";
 		
 	}
+	
 	@RequestMapping("/buscadorRevistas")
 	public String buscadorRevista(Model model) {
 		//NO HA INICIADO SESION
@@ -126,6 +137,7 @@ public class inicioController {
 		model.addAttribute("visibleIniciarSesion",true);
 		return "buscadorRevistas";
 	}
+	
 	@RequestMapping("/reservaSalaTrabajoGrupo")
 	public String reservaSalaTrabajoGrupo(Model model) {
 		ArrayList<SalaTrabajoGrupo> listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findAll();
@@ -135,6 +147,7 @@ public class inicioController {
 		model.addAttribute("visibleIniciarSesion",true);
 		return "reservaSalaTrabajoGrupo";
 	}
+	
 	@RequestMapping("/reservaEquipoInformatico")
 	public String reservaEquipoInformatico(Model model) {
 		ArrayList<EquipoInformatico> listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findAll();
@@ -144,10 +157,12 @@ public class inicioController {
 		model.addAttribute("visibleIniciarSesion",true);
 		return "reservaEquipoInformatico";
 	}
+	
 	@RequestMapping("/registro")
 	public String registro(Model model) {
 		return "registro";
 	}
+	
 	@RequestMapping("/miPerfil")
 	public String miPerfil(Model model) {
 		Random randomPick=new Random();
@@ -188,26 +203,32 @@ public class inicioController {
 		model.addAttribute("usuarioAdmin", true);
 		return "miPerfil";
 	}
+	
 	@RequestMapping("/editarPerfil")
 	public String editarPerfil(Model model) {
 		return "editarPerfil";
 	}
+	
 	@RequestMapping("/añadirRevista")
 	public String añadirRevista(Model model) {
 		return "añadirRevista";
 	}
+	
 	@RequestMapping("/añadirSalaTrabajoGrupo")
 	public String añadirSala(Model model) {
 		return "añadirSalaTrabajoGrupo";
 	}
+	
 	@RequestMapping("/añadirEquipoInformatico")
 	public String añadirEquipoInformatico(Model model) {
 		return "añadirEquipoInformatico";
 	}
+	
 	@RequestMapping("/añadirLibro")
 	public String añadirLibro(Model model) {
 		return "añadirLibro";
 	}
+	
 	@RequestMapping("/administrarUsuarios")
 	public String administrarUsuarios(Model model) {
 		return "administrarUsuarios";
