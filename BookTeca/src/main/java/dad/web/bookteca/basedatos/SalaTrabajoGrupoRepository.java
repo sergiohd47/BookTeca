@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import dad.web.bookteca.clases.SalaTrabajoGrupo;;;
+import dad.web.bookteca.clases.SalaTrabajoGrupo;
+import dad.web.bookteca.clases.Usuario;;;
 
 public interface SalaTrabajoGrupoRepository extends JpaRepository<SalaTrabajoGrupo, Long>{
 	
@@ -13,7 +14,7 @@ public interface SalaTrabajoGrupoRepository extends JpaRepository<SalaTrabajoGru
 	
 	ArrayList<SalaTrabajoGrupo> findByCompartida(boolean compartida);
 	
-	ArrayList<SalaTrabajoGrupo> findById(int id);
+	SalaTrabajoGrupo findById(long id);
 	
-	SalaTrabajoGrupo findByIdUsuario(int idUsuario);
+	SalaTrabajoGrupo findByIdUsuario(Usuario idUsuario);
 }

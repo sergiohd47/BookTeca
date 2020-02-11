@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import dad.web.bookteca.clases.EquipoInformatico;
+import dad.web.bookteca.clases.Usuario;
 
 public interface EquipoInformaticoRepository extends JpaRepository<EquipoInformatico, Long>{
 	
@@ -13,9 +14,10 @@ public interface EquipoInformaticoRepository extends JpaRepository<EquipoInforma
 	
 	ArrayList<EquipoInformatico> findBySistemaOperativo(String so);
 	
-	ArrayList<EquipoInformatico> findById(int id);
+	ArrayList<EquipoInformatico> findByIdUsuario(Usuario idUsuario);
 	
-	EquipoInformatico findByIdUsuario(int idUsuario);
+	EquipoInformatico findById(long id);
+	
 }
 
 
