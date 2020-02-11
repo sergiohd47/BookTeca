@@ -10,8 +10,8 @@ import dad.web.bookteca.clases.Revista;
 import dad.web.bookteca.clases.Usuario;
 
 public interface LibroRepository extends JpaRepository<Libro, Long> {
-	@Query(nativeQuery = true, value = "SELECT (*) FROM Libro L GROUP BY L.Nombre")
-	ArrayList<Libro> findAllGroupBy();
+	/*@Query(nativeQuery = true, value = "SELECT * FROM Libro GROUP BY nombre")
+	ArrayList<Libro> findByNombre();*/
 
 	ArrayList<Libro> findByNombre(String nombre);
 	

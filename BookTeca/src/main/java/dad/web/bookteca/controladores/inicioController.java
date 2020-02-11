@@ -79,20 +79,46 @@ public class inicioController {
 
 	@RequestMapping("/")
 	public String inicio(Model model) {
-		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAllGroupBy();
+		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 		Collections.shuffle(listaLibros);
 		ArrayList<Libro> listaLibrosDestacados=new ArrayList<>();
-		for(int i=0;i<NUMERO_RECURSOS_MAIN;i++) {
-			listaLibrosDestacados.add(listaLibros.get(i));
-		}
+		int i = 0;
+		int j = 0;
+		ArrayList<String> nombresLibros = new ArrayList<>(NUMERO_RECURSOS_MAIN);
+		do {
+			if(!nombresLibros.contains(listaLibros.get(j).getNombre())) {
+				nombresLibros.add(listaLibros.get(j).getNombre());
+				listaLibrosDestacados.add(listaLibros.get(j));
+				j++;
+				i++;
+			} else
+				j++;
+		} while(i < NUMERO_RECURSOS_MAIN);
+		/*for(int i=0;i<NUMERO_RECURSOS_MAIN;i++) {
+			if(!listaLibrosDestacados.contains(listaLibros.get(i)))
+				listaLibrosDestacados.add(listaLibros.get(i));
+		}*/
 		model.addAttribute("listaLibrosDestacados",listaLibrosDestacados);
 
-		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAllGroupBy();
+		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
 		Collections.shuffle(listaRevistas);
 		ArrayList<Revista> listaRevistasDestacadas=new ArrayList<>();
-		for(int i=0;i<NUMERO_RECURSOS_MAIN;i++) {
-			listaRevistasDestacadas.add(listaRevistas.get(i));
-		}
+		ArrayList<String> nombresRevistas = new ArrayList<>(NUMERO_RECURSOS_MAIN);
+		i = 0;
+		j = 0;
+		do {
+			if(!nombresRevistas.contains(listaRevistas.get(j).getNombre())) {
+				nombresRevistas.add(listaLibros.get(j).getNombre());
+				listaRevistasDestacadas.add(listaRevistas.get(j));
+				j++;
+				i++;
+			} else
+				j++;
+		} while(i < NUMERO_RECURSOS_MAIN);
+		/*for(int i=0;i<NUMERO_RECURSOS_MAIN;i++) {
+			if(!listaRevistasDestacadas.contains(listaRevistas.get(i)))
+				listaRevistasDestacadas.add(listaRevistas.get(i));
+		}*/
 		model.addAttribute("listaRevistasDestacadas",listaRevistasDestacadas);
 
 		//NO HA INICIADO SESION
@@ -108,23 +134,21 @@ public class inicioController {
 	@RequestMapping("/sesionIniciada")
 	public String sesionIniciada(Model model, @RequestParam("nombreUsuario") String email, HttpSession usuarioSesion) {
 		Usuario usuario=usuarios.findByEmail(email);
-		if(usuario==null) {
+		if(usuario==null)
 			return "iniciarSesionNuevo";
-		}
 		usuarioSesion.setAttribute("infoUsuario", usuario);
+		
 		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 		ArrayList<Libro> listaLibrosDestacados=new ArrayList<>();
 		Random randomPick=new Random();
-		for(int i=0;i<NUMERO_RECURSOS_MAIN;i++) {
+		for(int i=0;i<NUMERO_RECURSOS_MAIN;i++)
 			listaLibrosDestacados.add(listaLibros.get(randomPick.nextInt(listaLibros.size())));
-		}
 		model.addAttribute("listaLibrosDestacados",listaLibrosDestacados);
 
 		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
 		ArrayList<Revista> listaRevistasDestacadas=new ArrayList<>();
-		for(int i=0;i<NUMERO_RECURSOS_MAIN;i++) {
+		for(int i=0;i<NUMERO_RECURSOS_MAIN;i++)
 			listaRevistasDestacadas.add(listaRevistas.get(randomPick.nextInt(listaRevistas.size())));
-		}
 		model.addAttribute("listaRevistasDestacadas",listaRevistasDestacadas);
 		return "sesionIniciada";
 	}
@@ -185,26 +209,23 @@ public class inicioController {
 		return "registro";
 	}
 
-	/* COMENTADO POR FALLOS
-	 * @RequestMapping("/miPerfil")
+	@RequestMapping("/miPerfil")
 	public String miPerfil(Model model, HttpSession sesionUsuario) {
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
-		ArrayList<Libro> listaLibros=libros.findByIdUsuario(usuario.getId());
-
-
-		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
-
-
-		ArrayList<SalaTrabajoGrupo> listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findAll();
-
-
-		ArrayList<EquipoInformatico> listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findAll();
-
-
-		//EL USUARIO ES ADMINISTRADOR
-		model.addAttribute("usuarioAdmin", usuario.getAdministrador());
+		ArrayList<Libro> listaLibros=libros.findByIdUsuario(usuario);
+		model.addAttribute("listaLibros",listaLibros);
+		ArrayList<Revista> listaRevistas=revistas.findByIdUsuario(usuario);
+		model.addAttribute("listaRevistas",listaRevistas);
+		SalaTrabajoGrupo STG=salasTrabajoGrupo.findByIdUsuario(usuario);
+		model.addAttribute("STG",STG);
+		ArrayList<EquipoInformatico> listaEquipos=equiposInformaticos.findByIdUsuario(usuario);
+		model.addAttribute("listaEquipos",listaEquipos);
+		if(usuario.getAdministrador())
+			model.addAttribute("usuarioAdmin",true);
+		else
+			model.addAttribute("usuario",false);
 		return "miPerfil";
-	}*/
+	}
 
 	@RequestMapping("/editarPerfil")
 	public String editarPerfil(Model model, Usuario usuario) {

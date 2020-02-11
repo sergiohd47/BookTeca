@@ -9,8 +9,8 @@ import dad.web.bookteca.clases.Revista;
 import dad.web.bookteca.clases.Usuario;
 
 public interface RevistaRepository extends JpaRepository<Revista, Long>{
-	@Query(nativeQuery = true, value = "SELECT (*) FROM Revista R GROUP BY R.Nombre")
-	ArrayList<Revista> findAllGroupBy();
+	/*@Query(nativeQuery = true, value = "SELECT * FROM Revista GROUP BY nombre")
+	ArrayList<Revista> findByNombre();*/
 	
 	ArrayList<Revista> findByNombre(String nombre);
 	
