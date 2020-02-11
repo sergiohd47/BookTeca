@@ -28,21 +28,24 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">Inicio
-							<span class="sr-only">(current)</span>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="buscadorLibros">Libros</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" href="buscadorRevistas">Revistas</a>
-					</li>
+					{{#usuarioAdmin}}
+					<li class="nav-item active"><a class="nav-link" href="/">Inicio
+							<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi Perfil</a></li>
+					<li class="nav-item"><a class="nav-link" href="/">Cerrar Sesion</a></li> 
+					{{/usuarioAdmin}}
+					{{#usuario}}
+					<li class="nav-item active"><a class="nav-link" href="/">Inicio
+							<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="buscadorLibros">Libros</a></li>
+					<li class="nav-item"><a class="nav-link" href="buscadorRevistas">Revistas</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="reservaSalaTrabajoGrupo">Sala Trabajo En Grupo</a></li>
+						href="reservaSalaTrabajoGrupo">Salas Trabajo En Grupo</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="reservaEquipoInformatico">Equipos Informaticos</a></li> 
-					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi
-							Perfil</a></li>
-					<li class="nav-item"><a class="nav-link" href="/">Cerrar
-							Sesion</a></li> 
+					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi Perfil</a></li>
+					<li class="nav-item"><a class="nav-link" href="/">Cerrar Sesion</a></li> 
+					{{/usuario}}
 				</ul>
 			</div>
 		</div>
@@ -52,13 +55,80 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<h1 class="mt-5"></h1>
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
-				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu
-					mano</h1>
-				<h1 class="mt-5"></h1>
-				<h1 class="mt-5">LIBROS</h1>
-				<p class="lead">El libro destacado del dia es:</p>
+				{{#usuarioAdmin}}
+				<h1 class="mt-5">Aqui tienes todos los recursos de BookTeca</h1>
+				<h2 class="mt-5">LIBROS</h2>
+				<table border="1" class="lead" align="center">
+					<tr>
+						<th>NOMBRE</th>
+						<th>AUTOR</th>
+						<th>EDITORIAL</th>
+						<th>GENERO</th>
+					</tr>
+					{{#listaLibros}}
+					<tr>
+						<td>{{nombre}}</td>
+						<td>{{autor}}</td>
+						<td>{{editorial}}</td>
+						<td>{{genero}}</td>
+					</tr>
+					{{/listaLibros}}
+				</table>
+				<h2 class="mt-5">REVISTAS</h2>
+				<table border="1" class="lead" align="center">
+					<tr>
+						<th>NOMBRE</th>
+						<th>EDITORIAL</th>
+						<th>FASCICULOS</th>
+						<th>GENERO</th>
+					</tr>
+					{{#listaRevistas}}
+					<tr>
+						<td>{{nombre}}</td>
+						<td>{{editorial}}</td>
+						<td>{{fasciculo}}</td>
+						<td>{{genero}}</td>
+					</tr>
+					{{/listaRevistas}}
+				</table>
+				<h2 class="mt-5">SALAS DE TRABAJO</h2>
+				<table border="1" class="lead" align="center">
+					<tr>
+						<th>CAPACIDAD</th>
+						<th>LOCALIZACION</th>
+						<th>COMPARTIDA</th>
+						<th>DISPONIBLE</th>
+					</tr>
+					{{#listaSTGs}}
+					<tr>
+						<td>{{capacidad}}</td>
+						<td>{{localizacion}}</td>
+						<td>{{compartida}}</td>
+						<td>{{disponible}}</td>
+					</tr>
+					{{/listaSTGs}}
+				</table>
+				<h2 class="mt-5">EQUIPOS INFORMATICOS</h2>
+				<table border="1" class="lead" align="center">
+					<tr>
+						<th>SISTEMA OPERATIVO</th>
+						<th>LOCALIZACION</th>
+						<th>DISPONIBLE</th>
+					</tr>
+					{{#listaEquipos}}
+					<tr>
+						<td>{{sistemaOperativo}}</td>
+						<td>{{localizacion}}</td>
+						<td>{{disponible}}</td>
+					</tr>
+					{{/listaEquipos}}
+				</table>
+				{{/usuarioAdmin}}
+				{{#usuario}}
+				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu mano</h1>
+				<h2 class="mt-5">LIBROS</h2>
+				<p class="lead">Los libros destacados de hoy son:</p>
 				<table border="1" class="lead" align="center">
 					<tr>
 						<th>NOMBRE</th>
@@ -77,13 +147,13 @@
 					</tr>
 					{{/listaLibrosDestacados}}
 				</table>
-				<h1 class="mt-5">REVISTAS</h1>
-				<p class="lead">La revista destacada del dia es:</p>
+				<h2 class="mt-5">REVISTAS</h2>
+				<p class="lead">Las revistas destacadas de hoy son:</p>
 				<table border="1" class="lead" align="center">
 					<tr>
 						<th>NOMBRE</th>
 						<th>EDITORIAL</th>
-						<th>FASCICULO</th>
+						<th>FASCICULOS</th>
 						<th>GENERO</th>
 						<th>RESERVAR</th>
 					</tr>
@@ -97,6 +167,7 @@
 					</tr>
 					{{/listaRevistasDestacadas}}
 				</table>
+				{{/usuario}}
 			</div>
 		</div>
 	</div>

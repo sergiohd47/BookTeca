@@ -39,6 +39,9 @@ public class inicioController {
 
 	@Autowired
 	private UsuarioRepository usuarios;
+	
+	private ArrayList<Libro> listaLibrosDestacados;
+	private ArrayList<Revista> listaRevistasDestacadas;
 
 	@PostConstruct
 	public void init() {
@@ -75,13 +78,15 @@ public class inicioController {
 		usuarios.save(new Usuario("Borja","Martin Alonso","G07martin","bormaral13@gmail.com",false));
 		usuarios.save(new Usuario("Sergio","Hernandez Dominguez","HDsergii47","sergiohd47@gmail.com",true));
 		usuarios.save(new Usuario("Daniel","Molina Ballesteros","Daany10","dmolinaballesteros@gmail.com",false));
+		
 	}
 
 	@RequestMapping("/")
 	public String inicio(Model model) {
+		listaLibrosDestacados=new ArrayList<>();
+		listaRevistasDestacadas=new ArrayList<>();
 		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 		Collections.shuffle(listaLibros);
-		ArrayList<Libro> listaLibrosDestacados=new ArrayList<>();
 		int i = 0;
 		int j = 0;
 		ArrayList<String> nombresLibros = new ArrayList<>(NUMERO_RECURSOS_MAIN);
@@ -94,15 +99,9 @@ public class inicioController {
 			} else
 				j++;
 		} while(i < NUMERO_RECURSOS_MAIN);
-		/*for(int i=0;i<NUMERO_RECURSOS_MAIN;i++) {
-			if(!listaLibrosDestacados.contains(listaLibros.get(i)))
-				listaLibrosDestacados.add(listaLibros.get(i));
-		}*/
 		model.addAttribute("listaLibrosDestacados",listaLibrosDestacados);
-
 		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
 		Collections.shuffle(listaRevistas);
-		ArrayList<Revista> listaRevistasDestacadas=new ArrayList<>();
 		ArrayList<String> nombresRevistas = new ArrayList<>(NUMERO_RECURSOS_MAIN);
 		i = 0;
 		j = 0;
@@ -115,10 +114,6 @@ public class inicioController {
 			} else
 				j++;
 		} while(i < NUMERO_RECURSOS_MAIN);
-		/*for(int i=0;i<NUMERO_RECURSOS_MAIN;i++) {
-			if(!listaRevistasDestacadas.contains(listaRevistas.get(i)))
-				listaRevistasDestacadas.add(listaRevistas.get(i));
-		}*/
 		model.addAttribute("listaRevistasDestacadas",listaRevistasDestacadas);
 
 		//NO HA INICIADO SESION
@@ -136,20 +131,22 @@ public class inicioController {
 		Usuario usuario=usuarios.findByEmail(email);
 		if(usuario==null)
 			return "iniciarSesionNuevo";
-		usuarioSesion.setAttribute("infoUsuario", usuario);
-		
-		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
-		ArrayList<Libro> listaLibrosDestacados=new ArrayList<>();
-		Random randomPick=new Random();
-		for(int i=0;i<NUMERO_RECURSOS_MAIN;i++)
-			listaLibrosDestacados.add(listaLibros.get(randomPick.nextInt(listaLibros.size())));
-		model.addAttribute("listaLibrosDestacados",listaLibrosDestacados);
-
-		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
-		ArrayList<Revista> listaRevistasDestacadas=new ArrayList<>();
-		for(int i=0;i<NUMERO_RECURSOS_MAIN;i++)
-			listaRevistasDestacadas.add(listaRevistas.get(randomPick.nextInt(listaRevistas.size())));
-		model.addAttribute("listaRevistasDestacadas",listaRevistasDestacadas);
+		usuarioSesion.setAttribute("infoUsuario", usuario);	
+		if(!usuario.getAdministrador()) {
+			model.addAttribute("usuario",true);
+			model.addAttribute("listaLibrosDestacados",listaLibrosDestacados);
+			model.addAttribute("listaRevistasDestacadas",listaRevistasDestacadas);
+		} else {
+			model.addAttribute("usuarioAdmin",true);
+			ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
+			model.addAttribute("listaLibros",listaLibros);
+			ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
+			model.addAttribute("listaRevistas",listaRevistas);
+			ArrayList<SalaTrabajoGrupo> listaSTGs=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findAll();
+			model.addAttribute("listaSTGs",listaSTGs);
+			ArrayList<EquipoInformatico> listaEquipos=(ArrayList<EquipoInformatico>) equiposInformaticos.findAll();
+			model.addAttribute("listaEquipos",listaEquipos);
+		}
 		return "sesionIniciada";
 	}
 
