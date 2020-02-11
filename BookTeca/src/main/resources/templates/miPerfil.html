@@ -54,9 +54,9 @@
 			<div class="col-lg-12 text-center">
 				<h1 class="mt-5"></h1>
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
-				<h1 class="mt-5">Mi Perfil</h1>
+				<h1 class="mt-5">Hola {{nombre}}</h1>
 				{{#usuarioAdmin}}
-				<h1 class="mt-5">Zona Administracion</h1>
+				<h2 class="mt-5">¿Que desea realizar?</h2>
 				<p class="lead">Desde aqui puedes administrar los diferentes recursos de la coleccion</p>
 				<a href="añadirLibro" class="btn btn-success">AÑADIR LIBRO</a>
 				<a href="añadirRevista" class="btn btn-success">AÑADIR REVISTA</a>
@@ -67,10 +67,11 @@
 				<a href="administrarUsuarios" class="btn btn-success">ADMINISTRAR USUARIOS</a>
 				<h1 class="mt-5"></h1>
 				{{/usuarioAdmin}}
+				{{#usuario}}
 				<p class="lead">Desde aqui, puedes mirar el estado de tus reservas o editar tu perfil</p>
 				<a href="editarPerfil" class="btn btn-success">EDITAR PERFIL</a>
 				<h1 class="mt-5"></h1>
-				<h1 class="mt-5">Reservas</h1>
+				<h2 class="mt-5">Reservas</h2>
 				<p class="lead">Libros reservados:</p>
 				<table border="1" class="lead" align="center">
 					<tr>
@@ -144,6 +145,7 @@
 					</tr>
 					{{/listaEquipos}}
 				</table>
+				{{/usuario}}
 			</div>
 		</div>
 	</div>

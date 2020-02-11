@@ -212,18 +212,21 @@ public class inicioController {
 	@RequestMapping("/miPerfil")
 	public String miPerfil(Model model, HttpSession sesionUsuario) {
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
-		ArrayList<Libro> listaLibros=libros.findByIdUsuario(usuario);
-		model.addAttribute("listaLibros",listaLibros);
-		ArrayList<Revista> listaRevistas=revistas.findByIdUsuario(usuario);
-		model.addAttribute("listaRevistas",listaRevistas);
-		SalaTrabajoGrupo STG=salasTrabajoGrupo.findByIdUsuario(usuario);
-		model.addAttribute("STG",STG);
-		ArrayList<EquipoInformatico> listaEquipos=equiposInformaticos.findByIdUsuario(usuario);
-		model.addAttribute("listaEquipos",listaEquipos);
-		if(usuario.getAdministrador())
+		if(!usuario.getAdministrador()) {
+			model.addAttribute("nombre",usuario.getNombre());
+			model.addAttribute("usuario",true);
+			ArrayList<Libro> listaLibros=libros.findByIdUsuario(usuario);
+			model.addAttribute("listaLibros",listaLibros);
+			ArrayList<Revista> listaRevistas=revistas.findByIdUsuario(usuario);
+			model.addAttribute("listaRevistas",listaRevistas);
+			SalaTrabajoGrupo STG=salasTrabajoGrupo.findByIdUsuario(usuario);
+			model.addAttribute("STG",STG);
+			ArrayList<EquipoInformatico> listaEquipos=equiposInformaticos.findByIdUsuario(usuario);
+			model.addAttribute("listaEquipos",listaEquipos);
+		} else {
+			model.addAttribute("nombre",usuario.getNombre());
 			model.addAttribute("usuarioAdmin",true);
-		else
-			model.addAttribute("usuario",false);
+		}
 		return "miPerfil";
 	}
 
