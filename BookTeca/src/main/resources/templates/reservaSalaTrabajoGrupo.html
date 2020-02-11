@@ -30,7 +30,7 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="/">Inicio
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Libros
+					<li class="nav-item"><a class="nav-link" href="buscadorLibros">Libros
 					</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="buscadorRevistas">Revistas</a></li>
@@ -39,12 +39,12 @@
 						<span class="sr-only">(current)</span>
 					<li class="nav-item"><a class="nav-link"
 						href="reservaEquipoInformatico">Equipos Informaticos</a></li>
-					{{#visibleCerrarSesion}}
+					{{^visibleIniciarSesion}}
 					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi
 							Perfil</a></li>
 					<li class="nav-item"><a class="nav-link" href="/">Cerrar
 							Sesion</a></li> 
-					{{/visibleCerrarSesion}}
+					{{/visibleIniciarSesion}}
 					{{#visibleIniciarSesion}}
 					<li class="nav-item"><a class="nav-link" href="iniciarSesion">Iniciar Sesion</a></li>
 					<li class="nav-item"><a class="nav-link" href="registro">Registro</a></li> 
@@ -74,9 +74,9 @@
 						<th>CAPACIDAD</th>
 						<th>LOCALIZACION</th>
 						<th>COMPARTIDA</th>
-						{{#visibleCerrarSesion}}
+						{{^visibleIniciarSesion}}
 						<th>RESERVAR</th>
-						{{/visibleCerrarSesion}}
+						{{/visibleIniciarSesion}}
 					</tr>
 					{{#listaSTG}}
 					<tr>
@@ -88,9 +88,9 @@
 						{{^compartida}}
 						<td>No</td>
 						{{/compartida}}
-						{{#visibleCerrarSesion}}
+						{{^visibleIniciarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
-						{{/visibleCerrarSesion}}
+						{{/visibleIniciarSesion}}
 					</tr>
 					{{/listaSTG}}
 				</table>

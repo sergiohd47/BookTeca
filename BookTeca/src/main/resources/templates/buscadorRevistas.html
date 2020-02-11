@@ -39,12 +39,12 @@
 						href="reservaSalaTrabajoGrupo">Sala Trabajo En Grupo</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="reservaEquipoInformatico">Equipos Informaticos</a></li>
-					{{#visibleCerrarSesion}}
+					{{^visibleIniciarSesion}}
 					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi
 							Perfil</a></li>
 					<li class="nav-item"><a class="nav-link" href="/">Cerrar
 							Sesion</a></li> 
-					{{/visibleCerrarSesion}}
+					{{/visibleIniciarSesion}}
 					{{#visibleIniciarSesion}}
 					<li class="nav-item"><a class="nav-link" href="iniciarSesion">Iniciar Sesion</a></li>
 					<li class="nav-item"><a class="nav-link" href="registro">Registro</a></li> 
@@ -86,7 +86,7 @@
 						<th>EDITORIAL</th>
 						<th>FASCICULO</th>
 						<th>GENERO</th>
-						{{#visibleCerrarSesion}}
+						{{^visibleIniciarSesion}}
 						<th>RESERVAR</th>
 						{{/visibleCerrarSesion}}
 					</tr>
@@ -96,9 +96,9 @@
 						<td>{{editorial}}</td>
 						<td>{{fasciculo}}</td>
 						<td>{{genero}}</td>
-						{{#visibleCerrarSesion}}
+						{{^visibleIniciarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
-						{{/visibleCerrarSesion}}
+						{{/visibleIniciarSesion}}
 					</tr>
 					{{/listaRevistasBusqueda}}
 				</table>

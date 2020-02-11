@@ -90,6 +90,9 @@ public class Usuario {
 	public boolean getAdministrador() {
 		return administrador;
 	}
+	public void setAdministrador(boolean tipo) {
+		this.administrador=tipo;
+	}
 
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;

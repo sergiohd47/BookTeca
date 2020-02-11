@@ -46,12 +46,12 @@
 					<li class="nav-item"><a class="nav-link" href="registro">Registrate
 							</a></li> 
 					{{/visibleIniciarSesion}} 
-					{{#visibleCerrarSesion}}
+					{{^visibleIniciarSesion}}
 					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi
 							Perfil</a></li>
 					<li class="nav-item"><a class="nav-link" href="/">Cerrar
 							Sesion</a></li> 
-					{{/visibleCerrarSesion}}
+					{{/visibleIniciarSesion}}
 				</ul>
 			</div>
 		</div>
@@ -80,9 +80,9 @@
 						<th>AUTOR</th>
 						<th>EDITORIAL</th>
 						<th>GENERO</th>
-						{{#visibleCerrarSesion}}
+						{{^visibleIniciarSesion}}
 						<th>RESERVAR</th>
-						{{/visibleCerrarSesion}}
+						{{/visibleIniciarSesion}}
 					</tr>
 					{{#listaLibrosDestacados}}
 					<tr>
@@ -90,9 +90,9 @@
 						<td>{{autor}}</td>
 						<td>{{editorial}}</td>
 						<td>{{genero}}</td>
-						{{#visibleCerrarSesion}}
+						{{^visibleIniciarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
-						{{/visibleCerrarSesion}}
+						{{/visibleIniciarSesion}}
 					</tr>
 					{{/listaLibrosDestacados}}
 				</table>
@@ -104,9 +104,9 @@
 						<th>EDITORIAL</th>
 						<th>FASCICULO</th>
 						<th>GENERO</th>
-						{{#visibleCerrarSesion}}
+						{{^visibleIniciarSesion}}
 						<th>RESERVAR</th>
-						{{/visibleCerrarSesion}}
+						{{/visibleIniciarSesion}}
 					</tr>
 					{{#listaRevistasDestacadas}}
 					<tr>
@@ -114,9 +114,9 @@
 						<td>{{editorial}}</td>
 						<td>{{fasciculo}}</td>
 						<td>{{genero}}</td>
-						{{#visibleCerrarSesion}}
+						{{^visibleIniciarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
-						{{/visibleCerrarSesion}}
+						{{/visibleIniciarSesion}}
 					</tr>
 					{{/listaRevistasDestacadas}}
 				</table>

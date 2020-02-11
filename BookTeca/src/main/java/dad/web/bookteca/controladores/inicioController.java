@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import dad.web.bookteca.clases.EquipoInformatico;
 import dad.web.bookteca.clases.Libro;
@@ -76,6 +78,7 @@ public class inicioController {
 	
 	@RequestMapping("/")
 	public String inicio(Model model) {
+		
 		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 		ArrayList<Libro> listaLibrosDestacados=new ArrayList<>();
 		Random randomPick=new Random();
@@ -93,8 +96,6 @@ public class inicioController {
 		
 		//NO HA INICIADO SESION
 		model.addAttribute("visibleIniciarSesion", true);
-		model.addAttribute("visibleCerrarSesion", false);
-		
 		return "index";
 	}
 	
@@ -104,7 +105,12 @@ public class inicioController {
 	}
 	
 	@RequestMapping("/sesionIniciada")
-	public String sesionIniciada(Model model) {
+	public String sesionIniciada(Model model, @RequestParam("nombreUsuario") String email, HttpSession usuarioSesion) {
+		Usuario usuario=usuarios.findByEmail(email);
+		if(usuario==null) {
+			return "iniciarSesionNuevo";
+		}
+		usuarioSesion.setAttribute("infoUsuario", usuario);
 		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 		ArrayList<Libro> listaLibrosDestacados=new ArrayList<>();
 		Random randomPick=new Random();
@@ -123,55 +129,52 @@ public class inicioController {
 	}
 	
 	@RequestMapping("/buscadorLibros")
-	public String buscadorLibros(Model model) {
-		//NO HA INICIADO SESION
-		//model.addAttribute("visibleCerrarSesion",false);
+	public String buscadorLibros(Model model, HttpSession usuarioSesion) {
+		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<Libro> listaLibrosBusqueda=new ArrayList<>();
 		//listaLibrosBusqueda=(ArrayList<Libro>) libros.findAll();
 		boolean visibleTabla=!listaLibrosBusqueda.isEmpty();
 		model.addAttribute("listaLibrosBusqueda",listaLibrosBusqueda);
 		model.addAttribute("visibleTabla",visibleTabla);
-		model.addAttribute("visibleIniciarSesion",true);
+		model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
 		return "buscadorLibros";
 		
 	}
 	
 	@RequestMapping("/buscadorRevistas")
-	public String buscadorRevista(Model model) {
-		//NO HA INICIADO SESION
-		//model.addAttribute("visibleCerrarSesion",false);
+	public String buscadorRevista(Model model, HttpSession usuarioSesion) {
+		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<Revista> listaRevistasBusqueda=new ArrayList<>();
 		//listaRevistasBusqueda=(ArrayList<Revista>) revistas.findAll();
 		boolean visibleTabla=!listaRevistasBusqueda.isEmpty();
 		model.addAttribute("listaRevistasBusqueda",listaRevistasBusqueda);
 		model.addAttribute("visibleTabla",visibleTabla);
-		model.addAttribute("visibleIniciarSesion",true);
+		model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
 		return "buscadorRevistas";
 	}
 	
 	@RequestMapping("/reservaSalaTrabajoGrupo")
-	public String reservaSalaTrabajoGrupo(Model model) {
+	public String reservaSalaTrabajoGrupo(Model model, HttpSession usuarioSesion) {
+		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<SalaTrabajoGrupo> listaSTG=new ArrayList<>();
 		//listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findAll();
 		boolean visibleTabla=!listaSTG.isEmpty();
 		model.addAttribute("visibleTabla",visibleTabla);
 		model.addAttribute("listaSTG",listaSTG);
-		//NO HA INICIADO SESION
-		//model.addAttribute("visibleCerrarSesion",false);
-		model.addAttribute("visibleIniciarSesion",true);
+		model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
+		System.out.println(!usuarios.findAll().contains(usuario));
 		return "reservaSalaTrabajoGrupo";
 	}
 	
 	@RequestMapping("/reservaEquipoInformatico")
-	public String reservaEquipoInformatico(Model model) {
+	public String reservaEquipoInformatico(Model model, HttpSession usuarioSesion) {
+		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<EquipoInformatico> listaEquipo=new ArrayList<>();
 		//listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findAll();
 		boolean visibleTabla=!listaEquipo.isEmpty();
 		model.addAttribute("visibleTabla",visibleTabla);
 		model.addAttribute("listaEquipo",listaEquipo);
-		//NO HA INICIADO SESION
-		//model.addAttribute("visibleCerrarSesion",false);
-		model.addAttribute("visibleIniciarSesion",true);
+		model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
 		return "reservaEquipoInformatico";
 	}
 	
@@ -181,46 +184,26 @@ public class inicioController {
 		return "registro";
 	}
 	
-	@RequestMapping("/miPerfil")
-	public String miPerfil(Model model) {
-		Random randomPick=new Random();
-		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
-		Libro libroEscogido=listaLibros.get(randomPick.nextInt(listaLibros.size()));
-		model.addAttribute("nombreLibro", libroEscogido.getNombre());
-		model.addAttribute("autorLibro", libroEscogido.getAutor());
-		model.addAttribute("editorialLibro", libroEscogido.getEditorial());
-		model.addAttribute("generoLibro", libroEscogido.getGenero());
-		model.addAttribute("diaFinReservaLibro", "3.03.2020");
+	/* COMENTADO POR FALLOS
+	 * @RequestMapping("/miPerfil")
+	public String miPerfil(Model model, HttpSession sesionUsuario) {
+		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
+		ArrayList<Libro> listaLibros=libros.findByIdUsuario(usuario.getId());
+		
 		
 		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
-		Revista revistaEscogida=listaRevistas.get(randomPick.nextInt(listaRevistas.size()));
-		model.addAttribute("nombreRevista", revistaEscogida.getNombre());
-		model.addAttribute("editorialRevista", revistaEscogida.getEditorial());
-		model.addAttribute("fasciculoRevista", revistaEscogida.getFasciculo());
-		model.addAttribute("generoRevista", revistaEscogida.getGenero());
-		model.addAttribute("diaFinReservaRevista", "18.02.2020");
+		
 		
 		ArrayList<SalaTrabajoGrupo> listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findAll();
-		SalaTrabajoGrupo salaEscogida=listaSTG.get(randomPick.nextInt(listaSTG.size()));
-		model.addAttribute("capacidadSala", salaEscogida.getCapacidad());
-		model.addAttribute("localizacionSala", salaEscogida.getLocalizacion());
-		if(salaEscogida.isCompartida()) {
-			model.addAttribute("compartidaSala", "Si");
-		}else {
-			model.addAttribute("compartidaSala", "No");
-		}
-		model.addAttribute("diaFinReservaSala", "5.02.2020");
+		
 		
 		ArrayList<EquipoInformatico> listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findAll();
-		EquipoInformatico equipoEscogido=listaEquipo.get(randomPick.nextInt(listaEquipo.size()));
-		model.addAttribute("sistemaOperativoEquipo", equipoEscogido.getSistemaOperativo());
-		model.addAttribute("localizacionEquipo", equipoEscogido.getLocalizacion());
-		model.addAttribute("diaFinReservaEquipo", "8.02.2020");
+		
 		
 		//EL USUARIO ES ADMINISTRADOR
-		model.addAttribute("usuarioAdmin", true);
+		model.addAttribute("usuarioAdmin", usuario.getAdministrador());
 		return "miPerfil";
-	}
+	}*/
 	
 	@RequestMapping("/editarPerfil")
 	public String editarPerfil(Model model, Usuario usuario) {
@@ -253,7 +236,9 @@ public class inicioController {
 	}
 	
 	@RequestMapping("/administrarUsuarios")
-	public String administrarUsuarios(Model model) {
+	public String administrarUsuarios(Model model, @RequestParam("emailUsuario") String emailNuevoAdmin) {
+		Usuario usuario=usuarios.findByEmail(emailNuevoAdmin);
+		usuario.setAdministrador(true);
 		return "administrarUsuarios";
 	}
 
