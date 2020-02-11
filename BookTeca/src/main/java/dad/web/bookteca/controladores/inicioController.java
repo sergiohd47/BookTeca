@@ -108,7 +108,7 @@ public class inicioController {
 		j = 0;
 		do {
 			if(!nombresRevistas.contains(listaRevistas.get(j).getNombre())) {
-				nombresRevistas.add(listaLibros.get(j).getNombre());
+				nombresRevistas.add(listaRevistas.get(j).getNombre());
 				listaRevistasDestacadas.add(listaRevistas.get(j));
 				j++;
 				i++;
