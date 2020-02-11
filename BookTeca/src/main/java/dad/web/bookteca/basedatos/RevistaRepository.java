@@ -15,7 +15,7 @@ public interface RevistaRepository extends JpaRepository<Revista, Long>{
 	
 	ArrayList<Revista> findById(long id);
 	
-	ArrayList<Revista> findByRevistaNombreOrRevistaEditorialOrRevistaGenero(String nombre, String editorial, String genero);
+	ArrayList<Revista> findByNombreOrEditorialOrGenero(String nombre, String editorial, String genero);
 	
 	Revista findByIdUsuario(long idUsuario);
 }
