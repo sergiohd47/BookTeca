@@ -72,7 +72,7 @@
 				<h1 class="mt-5"></h1>
 				<h1 class="mt-5">Reservas</h1>
 				<p class="lead">Libros reservados:</p>
-				<table border class="lead">
+				<table border="1" class="lead" align="center">
 					<tr>
 						<th>NOMBRE</th>
 						<th>AUTOR</th>
@@ -80,17 +80,19 @@
 						<th>GENERO</th>
 						<th>FIN DE RESERVA</th>
 					</tr>
+					{{#listaLibros}}
 					<tr>
-						<td>{{nombreLibro}}</td>
-						<td>{{autorLibro}}</td>
-						<td>{{editorialLibro}}</td>
-						<td>{{generoLibro}}</td>
-						<td>{{diaFinReservaLibro}}</td>
+						<td>{{nombre}}</td>
+						<td>{{autor}}</td>
+						<td>{{editorial}}</td>
+						<td>{{genero}}</td>
+						<td>{{diaFinReserva}}</td>
 					</tr>
+					{{/listaLibros}}
 				</table>
 				<h1 class="mt-5"></h1>
 				<p class="lead">Revistas reservadas:</p>
-				<table border class="lead">
+				<table border="1" class="lead" align="center">
 					<tr>
 						<th>NOMBRE</th>
 						<th>EDITORIAL</th>
@@ -98,43 +100,49 @@
 						<th>GENERO</th>
 						<th>FIN DE RESERVA</th>
 					</tr>
+					{{#listaRevistas}}
 					<tr>
-						<td>{{nombreRevista}}</td>
-						<td>{{editorialRevista}}</td>
-						<td>{{fasciculoRevista}}</td>
-						<td>{{generoRevista}}</td>
-						<td>{{diaFinReservaRevista}}</td>
+						<td>{{nombre}}</td>
+						<td>{{editorial}}</td>
+						<td>{{fasciculo}}</td>
+						<td>{{genero}}</td>
+						<td>{{diaFinReserva}}</td>
 					</tr>
+					{{/listaRevistas}}
 				</table>
 				<h1 class="mt-5"></h1>
 				<p class="lead">Sala de trabajo reservada:</p>
-				<table border class="lead">
+				<table border="1" class="lead" align="center">
 					<tr>
 						<th>CAPACIDAD</th>
 						<th>LOCALIZACION</th>
 						<th>COMPARTIDA</th>
 						<th>FIN DE RESERVA</th>
 					</tr>
+					{{#STG}}
 					<tr>
-						<td>{{capacidadSala}}</td>
-						<td>{{localizacionSala}}</td>
-						<td>{{compartidaSala}}</td>
-						<td>{{diaFinReservaSala}}</td>
+						<td>{{capacidad}}</td>
+						<td>{{localizacion}}</td>
+						<td>{{compartida}}</td>
+						<td>{{diaFinReserva}}</td>
 					</tr>
+					{{/STG}}
 				</table>
 				<h1 class="mt-5"></h1>
 				<p class="lead">Equipos informticos reservados:</p>
-				<table border class="lead">
+				<table border="1" class="lead" align="center">
 					<tr>
 						<th>SISTEMA OPERATIVO</th>
 						<th>LOCALIZACION</th>
 						<th>FIN DE RESERVA</th>
 					</tr>
+					{{#listaEquipos}}
 					<tr>
-						<td>{{sistemaOperativoEquipo}}</td>
-						<td>{{localizacionEquipo}}</td>
-						<td>{{diaFinReservaEquipo}}</td>
+						<td>{{sistemaOperativo}}</td>
+						<td>{{localizacion}}</td>
+						<td>{{diaFinReserva}}</td>
 					</tr>
+					{{/listaEquipos}}
 				</table>
 			</div>
 		</div>
