@@ -89,7 +89,7 @@ public class inicioController {
 		for(int i=0;i<NUMERO_RECURSOS_MAIN;i++) {
 			listaRevistasDestacadas.add(listaRevistas.get(randomPick.nextInt(listaRevistas.size())));
 		}
-		model.addAttribute("listaRevistaDestacadas",listaRevistasDestacadas);
+		model.addAttribute("listaRevistasDestacadas",listaRevistasDestacadas);
 		
 		//NO HA INICIADO SESION
 		model.addAttribute("visibleIniciarSesion", true);
@@ -106,23 +106,19 @@ public class inicioController {
 	@RequestMapping("/sesionIniciada")
 	public String sesionIniciada(Model model) {
 		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
+		ArrayList<Libro> listaLibrosDestacados=new ArrayList<>();
 		Random randomPick=new Random();
-		Libro libroEscogido=listaLibros.get(randomPick.nextInt(listaLibros.size()));
-		long idLibro=libroEscogido.getId();
-		model.addAttribute("nombreLibroDestacado",libroEscogido.getNombre());
-		model.addAttribute("autorLibroDestacado",libroEscogido.getAutor());
-		model.addAttribute("editorialLibroDestacado",libroEscogido.getEditorial());
-		model.addAttribute("generoLibroDestacado",libroEscogido.getGenero());
-		model.addAttribute("numeroEjemplaresLibroDestacado",libros.findById(idLibro).size()); //luego se saca de la base de datos
+		for(int i=0;i<NUMERO_RECURSOS_MAIN;i++) {
+			listaLibrosDestacados.add(listaLibros.get(randomPick.nextInt(listaLibros.size())));
+		}
+		model.addAttribute("listaLibrosDestacados",listaLibrosDestacados);
 		
 		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
-		Revista revistaEscogida=listaRevistas.get(randomPick.nextInt(listaRevistas.size()));
-		long idRevista=revistaEscogida.getId();
-		model.addAttribute("nombreRevistaDestacada",revistaEscogida.getNombre());
-		model.addAttribute("editorialRevistaDestacada",revistaEscogida.getEditorial());
-		model.addAttribute("fasciculoRevistaDestacada",revistaEscogida.getFasciculo());
-		model.addAttribute("generoRevistaDestacada",revistaEscogida.getGenero());
-		model.addAttribute("numeroEjemplaresRevistaDestacada",revistas.findById(idRevista).size()); //luego se saca de la base de datos
+		ArrayList<Revista> listaRevistasDestacadas=new ArrayList<>();
+		for(int i=0;i<NUMERO_RECURSOS_MAIN;i++) {
+			listaRevistasDestacadas.add(listaRevistas.get(randomPick.nextInt(listaRevistas.size())));
+		}
+		model.addAttribute("listaRevistasDestacadas",listaRevistasDestacadas);
 		return "sesionIniciada";
 	}
 	
@@ -130,6 +126,11 @@ public class inicioController {
 	public String buscadorLibros(Model model) {
 		//NO HA INICIADO SESION
 		//model.addAttribute("visibleCerrarSesion",false);
+		ArrayList<Libro> listaLibrosBusqueda=new ArrayList<>();
+		//listaLibrosBusqueda=(ArrayList<Libro>) libros.findAll();
+		boolean visibleTabla=!listaLibrosBusqueda.isEmpty();
+		model.addAttribute("listaLibrosBusqueda",listaLibrosBusqueda);
+		model.addAttribute("visibleTabla",visibleTabla);
 		model.addAttribute("visibleIniciarSesion",true);
 		return "buscadorLibros";
 		
@@ -139,13 +140,21 @@ public class inicioController {
 	public String buscadorRevista(Model model) {
 		//NO HA INICIADO SESION
 		//model.addAttribute("visibleCerrarSesion",false);
+		ArrayList<Revista> listaRevistasBusqueda=new ArrayList<>();
+		//listaRevistasBusqueda=(ArrayList<Revista>) revistas.findAll();
+		boolean visibleTabla=!listaRevistasBusqueda.isEmpty();
+		model.addAttribute("listaRevistasBusqueda",listaRevistasBusqueda);
+		model.addAttribute("visibleTabla",visibleTabla);
 		model.addAttribute("visibleIniciarSesion",true);
 		return "buscadorRevistas";
 	}
 	
 	@RequestMapping("/reservaSalaTrabajoGrupo")
 	public String reservaSalaTrabajoGrupo(Model model) {
-		ArrayList<SalaTrabajoGrupo> listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findAll();
+		ArrayList<SalaTrabajoGrupo> listaSTG=new ArrayList<>();
+		//listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findAll();
+		boolean visibleTabla=!listaSTG.isEmpty();
+		model.addAttribute("visibleTabla",visibleTabla);
 		model.addAttribute("listaSTG",listaSTG);
 		//NO HA INICIADO SESION
 		//model.addAttribute("visibleCerrarSesion",false);
@@ -155,7 +164,10 @@ public class inicioController {
 	
 	@RequestMapping("/reservaEquipoInformatico")
 	public String reservaEquipoInformatico(Model model) {
-		ArrayList<EquipoInformatico> listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findAll();
+		ArrayList<EquipoInformatico> listaEquipo=new ArrayList<>();
+		//listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findAll();
+		boolean visibleTabla=!listaEquipo.isEmpty();
+		model.addAttribute("visibleTabla",visibleTabla);
 		model.addAttribute("listaEquipo",listaEquipo);
 		//NO HA INICIADO SESION
 		//model.addAttribute("visibleCerrarSesion",false);

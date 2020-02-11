@@ -96,28 +96,33 @@
 					</div>
 				</form>
 				<h1 class="mt-5">RESULTADO DE TU BUSQUEDA</h1>
-				<table border class="lead">
+				{{^listaRevistasBusqueda}}
+				<p class="lead">Lo sentimos pero la busqueda no ha encontrado resultados :(</p>
+				{{/listaRevistasBusqueda}}
+				{{#visibleTabla}}
+				<table border="1" class="lead">
 					<tr>
 						<th>NOMBRE</th>
 						<th>EDITORIAL</th>
-						<th>FASCICULOS</th>
-						<th>NUMERO EJEMPLARES</th>
+						<th>FASCICULO</th>
 						<th>GENERO</th>
 						{{#visibleCerrarSesion}}
 						<th>RESERVAR</th>
 						{{/visibleCerrarSesion}}
 					</tr>
+					{{#listaRevistasBusqueda}}
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>{{nombre}}</td>
+						<td>{{editorial}}</td>
+						<td>{{fasciculo}}</td>
+						<td>{{genero}}</td>
 						{{#visibleCerrarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
 						{{/visibleCerrarSesion}}
 					</tr>
+					{{/listaRevistasBusqueda}}
 				</table>
+				{{/visibleTabla}}
 			</div>
 		</div>
 	</div>

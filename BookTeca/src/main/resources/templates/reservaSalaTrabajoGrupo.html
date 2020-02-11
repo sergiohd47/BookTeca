@@ -65,6 +65,10 @@
 				<p class="lead">Aqui encontraras las diferentes salas de trabajo para grupos que tenemos disponibles</p>
 				<h1 class="mt-5"></h1>
 				<h1 class="mt-5">SALAS LIBRES</h1>
+				{{^listaSTG}}
+				<p class="lead">Lo sentimos, pero no disponemos de salas libres :(</p>
+				{{/listaSTG}}
+				{{#visibleTabla}}
 				<table border class="lead">
 					<tr>
 						<th>CAPACIDAD</th>
@@ -78,13 +82,19 @@
 					<tr>
 						<td>{{capacidad}}</td>
 						<td>{{localizacion}}</td>
-						<td>{{compartida}}</td>
+						{{#compartida}}
+						<td>Si</td>
+						{{/compartida}}
+						{{^compartida}}
+						<td>No</td>
+						{{/compartida}}
 						{{#visibleCerrarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
 						{{/visibleCerrarSesion}}
 					</tr>
 					{{/listaSTG}}
 				</table>
+				{{/visibleTabla}}
 			</div>
 		</div>
 	</div>

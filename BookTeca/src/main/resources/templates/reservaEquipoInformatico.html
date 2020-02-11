@@ -30,7 +30,7 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="/">Inicio
 					</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Libros
+					<li class="nav-item"><a class="nav-link" href="buscadorLibros">Libros
 					</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="buscadorRevistas">Revistas</a></li>
@@ -65,6 +65,10 @@
 				<p class="lead">Aqui encontraras los diferentes equipos informaticos que tenemos disponibles</p>
 				<h1 class="mt-5"></h1>
 				<h1 class="mt-5">EQUIPOS LIBRES</h1>
+				{{^listaEquipo}}
+				<p class="lead">Lo sentimos, pero no disponemos de equipos libres :(</p>
+				{{/listaEquipo}}
+				{{#visibleTabla}}
 				<table border class="lead">
 					<tr>
 						<th>SISTEMA OPERATIVO</th>
@@ -83,6 +87,7 @@
 					</tr>
 					{{/listaEquipo}}
 				</table>
+				{{/visibleTabla}}
 			</div>
 		</div>
 	</div>
