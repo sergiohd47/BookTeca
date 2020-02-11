@@ -15,5 +15,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
 	ArrayList<Usuario> findByNombre(String nombre);
 	
-	Usuario findByNombreAndApellidos(String nombre, String apellidos);
+	ArrayList<Usuario> findByNombreAndApellidos(String nombre, String apellidos);
 }

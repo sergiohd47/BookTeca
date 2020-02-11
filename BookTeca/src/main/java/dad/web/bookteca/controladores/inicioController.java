@@ -1,6 +1,7 @@
 package dad.web.bookteca.controladores;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import javax.annotation.PostConstruct;
@@ -76,18 +77,19 @@ public class inicioController {
 	
 	@RequestMapping("/")
 	public String inicio(Model model) {
-		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
+		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAllGroupBy();
+		Collections.shuffle(listaLibros);
 		ArrayList<Libro> listaLibrosDestacados=new ArrayList<>();
-		Random randomPick=new Random();
 		for(int i=0;i<NUMERO_RECURSOS_MAIN;i++) {
-			listaLibrosDestacados.add(listaLibros.get(randomPick.nextInt(listaLibros.size())));
+			listaLibrosDestacados.add(listaLibros.get(i));
 		}
 		model.addAttribute("listaLibrosDestacados",listaLibrosDestacados);
 		
-		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
+		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAllGroupBy();
+		Collections.shuffle(listaRevistas);
 		ArrayList<Revista> listaRevistasDestacadas=new ArrayList<>();
 		for(int i=0;i<NUMERO_RECURSOS_MAIN;i++) {
-			listaRevistasDestacadas.add(listaRevistas.get(randomPick.nextInt(listaRevistas.size())));
+			listaRevistasDestacadas.add(listaRevistas.get(i));
 		}
 		model.addAttribute("listaRevistasDestacadas",listaRevistasDestacadas);
 		
