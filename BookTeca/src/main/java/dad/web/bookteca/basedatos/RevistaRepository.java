@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import dad.web.bookteca.clases.Revista;
 
 public interface RevistaRepository extends JpaRepository<Revista, Long>{
+	@Query(nativeQuery = true, value = "SELECT (*) FROM Revista R GROUP BY R.Nombre")
+	ArrayList<Revista> findAllGroupBy();
 	
 	ArrayList<Revista> findByNombre(String nombre);
 	
