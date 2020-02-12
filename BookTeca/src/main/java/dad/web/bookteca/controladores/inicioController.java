@@ -69,14 +69,14 @@ public class inicioController {
 		salasTrabajoGrupo.save(new SalaTrabajoGrupo(5,"Planta 0",false));
 
 		//EQUIPO INFORMATICO
-		equiposInformaticos.save(new EquipoInformatico("MacOSX","Equipo 45"));
-		equiposInformaticos.save(new EquipoInformatico("Linux","Equipo 32"));
-		equiposInformaticos.save(new EquipoInformatico("Windows","Equipo 2"));
-		equiposInformaticos.save(new EquipoInformatico("MacOSX","Equipo 1"));
+		equiposInformaticos.save(new EquipoInformatico("MacOSX","Equipo 45", true));
+		equiposInformaticos.save(new EquipoInformatico("Linux","Equipo 32", true));
+		equiposInformaticos.save(new EquipoInformatico("Windows","Equipo 2",false));
+		equiposInformaticos.save(new EquipoInformatico("MacOSX","Equipo 1",true));
 
 		//USUARIOS
 		usuarios.save(new Usuario("Borja","Martin Alonso","G07martin","bormaral13@gmail.com",false));
-		usuarios.save(new Usuario("Sergio","Hernandez Dominguez","HDsergii47","sergiohd47@gmail.com",true));
+		usuarios.save(new Usuario("Sergio","Hernandez Dominguez","Pass1","sergiohd47@gmail.com",true));
 		usuarios.save(new Usuario("Daniel","Molina Ballesteros","Daany10","dmolinaballesteros@gmail.com",false));
 		
 	}
@@ -179,12 +179,11 @@ public class inicioController {
 	public String reservaSalaTrabajoGrupo(Model model, HttpSession usuarioSesion) {
 		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<SalaTrabajoGrupo> listaSTG=new ArrayList<>();
-		//listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findAll();
+		listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findByDisponible(true);
 		boolean visibleTabla=!listaSTG.isEmpty();
 		model.addAttribute("visibleTabla",visibleTabla);
 		model.addAttribute("listaSTG",listaSTG);
 		model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
-		System.out.println(!usuarios.findAll().contains(usuario));
 		return "reservaSalaTrabajoGrupo";
 	}
 
@@ -192,7 +191,7 @@ public class inicioController {
 	public String reservaEquipoInformatico(Model model, HttpSession usuarioSesion) {
 		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<EquipoInformatico> listaEquipo=new ArrayList<>();
-		//listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findAll();
+		listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findByDisponible(true);
 		boolean visibleTabla=!listaEquipo.isEmpty();
 		model.addAttribute("visibleTabla",visibleTabla);
 		model.addAttribute("listaEquipo",listaEquipo);
