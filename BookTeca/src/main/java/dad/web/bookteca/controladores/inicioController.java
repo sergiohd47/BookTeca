@@ -173,103 +173,6 @@ public class inicioController {
 		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info,null,null));
 		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,info,null));
 		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,null,info));
-		/*int letra = 0;
-		int[] letrasHastaBarra = new int[3];
-		int j = 0;
-		for(int i=0;i<info.length();i++) {
-			if(info.charAt(i) == '/') {
-				letrasHastaBarra[j] = letra;
-				j++;
-			}
-			letra++;
-		}
-		switch(letrasHastaBarra.length) {
-			case 0: 
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info,null,null,null));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info,null,null));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,info,null));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,null,info));
-			case 1: 
-				String info1 = info.substring(0,letrasHastaBarra[0]);
-				String info2 = info.substring((letrasHastaBarra[0]+1),letrasHastaBarra[1]);
-				
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info2,null,null));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,null,info2,null));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,null,null,info2));
-				
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info1,null,null));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info1,info2,null));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info1,null,info2));
-				
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,null,info1,null));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info2,info1,null));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,info1,info2));
-				
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,null,null,info1));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info2,null,info1));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,info2,info1));
-			case 2:
-				info1 = info.substring(0,letrasHastaBarra[0]);
-				info2 = info.substring((letrasHastaBarra[0]+1),letrasHastaBarra[1]);
-				String info3 = info.substring((letrasHastaBarra[1]+1),letrasHastaBarra[2]);
-				
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info2,info3,null));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info2,null,info3));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info3,info2,null));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info3,null,info2));
-				
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info1,info3,null));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info1,null,info3));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info1,info2,null));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info1,null,info2));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info1,info2,info3));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info1,info3,info2));
-				
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info3,info1,null));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,null,info1,info3));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info2,info1,null));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,null,info1,info2));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info2,info1,info3));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info3,info1,info2));
-				
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info3,null,info1));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,null,info3,info1));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info2,null,info1));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,null,info2,info1));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info2,info3,info1));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info3,info2,info1));
-			case 3:
-				info1 = info.substring(0,letrasHastaBarra[0]);
-				info2 = info.substring((letrasHastaBarra[0]+1),letrasHastaBarra[1]);
-				info3 = info.substring((letrasHastaBarra[1]+1),letrasHastaBarra[2]);
-				String info4 = info.substring((letrasHastaBarra[2]+1),(info.length()-1));
-				
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info2,info3,info4));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info2,info4,info3));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info3,info2,info4));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info3,info4,info2));
-						
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info1,info3,info4));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info1,info4,info3));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info1,info2,info4));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info1,info4,info2));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info4,info1,info2,info3));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info4,info1,info3,info2));
-				
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info3,info1,info4));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info4,info1,info3));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info2,info1,info4));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info4,info1,info2));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info4,info2,info1,info3));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info4,info3,info1,info2));
-				
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info3,info4,info1));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info4,info3,info1));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info2,info4,info1));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info4,info2,info1));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info4,info2,info3,info1));
-				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info4,info3,info2,info1));		
-		}	*/
 		if(sesionNoIniciada) {
 			model.addAttribute("visibleIniciarSesion",true);
 			model.addAttribute("listaLibrosBusqueda",listaLibrosBusqueda);
@@ -284,6 +187,7 @@ public class inicioController {
 		}
 		return "busquedaLibros";
 	}
+	
 
 	@RequestMapping("/buscadorRevistas")
 	public String buscadorRevista(Model model, HttpSession usuarioSesion) {
@@ -308,6 +212,26 @@ public class inicioController {
 			}
 		}
 		return "buscadorRevistas";
+	}
+	@RequestMapping("/busquedaRevistas")
+	public String busquedaRevistas(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveRevista") String info) {
+		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
+		ArrayList<Revista> listaRevistasBusqueda=new ArrayList<>();
+		listaRevistasBusqueda.addAll(revistas.findByNombreOrEditorialOrGenero(info, null, null));
+		listaRevistasBusqueda.addAll(revistas.findByNombreOrEditorialOrGenero(null,info,null));
+		listaRevistasBusqueda.addAll(revistas.findByNombreOrEditorialOrGenero(null,null,info));
+		if(sesionNoIniciada) {
+			model.addAttribute("visibleIniciarSesion",true);
+			model.addAttribute("listaLibrosBusqueda",listaRevistasBusqueda);
+			model.addAttribute("visibleTabla",!listaRevistasBusqueda.isEmpty());
+		} else {
+			model.addAttribute("visibleCerrarSesion",true);
+			if(!usuario.getAdministrador()) {
+				model.addAttribute("listaLibrosBusqueda",listaRevistasBusqueda);
+				model.addAttribute("visibleTabla",!listaRevistasBusqueda.isEmpty());
+			}
+		}
+		return "busquedaRevistas";
 	}
 
 	@RequestMapping("/reservaSalaTrabajoGrupo")
