@@ -46,7 +46,7 @@ public class inicioController {
 
 	@PostConstruct
 	public void init() {
-		/*
+		
 		//LIBROS
 		libros.save(new Libro("Caperucita Roja", "Sergio","Anaya","Infantil"));
 		libros.save(new Libro("Los Tres Cerditos", "Borja","El Mundo","Infantil"));
@@ -80,7 +80,7 @@ public class inicioController {
 		usuarios.save(new Usuario("Borja","Martin Alonso","G07martin","bormaral13@gmail.com",false));
 		usuarios.save(new Usuario("Sergio","Hernandez Dominguez","Pass1","sergiohd47@gmail.com",true));
 		usuarios.save(new Usuario("Daniel","Molina Ballesteros","Daany10","dmolinaballesteros@gmail.com",false));
-		*/
+		
 	}
 
 	@RequestMapping("/")
@@ -129,13 +129,13 @@ public class inicioController {
 	}
 
 	@RequestMapping("/sesionIniciada")
-	public String sesionIniciada(Model model, @RequestParam("nombreUsuario") String email,@RequestParam("contrasenya") String contrasenya, HttpSession usuarioSesion) {
-		Usuario usuario=usuarios.findByEmail(email);
+	public String sesionIniciada(Model model, @RequestParam("nombreUsuario") String email,@RequestParam String contrasenya, HttpSession usuarioSesion) {
+		Usuario usuario=usuarios.findByEmailAndContrasenya(email,contrasenya);
 		if(usuario==null)
 			return "iniciarSesionNuevo";
-		if(!usuario.esContrasenya(contrasenya))
-			return "iniciarSesionNuevo";
-		usuarioSesion.setAttribute("infoUsuario", usuario);
+		/*if(!usuario.esContrasenya(contrasenya))
+			return "iniciarSesionNuevo";*/
+		//usuarioSesion.setAttribute("infoUsuario", usuario);
 		sesionNoIniciada = false;
 		if(!usuario.getAdministrador()) {
 			model.addAttribute("usuario",true);
