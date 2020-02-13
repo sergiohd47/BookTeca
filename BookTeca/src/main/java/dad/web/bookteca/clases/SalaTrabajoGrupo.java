@@ -32,7 +32,11 @@ public class SalaTrabajoGrupo {
 		this.capacidad = capacidad;
 		this.localizacion = localizacion;
 		this.compartida = compartida;
+		
 		this.disponible = true;
+		this.idUsuario = null;
+		this.fechaReserva = null;
+		
 	}
 	
 	public long getId() {

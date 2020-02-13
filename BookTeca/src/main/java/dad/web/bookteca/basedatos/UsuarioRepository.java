@@ -2,6 +2,8 @@ package dad.web.bookteca.basedatos;
 
 import java.util.ArrayList;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -9,11 +11,11 @@ import dad.web.bookteca.clases.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
-	ArrayList<Usuario> findByAdministrador(boolean administrador);
+	Page<Usuario> findByAdministrador(boolean administrador, Pageable Page);
 	
 	Usuario findByEmail(String email);
 	
-	ArrayList<Usuario> findByNombre(String nombre);
+	Page<Usuario> findByNombre(String nombre, Pageable Page);
 	
-	ArrayList<Usuario> findByNombreAndApellidos(String nombre, String apellidos);
+	Page<Usuario> findByNombreAndApellidos(String nombre, String apellidos, Pageable Page);
 }

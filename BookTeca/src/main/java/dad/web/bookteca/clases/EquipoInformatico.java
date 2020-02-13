@@ -21,10 +21,12 @@ public class EquipoInformatico {
 	
 	protected EquipoInformatico() {}
 	
-	public EquipoInformatico(String sistemaOperativo, String localizacion, boolean disponible) {
+	public EquipoInformatico(String sistemaOperativo, String localizacion) {
 		this.sistemaOperativo = sistemaOperativo;
 		this.localizacion = localizacion;
-		this.disponible=disponible;
+		this.disponible=true;
+		this.idUsuario=null;
+		this.fechaReserva=null;
 	}
 	
 	public long getId() {
