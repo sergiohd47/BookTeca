@@ -148,6 +148,10 @@ public class Usuario {
 			revistasReservadas.add(r);
 	}
 
+	public boolean esContrasenya(String contrasenya) {
+		return this.contrasenya == contrasenya;
+	}
+	
 	@Override
 	public String toString() {
 		return "Usuario [email=" + email + ", nombre=" + nombre + ", apellidos=" + apellidos + ", contraseña=" + 

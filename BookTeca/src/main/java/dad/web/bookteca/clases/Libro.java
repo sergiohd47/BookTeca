@@ -30,7 +30,11 @@ public class Libro {
 		this.autor=autor;
 		this.editorial=editorial;
 		this.genero=genero;
+		
 		this.disponible=true;
+		this.idUsuario=null;
+		this.fecInicio=null;
+		this.fecFin=null;
 		
 	}
 	

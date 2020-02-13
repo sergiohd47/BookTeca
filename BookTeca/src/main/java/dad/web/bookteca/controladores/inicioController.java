@@ -70,10 +70,10 @@ public class inicioController {
 		salasTrabajoGrupo.save(new SalaTrabajoGrupo(5,"Planta 0",false));
 
 		//EQUIPO INFORMATICO
-		equiposInformaticos.save(new EquipoInformatico("MacOSX","Equipo 45", true));
-		equiposInformaticos.save(new EquipoInformatico("Linux","Equipo 32", true));
-		equiposInformaticos.save(new EquipoInformatico("Windows","Equipo 2",false));
-		equiposInformaticos.save(new EquipoInformatico("MacOSX","Equipo 1",true));
+		equiposInformaticos.save(new EquipoInformatico("MacOSX","Equipo 45"));
+		equiposInformaticos.save(new EquipoInformatico("Linux","Equipo 32"));
+		equiposInformaticos.save(new EquipoInformatico("Windows","Equipo 2"));
+		equiposInformaticos.save(new EquipoInformatico("MacOSX","Equipo 1"));
 
 		//USUARIOS
 		usuarios.save(new Usuario("Borja","Martin Alonso","G07martin","bormaral13@gmail.com",false));
@@ -128,9 +128,11 @@ public class inicioController {
 	}
 
 	@RequestMapping("/sesionIniciada")
-	public String sesionIniciada(Model model, @RequestParam("nombreUsuario") String email, HttpSession usuarioSesion) {
+	public String sesionIniciada(Model model, @RequestParam("nombreUsuario") String email,@RequestParam("contrasenya") String contrasenya, HttpSession usuarioSesion) {
 		Usuario usuario=usuarios.findByEmail(email);
 		if(usuario==null)
+			return "iniciarSesionNuevo";
+		if(!usuario.esContrasenya(contrasenya))
 			return "iniciarSesionNuevo";
 		usuarioSesion.setAttribute("infoUsuario", usuario);
 		sesionNoIniciada = false;
@@ -382,32 +384,37 @@ public class inicioController {
 	}
 
 	@RequestMapping("/editarPerfil")
-	public String editarPerfil(Model model, Usuario usuario) {
-		usuarios.save(usuario);
+	public String editarPerfil(Model model, @RequestParam("nuevoNombreUsuario") String nombre, @RequestParam("nuevoApellidoUsuario") String apellidos, @RequestParam("password") String contrasenya, HttpSession usuarioSesion ) {
+		Usuario usuarioEditado = (Usuario) usuarioSesion.getAttribute("infoUsuario");
+		usuarioEditado.setNombre(nombre);
+		usuarioEditado.setApellidos(apellidos);
+		usuarioEditado.setContrasenya(contrasenya);
+		usuarios.save(usuarioEditado);
+		usuarioSesion.setAttribute("infoUsuario", usuarioEditado);
 		return "editarPerfil";
 	}
 
 	@RequestMapping("/añadirRevista")
-	public String añadirRevista(Model model, Revista revista) {
-		revistas.save(revista);
+	public String añadirRevista(Model model, @RequestParam("nombreRevista") String nombre, @RequestParam("editorialLibro") String editorial, @RequestParam("fasciculo") int fasciculo, @RequestParam("genero") String genero) {
+		revistas.save(new Revista(nombre,editorial,fasciculo,genero));
 		return "añadirRevista";
 	}
 
 	@RequestMapping("/añadirSalaTrabajoGrupo")
-	public String añadirSala(Model model, SalaTrabajoGrupo sala) {
-		salasTrabajoGrupo.save(sala);
+	public String añadirSala(Model model, @RequestParam("capacidadNuevaSala") int capacidad, @RequestParam("localizacionNuevaSala") String localizacion, @RequestParam("compartida") boolean compartida) {
+		salasTrabajoGrupo.save(new SalaTrabajoGrupo(capacidad, localizacion, compartida));
 		return "añadirSalaTrabajoGrupo";
 	}
 
 	@RequestMapping("/añadirEquipoInformatico")
-	public String añadirEquipoInformatico(Model model, EquipoInformatico equipo) {
-		equiposInformaticos.save(equipo);
+	public String añadirEquipoInformatico(Model model, @RequestParam("soNuevoEquipo") String so, @RequestParam("localizacionNuevoEquipo") String localizacion) {
+		equiposInformaticos.save(new EquipoInformatico(so, localizacion));
 		return "añadirEquipoInformatico";
 	}
 
 	@RequestMapping("/añadirLibro")
-	public String añadirLibro(Model model, Libro libro) {
-		libros.save(libro);
+	public String añadirLibro(Model model, @RequestParam("nombreLibro") String nombre, @RequestParam("autor") String autor, @RequestParam("editorialLibro") String editorialLibro, @RequestParam("genero") String genero) {
+		libros.save(new Libro(nombre,autor,editorialLibro,genero));
 		return "añadirLibro";
 	}
 
@@ -415,6 +422,7 @@ public class inicioController {
 	public String administrarUsuarios(Model model, @RequestParam("emailUsuario") String emailNuevoAdmin) {
 		Usuario usuario=usuarios.findByEmail(emailNuevoAdmin);
 		usuario.setAdministrador(true);
+		usuarios.save(usuario);
 		return "administrarUsuarios";
 	}
 

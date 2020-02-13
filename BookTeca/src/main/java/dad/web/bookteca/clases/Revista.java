@@ -29,7 +29,11 @@ public class Revista {
 		this.editorial = editorial;
 		this.fasciculo = fasciculo;
 		this.genero = genero;
+		
 		this.disponible = true;
+		this.idUsuario = null;
+		this.fecInicio = null;
+		this.fecFin = null;
 	}
 	
 	public long getId() {
