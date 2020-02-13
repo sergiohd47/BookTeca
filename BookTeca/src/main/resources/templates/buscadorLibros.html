@@ -28,26 +28,22 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="/">Inicio
-					</a></li>
+					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
 					<li class="nav-item active"><a class="nav-link" href="#">Libros
-							<span class="sr-only">(current)</span>
-					</a></li>
+							<span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="buscadorRevistas">Revistas</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="reservaSalaTrabajoGrupo">Sala Trabajo En Grupo</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="reservaEquipoInformatico">Equipos Informaticos</a></li>
-					{{^visibleIniciarSesion}}
-					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi
-							Perfil</a></li>
-					<li class="nav-item"><a class="nav-link" href="/">Cerrar
-							Sesion</a></li> 
-					{{/visibleIniciarSesion}}
+					{{#visibleCerrarSesion}}
+					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi Perfil</a></li>
+					<li class="nav-item"><a class="nav-link" href="/">Cerrar Sesion</a></li>
+					{{/visibleCerrarSesion}}
 					{{#visibleIniciarSesion}}
 					<li class="nav-item"><a class="nav-link" href="iniciarSesion">Iniciar Sesion</a></li>
-					<li class="nav-item"><a class="nav-link" href="registro">Registro</a></li> 
+					<li class="nav-item"><a class="nav-link" href="registro">Registrate</a></li>
 					{{/visibleIniciarSesion}}
 				</ul>
 			</div>
@@ -60,13 +56,11 @@
 			<div class="col-lg-12 text-center">
 				<h1 class="mt-5"></h1>
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
-				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu
-					mano</h1>
-				<p class="lead">Aqui encontraras el buscador de libros de
-					nuestra biblioteca</p>
+				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu mano</h1>
+				<p class="lead">Aqui encontraras el buscador de libros de nuestra biblioteca</p>
 				<p class="lead">En el siguiente buscador introduce el nombre o el autor o el genero o la editorial.</p>
 				<h1 class="mt-5"></h1>
-				<form>
+				<form action="/busquedaLibros" method="post">
 					<div>
 						<label for="busquedaLibro">Busqueda: </label> <input type="search"
 							id="palabraClaveLibro" name="palabraClaveLibro"
@@ -76,18 +70,18 @@
 						<span class="validity"></span>
 					</div>
 				</form>
-				<h1 class="mt-5">RESULTADO DE TU BUSQUEDA</h1>
+				<!-- <h1 class="mt-5">RESULTADO DE TU BUSQUEDA</h1>
 				{{^listaLibrosBusqueda}}
 				<p class="lead">Lo sentimos pero la busqueda no ha encontrado resultados :(</p>
 				{{/listaLibrosBusqueda}}
 				{{#visibleTabla}}
-				<table border class="lead">
+				<table border="1" class="lead" align="center">
 					<tr>
 						<th>NOMBRE</th>
 						<th>AUTOR</th>
 						<th>EDITORIAL</th>
 						<th>GENERO</th>
-						{{^visibleIniciarSesion}}
+						{{#visibleCerrarSesion}}
 						<th>RESERVAR</th>
 						{{/visibleCerrarSesion}}
 					</tr>
@@ -97,13 +91,13 @@
 						<td>{{autor}}</td>
 						<td>{{editorial}}</td>
 						<td>{{genero}}</td>
-						{{^visibleIniciarSesion}}
+						{{^visibleCerrarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
 						{{/visibleCerrarSesion}}
 					</tr>
 					{{/listaLibrosBusqueda}}
 				</table>
-				{{/visibleTabla}}
+				{{/visibleTabla}} -->
 			</div>
 		</div>
 	</div>

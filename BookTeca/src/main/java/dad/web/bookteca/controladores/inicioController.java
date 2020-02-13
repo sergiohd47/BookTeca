@@ -42,6 +42,7 @@ public class inicioController {
 	
 	private ArrayList<Libro> listaLibrosDestacados;
 	private ArrayList<Revista> listaRevistasDestacadas;
+	private boolean sesionNoIniciada = true;
 
 	@PostConstruct
 	public void init() {
@@ -117,7 +118,7 @@ public class inicioController {
 		model.addAttribute("listaRevistasDestacadas",listaRevistasDestacadas);
 
 		//NO HA INICIADO SESION
-		model.addAttribute("visibleIniciarSesion", true);
+		model.addAttribute("visibleIniciarSesion",true);
 		return "index";
 	}
 
@@ -131,7 +132,8 @@ public class inicioController {
 		Usuario usuario=usuarios.findByEmail(email);
 		if(usuario==null)
 			return "iniciarSesionNuevo";
-		usuarioSesion.setAttribute("infoUsuario", usuario);	
+		usuarioSesion.setAttribute("infoUsuario", usuario);
+		sesionNoIniciada = false;
 		if(!usuario.getAdministrador()) {
 			model.addAttribute("usuario",true);
 			model.addAttribute("listaLibrosDestacados",listaLibrosDestacados);
@@ -153,25 +155,153 @@ public class inicioController {
 	@RequestMapping("/buscadorLibros")
 	public String buscadorLibros(Model model, HttpSession usuarioSesion) {
 		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
-		ArrayList<Libro> listaLibrosBusqueda=new ArrayList<>();
-		//listaLibrosBusqueda=(ArrayList<Libro>) libros.findAll();
-		boolean visibleTabla=!listaLibrosBusqueda.isEmpty();
-		model.addAttribute("listaLibrosBusqueda",listaLibrosBusqueda);
-		model.addAttribute("visibleTabla",visibleTabla);
-		model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
+		if(sesionNoIniciada)
+			model.addAttribute("visibleIniciarSesion",true);
+		else {
+			model.addAttribute("visibleCerrarSesion",true);
+			if(!usuario.getAdministrador()) {
+			}
+		}
 		return "buscadorLibros";
-
+	}
+	
+	@RequestMapping("/busquedaLibros")
+	public String busquedaLibros(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveLibro") String info) {
+		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
+		ArrayList<Libro> listaLibrosBusqueda=new ArrayList<>();
+		int letra = 0;
+		int[] letrasHastaBarra = new int[3];
+		int j = 0;
+		for(int i=0;i<info.length();i++) {
+			if(info.charAt(i) == '/') {
+				letrasHastaBarra[j] = letra;
+				j++;
+			}
+			letra++;
+		}
+		switch(letrasHastaBarra.length) {
+			case 0: 
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info,null,null,null));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info,null,null));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,info,null));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,null,info));
+			case 1: 
+				String info1 = info.substring(0,letrasHastaBarra[0]);
+				String info2 = info.substring((letrasHastaBarra[0]+1),letrasHastaBarra[1]);
+				
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info2,null,null));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,null,info2,null));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,null,null,info2));
+				
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info1,null,null));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info1,info2,null));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info1,null,info2));
+				
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,null,info1,null));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info2,info1,null));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,info1,info2));
+				
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,null,null,info1));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info2,null,info1));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,info2,info1));
+			case 2:
+				info1 = info.substring(0,letrasHastaBarra[0]);
+				info2 = info.substring((letrasHastaBarra[0]+1),letrasHastaBarra[1]);
+				String info3 = info.substring((letrasHastaBarra[1]+1),letrasHastaBarra[2]);
+				
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info2,info3,null));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info2,null,info3));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info3,info2,null));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info3,null,info2));
+				
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info1,info3,null));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info1,null,info3));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info1,info2,null));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info1,null,info2));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info1,info2,info3));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info1,info3,info2));
+				
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info3,info1,null));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,null,info1,info3));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info2,info1,null));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,null,info1,info2));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info2,info1,info3));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info3,info1,info2));
+				
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info3,null,info1));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,null,info3,info1));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info2,null,info1));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,null,info2,info1));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info2,info3,info1));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info3,info2,info1));
+			case 3:
+				info1 = info.substring(0,letrasHastaBarra[0]);
+				info2 = info.substring((letrasHastaBarra[0]+1),letrasHastaBarra[1]);
+				info3 = info.substring((letrasHastaBarra[1]+1),letrasHastaBarra[2]);
+				String info4 = info.substring((letrasHastaBarra[2]+1),(info.length()-1));
+				
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info2,info3,info4));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info2,info4,info3));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info3,info2,info4));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info1,info3,info4,info2));
+						
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info1,info3,info4));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info1,info4,info3));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info1,info2,info4));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info1,info4,info2));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info4,info1,info2,info3));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info4,info1,info3,info2));
+				
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info3,info1,info4));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info4,info1,info3));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info2,info1,info4));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info4,info1,info2));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info4,info2,info1,info3));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info4,info3,info1,info2));
+				
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info3,info4,info1));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info2,info4,info3,info1));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info2,info4,info1));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info4,info2,info1));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info4,info2,info3,info1));
+				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info4,info3,info2,info1));		
+		}	
+		if(sesionNoIniciada) {
+			model.addAttribute("visibleIniciarSesion",true);
+			model.addAttribute("listaLibrosBusqueda",listaLibrosBusqueda);
+			model.addAttribute("visibleTabla",!listaLibrosBusqueda.isEmpty());
+		} else {
+			model.addAttribute("visibleCerrarSesion",true);
+			if(!usuario.getAdministrador()) {
+				model.addAttribute("listaLibrosBusqueda",listaLibrosBusqueda);
+				model.addAttribute("visibleTabla",!listaLibrosBusqueda.isEmpty());
+			}
+		}
+		return "busquedaLibros";
 	}
 
 	@RequestMapping("/buscadorRevistas")
 	public String buscadorRevista(Model model, HttpSession usuarioSesion) {
 		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<Revista> listaRevistasBusqueda=new ArrayList<>();
-		//listaRevistasBusqueda=(ArrayList<Revista>) revistas.findAll();
-		boolean visibleTabla=!listaRevistasBusqueda.isEmpty();
-		model.addAttribute("listaRevistasBusqueda",listaRevistasBusqueda);
-		model.addAttribute("visibleTabla",visibleTabla);
-		model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
+		if(sesionNoIniciada) {
+			model.addAttribute("visibleIniciarSesion",true);
+			/*listaRevistasBusqueda=(ArrayList<Revista>) 
+					revistas.findByNombreOrEditorialOrGenero(nombre,editorial,genero);*/
+			model.addAttribute("listaRevistasBusqueda",listaRevistasBusqueda);
+			model.addAttribute("visibleTabla",!listaRevistasBusqueda.isEmpty());
+			//model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
+		} else {
+			model.addAttribute("visibleCerrarSesion",true);
+			if(!usuario.getAdministrador()) {
+				//listaRevistasBusqueda=(ArrayList<Revista>) revistas.findAll();
+				/*listaRevistasBusqueda=(ArrayList<Revista>) 
+						revistas.findByNombreOrEditorialOrGenero(nombre,editorial,genero);*/
+				model.addAttribute("listaRevistasBusqueda",listaRevistasBusqueda);
+				model.addAttribute("visibleTabla",!listaRevistasBusqueda.isEmpty());
+				//model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
+			}
+		}
 		return "buscadorRevistas";
 	}
 
@@ -179,23 +309,44 @@ public class inicioController {
 	public String reservaSalaTrabajoGrupo(Model model, HttpSession usuarioSesion) {
 		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<SalaTrabajoGrupo> listaSTG=new ArrayList<>();
-		listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findByDisponible(true);
-		boolean visibleTabla=!listaSTG.isEmpty();
-		model.addAttribute("visibleTabla",visibleTabla);
-		model.addAttribute("listaSTG",listaSTG);
-		model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
+		if(sesionNoIniciada) {
+			model.addAttribute("visibleIniciarSesion",true);
+			listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findByDisponible(true);
+			boolean visibleTabla=!listaSTG.isEmpty();
+			model.addAttribute("visibleTabla",visibleTabla);
+			model.addAttribute("listaSTG",listaSTG);
+			//model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
+		} else {
+			model.addAttribute("visibleCerrarSesion",true);
+			if(!usuario.getAdministrador()) {
+				listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findByDisponible(true);
+				model.addAttribute("visibleTabla",!listaSTG.isEmpty());
+				model.addAttribute("listaSTG",listaSTG);
+				//model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
+			}
+		}
 		return "reservaSalaTrabajoGrupo";
 	}
 
 	@RequestMapping("/reservaEquipoInformatico")
 	public String reservaEquipoInformatico(Model model, HttpSession usuarioSesion) {
-		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<EquipoInformatico> listaEquipo=new ArrayList<>();
-		listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findByDisponible(true);
-		boolean visibleTabla=!listaEquipo.isEmpty();
-		model.addAttribute("visibleTabla",visibleTabla);
-		model.addAttribute("listaEquipo",listaEquipo);
-		model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
+		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
+		if(sesionNoIniciada) {
+			model.addAttribute("visibleIniciarSesion",true);
+			listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findByDisponible(true);
+			model.addAttribute("visibleTabla",!listaEquipo.isEmpty());
+			model.addAttribute("listaEquipo",listaEquipo);
+			//model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
+		} else {
+			model.addAttribute("visibleCerrarSesion",true);
+			if(!usuario.getAdministrador()) {
+				listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findByDisponible(true);
+				model.addAttribute("visibleTabla",!listaEquipo.isEmpty());
+				model.addAttribute("listaEquipo",listaEquipo);
+				//model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
+			}
+		}
 		return "reservaEquipoInformatico";
 	}
 

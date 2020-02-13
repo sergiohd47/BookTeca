@@ -28,27 +28,23 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="/">Inicio
-					</a></li>
-					<li class="nav-item"><a class="nav-link" href="buscadorLibros">Libros
-					</a></li>
+					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+					<li class="nav-item"><a class="nav-link" href="buscadorLibros">Libros</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="buscadorRevistas">Revistas</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="reservaSalaTrabajoGrupo">Sala Trabajo En Grupo</a></li>
 					<li class="nav-item active"><a class="nav-link"
-						href="reservaEquipoInformatico">Equipos Informaticos</a></li>
-						<span class="sr-only">(current)</span>
-					{{^visibleIniciarSesion}}
-					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi
-							Perfil</a></li>
-					<li class="nav-item"><a class="nav-link" href="/">Cerrar
-							Sesion</a></li> 
-					{{/visibleIniciarSesion}}
+						href="reservaEquipoInformatico">Equipos Informaticos
+						<span class="sr-only">(current)</span></a></li>
+					{{#visibleCerrarSesion}}
+					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi Perfil</a></li>
+					<li class="nav-item"><a class="nav-link" href="/">Cerrar Sesion</a></li> 
+					{{/visibleCerrarSesion}}
 					{{#visibleIniciarSesion}}
 					<li class="nav-item"><a class="nav-link" href="iniciarSesion">Iniciar Sesion</a></li>
-					<li class="nav-item"><a class="nav-link" href="registro">Registro</a></li> 
-					{{/visibleIniciarSesion}}
+					<li class="nav-item"><a class="nav-link" href="registro">Registrate</a></li>
+					{{/visibleIniciarSesion}} 
 				</ul>
 			</div>
 		</div>
@@ -60,8 +56,7 @@
 			<div class="col-lg-12 text-center">
 				<h1 class="mt-5"></h1>
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
-				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu
-					mano</h1>
+				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu mano</h1>
 				<p class="lead">Aqui encontraras los diferentes equipos informaticos que tenemos disponibles</p>
 				<h1 class="mt-5"></h1>
 				<h1 class="mt-5">EQUIPOS LIBRES</h1>
@@ -69,19 +64,19 @@
 				<p class="lead">Lo sentimos, pero no disponemos de equipos libres :(</p>
 				{{/listaEquipo}}
 				{{#visibleTabla}}
-				<table border class="lead" align="center">
+				<table border="1" class="lead" align="center">
 					<tr>
 						<th>SISTEMA OPERATIVO</th>
 						<th>LOCALIZACION</th>
-						{{^visibleIniciarSesion}}
+						{{#visibleCerrarSesion}}
 						<th>RESERVAR</th>
-						{{/visibleIniciarSesion}}
+						{{/visibleCerrarSesion}}
 					</tr>
 					{{#listaEquipo}}
 					<tr>
 						<td>{{sistemaOperativo}}</td>
 						<td>{{localizacion}}</td>
-						{{^visibleIniciarSesion}}
+						{{#visibleCerrarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
 						{{/visibleCerrarSesion}}
 					</tr>

@@ -19,6 +19,8 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
 	
 	ArrayList<Libro> findByEditorial(String editorial);
 	
+	ArrayList<Libro> findByGenero(String genero);
+
 	ArrayList<Libro> findByNombreOrAutorOrEditorialOrGenero(String nombre, String autor, String editorial, String genero);
 	
 	Libro findById(long id);
