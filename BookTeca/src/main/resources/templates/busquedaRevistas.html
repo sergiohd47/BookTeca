@@ -8,7 +8,7 @@
 <meta name="description" content="Pagina web BookTeca">
 <meta name="author" content="Dani, Borja y Sergio">
 
-<title>Libros - BookTeca</title>
+<title>Revistas - BookTeca</title>
 
 <!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -29,10 +29,10 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-					<li class="nav-item active"><a class="nav-link" href="#">Libros
-							<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item active"><a class="nav-link" href="buscadorLibros">Libros</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="buscadorRevistas">Revistas</a></li>
+						href="#">Revistas</a></li>
+						<span class="sr-only">(current)</span>
 					<li class="nav-item"><a class="nav-link"
 						href="reservaSalaTrabajoGrupo">Sala Trabajo En Grupo</a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -57,19 +57,48 @@
 				<h1 class="mt-5"></h1>
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
 				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu mano</h1>
-				<p class="lead">Aqui encontraras el buscador de libros de nuestra biblioteca</p>
-				<p class="lead">En el siguiente buscador introduce el nombre o el autor o el genero o la editorial.</p>
+				<!-- <p class="lead">Aqui encontraras el buscador de libros de nuestra biblioteca</p> -->
+				<p class="lead">Puedes buscar por el nombre, autor, genero o editorial del libro, 
+				separado por / en caso de que busques por mas de un tipo.</p>
 				<h1 class="mt-5"></h1>
-				<form action="/busquedaLibros" method="post">
+				<form action="/buscadorLibros" method="post">
 					<div>
-						<label for="busquedaLibros">Busqueda: </label> <input type="search"
-							id="palabraClaveLibro" name="palabraClaveLibro"
-							placeholder="Por ejemplo: Anaya o Romantico o Constitucion Española.." required
+						<label for="busquedaRevista">Busqueda: </label> <input type="search"
+							id="palabraClaveRevista" name="palabraClaveRevista"
+							placeholder="Por ejemplo: GQ o Moda o Editorial ElMundo..." required
 							size="30">
 						<button>BUSCAR</button>
 						<span class="validity"></span>
 					</div>
 				</form>
+				<h1 class="mt-5">RESULTADO DE TU BUSQUEDA</h1>
+				{{^listaRevistasBusqueda}}
+				<p class="lead">Lo sentimos pero la busqueda no ha encontrado resultados :(</p>
+				{{/listaRevistasBusqueda}}
+				{{#visibleTabla}}
+				<table border="1" class="lead" align="center">
+					<tr>
+						<th>NOMBRE</th>
+						<th>EDITORIAL</th>
+						<th>FASCICULO</th>
+						<th>GENERO</th>
+						{{#visibleCerrarSesion}}
+						<th>RESERVAR</th>
+						{{/visibleCerrarSesion}}
+					</tr>
+					{{#listaRevistasBusqueda}}
+					<tr>
+						<td>{{nombre}}</td>
+						<td>{{editorial}}</td>
+						<td>{{fasciculo}}</td>
+						<td>{{genero}}</td>
+						{{#visibleCerrarSesion}}
+						<td href="reservar" class="btn btn-success">RESERVAR</td>
+						{{/visibleCerrarSesion}}
+					</tr>
+					{{/listaRevistasBusqueda}}
+				</table>
+				{{/visibleTabla}}
 			</div>
 		</div>
 	</div>
