@@ -46,6 +46,7 @@ public class inicioController {
 
 	@PostConstruct
 	public void init() {
+		/*
 		//LIBROS
 		libros.save(new Libro("Caperucita Roja", "Sergio","Anaya","Infantil"));
 		libros.save(new Libro("Los Tres Cerditos", "Borja","El Mundo","Infantil"));
@@ -73,13 +74,14 @@ public class inicioController {
 		equiposInformaticos.save(new EquipoInformatico("MacOSX","Equipo 45", true));
 		equiposInformaticos.save(new EquipoInformatico("Linux","Equipo 32", true));
 		equiposInformaticos.save(new EquipoInformatico("Windows","Equipo 2",false));
-		equiposInformaticos.save(new EquipoInformatico("MacOSX","Equipo 1",true));
+		equiposInformaticos.save(new EquipoInformatico("Windows","Equipo 66",false));
+		
 
 		//USUARIOS
 		usuarios.save(new Usuario("Borja","Martin Alonso","G07martin","bormaral13@gmail.com",false));
 		usuarios.save(new Usuario("Sergio","Hernandez Dominguez","Pass1","sergiohd47@gmail.com",true));
 		usuarios.save(new Usuario("Daniel","Molina Ballesteros","Daany10","dmolinaballesteros@gmail.com",false));
-		
+		*/
 	}
 
 	@RequestMapping("/")
