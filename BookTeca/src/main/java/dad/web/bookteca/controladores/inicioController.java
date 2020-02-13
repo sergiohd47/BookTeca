@@ -159,8 +159,8 @@ public class inicioController {
 			model.addAttribute("visibleIniciarSesion",true);
 		else {
 			model.addAttribute("visibleCerrarSesion",true);
-			if(!usuario.getAdministrador()) {
-			}
+			if(!usuario.getAdministrador())
+				model.addAttribute("nombre",usuario.getNombre());
 		}
 		return "buscadorLibros";
 	}
@@ -277,6 +277,7 @@ public class inicioController {
 		} else {
 			model.addAttribute("visibleCerrarSesion",true);
 			if(!usuario.getAdministrador()) {
+				model.addAttribute("nombre",usuario.getNombre());
 				model.addAttribute("listaLibrosBusqueda",listaLibrosBusqueda);
 				model.addAttribute("visibleTabla",!listaLibrosBusqueda.isEmpty());
 			}
