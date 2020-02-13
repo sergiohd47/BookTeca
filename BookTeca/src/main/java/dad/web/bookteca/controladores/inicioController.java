@@ -6,12 +6,15 @@ import java.util.Random;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import dad.web.bookteca.clases.EquipoInformatico;
 import dad.web.bookteca.clases.Libro;
@@ -132,10 +135,8 @@ public class inicioController {
 	public String sesionIniciada(Model model, @RequestParam("nombreUsuario") String email,@RequestParam String contrasenya, HttpSession usuarioSesion) {
 		Usuario usuario=usuarios.findByEmailAndContrasenya(email,contrasenya);
 		if(usuario==null)
-			return "iniciarSesionNuevo";
-		/*if(!usuario.esContrasenya(contrasenya))
-			return "iniciarSesionNuevo";*/
-		//usuarioSesion.setAttribute("infoUsuario", usuario);
+			return iniciarSesion(model);
+		usuarioSesion.setAttribute("infoUsuario",usuario);
 		sesionNoIniciada = false;
 		if(!usuario.getAdministrador()) {
 			model.addAttribute("usuario",true);
@@ -172,10 +173,6 @@ public class inicioController {
 	public String busquedaLibros(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveLibro") String info) {
 		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<Libro> listaLibrosBusqueda=new ArrayList<>();
-		/*listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info,null,null,null));
-		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info,null,null));
-		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,info,null));
-		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,null,info));*/
 		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info,info,info,info));
 		if(sesionNoIniciada) {
 			model.addAttribute("visibleIniciarSesion",true);
@@ -215,9 +212,6 @@ public class inicioController {
 	public String busquedaRevistas(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveRevista") String info) {
 		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<Revista> listaRevistasBusqueda=new ArrayList<>();
-		/*listaRevistasBusqueda.addAll(revistas.findByNombreOrEditorialOrGenero(info, null, null));
-		listaRevistasBusqueda.addAll(revistas.findByNombreOrEditorialOrGenero(null,info,null));
-		listaRevistasBusqueda.addAll(revistas.findByNombreOrEditorialOrGenero(null,null,info));*/
 		listaRevistasBusqueda.addAll(revistas.findByNombreOrEditorialOrGenero(info,info,info));
 		if(sesionNoIniciada) {
 			model.addAttribute("visibleIniciarSesion",true);
@@ -251,7 +245,6 @@ public class inicioController {
 				listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findByDisponible(true);
 				model.addAttribute("visibleTabla",!listaSTG.isEmpty());
 				model.addAttribute("listaSTG",listaSTG);
-				//model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
 			}
 		}
 		return "reservaSalaTrabajoGrupo";
@@ -266,14 +259,12 @@ public class inicioController {
 			listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findByDisponible(true);
 			model.addAttribute("visibleTabla",!listaEquipo.isEmpty());
 			model.addAttribute("listaEquipo",listaEquipo);
-			//model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
 		} else {
 			model.addAttribute("visibleCerrarSesion",true);
 			if(!usuario.getAdministrador()) {
 				listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findByDisponible(true);
 				model.addAttribute("visibleTabla",!listaEquipo.isEmpty());
 				model.addAttribute("listaEquipo",listaEquipo);
-				//model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
 			}
 		}
 		return "reservaEquipoInformatico";
@@ -318,7 +309,7 @@ public class inicioController {
 	}
 
 	@RequestMapping("/añadirRevista")
-	public String añadirRevista(Model model, @RequestParam("nombreRevista") String nombre, @RequestParam("editorialLibro") String editorial, @RequestParam("fasciculo") int fasciculo, @RequestParam("genero") String genero) {
+	public String añadirRevista(Model model, @RequestParam("nombreRevista") String nombre, @RequestParam("editorialRevista") String editorial, @RequestParam("fasciculo") int fasciculo, @RequestParam("genero") String genero) {
 		revistas.save(new Revista(nombre,editorial,fasciculo,genero));
 		return "añadirRevista";
 	}
