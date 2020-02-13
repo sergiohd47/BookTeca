@@ -68,34 +68,7 @@
 						<span class="validity"></span>
 					</div>
 				</form>
-				<h1 class="mt-5">RESULTADO DE TU BUSQUEDA</h1>
-				{{^listaRevistasBusqueda}}
-				<p class="lead">Lo sentimos pero la busqueda no ha encontrado resultados :(</p>
-				{{/listaRevistasBusqueda}}
-				{{#visibleTabla}}
-				<table border="1" class="lead" align="center">
-					<tr>
-						<th>NOMBRE</th>
-						<th>EDITORIAL</th>
-						<th>FASCICULO</th>
-						<th>GENERO</th>
-						{{#visibleCerrarSesion}}
-						<th>RESERVAR</th>
-						{{/visibleCerrarSesion}}
-					</tr>
-					{{#listaRevistasBusqueda}}
-					<tr>
-						<td>{{nombre}}</td>
-						<td>{{editorial}}</td>
-						<td>{{fasciculo}}</td>
-						<td>{{genero}}</td>
-						{{#visibleCerrarSesion}}
-						<td href="reservar" class="btn btn-success">RESERVAR</td>
-						{{/visibleCerrarSesion}}
-					</tr>
-					{{/listaRevistasBusqueda}}
-				</table>
-				{{/visibleTabla}}
+				
 			</div>
 		</div>
 	</div>
