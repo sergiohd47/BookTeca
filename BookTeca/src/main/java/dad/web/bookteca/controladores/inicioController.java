@@ -169,7 +169,11 @@ public class inicioController {
 	public String busquedaLibros(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveLibro") String info) {
 		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<Libro> listaLibrosBusqueda=new ArrayList<>();
-		int letra = 0;
+		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info,null,null,null));
+		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info,null,null));
+		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,info,null));
+		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,null,info));
+		/*int letra = 0;
 		int[] letrasHastaBarra = new int[3];
 		int j = 0;
 		for(int i=0;i<info.length();i++) {
@@ -265,7 +269,7 @@ public class inicioController {
 				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info3,info4,info2,info1));
 				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info4,info2,info3,info1));
 				listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info4,info3,info2,info1));		
-		}	
+		}	*/
 		if(sesionNoIniciada) {
 			model.addAttribute("visibleIniciarSesion",true);
 			model.addAttribute("listaLibrosBusqueda",listaLibrosBusqueda);
