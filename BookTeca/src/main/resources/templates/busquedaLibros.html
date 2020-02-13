@@ -29,10 +29,9 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-					<li class="nav-item active"><a class="nav-link" href="#">Libros
+					<li class="nav-item active"><a class="nav-link" href="buscadorLibros">Libros
 							<span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="buscadorRevistas">Revistas</a></li>
+					<li class="nav-item"><a class="nav-link" href="buscadorRevistas">Revistas</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="reservaSalaTrabajoGrupo">Sala Trabajo En Grupo</a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -57,7 +56,12 @@
 				<h1 class="mt-5"></h1>
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
 				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu mano</h1>
-				<h2 class="lead">¿Deseas seguir buscando nuevos libros {{nombre}}?</h2>
+				{{#visibleCerrarSesion}}
+				<h2 class="lead"><b>¿Deseas seguir buscando nuevos libros {{nombre}}?</b></h2>
+				{{/visibleCerrarSesion}}
+				{{#visibleIniciarSesion}}
+				<h2 class="lead"><b>¿Deseas seguir buscando nuevos libros?</b></h2>
+				{{/visibleIniciarSesion}}
 				<p class="lead">Puedes buscar por el nombre, autor, genero o editorial del libro</p>
 				<h1 class="mt-5"></h1>
 				<form action="/busquedaLibros" method="post">
@@ -91,7 +95,7 @@
 						<td>{{autor}}</td>
 						<td>{{editorial}}</td>
 						<td>{{genero}}</td>
-						{{^visibleCerrarSesion}}
+						{{#visibleCerrarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
 						{{/visibleCerrarSesion}}
 					</tr>

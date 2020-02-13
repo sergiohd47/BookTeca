@@ -169,10 +169,11 @@ public class inicioController {
 	public String busquedaLibros(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveLibro") String info) {
 		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<Libro> listaLibrosBusqueda=new ArrayList<>();
-		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info,null,null,null));
+		/*listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info,null,null,null));
 		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,info,null,null));
 		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,info,null));
-		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,null,info));
+		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(null,null,null,info));*/
+		listaLibrosBusqueda.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info,info,info,info));
 		if(sesionNoIniciada) {
 			model.addAttribute("visibleIniciarSesion",true);
 			model.addAttribute("listaLibrosBusqueda",listaLibrosBusqueda);
@@ -195,20 +196,14 @@ public class inicioController {
 		ArrayList<Revista> listaRevistasBusqueda=new ArrayList<>();
 		if(sesionNoIniciada) {
 			model.addAttribute("visibleIniciarSesion",true);
-			/*listaRevistasBusqueda=(ArrayList<Revista>) 
-					revistas.findByNombreOrEditorialOrGenero(nombre,editorial,genero);*/
 			model.addAttribute("listaRevistasBusqueda",listaRevistasBusqueda);
 			model.addAttribute("visibleTabla",!listaRevistasBusqueda.isEmpty());
-			//model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
 		} else {
 			model.addAttribute("visibleCerrarSesion",true);
 			if(!usuario.getAdministrador()) {
-				//listaRevistasBusqueda=(ArrayList<Revista>) revistas.findAll();
-				/*listaRevistasBusqueda=(ArrayList<Revista>) 
-						revistas.findByNombreOrEditorialOrGenero(nombre,editorial,genero);*/
+				model.addAttribute("nombre",usuario.getNombre());
 				model.addAttribute("listaRevistasBusqueda",listaRevistasBusqueda);
 				model.addAttribute("visibleTabla",!listaRevistasBusqueda.isEmpty());
-				//model.addAttribute("visibleIniciarSesion",!usuarios.findAll().contains(usuario));
 			}
 		}
 		return "buscadorRevistas";
@@ -217,17 +212,19 @@ public class inicioController {
 	public String busquedaRevistas(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveRevista") String info) {
 		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<Revista> listaRevistasBusqueda=new ArrayList<>();
-		listaRevistasBusqueda.addAll(revistas.findByNombreOrEditorialOrGenero(info, null, null));
+		/*listaRevistasBusqueda.addAll(revistas.findByNombreOrEditorialOrGenero(info, null, null));
 		listaRevistasBusqueda.addAll(revistas.findByNombreOrEditorialOrGenero(null,info,null));
-		listaRevistasBusqueda.addAll(revistas.findByNombreOrEditorialOrGenero(null,null,info));
+		listaRevistasBusqueda.addAll(revistas.findByNombreOrEditorialOrGenero(null,null,info));*/
+		listaRevistasBusqueda.addAll(revistas.findByNombreOrEditorialOrGenero(info,info,info));
 		if(sesionNoIniciada) {
 			model.addAttribute("visibleIniciarSesion",true);
-			model.addAttribute("listaLibrosBusqueda",listaRevistasBusqueda);
+			model.addAttribute("listaRevistasBusqueda",listaRevistasBusqueda);
 			model.addAttribute("visibleTabla",!listaRevistasBusqueda.isEmpty());
 		} else {
 			model.addAttribute("visibleCerrarSesion",true);
 			if(!usuario.getAdministrador()) {
-				model.addAttribute("listaLibrosBusqueda",listaRevistasBusqueda);
+				model.addAttribute("nombre",usuario.getNombre());
+				model.addAttribute("listaRevistasBusqueda",listaRevistasBusqueda);
 				model.addAttribute("visibleTabla",!listaRevistasBusqueda.isEmpty());
 			}
 		}

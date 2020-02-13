@@ -30,9 +30,8 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
 					<li class="nav-item active"><a class="nav-link" href="buscadorLibros">Libros</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="#">Revistas</a></li>
-						<span class="sr-only">(current)</span>
+					<li class="nav-item"><a class="nav-link" href="buscadorRevistas">Revistas
+						<span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="reservaSalaTrabajoGrupo">Sala Trabajo En Grupo</a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -57,11 +56,15 @@
 				<h1 class="mt-5"></h1>
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
 				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu mano</h1>
-				<!-- <p class="lead">Aqui encontraras el buscador de libros de nuestra biblioteca</p> -->
-				<p class="lead">Puedes buscar por el nombre, autor, genero o editorial del libro, 
-				separado por / en caso de que busques por mas de un tipo.</p>
+				{{#visibleCerrarSesion}}
+				<h2 class="lead"><b>¿Deseas seguir buscando nuevas revistas {{nombre}}?</b></h2>
+				{{/visibleCerrarSesion}}
+				{{#visibleIniciarSesion}}
+				<h2 class="lead"><b>¿Deseas seguir buscando nuevas revistas?</b></h2>
+				{{/visibleIniciarSesion}}
+				<p class="lead">Puedes buscar por el nombre, genero o editorial de la revista</p>
 				<h1 class="mt-5"></h1>
-				<form action="/buscadorLibros" method="post">
+				<form action="/busquesdaRevistas" method="post">
 					<div>
 						<label for="busquedaRevista">Busqueda: </label> <input type="search"
 							id="palabraClaveRevista" name="palabraClaveRevista"

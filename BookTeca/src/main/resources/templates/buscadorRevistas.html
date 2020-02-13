@@ -30,7 +30,7 @@
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
 					<li class="nav-item"><a class="nav-link" href="buscadorLibros">Libros</a></li>
-					<li class="nav-item active"><a class="nav-link" href="#">Revistas
+					<li class="nav-item active"><a class="nav-link" href="buscadorRevistas">Revistas
 						<span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="reservaSalaTrabajoGrupo">Sala Trabajo En Grupo</a></li>
@@ -56,9 +56,15 @@
 				<h1 class="mt-5"></h1>
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
 				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu mano</h1>
-				<p class="lead">Aqui encontraras el buscador de revistas de nuestra biblioteca</p>
+				{{#visibleCerrarSesion}}
+				<h2 class="lead"><b>¿Que tipo de revista deseas buscar {{nombre}}?</b></h2>
+				{{/visibleCerrarSesion}}
+				{{#visibleIniciarSesion}}
+				<h2 class="lead"><b>¿Que tipo de revista deseas buscar?</b></h2>
+				{{/visibleIniciarSesion}}
+				<p class="lead">Puedes buscar por el nombre, autor, genero o editorial de la revista</p>
 				<h1 class="mt-5"></h1>
-				<form>
+				<form action="/busquedaRevistas" method="post">
 					<div>
 						<label for="busquedaRevista">Busqueda: </label> <input type="search"
 							id="palabraClaveRevista" name="palabraClaveRevista"

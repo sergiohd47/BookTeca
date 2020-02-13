@@ -18,7 +18,6 @@ public interface RevistaRepository extends JpaRepository<Revista, Long>{
 	
 	Revista findById(long id);
 	
-	@Query(nativeQuery = true, value = "SELECT * FROM Revista WHERE nombre=?1 OR editorial=?2 OR genero=?3")
 	ArrayList<Revista> findByNombreOrEditorialOrGenero(String nombre, String editorial, String genero);
 	
 	ArrayList<Revista> findByIdUsuario(Usuario idUsuario);
