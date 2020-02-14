@@ -283,12 +283,20 @@ public class inicioController {
 			model.addAttribute("nombre",usuario.getNombre());
 			model.addAttribute("usuario",true);
 			ArrayList<Libro> listaLibros=libros.findByIdUsuario(usuario);
+			boolean visibleTablaLibros=!listaLibros.isEmpty();
+			model.addAttribute("visibleTablaLibros",visibleTablaLibros);
 			model.addAttribute("listaLibros",listaLibros);
 			ArrayList<Revista> listaRevistas=revistas.findByIdUsuario(usuario);
+			boolean visibleTablaRevistas=!listaRevistas.isEmpty();
+			model.addAttribute("visibleTablaRevistas",visibleTablaRevistas);
 			model.addAttribute("listaRevistas",listaRevistas);
 			SalaTrabajoGrupo STG=salasTrabajoGrupo.findByIdUsuario(usuario);
+			boolean visibleTablaSTG=STG!=null;
+			model.addAttribute("visibleTablaSTG",visibleTablaSTG);
 			model.addAttribute("STG",STG);
 			ArrayList<EquipoInformatico> listaEquipos=equiposInformaticos.findByIdUsuario(usuario);
+			boolean visibleTablaEquipos=!listaEquipos.isEmpty();
+			model.addAttribute("visibleTablaEquipos",visibleTablaEquipos);
 			model.addAttribute("listaEquipos",listaEquipos);
 		} else {
 			model.addAttribute("nombre",usuario.getNombre());
