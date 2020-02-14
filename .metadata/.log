@@ -4143,3 +4143,113 @@ java.lang.InterruptedException
 	at org.eclipse.jdt.internal.ui.text.java.hover.BestMatchHover.getHoverInfo2(BestMatchHover.java:133)
 	at org.eclipse.jdt.internal.ui.text.java.hover.JavaEditorTextHoverProxy.getHoverInfo2(JavaEditorTextHoverProxy.java:89)
 	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:169)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:06:03.793
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.GkBrRQQQ
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:06:03.794
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.GkBrRQQQ
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:06:03.794
+!MESSAGE subsribers = null
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:06:03.794
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.GkBrRQQQ => OK
+!SESSION 2020-02-14 15:09:30.409 -----------------------------------------------
+eclipse.buildId=4.1.1.201901241133-RELEASE
+java.version=10.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=es_ES
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -keyring /Users/sergiohernandezdominguez/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.springframework.boot.ide.branding.sts4 -keyring /Users/sergiohernandezdominguez/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2020-02-14 15:09:49.804
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jface 2 0 2020-02-14 15:09:50.833
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-02-14 15:09:50.833
+!MESSAGE A conflict occurred for COMMAND+SHIFT+T:
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@4549d616,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@1bfb60b7,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:09:58.747
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:09:58.748
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@765f36fb[org.springframework.tooling.boot.ls:1.2.1.201901241129(id=615)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:09:58.765
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2020-02-14 15:09:59.568
+!MESSAGE Exception caught during execution of command '[git, --version]' in '/usr/bin', return code '1', error message 'xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+'
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:09:59.714
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:10:05.337
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.wGRmdKDs
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:10:05.338
+!MESSAGE subscribing to classpath changes: sts4.classpath.wGRmdKDs
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:10:05.340
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:10:05.340
+!MESSAGE subsribers = [sts4.classpath.wGRmdKDs]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:10:05.341
+!MESSAGE Sending initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:10:05.343
+!MESSAGE project BookTeca ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:10:05.344
+!MESSAGE Sending initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:10:05.344
+!MESSAGE Preparing classpath changed notification BookTeca
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:10:05.345
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.wGRmdKDs => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:10:05.345
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:10:05.351
+!MESSAGE classpath=99 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:10:05.351
+!MESSAGE executing callback sts4.classpath.wGRmdKDs BookTeca false 99
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:10:05.444
+!MESSAGE executing callback sts4.classpath.wGRmdKDs SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:11:00.633
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.wGRmdKDs
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:11:00.633
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.wGRmdKDs
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:11:00.639
+!MESSAGE subsribers = null
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-14 15:11:00.639
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.wGRmdKDs => OK
