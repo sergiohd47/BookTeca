@@ -1,71 +1,30 @@
-
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Pagina web BookTeca">
-<meta name="author" content="Dani, Borja y Sergio">
-
-<title>Añadir Sala Trabajo Grupo - BookTeca</title>
-
-<!-- Bootstrap core CSS -->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, 
+		maximum-scale=1.0, minimum-scale=1.0">
+	<title>Sala - BookTeca</title>
+	<link rel="stylesheet" href="../css/addroomstyles.css">
 </head>
 
 <body>
-
-	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-		<div class="container">
-			<a class="navbar-brand" href="#">BookTeca</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarResponsive" aria-controls="navbarResponsive"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+	<form id="addroom" action="/salaAñadida" method="post">
+		<div class="form-sesion">
+			<p>
+				<label><b>Capacidad</b></label><br> 
+				<input type="number" name="capacidadSala" required placeholder="2" min="2" max="15">
+			</p>
+			<p>
+				<label><b>Localizacion</b></label><br> 
+				<input type="text" name="localizacionSala" required placeholder="Planta 0/1/...">
+			</p>
+			<p>
+				<label for="comp"><b>Compartida</b></label><br>
+				<input type="checkbox" id="comp" name="compartida"/>
+			</p>
+			<p><input id="button-addroom" type="submit" value="Añadir"></p>
 		</div>
-	</nav>
-
-	<!-- Page Content -->
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<h1 class="mt-5"></h1>
-				<img src="imagenes/logoBookTeca.png" width="600" height="341">
-				<h1 class="mt-5">Zona Administracion de Salas</h1>
-				<p class="lead">Desde aqui puedes añadir Salas de Trabajo en
-					Grupo</p>
-				<form id="signin" action="/añadirSalaTrabajoGrupo" method="post">
-					<div class="form-sesion">
-						<p>
-							<label><b>Capacidad</b></label><br> <input type="number"
-								name="capacidadNuevaSala" required placeholder="2">
-						</p>
-						<p>
-							<label><b>Localizacion</b></label><br> <input type="text"
-								name="localizacionNuevaSala" required placeholder="Planta 0">
-						</p>
-						<p>
-							<label><b>Compartida</b></label><br> <input type="checkbox"
-								name="compartida" value="compartida"> Compartida<br>
-							No<br>
-						</p>
-
-						<p>
-							<input id="button-sesion" type="submit" value="Añadir">
-						</p>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-
-	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.slim.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	</form>
 </body>
 </html>

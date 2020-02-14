@@ -1,85 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Pagina web BookTeca">
-<meta name="author" content="Dani, Borja y Sergio">
-
-
-
-<!-- Bootstrap core CSS -->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, 
+		maximum-scale=1.0, minimum-scale=1.0">
+	<title>Equipo - BookTeca</title>
+	<link rel="stylesheet" href="../css/addpcstyles.css">
 </head>
 
 <body>
-
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Pagina web BookTeca">
-<meta name="author" content="Dani, Borja y Sergio">
-
-<title>Añadir Equipo Informatico - BookTeca</title>
-
-<!-- Bootstrap core CSS -->
-<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-		<div class="container">
-			<a class="navbar-brand" href="#">BookTeca</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarResponsive" aria-controls="navbarResponsive"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+	<form id="addpc" action="/equipoAñadido" method="post">
+		<div class="form-sesion">
+			<p>
+				<label><b>Sistema Operativo</b></label><br> 
+				<input type="text" name="soEquipo" required>
+			</p>
+			<p>
+				<label><b>Localizacion</b></label><br> 
+				<input type="text"name="localizacionEquipo" required placeholder="Equipo 29/14/...">
+			</p>
+			<p><input id="button-addpc" type="submit" value="Añadir"></p>
 		</div>
-	</nav>
-
-	<!-- Page Content -->
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 text-center">
-				<h1 class="mt-5"></h1>
-				<img src="imagenes/logoBookTeca.png" width="600" height="341">
-				<h1 class="mt-5">Zona Administracion de Equipos Informaticos</h1>
-				<p class="lead">Desde aqui puedes añadir Equipos Informaticos</p>
-				<form id="signin" action="/añadirEquipoInformatico" method="post">
-					<div class="form-sesion">
-						<p>
-							<label><b>Sistema Operativo</b></label><br> <input
-								type="text" name="soNuevoEquipo" required placeholder="Mac OSX">
-						</p>
-						<p>
-							<label><b>Localizacion</b></label><br> <input type="text"
-								name="localizacionNuevoEquipo" required placeholder="Equipo 29">
-						</p>
-						<p>
-							<input id="button-sesion" type="submit" value="Añadir">
-						</p>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-
-	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.slim.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	</form>
 </body>
 </html>

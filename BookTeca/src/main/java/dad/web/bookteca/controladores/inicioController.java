@@ -277,7 +277,7 @@ public class inicioController {
 	}
 
 	@RequestMapping("/miPerfil")
-	public String miPerfil(Model model, HttpSession sesionUsuario) {
+	public String miPerfil(Model model,HttpSession sesionUsuario) {
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if(!usuario.getAdministrador()) {
 			model.addAttribute("nombre",usuario.getNombre());
@@ -298,46 +298,16 @@ public class inicioController {
 	}
 
 	@RequestMapping("/editarPerfil")
-	public String editarPerfil(Model model, @RequestParam("nuevoNombreUsuario") String nombre, @RequestParam("nuevoApellidoUsuario") String apellidos, @RequestParam("password") String contrasenya, HttpSession usuarioSesion ) {
-		Usuario usuarioEditado = (Usuario) usuarioSesion.getAttribute("infoUsuario");
+	public String editarPerfil(Model model, @RequestParam("nuevoNombreUsuario") String nombre, 
+			@RequestParam("nuevoApellidoUsuario") String apellidos, @RequestParam("password") String contrasenya, 
+			HttpSession sesionUsuario ) {
+		Usuario usuarioEditado = (Usuario) sesionUsuario.getAttribute("infoUsuario");
 		usuarioEditado.setNombre(nombre);
 		usuarioEditado.setApellidos(apellidos);
 		usuarioEditado.setContrasenya(contrasenya);
 		usuarios.save(usuarioEditado);
-		usuarioSesion.setAttribute("infoUsuario", usuarioEditado);
+		sesionUsuario.setAttribute("infoUsuario",usuarioEditado);
 		return "editarPerfil";
-	}
-
-	@RequestMapping("/añadirRevista")
-	public String añadirRevista(Model model, @RequestParam("nombreRevista") String nombre, @RequestParam("editorialRevista") String editorial, @RequestParam("fasciculo") int fasciculo, @RequestParam("genero") String genero) {
-		revistas.save(new Revista(nombre,editorial,fasciculo,genero));
-		return "añadirRevista";
-	}
-
-	@RequestMapping("/añadirSalaTrabajoGrupo")
-	public String añadirSala(Model model, @RequestParam("capacidadNuevaSala") int capacidad, @RequestParam("localizacionNuevaSala") String localizacion, @RequestParam("compartida") boolean compartida) {
-		salasTrabajoGrupo.save(new SalaTrabajoGrupo(capacidad, localizacion, compartida));
-		return "añadirSalaTrabajoGrupo";
-	}
-
-	@RequestMapping("/añadirEquipoInformatico")
-	public String añadirEquipoInformatico(Model model, @RequestParam("soNuevoEquipo") String so, @RequestParam("localizacionNuevoEquipo") String localizacion) {
-		equiposInformaticos.save(new EquipoInformatico(so, localizacion));
-		return "añadirEquipoInformatico";
-	}
-
-	@RequestMapping("/añadirLibro")
-	public String añadirLibro(Model model, @RequestParam("nombreLibro") String nombre, @RequestParam("autor") String autor, @RequestParam("editorialLibro") String editorialLibro, @RequestParam("genero") String genero) {
-		libros.save(new Libro(nombre,autor,editorialLibro,genero));
-		return "añadirLibro";
-	}
-
-	@RequestMapping("/administrarUsuarios")
-	public String administrarUsuarios(Model model, @RequestParam("emailUsuario") String emailNuevoAdmin) {
-		Usuario usuario=usuarios.findByEmail(emailNuevoAdmin);
-		usuario.setAdministrador(true);
-		usuarios.save(usuario);
-		return "administrarUsuarios";
 	}
 
 }
