@@ -8,7 +8,7 @@
 <meta name="description" content="Pagina web BookTeca">
 <meta name="author" content="Dani, Borja y Sergio">
 
-<title>Registro - BookTeca</title>
+<title>Inicio Sesion - BookTeca</title>
 
 <!-- Bootstrap core CSS -->
 <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -37,21 +37,12 @@
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
 				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu
 					mano</h1>
-				<p class="lead">Cree una cuenta para acceder a todas funcionalidades</p>
-				<p class="lead">Por favor, rellene el formulario para crear una cuenta</p>
-				<form id="signup" action="/iniciarSesionTrasRegistro" method="post">
+				<p class="lead">Acceda mediante su nombre de usuario y su contraseña, a su cuenta</p>
+				<form id="signin" action="/sesionIniciada" method="post">
 					<div class="form-sesion">
 						<p>
-							<label><b>Nombre</b></label><br> <input type="text"
-								placeholder="Nombre"name="nombreUsuario" required>
-						</p>
-						<p>
-							<label><b>Apellidos</b></label><br> <input type="text"
-								placeholder="Apellidos"name="apellidosUsuario" required>
-						</p>
-						<p>
-							<label><b>Email</b></label><br> <input type="text"
-								placeholder="xxx@ejemplo.com" name="email" required>
+							<label><b>Usuario</b></label><br> <input type="text"
+								placeholder="xxxxx@porejemplo.com" name="nombreUsuario" required>
 						</p>
 						<p>
 							<label><b>Contraseña</b></label><br> <input type="password"
@@ -61,7 +52,7 @@
 								required>
 						</p>
 						<p>
-							<input id="button-sesion" type="submit" value="Registrarse">
+							<input id="button-sesion" type="submit" value="Iniciar Sesion">
 						</p>
 					</div>
 				</form>

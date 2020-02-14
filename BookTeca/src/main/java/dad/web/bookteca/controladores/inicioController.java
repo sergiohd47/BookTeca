@@ -271,9 +271,14 @@ public class inicioController {
 	}
 
 	@RequestMapping("/registro")
-	public String registro(Model model, Usuario usuario) {
-		usuarios.save(usuario);
+	public String registro(Model model) {
 		return "registro";
+	}
+	@RequestMapping("/iniciarSesionTrasRegistro")
+	public String iniciarSesionTrasRegistro(Model model, @RequestParam("nombreUsuario") String nombre, @RequestParam("email") String email,
+			@RequestParam("contrasenya") String contraseña, @RequestParam("apellidosUsuario") String apellidos) {
+		usuarios.save(new Usuario(nombre,apellidos,contraseña,email,false));
+		return "iniciarSesionNuevoRegistro";
 	}
 
 	@RequestMapping("/miPerfil")
