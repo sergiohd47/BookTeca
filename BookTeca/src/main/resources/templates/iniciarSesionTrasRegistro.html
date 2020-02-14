@@ -35,21 +35,16 @@
 			<div class="col-lg-12 text-center">
 				<h1 class="mt-5"></h1>
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
-				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu
-					mano</h1>
-				<p class="lead">Acceda mediante su nombre de usuario y su contraseña, a su cuenta</p>
+				<h1 class="mt-5">Acceda directamente a BookTeca con su nueva cuenta de usuario</h1>
 				<form id="signin" action="/sesionIniciada" method="post">
 					<div class="form-sesion">
 						<p>
-							<label><b>Usuario</b></label><br> <input type="text"
-								placeholder="xxxxx@porejemplo.com" name="nombreUsuario" required>
+							<label><b>Usuario</b></label><br> 
+							<input type="text" name="nombreUsuario" value="{{email}}" required>
 						</p>
 						<p>
-							<label><b>Contraseña</b></label><br> <input type="password"
-								name="contrasenya"
-								pattern="[A-Za-z][A-Za-z0-9]*[0-9][A-Za-z0-9]*"
-								title="La contraseña debe contener almenos 1 letra mayuscula, 1 letra minuscula y 1 digito"
-								required>
+							<label><b>Contraseña</b></label><br> <input type="password" name="contrasenya" 
+							value="{{contraseña}}"required>
 						</p>
 						<p>
 							<input id="button-sesion" type="submit" value="Iniciar Sesion">
