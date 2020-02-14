@@ -70,6 +70,10 @@
 				<h1 class="mt-5"></h1>
 				<h2 class="mt-5">Reservas</h2>
 				<p class="lead">Libros reservados:</p>
+				{{^listaLibros}}
+				<p class="lead">Parece que no tienes libros reservados.</p>
+				{{/listaLibros}}
+				{{#visibleTablaLibros}}
 				<table border="1" class="lead" align="center">
 					<tr>
 						<th>NOMBRE</th>
@@ -88,8 +92,13 @@
 					</tr>
 					{{/listaLibros}}
 				</table>
+				{{/visibleTablaLibros}}
 				<h1 class="mt-5"></h1>
 				<p class="lead">Revistas reservadas:</p>
+				{{^listaRevistas}}
+				<p class="lead">Parece que no tienes revistas reservadas.</p>
+				{{/listaRevistas}}
+				{{#visibleTablaRevistas}}
 				<table border="1" class="lead" align="center">
 					<tr>
 						<th>NOMBRE</th>
@@ -108,8 +117,13 @@
 					</tr>
 					{{/listaRevistas}}
 				</table>
+				{{/visibleTablaRevistas}}
 				<h1 class="mt-5"></h1>
-				<p class="lead">Sala de trabajo reservada:</p>
+				<p class="lead">Salas de trabajo reservada:</p>
+				{{^STG}}
+				<p class="lead">Parece que no tienes salas reservadas.</p>
+				{{/STG}}
+				{{#visibleTablaSTG}}
 				<table border="1" class="lead" align="center">
 					<tr>
 						<th>CAPACIDAD</th>
@@ -126,8 +140,13 @@
 					</tr>
 					{{/STG}}
 				</table>
+				{{/visibleTablaSTG}}
 				<h1 class="mt-5"></h1>
 				<p class="lead">Equipos informticos reservados:</p>
+				{{^listaEquipos}}
+				<p class="lead">Parece que no tienes equipos reservados.</p>
+				{{/listaEquipos}}
+				{{#visibleTablaEquipos}}
 				<table border="1" class="lead" align="center">
 					<tr>
 						<th>SISTEMA OPERATIVO</th>
@@ -142,6 +161,7 @@
 					</tr>
 					{{/listaEquipos}}
 				</table>
+				{{/visibleTablaEquipos}}
 				{{/usuario}}
 			</div>
 		</div>
