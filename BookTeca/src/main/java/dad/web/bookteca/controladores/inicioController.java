@@ -304,17 +304,23 @@ public class inicioController {
 		}
 		return "miPerfil";
 	}
-
-	@RequestMapping("/editarPerfil")
-	public String editarPerfil(Model model, @RequestParam("nuevoNombreUsuario") String nombre, 
-			@RequestParam("nuevoApellidoUsuario") String apellidos, @RequestParam("password") String contrasenya, 
-			HttpSession sesionUsuario ) {
+	@RequestMapping("/perfilEditado")
+	public String perfilEditado(Model model, HttpSession sesionUsuario, @RequestParam("nuevoNombreUsuario") String nombre, 
+			@RequestParam("nuevoApellidoUsuario") String apellidos, @RequestParam("nuevaContrasenya") String contrasenya) {
 		Usuario usuarioEditado = (Usuario) sesionUsuario.getAttribute("infoUsuario");
 		usuarioEditado.setNombre(nombre);
 		usuarioEditado.setApellidos(apellidos);
 		usuarioEditado.setContrasenya(contrasenya);
 		usuarios.save(usuarioEditado);
 		sesionUsuario.setAttribute("infoUsuario",usuarioEditado);
+		String nombreUsuario=usuarioEditado.getNombre()+" "+usuarioEditado.getApellidos();
+		model.addAttribute("nombre", nombreUsuario);
+		return "perfilEditado";
+		
+	}
+
+	@RequestMapping("/editarPerfil")
+	public String editarPerfil(Model model, HttpSession sesionUsuario ) {
 		return "editarPerfil";
 	}
 

@@ -40,7 +40,7 @@
 				<p class="lead">Desde aqui puedes hacer administracion a los usuarios</p>
 				<form>
 					<div>
-						<label for="busquedaTitulo">Busqueda por email: </label> <input type="search"
+						<label for="busquedaUsuario">Busqueda por email: </label> <input type="search"
 							id="emailUsuario" name="emailUsuario"
 							placeholder="Escribe el email del usuario" required
 							size="30">
@@ -49,20 +49,27 @@
 					</div>
 				</form>
 				<h1 class="mt-5">RESULTADO DE TU BUSQUEDA</h1>
-				<table border class="lead">
+				{{^usuario}}
+				<p class="lead">Lo sentimos, tu busqueda no ha tenido resultado</p>
+				{{#visibleTabla}}
+				<table border="1" class="lead">
 					<tr>
-						<th>NOMBRE COMPLETO</th>
+						<th>NOMBRE</th>
+						<th>APELLIDOS</th>
 						<th>CORREO</th>
 						<th>ADMINISTRADOR</th>
 						<th></th>
 					</tr>
+					{{#usuario}}
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td href="adminUsuarios" id="hacerAdmin" class="btn btn-success">CAMBIAR ROL</td>
+						<td>{{nombre}}</td>
+						<td>{{apellidos}}</td>
+						<td>{{email}}</td>
+						<td href="recursoAñadido" id="hacerAdmin" class="btn btn-success">CAMBIAR ROL</td>
 					</tr>
+					{{/usuario}}
 				</table>
+				{{/visibleTabla}}
 			</div>
 		</div>
 	</div>

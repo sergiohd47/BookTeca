@@ -112,6 +112,8 @@ public class AdministradorController {
 		Usuario admin = (Usuario) sesionUsuario.getAttribute("infoUsuario");
 		model.addAttribute("nombre",admin);
 		Usuario usuario=usuarios.findByEmail(emailNuevoAdmin);
+		model.addAttribute("usuario",usuario);
+		boolean visibleTabla=usuario!=null;
 		usuario.setAdministrador(true);
 		usuarios.save(usuario);
 		return "recursoAñadido";
