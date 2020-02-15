@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, 
+		maximum-scale=1.0, minimum-scale=1.0">
+	<title>Sala - BookTeca</title>
+	<link rel="stylesheet" href="../css/addroomstyles.css">
+</head>
+
+<body>
+	<form id="addroom" action="/salaAñadida" method="post">
+		<div class="form-sesion">
+			<p>
+				<label><b>Capacidad</b></label><br> 
+				<input type="number" name="capacidadSala" required placeholder="2" min="2" max="15">
+			</p>
+			<p>
+				<label><b>Localizacion</b></label><br> 
+				<input type="text" name="localizacionSala" required placeholder="Planta 0/1/...">
+			</p>
+			<p>
+				<label for="comp"><b>Compartida</b></label><br>
+				<input type="checkbox" id="comp" name="compartida"/>
+			</p>
+			<p><input id="button-addroom" type="submit" value="Añadir"></p>
+		</div>
+	</form>
+</body>
+</html>

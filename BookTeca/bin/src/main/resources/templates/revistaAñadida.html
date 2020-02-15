@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Pagina web BookTeca">
+<meta name="author" content="Dani, Borja y Sergio">
+
+<title>Mi Perfil - BookTeca</title>
+
+<!-- Bootstrap core CSS -->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+		<div class="container">
+			<a class="navbar-brand" href="#">BookTeca</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+					{{#usuario}}
+					<li class="nav-item"><a class="nav-link" href="buscadorLibros">Libros</a></li>
+					<li class="nav-item"><a class="nav-link" href="buscadorRevistas">Revistas</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="reservaSalaTrabajoGrupo">Sala Trabajo En Grupo</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="reservaEquipoInformatico">Equipos Informaticos</a></li>
+					{{/usuario}}
+					<li class="nav-item active"><a class="nav-link" href="miPerfil">Mi Perfil
+						<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="/">Cerrar Sesion</a></li> 
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h1 class="mt-5"></h1>
+				<img src="imagenes/logoBookTeca.png" width="600" height="341">
+				<h1 class="mt-5">Hola {{nombre}}</h1>
+				{{#usuarioAdmin}}
+				<h2 class="mt-5">¿Que desea realizar?</h2>
+				<p class="lead">Desde aqui puedes administrar los diferentes recursos de la coleccion</p>
+				<a href="añadirLibro" class="btn btn-success">AÑADIR LIBRO</a>
+				<a href="añadirRevista" class="btn btn-success">AÑADIR REVISTA</a>
+				<a href="añadirSalaTrabajoGrupo" class="btn btn-success">AÑADIR SALA</a>
+				<a href="añadirEquipoInformatico" class="btn btn-success">AÑADIR EQUIPO INFORMATICO</a>
+				<h1 class="mt-5"></h1>
+				<p class="lead">En esta parte puedes administrar los diferentes usuario, borrando o cambiandole el rol</p>
+				<a href="administrarUsuarios" class="btn btn-success">ADMINISTRAR USUARIOS</a>
+				<h1 class="mt-5"></h1>
+				{{/usuarioAdmin}}
+				{{#usuario}}
+				<p class="lead">Desde aqui, puedes mirar el estado de tus reservas o editar tu perfil</p>
+				<a href="editarPerfil" class="btn btn-success">EDITAR PERFIL</a>
+				<h1 class="mt-5"></h1>
+				<h2 class="mt-5">Reservas</h2>
+				<p class="lead">Libros reservados:</p>
+				<table border="1" class="lead" align="center">
+					<tr>
+						<th>NOMBRE</th>
+						<th>AUTOR</th>
+						<th>EDITORIAL</th>
+						<th>GENERO</th>
+						<th>FIN DE RESERVA</th>
+					</tr>
+					{{#listaLibros}}
+					<tr>
+						<td>{{nombre}}</td>
+						<td>{{autor}}</td>
+						<td>{{editorial}}</td>
+						<td>{{genero}}</td>
+						<td>{{diaFinReserva}}</td>
+					</tr>
+					{{/listaLibros}}
+				</table>
+				<h1 class="mt-5"></h1>
+				<p class="lead">Revistas reservadas:</p>
+				<table border="1" class="lead" align="center">
+					<tr>
+						<th>NOMBRE</th>
+						<th>EDITORIAL</th>
+						<th>FASCICULOS</th>
+						<th>GENERO</th>
+						<th>FIN DE RESERVA</th>
+					</tr>
+					{{#listaRevistas}}
+					<tr>
+						<td>{{nombre}}</td>
+						<td>{{editorial}}</td>
+						<td>{{fasciculo}}</td>
+						<td>{{genero}}</td>
+						<td>{{diaFinReserva}}</td>
+					</tr>
+					{{/listaRevistas}}
+				</table>
+				<h1 class="mt-5"></h1>
+				<p class="lead">Sala de trabajo reservada:</p>
+				<table border="1" class="lead" align="center">
+					<tr>
+						<th>CAPACIDAD</th>
+						<th>LOCALIZACION</th>
+						<th>COMPARTIDA</th>
+						<th>FIN DE RESERVA</th>
+					</tr>
+					{{#STG}}
+					<tr>
+						<td>{{capacidad}}</td>
+						<td>{{localizacion}}</td>
+						<td>{{compartida}}</td>
+						<td>{{diaFinReserva}}</td>
+					</tr>
+					{{/STG}}
+				</table>
+				<h1 class="mt-5"></h1>
+				<p class="lead">Equipos informticos reservados:</p>
+				<table border="1" class="lead" align="center">
+					<tr>
+						<th>SISTEMA OPERATIVO</th>
+						<th>LOCALIZACION</th>
+						<th>FIN DE RESERVA</th>
+					</tr>
+					{{#listaEquipos}}
+					<tr>
+						<td>{{sistemaOperativo}}</td>
+						<td>{{localizacion}}</td>
+						<td>{{diaFinReserva}}</td>
+					</tr>
+					{{/listaEquipos}}
+				</table>
+				{{/usuario}}
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="vendor/jquery/jquery.slim.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, 
+		maximum-scale=1.0, minimum-scale=1.0">
+	<title>Equipo - BookTeca</title>
+	<link rel="stylesheet" href="../css/addpcstyles.css">
+</head>
+
+<body>
+	<form id="addpc" action="/equipoAñadido" method="post">
+		<div class="form-sesion">
+			<p>
+				<label><b>Sistema Operativo</b></label><br> 
+				<input type="text" name="soEquipo" required>
+			</p>
+			<p>
+				<label><b>Localizacion</b></label><br> 
+				<input type="text"name="localizacionEquipo" required placeholder="Equipo 29/14/...">
+			</p>
+			<p><input id="button-addpc" type="submit" value="Añadir"></p>
+		</div>
+	</form>
+</body>
+</html>
