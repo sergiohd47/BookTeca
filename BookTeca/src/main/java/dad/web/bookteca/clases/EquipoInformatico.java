@@ -59,6 +59,12 @@ public class EquipoInformatico {
 		this.fechaReserva = reserva;
 	}
 	
+	public void quitar() {
+		this.disponible = true;
+		this.idUsuario = null;
+		this.fechaReserva = null;
+	}
+	
 	@Override
 	public String toString() {
 		return "EquipoInformatico [id=" + id + ", sistemaOperativo=" + sistemaOperativo + 

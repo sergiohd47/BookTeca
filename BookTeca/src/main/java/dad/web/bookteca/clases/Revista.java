@@ -78,6 +78,13 @@ public class Revista {
 		this.fecInicio = inicio;
 		this.fecFin = fin;
 	}
+	
+	public void quitar() {
+		this.disponible = true;
+		this.idUsuario = null;
+		this.fecInicio = null;
+		this.fecFin = null;
+	}
 
 	@Override
 	public String toString() {

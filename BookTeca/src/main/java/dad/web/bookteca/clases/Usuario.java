@@ -150,7 +150,7 @@ public class Usuario {
 					Calendar calendar = Calendar.getInstance();
 				    
 					Date inicio = Date.valueOf(java.time.LocalDate.now());
-					calendar.setTime(inicio); // Configuramos la fecha que se recibe
+					calendar.setTime(inicio); 
 				    calendar.add(Calendar.DAY_OF_YEAR , 7);
 					Date fin = (Date) calendar.getTime();
 					l.reservar(this, inicio, fin);
@@ -160,11 +160,89 @@ public class Usuario {
 		return false;
 	}
 	
-	public void reservarRevista(Revista r) {
-		if(!revistasReservadas.contains(r))
-			revistasReservadas.add(r);
+	public boolean quitarLibro(Libro l) {
+		if (l.getIdUsuario()==this) {
+			l.quitar();
+			this.removeLibrosReservados(l);
+			return true;
+		}
+		
+		return false;
 	}
+	
+	
+	public boolean quitarRevista(Revista r) {
+		if (r.getIdUsuario()==this) {
+			r.quitar();
+			this.removeRevistasReservadas(r);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean reservarRevista(Revista r) {
+		if (r.isDisponible()){
+			if (revistasReservadas.size()<3) {
+				revistasReservadas.add(r);
+				Calendar calendar = Calendar.getInstance();
+			    
+				Date inicio = Date.valueOf(java.time.LocalDate.now());
+				calendar.setTime(inicio); 
+			    calendar.add(Calendar.DAY_OF_YEAR , 7);
+				Date fin = (Date) calendar.getTime();
+				r.reservar(this, inicio, fin);
+				return true;
+			}
+		}
+	return false;
+	}
+	
 
+	public boolean reservarPuestoInformatico(EquipoInformatico puestoInformatico) {
+		if (puestoInformatico.isDisponible()){
+			if (this.getPuestoInformatico()==null) {
+				this.setPuestoInformatico(puestoInformatico);			    
+				Date fecha = Date.valueOf(java.time.LocalDate.now());
+				puestoInformatico.reservar(this, fecha);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean quitarPuestoInformatico(EquipoInformatico puestoInformatico) {
+		if (puestoInformatico.getIdUsuario()==this) {
+			puestoInformatico.quitar();
+			this.setPuestoInformatico(null);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean reservarSalaTrabajoGrupo(SalaTrabajoGrupo salaTrabajo) {
+		if (salaTrabajo.isDisponible()){
+			if (this.getPuestoInformatico()==null) {
+				this.setSalaTrabajoGrupo(salaTrabajo);			    
+				Date fecha = Date.valueOf(java.time.LocalDate.now());
+				salaTrabajo.reservar(this, fecha);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean quitarSalaTrabajoGrupo(SalaTrabajoGrupo salaTrabajo) {
+		if (salaTrabajo.getIdUsuario()==this) {
+			salaTrabajo.quitar();
+			this.setPuestoInformatico(null);
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public boolean esContrasenya(String contrasenya) {
 		return this.contrasenya == contrasenya;
 	}

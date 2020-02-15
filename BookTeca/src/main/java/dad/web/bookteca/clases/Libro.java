@@ -81,6 +81,13 @@ public class Libro {
 		this.fecFin = fin;
 	}
 	
+	public void quitar() {
+		this.disponible = true;
+		this.idUsuario = null;
+		this.fecInicio = null;
+		this.fecFin = null;
+	}
+	
 	@Override
 	public String toString() {
 		return "Libro [id=" + id + ", nombre=" + nombre + ", autor=" + autor + ", editorial=" + editorial

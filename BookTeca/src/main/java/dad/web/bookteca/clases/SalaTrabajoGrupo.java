@@ -55,6 +55,10 @@ public class SalaTrabajoGrupo {
 		return compartida;
 	}
 	
+	public Date getFechaReserva() {
+		return fechaReserva;
+	}
+
 	public boolean isDisponible() {
 		return disponible;
 	}
@@ -63,10 +67,18 @@ public class SalaTrabajoGrupo {
 		return idUsuario;
 	}
 	
-	public void reservar(Usuario idUsuario) {
+	public void reservar(Usuario idUsuario, Date fecha) {
 		this.disponible = false;
 		this.idUsuario = idUsuario;
+		this.fechaReserva = fecha;
 	}
+	
+	public void quitar() {
+		this.disponible = true;
+		this.idUsuario = null;
+		this.fechaReserva = null;
+	}
+	
 	
 	@Override
 	public String toString() {
