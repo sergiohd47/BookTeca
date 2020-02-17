@@ -91,13 +91,20 @@
 					</tr>
 					{{#listaRevistasBusqueda}}
 					<tr>
+						<!-- <form id="reservarRevistas" action="/reservarRevistas" method="post"> -->
+						<!-- <div class="form-sesion"> -->
+						<!-- <td style="display:none;"> {{idRevista}} </td>-->
 						<td>{{nombre}}</td>
 						<td>{{editorial}}</td>
 						<td>{{fasciculo}}</td>
 						<td>{{genero}}</td>
 						{{#visibleCerrarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
+						<!-- <td><button>RESERVAR</button>
+						<span class="validity"></span></td> -->
 						{{/visibleCerrarSesion}}
+						<!--  </div> -->
+						<!--  </form> -->
 					</tr>
 					{{/listaRevistasBusqueda}}
 				</table>

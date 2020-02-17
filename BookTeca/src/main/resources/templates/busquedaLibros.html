@@ -91,13 +91,20 @@
 					</tr>
 					{{#listaLibrosBusqueda}}
 					<tr>
+						<!-- <form id="reservarLibros" action="/reservarLibros" method="post"> -->
+						<!-- <div class="form-sesion"> -->
+						<!-- <td style="display:none;"> {{idLibro}} </td>-->
 						<td>{{nombre}}</td>
 						<td>{{autor}}</td>
 						<td>{{editorial}}</td>
 						<td>{{genero}}</td>
 						{{#visibleCerrarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
+						<!-- <td> <button>RESERVAR</button>
+						<span class="validity"></span> </td> -->
 						{{/visibleCerrarSesion}}
+						<!--  </div> -->
+						<!--  </form> -->
 					</tr>
 					{{/listaLibrosBusqueda}}
 				</table>

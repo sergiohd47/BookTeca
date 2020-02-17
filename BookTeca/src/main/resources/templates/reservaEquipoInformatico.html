@@ -74,11 +74,18 @@
 					</tr>
 					{{#listaEquipo}}
 					<tr>
+						<!-- <form id="reservarEquipos" action="/reservarEquipos" method="post"> -->
+						<!-- <div class="form-sesion"> -->
+						<!-- <td style="display:none;"> {{idEquipo}} </td>-->
 						<td>{{sistemaOperativo}}</td>
 						<td>{{localizacion}}</td>
 						{{#visibleCerrarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
+						<!-- <td><button>RESERVAR</button>
+						<span class="validity"></span> </td> -->
 						{{/visibleCerrarSesion}}
+						<!--  </div> -->
+						<!--  </form> -->
 					</tr>
 					{{/listaEquipo}}
 				</table>

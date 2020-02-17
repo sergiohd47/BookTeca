@@ -247,6 +247,10 @@ public class Usuario {
 		return this.contrasenya == contrasenya;
 	}
 	
+	public void cambiarRol() {
+		this.administrador = !this.administrador;
+	}
+	
 	@Override
 	public String toString() {
 		return "Usuario [email=" + email + ", nombre=" + nombre + ", apellidos=" + apellidos + ", contraseña=" + 

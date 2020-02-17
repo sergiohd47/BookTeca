@@ -75,6 +75,9 @@
 					</tr>
 					{{#listaSTG}}
 					<tr>
+						<!-- <form id="reservarSalas" action="/reservarSalas" method="post"> -->
+						<!-- <div class="form-sesion"> -->
+						<!-- <td style="display:none;"> {{idSala}} </td>-->
 						<td>{{capacidad}}</td>
 						<td>{{localizacion}}</td>
 						{{#compartida}}
@@ -85,7 +88,11 @@
 						{{/compartida}}
 						{{#visibleCerrarSesion}}
 						<td href="reservar" class="btn btn-success">RESERVAR</td>
+						<!-- <td><button>RESERVAR</button>
+						<span class="validity"></span> </td> -->
 						{{/visibleCerrarSesion}}
+						<!--  </div> -->
+						<!--  </form> -->
 					</tr>
 					{{/listaSTG}}
 				</table>

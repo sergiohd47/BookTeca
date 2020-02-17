@@ -115,8 +115,10 @@ public class AdministradorController {
 		model.addAttribute("usuario",usuario);
 		boolean visibleTabla=usuario!=null;
 		usuario.setAdministrador(true);
+		//usuario.cambiarRol(); si no es admin lo vuelve admin y viceversa
 		usuarios.save(usuario);
 		return "recursoAñadido";
 	}
+	
 	
 }
