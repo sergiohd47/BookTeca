@@ -251,6 +251,28 @@ public class Usuario {
 		this.administrador = !this.administrador;
 	}
 	
+	public void darBaja() {
+		if(this.librosReservados.size()>0) {
+			for (Libro libro: this.librosReservados) {
+				quitarLibro(libro);
+			}
+		}
+		if(this.revistasReservadas.size()>0) {
+			for (Revista revista: this.revistasReservadas) {
+				this.quitarRevista(revista);
+			}
+		}
+		if (this.puestoInformatico != null) {
+			quitarPuestoInformatico(this.puestoInformatico);
+		}
+		if (this.salaTrabajo != null) {
+			quitarSalaTrabajoGrupo(this.salaTrabajo);
+		}
+		if(this.administrador) {
+			cambiarRol();
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "Usuario [email=" + email + ", nombre=" + nombre + ", apellidos=" + apellidos + ", contraseña=" + 
