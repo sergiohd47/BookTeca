@@ -145,17 +145,16 @@ public class Usuario {
 	
 	public boolean reservarLibro(Libro l) {
 		if (l.isDisponible()){
-				if (librosReservados.size()<3) {
-					librosReservados.add(l);
-					Calendar calendar = Calendar.getInstance();
-				    
-					Date inicio = Date.valueOf(java.time.LocalDate.now());
-					calendar.setTime(inicio); 
-				    calendar.add(Calendar.DAY_OF_YEAR , 7);
-					Date fin = (Date) calendar.getTime();
-					l.reservar(this, inicio, fin);
-					return true;
-				}
+			if (librosReservados.size()<MAX) {
+				librosReservados.add(l);
+				Calendar calendar = Calendar.getInstance();
+				Date inicio = Date.valueOf(java.time.LocalDate.now());
+				calendar.setTime(inicio); 
+			    calendar.add(Calendar.DAY_OF_YEAR , 7);
+				Date fin = (Date) calendar.getTime();
+				l.reservar(this, inicio, fin);
+				return true;
+			}
 		}
 		return false;
 	}
@@ -195,7 +194,7 @@ public class Usuario {
 				return true;
 			}
 		}
-	return false;
+		return false;
 	}
 	
 

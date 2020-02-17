@@ -38,7 +38,7 @@
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
 				<h1 class="mt-5">Zona Administracion de Usuarios</h1>
 				<p class="lead">Desde aqui puedes hacer administracion a los usuarios</p>
-				<form>
+				<form action="/busquedaUsuarios" method="post">
 					<div>
 						<label for="busquedaUsuario">Busqueda por email: </label> <input type="search"
 							id="emailUsuario" name="emailUsuario"
@@ -48,34 +48,6 @@
 						<span class="validity"></span>
 					</div>
 				</form>
-				<h1 class="mt-5">RESULTADO DE TU BUSQUEDA</h1>
-				{{^usuario}}
-				<p class="lead">Lo sentimos, tu busqueda no ha tenido resultado</p>
-				{{#visibleTabla}}
-				<table border="1" class="lead">
-					<tr>
-						<th>NOMBRE</th>
-						<th>APELLIDOS</th>
-						<th>CORREO</th>
-						<th>ADMINISTRADOR</th>
-						<th></th>
-					</tr>
-					{{#usuario}}
-					<tr>
-						<!-- <form id="usuarioAdministrado" action="/usuarioAdministrado" method="post"> -->
-						<!-- <div class="form-sesion"> -->
-						<td>{{nombre}}</td>
-						<td>{{apellidos}}</td>
-						<td>{{email}}</td>
-						<td href="recursoAñadido" id="hacerAdmin" class="btn btn-success">CAMBIAR ROL</td>
-						<!-- <td><button>RESERVAR</button>
-						<span class="validity"></span> </td> -->
-						<!--  </div> -->
-						<!--  </form> -->
-					</tr>
-					{{/usuario}}
-				</table>
-				{{/visibleTabla}}
 			</div>
 		</div>
 	</div>

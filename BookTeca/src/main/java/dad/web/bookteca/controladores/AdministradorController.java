@@ -37,6 +37,8 @@ public class AdministradorController {
 	@Autowired
 	private UsuarioRepository usuarios;
 	
+	private Usuario usuario;
+	
 	@RequestMapping("/añadirLibro")
 	public String añadirLibro(Model model,HttpSession sesionUsuario) {
 		sesionUsuario.getAttribute("infoUsuario");
@@ -106,19 +108,32 @@ public class AdministradorController {
 		return "administrarUsuarios";
 	}
 	
-	@RequestMapping("/usuarioAdministrado")
-	public String administrarUsuarios(Model model, @RequestParam("emailUsuario") String emailNuevoAdmin, 
+	@RequestMapping("/busquedaUsuarios")
+	public String busquedaUsuarios(Model model, @RequestParam("emailUsuario") String emailNuevoAdmin, 
 			HttpSession sesionUsuario) {
-		Usuario admin = (Usuario) sesionUsuario.getAttribute("infoUsuario");
-		model.addAttribute("nombre",admin);
-		Usuario usuario=usuarios.findByEmail(emailNuevoAdmin);
+		sesionUsuario.getAttribute("infoUsuario");
+		usuario=usuarios.findByEmail(emailNuevoAdmin);
 		model.addAttribute("usuario",usuario);
-		boolean visibleTabla=usuario!=null;
-		usuario.setAdministrador(true);
-		//usuario.cambiarRol(); si no es admin lo vuelve admin y viceversa
-		usuarios.save(usuario);
-		return "recursoAñadido";
+		if(usuario == null)
+			model.addAttribute("visibleTabla",false);
+		else {
+			model.addAttribute("visibleTabla",true);
+			if(usuario.getAdministrador())
+				model.addAttribute("usuarioAdmin",true);
+			else
+				model.addAttribute("usuarioNoAdmin",true);
+		}
+		return "busquedaUsuarios";
 	}
 	
-	
+	@RequestMapping("/usuarioAdministrado")
+	public String usuarioAdministrado(Model model, HttpSession sesionUsuario, @RequestParam String emailUsuario) {
+		Usuario admin =(Usuario) sesionUsuario.getAttribute("infoUsuario");
+		model.addAttribute("nombre",admin.getNombre());
+		usuario = usuarios.findByEmail(emailUsuario);
+		if(!usuario.getAdministrador())
+			usuario.setAdministrador(true);
+		usuarios.save(usuario);
+		return "recursoAñadido";
+	}	
 }

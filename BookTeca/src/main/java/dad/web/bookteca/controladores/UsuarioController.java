@@ -1,6 +1,7 @@
 package dad.web.bookteca.controladores;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -21,6 +22,7 @@ import dad.web.bookteca.clases.Libro;
 import dad.web.bookteca.clases.Revista;
 import dad.web.bookteca.clases.SalaTrabajoGrupo;
 import dad.web.bookteca.clases.Usuario;
+import dad.web.bookteca.servicios.UsuarioService;
 
 @Controller
 public class UsuarioController {
@@ -39,6 +41,9 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioRepository usuarios;
+	
+	@Autowired
+	private UsuarioService serviciosUsuario;
 	
 	private boolean sesionNoIniciada = true;
 	
@@ -256,38 +261,59 @@ public class UsuarioController {
 		usuarioEditado.setContrasenya(contrasenya);
 		usuarios.save(usuarioEditado);
 		sesionUsuario.setAttribute("infoUsuario",usuarioEditado);
-		String nombreUsuario=usuarioEditado.getNombre()+" "+usuarioEditado.getApellidos();
-		model.addAttribute("nombre", nombreUsuario);
+		//String nombreUsuario=usuarioEditado.getNombre()+" "+usuarioEditado.getApellidos();	
+		model.addAttribute("nombre",usuarioEditado.getNombre());
 		return "perfilEditado";
 		
 	}
 	
-	@RequestMapping("")//reservarLibros
-	public String reservarLibroController(Model model, HttpSession sesionUsuario,  @RequestParam("idLibro") Long idLibro) {
-		Optional<Libro> oLibro = libros.findById(idLibro);
-		Libro libro = null;
-		if (oLibro.get() != null) {
+	@RequestMapping("/libroReservado")//reservarLibros
+	public String libroReservado(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro) {
+		//Optional<Libro> oLibro = libros.findById(idLibro);
+		Libro libro = libros.findById(idLibro);
+		/*if (oLibro.get() != null) {
 			libro = oLibro.get();
 			return "";//buscadorLibros
-		}
+		}*/
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
-		if (usuario.reservarLibro(libro)){
+		boolean reservado = serviciosUsuario.reservarLibro(usuario,libro);
+		if(reservado) {
+			model.addAttribute("reservado",true);
 			libros.save(libro);
 			usuarios.save(usuario);
 			sesionUsuario.setAttribute("infoUsuario",usuario);
+			model.addAttribute("usuario",true);
+			model.addAttribute("usuarioAdmin",false);
+			InicioController.listaLibrosDestacados=new ArrayList<>();
+			ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
+			Collections.shuffle(listaLibros);
+			int i = 0;
+			int j = 0;
+			ArrayList<String> nombresLibros = new ArrayList<>(InicioController.NUMERO_RECURSOS_MAIN);
+			do {
+				if(!nombresLibros.contains(listaLibros.get(j).getNombre()) && (listaLibros.get(j).isDisponible())) {
+					nombresLibros.add(listaLibros.get(j).getNombre());
+					InicioController.listaLibrosDestacados.add(listaLibros.get(j));
+					j++;
+					i++;
+				} else
+					j++;
+			} while(i < InicioController.NUMERO_RECURSOS_MAIN);
+			model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
+			model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		}
-		
-		return "";//buscadorLibros
+		return "sesionIniciada";
 	}
 	
+	/*
 	@RequestMapping("")//busquedaLibros
-	public String anularLibroController(Model model, HttpSession sesionUsuario,  @RequestParam("idLibro") Long idLibro) {
-		Optional<Libro> oLibro = libros.findById(idLibro);
-		Libro libro = null;
-		if (oLibro.get() != null) {
-			libro = oLibro.get();
-			return "";//buscadorLibros
-		}
+	public String anularLibro(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro) {
+		//Optional<Libro> oLibro = libros.findById(idLibro);
+		Libro libro = libros.findById(idLibro);
+		//if (oLibro.get() != null) {
+			//libro = oLibro.get();
+			//return "";//buscadorLibros
+		//}
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if (usuario.quitarLibro(libro)) {
 			libros.save(libro);
@@ -296,105 +322,130 @@ public class UsuarioController {
 		}
 		
 		return "";//buscadorLibros
-	}
+	}*/
 	
-	@RequestMapping("")//reservarRevistas
-	public String reservarRevistaController(Model model, HttpSession sesionUsuario, @RequestParam("idRevista") Long idRevista) {
-		Optional<Revista> oRevista = revistas.findById(idRevista);
-		Revista revista = null;
-		if (oRevista.get() != null) {
+	@RequestMapping("/revistaReservada")//reservarRevistas
+	public String revistaReservada(Model model, HttpSession sesionUsuario, @RequestParam long idRevista) {
+		//Optional<Revista> oEquipo = revistas.findById(idRevista);
+		Revista revista = revistas.findById(idRevista);;
+		/*if (oRevista.get() != null) {
 			revista = oRevista.get();
 			return "";//busquedaRevistas
-		}
+		}*/
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if (usuario.reservarRevista(revista)){
 			revistas.save(revista);
 			usuarios.save(usuario);
 			sesionUsuario.setAttribute("infoUsuario",usuario);
 		}
-		
-		return "";//busquedaRevistas
+		model.addAttribute("usuario",true);
+		model.addAttribute("usuarioAdmin",false);
+		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
+		InicioController.listaRevistasDestacadas=new ArrayList<>();
+		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
+		Collections.shuffle(listaRevistas);
+		ArrayList<String> nombresRevistas = new ArrayList<>(InicioController.NUMERO_RECURSOS_MAIN);
+		int i = 0;
+		int j = 0;
+		do {
+			if(!nombresRevistas.contains(listaRevistas.get(j).getNombre()) && (listaRevistas.get(j).isDisponible())) {
+				nombresRevistas.add(listaRevistas.get(j).getNombre());
+				InicioController.listaRevistasDestacadas.add(listaRevistas.get(j));
+				j++;
+				i++;
+			} else
+				j++;
+		} while(i < InicioController.NUMERO_RECURSOS_MAIN);
+		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
+		return "sesionIniciada";
 	}
-	
+	/*
 	@RequestMapping("")//busquedaRevistas
-	public String anularRevistaController(Model model, HttpSession sesionUsuario, @RequestParam("idRevista") Long idRevista)  {
-		Optional<Revista> oRevista = revistas.findById(idRevista);
-		Revista revista = null;
-		if (oRevista.get() != null) {
-			revista = oRevista.get();
-			return "";//busquedaLibros
-		}
+	public String anularRevista(Model model, HttpSession sesionUsuario, @RequestParam long idRevista)  {
+		//Optional<Revista> oEquipo = revistas.findById(idRevista);
+		Revista revista = revistas.findById(idRevista);
+		//if (oRevista.get() != null) {
+			//revista = oRevista.get();
+			//return "";//busquedaLibros
+		//}
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if (usuario.quitarRevista(revista)){
 			revistas.save(revista);
 			usuarios.save(usuario);
 			sesionUsuario.setAttribute("infoUsuario",usuario);
 		}
-		
 		return "";//busquedaLibros
-	}
+	}*/
 	
-	@RequestMapping("")//reservarEquipos
-	public String reservarEquipoController(Model model, HttpSession sesionUsuario, @RequestParam("idEquipo") Long idEquipo) {
-		Optional<EquipoInformatico> oEquipo = equiposInformaticos.findById(idEquipo);
-		EquipoInformatico equipo = null;
-		if (oEquipo.get() != null) {
+	@RequestMapping("/equipoReservado")//reservarEquipos
+	public String equipoReservado(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo) {
+		//Optional<EquipoInformatico> oEquipo = equiposInformaticos.findById(idEquipo);
+		EquipoInformatico equipo = equiposInformaticos.findById(idEquipo);
+		/*if (oEquipo.get() != null) {
 			equipo = oEquipo.get();
 			return "";//reservaEquipoInfromatico
-		}
+		}*/
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if (usuario.reservarPuestoInformatico(equipo)){
 			equiposInformaticos.save(equipo);
 			usuarios.save(usuario);
 			sesionUsuario.setAttribute("infoUsuario",usuario);
 		}
-		
-		return "";//reservaEquipoInfromatico
+		model.addAttribute("usuario",true);
+		model.addAttribute("usuarioAdmin",false);
+		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
+		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
+		return "sesionIniciada";//reservaEquipoInfromatico
 	}
 	
+	/*
 	@RequestMapping("")//reservaEquipoInfromatico
-	public String anularEquipoController(Model model, HttpSession sesionUsuario, @RequestParam("idEquipo") Long idEquipo) {
-		Optional<EquipoInformatico> oEquipo = equiposInformaticos.findById(idEquipo);
-		EquipoInformatico equipo = null;
-		if (oEquipo.get() != null) {
-			equipo = oEquipo.get();
-			return "";//reservaEquipoInfromatico
-		}
+	public String anularEquipo(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo) {
+		//Optional<EquipoInformatico> oEquipo = equiposInformaticos.findById(idEquipo);
+		EquipoInformatico equipo = equiposInformaticos.findById(idEquipo);
+		//if (oEquipo.get() != null) {
+			//equipo = oEquipo.get();
+			//return "";//reservaEquipoInfromatico
+		//}
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if (usuario.quitarPuestoInformatico(equipo)){
 			equiposInformaticos.save(equipo);
 			usuarios.save(usuario);
 			sesionUsuario.setAttribute("infoUsuario",usuario);
-		}
-		
+		}	
 		return "";//reservaEquipoInfromatico
-	}
+	}*/
 	
-	@RequestMapping("")//reservarSalas
-	public String reservarSalaController(Model model, HttpSession sesionUsuario, @RequestParam("idSala") Long idSala) {
-		Optional<SalaTrabajoGrupo> oSala = salasTrabajoGrupo.findById(idSala);
-		SalaTrabajoGrupo sala = null;
-		if (oSala.get() != null) {
+	@RequestMapping("/salaReservada")//reservarSalas
+	public String salaReservada(Model model, HttpSession sesionUsuario, @RequestParam long idSala) {
+		//Optional<SalaTrabajoGrupo> oSala = salasTrabajoGrupo.findById(idSala);
+		SalaTrabajoGrupo sala = salasTrabajoGrupo.findById(idSala);
+		/*if (oSala.get() != null) {
 			sala = oSala.get();
 			return "";//reservaSalaTrabajoGrupo
-		}
+		}*/
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if (usuario.reservarSalaTrabajoGrupo(sala)){
 			salasTrabajoGrupo.save(sala);
 			usuarios.save(usuario);
 			sesionUsuario.setAttribute("infoUsuario",usuario);
 		}
-		
-		return "";//reservaSalaTrabajoGrupo
+		model.addAttribute("usuario",true);
+		model.addAttribute("usuarioAdmin",false);
+		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
+		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
+		return "sesionIniciada";//reservaSalaTrabajoGrupo
 	}
 	
-	public String anularSalaController(Model model, HttpSession sesionUsuario, @RequestParam("idSala") Long idSala) {
-		Optional<SalaTrabajoGrupo> oSala = salasTrabajoGrupo.findById(idSala);
-		SalaTrabajoGrupo sala = null;
-		if (oSala.get() != null) {
-			sala = oSala.get();
-			return "";//reservaSalaTrabajoGrupo
-		}
+	/*
+	@RequestMapping("")
+	public String anularSala(Model model, HttpSession sesionUsuario, @RequestParam long idSala) {
+		//Optional<SalaTrabajoGrupo> oSala = salasTrabajoGrupo.findById(idSala);
+		SalaTrabajoGrupo sala = salasTrabajoGrupo.findById(idSala);
+		//if (oSala.get() != null) {
+			//sala = oSala.get();
+			//return "";//reservaSalaTrabajoGrupo
+		//}
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if (usuario.quitarSalaTrabajoGrupo(sala)){
 			salasTrabajoGrupo.save(sala);
@@ -403,7 +454,7 @@ public class UsuarioController {
 		}
 		
 		return "";//reservaSalaTrabajoGrupo
-	}
+	}*/
 	
 
 }

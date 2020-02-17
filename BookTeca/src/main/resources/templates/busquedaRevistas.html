@@ -28,7 +28,12 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
+					{{#visibleIniciarSesion}}
 					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+					{{/visibleIniciarSesion}}
+					{{#visibleCerrarSesion}}
+					<li class="nav-item"><a class="nav-link" href="sesionIniciada">Inicio</a></li>
+					{{/visibleCerrarSesion}}
 					<li class="nav-item active"><a class="nav-link" href="buscadorLibros">Libros</a></li>
 					<li class="nav-item"><a class="nav-link" href="buscadorRevistas">Revistas
 						<span class="sr-only">(current)</span></a></li>
@@ -74,12 +79,44 @@
 						<span class="validity"></span>
 					</div>
 				</form>
-				<h1 class="mt-5">RESULTADO DE TU BUSQUEDA</h1>
+				<h2 class="mt-5">RESULTADOS ENCONTRADOS DE SU BUSQUEDA</h2>
 				{{^listaRevistasBusqueda}}
 				<p class="lead">Lo sentimos pero la busqueda no ha encontrado resultados :(</p>
 				{{/listaRevistasBusqueda}}
 				{{#visibleTabla}}
 				<table border="1" class="lead" align="center">
+					<tr>
+						{{#visibleCerrarSesion}}
+						<th style="visibility:hidden">ID</th>
+						{{/visibleCerrarSesion}}
+						<th>NOMBRE</th>
+						<th>EDITORIAL</th>
+						<th>FASCICULOS</th>
+						<th>GENERO</th>
+						{{#visibleCerrarSesion}}
+						<th style="visibility:hidden">RESERVAR</th>
+						{{/visibleCerrarSesion}}
+					</tr>
+					{{#listaRevistasBusqueda}}
+					<tr>
+						{{#visibleIniciarSesion}}
+						<td>{{nombre}}</td>
+						<td>{{editorial}}</td>
+						<td>{{fasciculo}}</td>
+						<td>{{genero}}</td>
+						{{/visibleIniciarSesion}}
+						{{#visibleCerrarSesion}}
+						<form action="/revistaReservada" method="post">
+							<td style="visibility:hidden"><input type="number" name="idRevista" value="{{id}}"/></td>
+							<td>{{nombre}}</td>
+							<td>{{editorial}}</td>
+							<td>{{fasciculo}}</td>
+							<td>{{genero}}</td>
+							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
+						</form>
+						{{/visibleCerrarSesion}}
+					</tr>
+					{{/listaRevistasDestacadas}}
 					<tr>
 						<th>NOMBRE</th>
 						<th>EDITORIAL</th>

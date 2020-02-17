@@ -26,7 +26,7 @@ import dad.web.bookteca.basedatos.*;
 @Controller
 public class InicioController {
 
-	protected final int NUMERO_RECURSOS_MAIN=3; //NUMERO DE LIBROS Y REVISTAS QUE SE MUESTRAN EN LA PANTALLA DE INICIO
+	public static final int NUMERO_RECURSOS_MAIN=3; //NUMERO DE LIBROS Y REVISTAS QUE SE MUESTRAN EN LA PANTALLA DE INICIO
 
 	@Autowired
 	private EquipoInformaticoRepository equiposInformaticos;
@@ -49,7 +49,7 @@ public class InicioController {
 	@PostConstruct
 	public void init() {
 		
-		/*//LIBROS
+		//LIBROS
 		libros.save(new Libro("Caperucita Roja", "Sergio","Anaya","Infantil"));
 		libros.save(new Libro("Los Tres Cerditos", "Borja","El Mundo","Infantil"));
 		libros.save(new Libro("La Vuelta Al Mundo En 80 Dias", "Dani","Santillana","Viajes"));
@@ -81,7 +81,7 @@ public class InicioController {
 		//USUARIOS
 		usuarios.save(new Usuario("Borja","Martin Alonso","G07martin","bormaral13@gmail.com",false));
 		usuarios.save(new Usuario("Sergio","Hernandez Dominguez","Pass1","sergiohd47@gmail.com",true));
-		usuarios.save(new Usuario("Daniel","Molina Ballesteros","Daany10","dmolinaballesteros@gmail.com",false));*/
+		usuarios.save(new Usuario("Daniel","Molina Ballesteros","Daany10","dmolinaballesteros@gmail.com",false));
 		
 	}
 

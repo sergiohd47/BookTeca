@@ -28,7 +28,12 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
+					{{#visibleIniciarSesion}}
 					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+					{{/visibleIniciarSesion}}
+					{{#visibleCerrarSesion}}
+					<li class="nav-item"><a class="nav-link" href="sesionIniciada">Inicio</a></li>
+					{{/visibleCerrarSesion}}
 					<li class="nav-item"><a class="nav-link" href="buscadorLibros">Libros</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="buscadorRevistas">Revistas</a></li>
@@ -59,33 +64,36 @@
 				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu mano</h1>
 				<p class="lead">Aqui encontraras los diferentes equipos informaticos que tenemos disponibles</p>
 				<h1 class="mt-5"></h1>
-				<h1 class="mt-5">EQUIPOS LIBRES</h1>
+				<h1 class="mt-5">EQUIPOS LIBRES PARA SU UTILIZACION</h1>
 				{{^listaEquipo}}
 				<p class="lead">Lo sentimos, pero no disponemos de equipos libres :(</p>
 				{{/listaEquipo}}
 				{{#visibleTabla}}
 				<table border="1" class="lead" align="center">
 					<tr>
+						{{#visibleCerrarSesion}}
+						<th style="visibility:hidden">ID</th>
+						{{/visibleCerrarSesion}}
 						<th>SISTEMA OPERATIVO</th>
 						<th>LOCALIZACION</th>
 						{{#visibleCerrarSesion}}
-						<th>RESERVAR</th>
+						<th style="visibility:hidden">RESERVAR</th>
 						{{/visibleCerrarSesion}}
 					</tr>
 					{{#listaEquipo}}
 					<tr>
-						<!-- <form id="reservarEquipos" action="/reservarEquipos" method="post"> -->
-						<!-- <div class="form-sesion"> -->
-						<!-- <td style="display:none;"> {{idEquipo}} </td>-->
+						{{#visibleIniciarSesion}}
 						<td>{{sistemaOperativo}}</td>
 						<td>{{localizacion}}</td>
+						{{/visibleIniciarSesion}}
 						{{#visibleCerrarSesion}}
-						<td href="reservar" class="btn btn-success">RESERVAR</td>
-						<!-- <td><button>RESERVAR</button>
-						<span class="validity"></span> </td> -->
+						<form action="/equipoReservado" method="post">
+							<td style="visibility:hidden"><input type="number" name="idEquipo" value="{{id}}"/></td>
+							<td>{{sistemaOperativo}}</td>
+							<td>{{localizacion}}</td>
+							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
+						</form>
 						{{/visibleCerrarSesion}}
-						<!--  </div> -->
-						<!--  </form> -->
 					</tr>
 					{{/listaEquipo}}
 				</table>

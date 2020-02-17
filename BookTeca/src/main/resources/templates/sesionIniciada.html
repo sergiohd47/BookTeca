@@ -29,13 +29,13 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					{{#usuarioAdmin}}
-					<li class="nav-item active"><a class="nav-link" href="/">Inicio
+					<li class="nav-item active"><a class="nav-link" href="sesionIniciada">Inicio
 							<span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi Perfil</a></li>
 					<li class="nav-item"><a class="nav-link" href="/">Cerrar Sesion</a></li> 
 					{{/usuarioAdmin}}
 					{{#usuario}}
-					<li class="nav-item active"><a class="nav-link" href="/">Inicio
+					<li class="nav-item active"><a class="nav-link" href="sesionIniciada">Inicio
 							<span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="buscadorLibros">Libros</a></li>
 					<li class="nav-item"><a class="nav-link" href="buscadorRevistas">Revistas</a></li>
@@ -131,19 +131,23 @@
 				<p class="lead">Los libros destacados de hoy son:</p>
 				<table border="1" class="lead" align="center">
 					<tr>
+						<th style="visibility:hidden">ID</th>
 						<th>NOMBRE</th>
 						<th>AUTOR</th>
 						<th>EDITORIAL</th>
 						<th>GENERO</th>
-						<th>RESERVAR</th>
+						<th style="visibility:hidden">RESERVAR</th>
 					</tr>
 					{{#listaLibrosDestacados}}
 					<tr>
-						<td>{{nombre}}</td>
-						<td>{{autor}}</td>
-						<td>{{editorial}}</td>
-						<td>{{genero}}</td>
-						<td href="reservar" class="btn btn-success">RESERVAR</td>
+						<form action="/libroReservado" method="post">
+							<td style="visibility:hidden"><input type="number" name="idLibro" value="{{id}}"/></td>
+							<td>{{nombre}}</td>
+							<td>{{autor}}</td>
+							<td>{{editorial}}</td>
+							<td>{{genero}}</td>
+							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
+						</form>
 					</tr>
 					{{/listaLibrosDestacados}}
 				</table>
@@ -151,19 +155,23 @@
 				<p class="lead">Las revistas destacadas de hoy son:</p>
 				<table border="1" class="lead" align="center">
 					<tr>
+						<th style="visibility:hidden">ID</th>
 						<th>NOMBRE</th>
 						<th>EDITORIAL</th>
 						<th>FASCICULOS</th>
 						<th>GENERO</th>
-						<th>RESERVAR</th>
+						<th style="visibility:hidden">RESERVAR</th>
 					</tr>
 					{{#listaRevistasDestacadas}}
 					<tr>
-						<td>{{nombre}}</td>
-						<td>{{editorial}}</td>
-						<td>{{fasciculo}}</td>
-						<td>{{genero}}</td>
-						<td href="reservar" class="btn btn-success">RESERVAR</td>
+						<form action="/revistaReservada" method="post">
+							<td style="visibility:hidden"><input type="number" name="idRevista" value="{{id}}"/></td>
+							<td>{{nombre}}</td>
+							<td>{{editorial}}</td>
+							<td>{{fasciculo}}</td>
+							<td>{{genero}}</td>
+							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
+						</form>
 					</tr>
 					{{/listaRevistasDestacadas}}
 				</table>

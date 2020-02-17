@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Pagina web BookTeca">
+<meta name="author" content="Dani, Borja y Sergio">
+
+<title>Administrar Usuarios - BookTeca</title>
+
+<!-- Bootstrap core CSS -->
+<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+		<div class="container">
+			<a class="navbar-brand" href="#">BookTeca</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarResponsive" aria-controls="navbarResponsive"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
+	</nav>
+
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 text-center">
+				<h1 class="mt-5"></h1>
+				<img src="imagenes/logoBookTeca.png" width="600" height="341">
+				<h1 class="mt-5">Zona de administracion de los diferentes usuarios de BookTeca</h1>
+				<form action="/busquedaUsuarios" method="post">
+					<div>
+						<label for="busquedaUsuario">Busqueda por email:</label> 
+						<input type="search" id="emailUsuario" name="emailUsuario" 
+							placeholder="Escribe el email del usuario" required size="30">
+						<button>BUSCAR</button>
+						<span class="validity"></span>
+					</div>
+				</form>
+				<h2 class="mt-5">RESULTADO DE SU BUSQUEDA</h2>
+				{{^usuario}}
+				<p class="lead">Lo sentimos, tu busqueda no ha tenido resultado</p>
+				{{/usuario}}
+				{{#visibleTabla}}
+				<table border="1" class="lead" align="center">
+					<tr>
+						{{#usuarioNoAdmin}}
+						<th style="visibility:hidden">CORREO</th>
+						{{/usuarioNoAdmin}}
+						<th>NOMBRE</th>
+						<th>APELLIDOS</th>
+						{{#usuarioAdmin}}
+						<th>ADMINISTRADOR</th>
+						{{/usuarioAdmin}}
+						{{#usuarioNoAdmin}}
+						<th style="visibility:hidden">ADMINISTRADOR</th>
+						{{/usuarioNoAdmin}}
+					</tr>
+					{{#usuario}}
+					<tr>
+						{{#usuarioAdmin}}
+						<td>{{email}}</td>
+						<td>{{nombre}}</td>
+						<td>{{apellidos}}</td>
+						<td>SI</td>
+						{{/usuarioAdmin}}
+						{{#usuarioNoAdmin}}
+						<form action="/usuarioAdministrado" method="post">
+							<td style="visibility:hidden"><input type="text" name="emailUsuario" value="{{email}}"/></td>
+							<td>{{nombre}}</td>
+							<td>{{apellidos}}</td>
+							<td style="border:hidden"><input type="submit" class="btn btn-success" value="CAMBIAR ROL"/></td>
+						</form>
+						{{/usuarioNoAdmin}}
+					</tr>
+					{{/usuario}}
+				</table>
+				{{/visibleTabla}}
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="vendor/jquery/jquery.slim.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -28,7 +28,12 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
+					{{#visibleIniciarSesion}}
 					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+					{{/visibleIniciarSesion}}
+					{{#visibleCerrarSesion}}
+					<li class="nav-item"><a class="nav-link" href="sesionIniciada">Inicio</a></li>
+					{{/visibleCerrarSesion}}
 					<li class="nav-item active"><a class="nav-link" href="buscadorLibros">Libros
 							<span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="buscadorRevistas">Revistas</a></li>
@@ -74,37 +79,42 @@
 						<span class="validity"></span>
 					</div>
 				</form>
-				<h1 class="mt-5">RESULTADO DE TU BUSQUEDA</h1>
+				<h1 class="mt-5">RESULTADOS ENCONTRADOS DE SU BUSQUEDA</h1>
 				{{^listaLibrosBusqueda}}
 				<p class="lead">Lo sentimos pero la busqueda no ha encontrado resultados :(</p>
 				{{/listaLibrosBusqueda}}
 				{{#visibleTabla}}
 				<table border="1" class="lead" align="center">
 					<tr>
+						{{#visibleCerrarSesion}}
+						<th style="visibility:hidden">ID</th>
+						{{/visibleCerrarSesion}}
 						<th>NOMBRE</th>
 						<th>AUTOR</th>
 						<th>EDITORIAL</th>
 						<th>GENERO</th>
 						{{#visibleCerrarSesion}}
-						<th>RESERVAR</th>
+						<th style="visibility:hidden">RESERVAR</th>
 						{{/visibleCerrarSesion}}
 					</tr>
 					{{#listaLibrosBusqueda}}
 					<tr>
-						<!-- <form id="reservarLibros" action="/reservarLibros" method="post"> -->
-						<!-- <div class="form-sesion"> -->
-						<!-- <td style="display:none;"> {{idLibro}} </td>-->
+						{{#visibleIniciarSesion}}
 						<td>{{nombre}}</td>
 						<td>{{autor}}</td>
 						<td>{{editorial}}</td>
 						<td>{{genero}}</td>
+						{{/visibleIniciarSesion}}
 						{{#visibleCerrarSesion}}
-						<td href="reservar" class="btn btn-success">RESERVAR</td>
-						<!-- <td> <button>RESERVAR</button>
-						<span class="validity"></span> </td> -->
-						{{/visibleCerrarSesion}}
-						<!--  </div> -->
-						<!--  </form> -->
+						<form action="/libroReservado" method="post">
+							<td style="visibility:hidden"><input type="number" name="idLibro" value="{{id}}"/></td>
+							<td>{{nombre}}</td>
+							<td>{{autor}}</td>
+							<td>{{editorial}}</td>
+							<td>{{genero}}</td>
+							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
+						</form>
+						{{#visibleCerrarSesion}}
 					</tr>
 					{{/listaLibrosBusqueda}}
 				</table>
