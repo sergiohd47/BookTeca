@@ -10,9 +10,11 @@
     - [Entidades principales](#id4)
     - [Funcionalidad servicio interno](#id5) 
     - [Integrantes proyecto](#id6)
-- [Segunda fase] (#id7)
-	- [Diagrama de clases] (#id8)
-### Introduccion<a name="id1"></a>
+- [Segunda fase](#id7)
+    - [Capturas pantalla](#id8)
+    - [Diagrama Navegacion](#id9)
+    - [Modelo Datos](#id10)
+ ### Introduccion<a name="id1"></a>
 La pagina web BookTeca consiste en una pagina para la administracion de los recursos de nuestra biblioteca, la cual cuenta con el clasico servicio de prestamo de libros y revistas o peliculas, reserva de salas de trabajo en grupo o de equipos informaticos.
 Los usuarios podran hacer reservas previas de libros, hacer un seguimiento de su prestamo o incluso reservar tanto equipos como salas desde su casa.
 
@@ -56,10 +58,117 @@ El equipo de desarrollo de la pagina web es:
    - ***Sergio Hernandez Dominguez***
       - _Correo URJC:_ s.hernandezdo@alumnos.urjc.es
       - _Usuario GitHub:_ [sergiohd47](https://github.com/sergiohd47)
+### Segunda fase<a name="id7"></a>
+#### Capturas pantalla<a name="id8"></a>
+   - ***Pantalla Inicio***
+   
+      En esta pantalla nos encontraremos cuando entremos en la pagina web. Ademas, podremos ver una seleccion de los libros y revistas del dia.
+      <p align="center">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaInicio.png">
+      </p>
+      
+  - ***Pantalla Libros***
+  
+      En esta pantalla tendremos un buscador donde podremos buscar nuestro libro favorito en funcion de su nombre, su autor o su editorial. En el caso de haber inciado sesion correctamente, podremos reservar los libros desde esta seccion.
+      <p align="center">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaBuscadorLibrosUsuario.png">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaResultadoBuscadorLibro.png">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaResultadoLibroUsuario.png">
+      </p>
+  
+  - ***Pantalla Revistas***
+      
+      Similar a la pantalla anterior de libros pero en este caso es con las diferentes revistas de nuestra biblioteca.
+      <p align="center">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaBuscadorRevista.png">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaResultadoBuscadorRevista.png">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaResultadoRevistaUsuario.png">
+      </p>
+      
+  - ***Pantalla Salas Trabajo Grupo***
+  
+      En esta pantalla podremos ver todas las Salas Trabajo Grupo que estan disponibles. Podremos ver de cada una su ubicacion, su capacidad y si es compartida o no. En caso de que seamos usuarios de BookTeca, podremos realizar la reserva de la sala.
+      <p align="center">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaSalasTrabajoGrupo.png">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaSTGUsuario.png">
+      </p>
+ 
+ - ***Pantalla Equipos Informaticos***
+ 
+      Similar a la pantalla anterior, pero en este caso podremos ver los equipos informaticos de nuestra coleccion. Al igual que antes, podremos realizar la reserva del equipo desde esta pagina.
+      <p align="center">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaEquipoInformatico.png">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaEquipoUsuario.png">
+      </p>
+ - ***Pantalla Mi Perfil***
+      En esta pantalla, un usuario podra ver el desglose de todas las reservas a su nombre o acceder a la zona donde podra editar la informacion relacionada con su perfil.
+      <p align="center">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaMiPerfilUsuario.png">
+      </p>
+      
+ - ***Pantalla Editar Perfil***
+ 
+      En esta pantalla, se podra editar la informacion relacionada con el perfil (nombre completo y contraseña).
+      <p align="center">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaEditarPerfilUsuario.png">
+      </p>
+      
+ - ***Pantalla Inicio Sesion***
+ 
+      Esta es una pantalla de inicio de sesion clasica, donde el usuario debera introducir su email y la contraseña asociada a su cuenta. En caso de que el usuario sea administrador, al iniciar sesion se te redigira a una zona especial de administracion.
+      <p align="center">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaIniciarSesion.png">
+      </p>
+      
+  - ***Pantalla Registro***
+  
+       En esta pantalla, un usuario podra crearse una cuenta para poder acceder a todos los recursos de la BookTeca.
+      <p align="center">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaRegistro.png">
+      </p>
+        
+  - ***Pantalla Inicio Admin***
+  
+      En caso de que tu perfil sea de administrador, al realizar el inicio de sesion, se te redigira a la pantalla de inicio de administrador, donde se podra ver entera la coleccion de recursos que tiene la biblioteca.
+      <p align="center">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaInicioAdmin.png">
+      </p>
+      
+  - ***Pantalla Mi Perfil Admin***
+      
+      Siendo administrador de la pagina, podras entrar en tu perfil y aqui podras gestionar tanto los recursos de BookTeca como gestionar los diferentes usuarios, convirtiendolos en administrador.
+      <p align="center">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaPerfilAdmin.png">
+      </p>
+      
+  - ***Pantalla Gestion Recursos Admin***
+      
+      En esta parte se organizan las cuatro pantallas correspondientes a añadir recursos a la BookTeca. Desde aqui podremos añadir libros, revistas, salas y equipos informaticos, tan sencillo como incluyendo la informacion requerida para cada caso.
+      <p align="center">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaAñadirEquipo.png">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaAñadirLibro.png">
+         <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaAñadirRevista.png">
+          <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaAñadirSala.png">
+      </p>
+      
+ - ***Pantalla Gestion Usuarios Admin***
+ 
+      Desde esta parte, podremos realizar una busqueda de usuarios en funcion de su correo. Posteriormente se mostrara el resultado y podriamos cambiar el rol de ese usuario, en caso de que este no sea administrador.
+      <p align="center">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaAdministracionUsuarios.png">
+        <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaResultadoAdministracionUsuarios.png">
+      </p>
+      
+#### Diagrama Navegacion <a name="id9"></a>
+Para la parte del diagrama de navegacion, hemos utilizado la aplicacion de prototipos "Marvel App". En esta pagina podras ir navegando y simulando la experiencia de nuestra web.
 
-###Segunda Fase<a name="id7"></a>
-####Diagrama de clases<a name="id8"></a>
-Para tener un concepto claro sobre las entidades que vamos a utilizar en nuestra aplicación web BookTeca, debemos presentar un boceto del diagrama de clases que hemos realizado con las correspondientes relaciones entre entidades que, dependiendo del tipo de usuario que esté utilizando nuestra aplicación web.
 <p align="center">
-  <img width="700" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/imagenesWeb/diagrama_clases_BookTeca.png">
+  
+  [DIAGRAMA NAVEGACION BOOKTECA](https://marvelapp.com/4c45eaf)
+</p>
+
+#### Modelo Datos<a name="id10"></a>
+En cuanto al modelo de datos, el diagrama relacionado con las diferentes clases de nuestro proyecto, es el siguiente:
+<p align="center">
+  <img width="800" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/imagenesWeb/diagrama_clases_BookTeca.png">
 </p>

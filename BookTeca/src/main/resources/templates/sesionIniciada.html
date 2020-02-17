@@ -104,8 +104,18 @@
 					<tr>
 						<td>{{capacidad}}</td>
 						<td>{{localizacion}}</td>
-						<td>{{compartida}}</td>
-						<td>{{disponible}}</td>
+						{{#compartida}}
+						<td>Si</td>
+						{{/compartida}}
+						{{^compartida}}
+						<td>No</td>
+						{{/compartida}}
+						{{#disponible}}
+						<td>Si</td>
+						{{/disponible}}
+						{{^disponible}}
+						<td>No</td>
+						{{/disponible}}
 					</tr>
 					{{/listaSTGs}}
 				</table>
@@ -120,7 +130,12 @@
 					<tr>
 						<td>{{sistemaOperativo}}</td>
 						<td>{{localizacion}}</td>
-						<td>{{disponible}}</td>
+						{{#disponible}}
+						<td>Si</td>
+						{{/disponible}}
+						{{^disponible}}
+						<td>No</td>
+						{{/disponible}}
 					</tr>
 					{{/listaEquipos}}
 				</table>
