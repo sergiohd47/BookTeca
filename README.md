@@ -10,7 +10,9 @@
     - [Entidades principales](#id4)
     - [Funcionalidad servicio interno](#id5) 
     - [Integrantes proyecto](#id6)
- ### Introduccion<a name="id1"></a>
+- [Segunda fase] (#id7)
+	- [Diagrama de clases] (#id8)
+### Introduccion<a name="id1"></a>
 La pagina web BookTeca consiste en una pagina para la administracion de los recursos de nuestra biblioteca, la cual cuenta con el clasico servicio de prestamo de libros y revistas o peliculas, reserva de salas de trabajo en grupo o de equipos informaticos.
 Los usuarios podran hacer reservas previas de libros, hacer un seguimiento de su prestamo o incluso reservar tanto equipos como salas desde su casa.
 
@@ -54,3 +56,10 @@ El equipo de desarrollo de la pagina web es:
    - ***Sergio Hernandez Dominguez***
       - _Correo URJC:_ s.hernandezdo@alumnos.urjc.es
       - _Usuario GitHub:_ [sergiohd47](https://github.com/sergiohd47)
+
+###Segunda Fase<a name="id7"></a>
+####Diagrama de clases<a name="id8"></a>
+Para tener un concepto claro sobre las entidades que vamos a utilizar en nuestra aplicación web BookTeca, debemos presentar un boceto del diagrama de clases que hemos realizado con las correspondientes relaciones entre entidades que, dependiendo del tipo de usuario que esté utilizando nuestra aplicación web.
+<p align="center">
+  <img width="700" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/imagenesWeb/diagrama_clases_BookTeca.png">
+</p>
