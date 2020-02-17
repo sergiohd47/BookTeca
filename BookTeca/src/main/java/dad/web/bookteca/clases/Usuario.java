@@ -3,17 +3,10 @@ package dad.web.bookteca.clases;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.sql.*;
-import java.time.LocalDate;
-
+import java.sql.Date;
 import javax.persistence.*;
 
-import org.hibernate.annotations.Proxy;
-
-import dad.web.bookteca.controladores.InicioController;
-
 @Entity
-@Proxy(lazy=false)
 @Table(name = "usuario")
 public class Usuario {
 	
@@ -31,10 +24,10 @@ public class Usuario {
 	@Column
 	private String contrasenya;
 	
-	@OneToMany(mappedBy="idUsuario")
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Libro> librosReservados;
 	
-	@OneToMany(mappedBy="idUsuario")
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Revista> revistasReservadas; 
 	
 	@OneToOne(cascade = CascadeType.ALL)

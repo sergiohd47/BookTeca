@@ -21,7 +21,7 @@ public class Libro {
 	@Column
 	private boolean disponible;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Usuario idUsuario;
 	@Column
 	private Date fecInicio;

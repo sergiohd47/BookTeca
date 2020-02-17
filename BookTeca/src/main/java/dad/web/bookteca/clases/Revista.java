@@ -21,7 +21,7 @@ public class Revista {
 	@Column
 	private boolean disponible;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Usuario idUsuario;
 	@Column
 	private Date fecInicio;
