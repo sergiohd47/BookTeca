@@ -159,3 +159,10 @@ El equipo de desarrollo de la pagina web es:
         <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaResultadoAdministracionUsuarios.png">
       </p>
       
+#### Diagrama Navegacion <a name="id9"></a>
+Para la parte del diagrama de navegacion, hemos utilizado la aplicacion de prototipos "Marvel App". En esta pagina podras ir navegando y simulando la experiencia de nuestra web.
+
+<p align="center">
+  
+  [DIAGRAMA NAVEGACION BOOKTECA](https://marvelapp.com/4c45eaf)
+</p>
