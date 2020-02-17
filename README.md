@@ -166,3 +166,9 @@ Para la parte del diagrama de navegacion, hemos utilizado la aplicacion de proto
   
   [DIAGRAMA NAVEGACION BOOKTECA](https://marvelapp.com/4c45eaf)
 </p>
+
+#### Modelo Datos<a name="id10"></a>
+En cuanto al modelo de datos, el diagrama relacionado con las diferentes clases de nuestro proyecto, es el siguiente:
+<p align="center">
+  <img width="800" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/imagenesWeb/diagrama_clases_BookTeca.png">
+</p>
