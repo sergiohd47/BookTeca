@@ -3,14 +3,18 @@ package dad.web.bookteca.clases;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.sql.Date;
+import java.sql.*;
 import java.time.LocalDate;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.Proxy;
+
 import dad.web.bookteca.controladores.InicioController;
 
 @Entity
+@Proxy(lazy=false)
+@Table(name = "usuario")
 public class Usuario {
 	
 	private final int MAX = 3;
@@ -18,17 +22,20 @@ public class Usuario {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+	@Column
 	private String email;
+	@Column
 	private String nombre;
+	@Column
 	private String apellidos;
+	@Column
 	private String contrasenya;
 	
 	@OneToMany(mappedBy="idUsuario")
-	private List<Libro> librosReservados = new ArrayList<>(MAX);
+	private List<Libro> librosReservados;
 	
 	@OneToMany(mappedBy="idUsuario")
-	private List<Revista> revistasReservadas = new ArrayList<>(MAX);
+	private List<Revista> revistasReservadas; 
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private EquipoInformatico puestoInformatico;
@@ -46,6 +53,8 @@ public class Usuario {
 		this.contrasenya = contrasenya;
 		this.email = email;
 		this.administrador = admin;
+		this.librosReservados = new ArrayList<>(MAX);
+		this.revistasReservadas = new ArrayList<>(MAX);
 	}
 	
 	public long getId() {

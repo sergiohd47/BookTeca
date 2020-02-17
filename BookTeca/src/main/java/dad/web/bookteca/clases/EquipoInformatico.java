@@ -4,19 +4,23 @@ import java.sql.Date;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "EquipoInformatico")
 public class EquipoInformatico {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+	@Column
 	private String sistemaOperativo;
+	@Column
 	private String localizacion;
+	@Column
 	private boolean disponible;
+	
 	
 	@OneToOne(mappedBy="puestoInformatico")
 	private Usuario idUsuario;
-	
+	@Column
 	private Date fechaReserva;
 	
 	protected EquipoInformatico() {}

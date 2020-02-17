@@ -4,22 +4,28 @@ import java.sql.Date;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "libro")
 public class Libro {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+	@Column
 	private String nombre;
+	@Column
 	private String autor;
+	@Column
 	private String editorial;
+	@Column
 	private String genero;
+	@Column
 	private boolean disponible;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Usuario idUsuario;
-	
+	@Column
 	private Date fecInicio;
+	@Column
 	private Date fecFin;
 	
 	//ConstructorBBDD

@@ -80,32 +80,32 @@
 					</div>
 				</form>
 				<h1 class="mt-5">RESULTADOS ENCONTRADOS DE SU BUSQUEDA</h1>
-				{{^listaLibrosBusqueda}}
+				{{^listaLibrosBusqueda}} <!-- 1 -->
 				<p class="lead">Lo sentimos pero la busqueda no ha encontrado resultados :(</p>
-				{{/listaLibrosBusqueda}}
-				{{#visibleTabla}}
+				{{/listaLibrosBusqueda}} <!-- 1 -->
+				{{#visibleTabla}} <!-- 0 -->
 				<table border="1" class="lead" align="center">
 					<tr>
-						{{#visibleCerrarSesion}}
+						{{#visibleCerrarSesion}} <!-- 1 -->
 						<th style="visibility:hidden">ID</th>
-						{{/visibleCerrarSesion}}
+						{{/visibleCerrarSesion}} <!-- 1 -->
 						<th>NOMBRE</th>
 						<th>AUTOR</th>
 						<th>EDITORIAL</th>
 						<th>GENERO</th>
-						{{#visibleCerrarSesion}}
+						{{#visibleCerrarSesion}} <!-- 1 -->
 						<th style="visibility:hidden">RESERVAR</th>
-						{{/visibleCerrarSesion}}
+						{{/visibleCerrarSesion}} <!-- 1 -->
 					</tr>
-					{{#listaLibrosBusqueda}}
+					{{#listaLibrosBusqueda}} <!-- 1 -->
 					<tr>
-						{{#visibleIniciarSesion}}
+						{{#visibleIniciarSesion}} <!-- 2 -->
 						<td>{{nombre}}</td>
 						<td>{{autor}}</td>
 						<td>{{editorial}}</td>
 						<td>{{genero}}</td>
-						{{/visibleIniciarSesion}}
-						{{#visibleCerrarSesion}}
+						{{/visibleIniciarSesion}}  <!-- 2 -->
+						{{#visibleCerrarSesion}}   <!-- 2 -->
 						<form action="/libroReservado" method="post">
 							<td style="visibility:hidden"><input type="number" name="idLibro" value="{{id}}"/></td>
 							<td>{{nombre}}</td>
@@ -114,11 +114,11 @@
 							<td>{{genero}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
 						</form>
-						{{#visibleCerrarSesion}}
+						{{/visibleCerrarSesion}} <!-- 2 -->
 					</tr>
-					{{/listaLibrosBusqueda}}
+					{{/listaLibrosBusqueda}} <!-- 1 -->
 				</table>
-				{{/visibleTabla}}
+				{{/visibleTabla}} <!-- 0 -->
 			</div>
 		</div>
 	</div>

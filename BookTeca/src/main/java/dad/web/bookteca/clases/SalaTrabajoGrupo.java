@@ -3,27 +3,33 @@ package dad.web.bookteca.clases;
 import java.sql.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table
 public class SalaTrabajoGrupo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
+	@Column
 	private int capacidad;
+	@Column
 	private String localizacion;
+	@Column
 	private boolean compartida;
+	@Column
 	private boolean disponible;
 		
 	@OneToOne(mappedBy="salaTrabajo")
 	private Usuario idUsuario;
-	
+	@Column
 	private Date fechaReserva;
 	
 	protected SalaTrabajoGrupo() {}
