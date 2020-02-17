@@ -28,7 +28,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+					<li class="nav-item"><a class="nav-link" href="sesionIniciada">Inicio</a></li>
 					{{#usuario}}
 					<li class="nav-item"><a class="nav-link" href="buscadorLibros">Libros</a></li>
 					<li class="nav-item"><a class="nav-link" href="buscadorRevistas">Revistas</a></li>
@@ -88,7 +88,7 @@
 						<td>{{autor}}</td>
 						<td>{{editorial}}</td>
 						<td>{{genero}}</td>
-						<td>{{diaFinReserva}}</td>
+						<td>{{fecFin}}</td>
 					</tr>
 					{{/listaLibros}}
 				</table>
@@ -113,7 +113,7 @@
 						<td>{{editorial}}</td>
 						<td>{{fasciculo}}</td>
 						<td>{{genero}}</td>
-						<td>{{diaFinReserva}}</td>
+						<td>{{fecFin}}</td>
 					</tr>
 					{{/listaRevistas}}
 				</table>
@@ -136,7 +136,7 @@
 						<td>{{capacidad}}</td>
 						<td>{{localizacion}}</td>
 						<td>{{compartida}}</td>
-						<td>{{diaFinReserva}}</td>
+						<td>{{fechaReserva}}</td>
 					</tr>
 					{{/STG}}
 				</table>
@@ -157,7 +157,7 @@
 					<tr>
 						<td>{{sistemaOperativo}}</td>
 						<td>{{localizacion}}</td>
-						<td>{{diaFinReserva}}</td>
+						<td>{{fechaReserva}}</td>
 					</tr>
 					{{/listaEquipos}}
 				</table>

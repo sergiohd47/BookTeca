@@ -418,12 +418,7 @@ public class UsuarioController {
 	
 	@RequestMapping("/equipoReservado")//reservarEquipos
 	public String equipoReservado(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo) {
-		//Optional<EquipoInformatico> oEquipo = equiposInformaticos.findById(idEquipo);
 		EquipoInformatico equipo = equiposInformaticos.findById(idEquipo);
-		/*if (oEquipo.get() != null) {
-			equipo = oEquipo.get();
-			return "";//reservaEquipoInfromatico
-		}*/
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if (usuario.reservarPuestoInformatico(equipo)){
 			equiposInformaticos.save(equipo);
