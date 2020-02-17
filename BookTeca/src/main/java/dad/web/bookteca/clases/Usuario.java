@@ -153,7 +153,8 @@ public class Usuario {
 				Date inicio = Date.valueOf(java.time.LocalDate.now());
 				calendar.setTime(inicio); 
 			    calendar.add(Calendar.DAY_OF_YEAR , 7);
-				Date fin = (Date) calendar.getTime();
+				Date fin = inicio;
+				fin.setTime(calendar.getTimeInMillis());
 				l.reservar(this, inicio, fin);
 				return true;
 			}
