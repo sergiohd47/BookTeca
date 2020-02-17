@@ -45,12 +45,10 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService serviciosUsuario;
 	
-	private boolean sesionNoIniciada = true;
-	
 	@RequestMapping("/buscadorLibros")
 	public String buscadorLibros(Model model, HttpSession usuarioSesion) {
 		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
-		if(sesionNoIniciada)
+		if(InicioController.sesionNoIniciada)
 			model.addAttribute("visibleIniciarSesion",true);
 		else {
 			model.addAttribute("visibleCerrarSesion",true);
@@ -65,7 +63,7 @@ public class UsuarioController {
 		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<Libro>listaLibros=new ArrayList<>();
 		listaLibros.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info,info,info,info));
-		if(sesionNoIniciada) {
+		if(InicioController.sesionNoIniciada) {
 			model.addAttribute("visibleIniciarSesion",true);
 			model.addAttribute("listaLibrosBusqueda",listaLibros);
 			model.addAttribute("visibleTabla",!listaLibros.isEmpty());
@@ -90,7 +88,7 @@ public class UsuarioController {
 	public String buscadorRevista(Model model, HttpSession usuarioSesion) {
 		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<Revista> listaRevistasBusqueda=new ArrayList<>();
-		if(sesionNoIniciada) {
+		if(InicioController.sesionNoIniciada) {
 			model.addAttribute("visibleIniciarSesion",true);
 			model.addAttribute("listaRevistasBusqueda",listaRevistasBusqueda);
 			model.addAttribute("visibleTabla",!listaRevistasBusqueda.isEmpty());
@@ -109,7 +107,7 @@ public class UsuarioController {
 		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<Revista> listaRevistas=new ArrayList<>();
 		listaRevistas.addAll(revistas.findByNombreOrEditorialOrGenero(info,info,info));
-		if(sesionNoIniciada) {
+		if(InicioController.sesionNoIniciada) {
 			model.addAttribute("visibleIniciarSesion",true);
 			model.addAttribute("listaRevistasBusqueda",listaRevistas);
 			model.addAttribute("visibleTabla",!listaRevistas.isEmpty());
@@ -133,7 +131,7 @@ public class UsuarioController {
 	public String reservaSalaTrabajoGrupo(Model model, HttpSession usuarioSesion) {
 		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<SalaTrabajoGrupo> listaSTG=new ArrayList<>();
-		if(sesionNoIniciada) {
+		if(InicioController.sesionNoIniciada) {
 			model.addAttribute("visibleIniciarSesion",true);
 			listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findByDisponible(true);
 			boolean visibleTabla=!listaSTG.isEmpty();
@@ -154,7 +152,7 @@ public class UsuarioController {
 	public String reservaEquipoInformatico(Model model, HttpSession usuarioSesion) {
 		ArrayList<EquipoInformatico> listaEquipo=new ArrayList<>();
 		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
-		if(sesionNoIniciada) {
+		if(InicioController.sesionNoIniciada) {
 			model.addAttribute("visibleIniciarSesion",true);
 			listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findByDisponible(true);
 			model.addAttribute("visibleTabla",!listaEquipo.isEmpty());
@@ -181,7 +179,29 @@ public class UsuarioController {
 		if(usuario==null)
 			return iniciarSesion(model);
 		usuarioSesion.setAttribute("infoUsuario",usuario);
-		sesionNoIniciada = false;
+		InicioController.sesionNoIniciada = false;
+		if(!usuario.getAdministrador()) {
+			model.addAttribute("usuario",true);
+			model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
+			model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
+		} else {
+			model.addAttribute("usuarioAdmin",true);
+			ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
+			model.addAttribute("listaLibros",listaLibros);
+			ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
+			model.addAttribute("listaRevistas",listaRevistas);
+			ArrayList<SalaTrabajoGrupo> listaSTGs=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findAll();
+			model.addAttribute("listaSTGs",listaSTGs);
+			ArrayList<EquipoInformatico> listaEquipos=(ArrayList<EquipoInformatico>) equiposInformaticos.findAll();
+			model.addAttribute("listaEquipos",listaEquipos);
+		}
+		return "sesionIniciada";
+	}
+	
+	@RequestMapping("/inicio")
+	public String inicio(Model model, HttpSession sesionUsuario) {
+		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
+		InicioController.sesionNoIniciada = false;
 		if(!usuario.getAdministrador()) {
 			model.addAttribute("usuario",true);
 			model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);

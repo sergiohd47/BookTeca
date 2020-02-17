@@ -45,6 +45,7 @@ public class InicioController {
 
 	public static ArrayList<Libro> listaLibrosDestacados;
 	public static ArrayList<Revista> listaRevistasDestacadas;
+	public static boolean sesionNoIniciada;
 
 	@PostConstruct
 	public void init() {
@@ -81,8 +82,8 @@ public class InicioController {
 		//USUARIOS
 		usuarios.save(new Usuario("Borja","Martin Alonso","G07martin","bormaral13@gmail.com",false));
 		usuarios.save(new Usuario("Sergio","Hernandez Dominguez","Pass1","sergiohd47@gmail.com",true));
-		usuarios.save(new Usuario("Daniel","Molina Ballesteros","Daany10","dmolinaballesteros@gmail.com",false));*/
-
+		usuarios.save(new Usuario("Daniel","Molina Ballesteros","Daany10","dmolinaballesteros@gmail.com",false));
+		*/
 	}
 
 	@RequestMapping("/")
@@ -119,8 +120,7 @@ public class InicioController {
 				j++;
 		} while(i < NUMERO_RECURSOS_MAIN);
 		model.addAttribute("listaRevistasDestacadas",listaRevistasDestacadas);
-
-		//NO HA INICIADO SESION
+		sesionNoIniciada = true;
 		model.addAttribute("visibleIniciarSesion",true);
 		return "index";
 	}
