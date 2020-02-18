@@ -162,10 +162,17 @@ El equipo de desarrollo de la pagina web es:
       
 #### Diagrama Navegacion <a name="id9"></a>
 Para la parte del diagrama de navegacion, hemos utilizado la aplicacion de prototipos "Marvel App". En esta pagina podras ir navegando y simulando la experiencia de nuestra web.
-
 <p align="center">
   
-  [DIAGRAMA NAVEGACION BOOKTECA](https://marvelapp.com/4c45eaf)
+   [PROTOTIPO DE NAVEGACION ENTRE PANTALLAS](https://marvelapp.com/4c45eaf)
+          
+</p>
+
+En la parte del diagrama de navegacion podemos ver dos partes distinguidas claramente. Una zona de color verde, que es la que el acceso esta condicionado de que seas un usuario administrador y la otra zona azul que es la relacionada con un usuario basico de la pagina web.
+Como aclaracion, las relaciones entre pantallas son bidireccionales, es decir, desde una pantalla podemos ir a la otra y posteriormente podremos volver a la pantalla anterior.
+
+<p align="center">
+  <img width="800" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/diagramaNavegacion.png">
 </p>
 
 #### Modelo Datos<a name="id10"></a>
