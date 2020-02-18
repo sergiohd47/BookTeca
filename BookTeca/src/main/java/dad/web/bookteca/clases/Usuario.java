@@ -24,10 +24,10 @@ public class Usuario {
 	@Column
 	private String contrasenya;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="idUsuario", cascade = CascadeType.ALL)
 	private List<Libro> librosReservados;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="idUsuario", cascade = CascadeType.ALL)
 	private List<Revista> revistasReservadas; 
 	
 	@OneToOne(cascade = CascadeType.ALL)
