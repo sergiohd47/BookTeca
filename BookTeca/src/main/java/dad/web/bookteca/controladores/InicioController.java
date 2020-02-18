@@ -111,13 +111,15 @@ public class InicioController {
 		i = 0;
 		j = 0;
 		do {
-			if(!nombresRevistas.contains(listaRevistas.get(j).getNombre()) && (listaRevistas.get(j).isDisponible())) {
-				nombresRevistas.add(listaRevistas.get(j).getNombre());
-				listaRevistasDestacadas.add(listaRevistas.get(j));
-				j++;
-				i++;
-			} else
-				j++;
+			if(!nombresRevistas.isEmpty()) {
+				if(!nombresRevistas.contains(listaRevistas.get(j).getNombre()) && (listaRevistas.get(j).isDisponible())) {
+					nombresRevistas.add(listaRevistas.get(j).getNombre());
+					listaRevistasDestacadas.add(listaRevistas.get(j));
+					j++;
+					i++;
+				} else
+					j++;
+			}
 		} while(i < NUMERO_RECURSOS_MAIN);
 		model.addAttribute("listaRevistasDestacadas",listaRevistasDestacadas);
 		sesionNoIniciada = true;
