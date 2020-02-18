@@ -238,7 +238,7 @@ public class Usuario {
 	public boolean quitarSalaTrabajoGrupo(SalaTrabajoGrupo salaTrabajo) {
 		if (salaTrabajo.getIdUsuario()==this) {
 			salaTrabajo.quitar();
-			this.setPuestoInformatico(null);
+			this.setSalaTrabajoGrupo(null);
 			return true;
 		}
 		
