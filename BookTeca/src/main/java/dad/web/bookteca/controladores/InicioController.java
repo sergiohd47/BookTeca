@@ -95,15 +95,18 @@ public class InicioController {
 		int i = 0;
 		int j = 0;
 		ArrayList<String> nombresLibros = new ArrayList<>(NUMERO_RECURSOS_MAIN);
-		do {
+		while((i < NUMERO_RECURSOS_MAIN) ||(j<listaLibros.size())){
 			if(!nombresLibros.contains(listaLibros.get(j).getNombre()) && (listaLibros.get(j).isDisponible())) {
 				nombresLibros.add(listaLibros.get(j).getNombre());
 				listaLibrosDestacados.add(listaLibros.get(j));
+				if(listaLibrosDestacados.size()==NUMERO_RECURSOS_MAIN) {
+					break;
+				}
 				j++;
 				i++;
 			} else
 				j++;
-		} while((i < NUMERO_RECURSOS_MAIN) ||(j<listaLibros.size()));
+		}
 		model.addAttribute("listaLibrosDestacados",listaLibrosDestacados);
 		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
 		Collections.shuffle(listaRevistas);
@@ -114,6 +117,9 @@ public class InicioController {
 			if(!nombresRevistas.contains(listaRevistas.get(j).getNombre()) && (listaRevistas.get(j).isDisponible())) {
 				nombresRevistas.add(listaRevistas.get(j).getNombre());
 				listaRevistasDestacadas.add(listaRevistas.get(j));
+				if(listaRevistasDestacadas.size()==NUMERO_RECURSOS_MAIN) {
+					break;
+				}
 				j++;
 				i++;
 			} else
