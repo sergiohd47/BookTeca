@@ -248,11 +248,17 @@ public class UsuarioController {
 			boolean visibleTablaRevistas=!listaRevistas.isEmpty();
 			model.addAttribute("visibleTablaRevistas",visibleTablaRevistas);
 			model.addAttribute("listaRevistas",listaRevistas);
-			SalaTrabajoGrupo STG=salasTrabajoGrupo.findById(usuario.getPuestoInformatico().getId());
+			SalaTrabajoGrupo STG=null;
+			if (usuario.getSalaTrabajo()!=null) {
+				STG = salasTrabajoGrupo.findById(usuario.getSalaTrabajo().getId());
+			}
 			boolean visibleTablaSTG=STG!=null;
 			model.addAttribute("visibleTablaSTG",visibleTablaSTG);
 			model.addAttribute("STG",STG);
-			EquipoInformatico listaEquipos=equiposInformaticos.findById(usuario.getSalaTrabajo().getId());
+			EquipoInformatico listaEquipos=null;
+			if (usuario.getPuestoInformatico()!=null) {
+				listaEquipos=equiposInformaticos.findById(usuario.getPuestoInformatico().getId());
+			}
 			boolean visibleTablaEquipos=listaEquipos!=null;
 			model.addAttribute("visibleTablaEquipos",visibleTablaEquipos);
 			model.addAttribute("listaEquipos",listaEquipos);
@@ -348,15 +354,18 @@ public class UsuarioController {
 			int i = 0;
 			int j = 0;
 			ArrayList<String> nombresLibros = new ArrayList<>(InicioController.NUMERO_RECURSOS_MAIN);
-			do {
+			while((i < InicioController.NUMERO_RECURSOS_MAIN)&&(j<listaLibros.size())){
 				if(!nombresLibros.contains(listaLibros.get(j).getNombre()) && (listaLibros.get(j).isDisponible())) {
 					nombresLibros.add(listaLibros.get(j).getNombre());
 					InicioController.listaLibrosDestacados.add(listaLibros.get(j));
+					if(InicioController.listaLibrosDestacados.size()==InicioController.NUMERO_RECURSOS_MAIN) {
+						break;
+					}
 					j++;
 					i++;
 				} else
 					j++;
-			} while(i < InicioController.NUMERO_RECURSOS_MAIN);
+			}
 			model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
 			model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		}
@@ -406,15 +415,18 @@ public class UsuarioController {
 		ArrayList<String> nombresRevistas = new ArrayList<>(InicioController.NUMERO_RECURSOS_MAIN);
 		int i = 0;
 		int j = 0;
-		do {
+		while((i < InicioController.NUMERO_RECURSOS_MAIN)&&(j<listaRevistas.size())){
 			if(!nombresRevistas.contains(listaRevistas.get(j).getNombre()) && (listaRevistas.get(j).isDisponible())) {
 				nombresRevistas.add(listaRevistas.get(j).getNombre());
 				InicioController.listaRevistasDestacadas.add(listaRevistas.get(j));
+				if(InicioController.listaRevistasDestacadas.size()==InicioController.NUMERO_RECURSOS_MAIN) {
+					break;
+				}
 				j++;
 				i++;
 			} else
 				j++;
-		} while(i < InicioController.NUMERO_RECURSOS_MAIN);
+		} 
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		return "sesionIniciada";
 	}

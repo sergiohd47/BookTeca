@@ -95,7 +95,7 @@ public class InicioController {
 		int i = 0;
 		int j = 0;
 		ArrayList<String> nombresLibros = new ArrayList<>(NUMERO_RECURSOS_MAIN);
-		while((i < NUMERO_RECURSOS_MAIN) ||(j<listaLibros.size())){
+		while((i < NUMERO_RECURSOS_MAIN)&&(j<listaLibros.size())){
 			if(!nombresLibros.contains(listaLibros.get(j).getNombre()) && (listaLibros.get(j).isDisponible())) {
 				nombresLibros.add(listaLibros.get(j).getNombre());
 				listaLibrosDestacados.add(listaLibros.get(j));
@@ -113,7 +113,7 @@ public class InicioController {
 		ArrayList<String> nombresRevistas = new ArrayList<>(NUMERO_RECURSOS_MAIN);
 		i = 0;
 		j = 0;
-		while((i < NUMERO_RECURSOS_MAIN)||(j<listaRevistas.size())){
+		while((i < NUMERO_RECURSOS_MAIN)&&(j<listaRevistas.size())){
 			if(!nombresRevistas.contains(listaRevistas.get(j).getNombre()) && (listaRevistas.get(j).isDisponible())) {
 				nombresRevistas.add(listaRevistas.get(j).getNombre());
 				listaRevistasDestacadas.add(listaRevistas.get(j));
