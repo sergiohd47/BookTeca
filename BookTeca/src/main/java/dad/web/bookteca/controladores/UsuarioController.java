@@ -373,7 +373,7 @@ public class UsuarioController {
 	}
 	
 	
-	@RequestMapping("/libroReservaEliminado")
+	/*@RequestMapping("/libroReservaEliminado")
 	public String libroReservaEliminado(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro) {
 		//Optional<Libro> oLibro = libros.findById(idLibro);
 		Libro libro = libros.findById(idLibro);
@@ -383,9 +383,11 @@ public class UsuarioController {
 		//}
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if (usuario.quitarLibro(libro)) {
+			libro.setIsDisponible(true);
 			libros.save(libro);
 			usuarios.save(usuario);
 			sesionUsuario.setAttribute("infoUsuario",usuario);
+			model.addAttribute("nombre",usuario.getNombre());
 			model.addAttribute("usuario",true);
 			model.addAttribute("usuarioAdmin",false);
 			InicioController.listaLibrosDestacados=new ArrayList<>();
@@ -410,8 +412,8 @@ public class UsuarioController {
 			model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		}
 		
-		return "sesionIniciada";
-	}
+		return "sesion";
+	}*/
 	
 	@RequestMapping("/revistaReservada")
 	public String revistaReservada(Model model, HttpSession sesionUsuario, @RequestParam long idRevista) {
@@ -452,7 +454,7 @@ public class UsuarioController {
 		return "sesionIniciada";
 	}
 
-	@RequestMapping("/revistaReservaEliminada")
+	/*@RequestMapping("/revistaReservaEliminada")
 	public String revistaReservaEliminada(Model model, HttpSession sesionUsuario, @RequestParam long idRevista)  {
 		//Optional<Revista> oEquipo = revistas.findById(idRevista);
 		Revista revista = revistas.findById(idRevista);
@@ -489,7 +491,7 @@ public class UsuarioController {
 		}
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		return "sesionIniciada";
-	}
+	}*/
 	
 	@RequestMapping("/equipoReservado")//reservarEquipos
 	public String equipoReservado(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo) {
@@ -507,7 +509,7 @@ public class UsuarioController {
 		return "sesionIniciada";//reservaEquipoInfromatico
 	}
 	
-	@RequestMapping("/equipoReservaEliminado")//reservaEquipoInfromatico
+	/*@RequestMapping("/equipoReservaEliminado")//reservaEquipoInfromatico
 	public String equipoReservaEliminado(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo) {
 		//Optional<EquipoInformatico> oEquipo = equiposInformaticos.findById(idEquipo);
 		EquipoInformatico equipo = equiposInformaticos.findById(idEquipo);
@@ -526,7 +528,7 @@ public class UsuarioController {
 		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		return "sesionIniciada";//reservaEquipoInfromatico
-	}
+	}*/
 	
 	@RequestMapping("/salaReservada")//reservarSalas
 	public String salaReservada(Model model, HttpSession sesionUsuario, @RequestParam long idSala) {
@@ -548,7 +550,7 @@ public class UsuarioController {
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		return "sesionIniciada";//reservaSalaTrabajoGrupo
 	}
-	
+	/*
 	@RequestMapping("/salaReservaEliminada")
 	public String salaReservaEliminada(Model model, HttpSession sesionUsuario, @RequestParam long idSala) {
 		//Optional<SalaTrabajoGrupo> oSala = salasTrabajoGrupo.findById(idSala);
@@ -569,6 +571,6 @@ public class UsuarioController {
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		return "sesionIniciada";//reservaSalaTrabajoGrupo
 	}
-	
+	*/
 
 }

@@ -76,19 +76,25 @@
 				{{#visibleTablaLibros}}
 				<table border="1" class="lead" align="center">
 					<tr>
+						<th style="visibility:hidden">ID</th>
 						<th>NOMBRE</th>
 						<th>AUTOR</th>
 						<th>EDITORIAL</th>
 						<th>GENERO</th>
 						<th>FIN DE RESERVA</th>
+						<th style="visibility:hidden">ELIMINAR</th>
 					</tr>
 					{{#listaLibros}}
 					<tr>
+						<form action="/libroReservaEliminado" method="post">
+						<td style="visibility:hidden"><input type="number" name="idLibro" value="{{id}}"/></td>
 						<td>{{nombre}}</td>
 						<td>{{autor}}</td>
 						<td>{{editorial}}</td>
 						<td>{{genero}}</td>
 						<td>{{fecFin}}</td>
+						<td style="border:hidden"><input type="submit" class="btn btn-success" value="ELIMINAR"/></td>
+						</form>
 					</tr>
 					{{/listaLibros}}
 				</table>
@@ -101,19 +107,25 @@
 				{{#visibleTablaRevistas}}
 				<table border="1" class="lead" align="center">
 					<tr>
+						<th style="visibility:hidden">ID</th>
 						<th>NOMBRE</th>
 						<th>EDITORIAL</th>
 						<th>FASCICULOS</th>
 						<th>GENERO</th>
 						<th>FIN DE RESERVA</th>
+						<th style="visibility:hidden">ELIMINAR</th>
 					</tr>
 					{{#listaRevistas}}
 					<tr>
+						<form action="/revistaReservaEliminada" method="post">
+							<td style="visibility:hidden"><input type="number" name="idRevista" value="{{id}}"/></td>
 							<td>{{nombre}}</td>
 							<td>{{editorial}}</td>
 							<td>{{fasciculo}}</td>
 							<td>{{genero}}</td>
 							<td>{{fecFin}}</td>
+							<td style="border:hidden"><input type="submit" class="btn btn-success" value="ELIMINAR"/></td>
+						</form>
 					</tr>
 					{{/listaRevistas}}
 				</table>
@@ -126,17 +138,23 @@
 				{{#visibleTablaSTG}}
 				<table border="1" class="lead" align="center">
 					<tr>
+						<th style="visibility:hidden">ID</th>
 						<th>CAPACIDAD</th>
 						<th>LOCALIZACION</th>
 						<th>COMPARTIDA</th>
 						<th>FIN DE RESERVA</th>
+						<th style="visibility:hidden">ELIMINAR</th>
 					</tr>
 					{{#STG}}
 					<tr>
+						<form action="/salaReservaEliminada" method="post">
+							<td style="visibility:hidden"><input type="number" name="idSala" value="{{id}}"/></td>
 							<td>{{capacidad}}</td>
 							<td>{{localizacion}}</td>
 							<td>{{compartida}}</td>
 							<td>{{fechaReserva}}</td>
+							<td style="border:hidden"><input type="submit" class="btn btn-success" value="ELIMINAR"/></td>
+						</form>
 					</tr>
 					{{/STG}}
 				</table>
@@ -149,15 +167,21 @@
 				{{#visibleTablaEquipos}}
 				<table border="1" class="lead" align="center">
 					<tr>
-											<th>SISTEMA OPERATIVO</th>
+						<th style="visibility:hidden">ID</th>
+						<th>SISTEMA OPERATIVO</th>
 						<th>LOCALIZACION</th>
 						<th>FIN DE RESERVA</th>
+						<th style="visibility:hidden">ELIMINAR</th>
 					</tr>
 					{{#listaEquipos}}
 					<tr>
+						<form action="/equipoReservaEliminado" method="post">
+							<td style="visibility:hidden"><input type="number" name="idEquipo" value="{{id}}"/></td>
 							<td>{{sistemaOperativo}}</td>
 							<td>{{localizacion}}</td>
 							<td>{{fechaReserva}}</td>
+							<td style="border:hidden"><input type="submit" class="btn btn-success" value="ELIMINAR"/></td>
+						</form>
 					</tr>
 					{{/listaEquipos}}
 				</table>

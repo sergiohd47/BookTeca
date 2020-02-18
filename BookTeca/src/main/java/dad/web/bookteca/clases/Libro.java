@@ -80,6 +80,9 @@ public class Libro {
 	public Date getFecFin() {
 		return fecFin;
 	}
+	public void setIsDisponible(boolean bol) {
+		this.disponible=bol;
+	}
 
 	public void reservar(Usuario idUsuario, Date inicio, Date fin) {
 		this.disponible = false;
