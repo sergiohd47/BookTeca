@@ -103,22 +103,25 @@ public class InicioController {
 				i++;
 			} else
 				j++;
-		} while(i < NUMERO_RECURSOS_MAIN);
+		} while((i < NUMERO_RECURSOS_MAIN) ||(j<listaLibros.size()));
 		model.addAttribute("listaLibrosDestacados",listaLibrosDestacados);
 		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
 		Collections.shuffle(listaRevistas);
 		ArrayList<String> nombresRevistas = new ArrayList<>(NUMERO_RECURSOS_MAIN);
 		i = 0;
 		j = 0;
-		do {
-			if(!nombresRevistas.contains(listaRevistas.get(j).getNombre()) && (listaRevistas.get(j).isDisponible())) {
+		while((i < NUMERO_RECURSOS_MAIN)||(j<listaRevistas.size())){
+			if (nombresRevistas.isEmpty()) {
+				nombresRevistas.add(listaRevistas.get(j).getNombre());
+				listaRevistasDestacadas.add(listaRevistas.get(j));
+			}else if(!nombresRevistas.contains(listaRevistas.get(j).getNombre()) && (listaRevistas.get(j).isDisponible())) {
 				nombresRevistas.add(listaRevistas.get(j).getNombre());
 				listaRevistasDestacadas.add(listaRevistas.get(j));
 				j++;
 				i++;
 			} else
 				j++;
-		} while(i < NUMERO_RECURSOS_MAIN);
+		} 
 		model.addAttribute("listaRevistasDestacadas",listaRevistasDestacadas);
 		sesionNoIniciada = true;
 		model.addAttribute("visibleIniciarSesion",true);
