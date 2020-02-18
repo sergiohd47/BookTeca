@@ -101,6 +101,7 @@ El equipo de desarrollo de la pagina web es:
         <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaEquipoUsuario.png">
       </p>
  - ***Pantalla Mi Perfil***
+ 
       En esta pantalla, un usuario podra ver el desglose de todas las reservas a su nombre o acceder a la zona donde podra editar la informacion relacionada con su perfil.
       <p align="center">
         <img width="400" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaMiPerfilUsuario.png">
