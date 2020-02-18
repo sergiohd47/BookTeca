@@ -111,10 +111,7 @@ public class InicioController {
 		i = 0;
 		j = 0;
 		while((i < NUMERO_RECURSOS_MAIN)||(j<listaRevistas.size())){
-			if (nombresRevistas.isEmpty()) {
-				nombresRevistas.add(listaRevistas.get(j).getNombre());
-				listaRevistasDestacadas.add(listaRevistas.get(j));
-			}else if(!nombresRevistas.contains(listaRevistas.get(j).getNombre()) && (listaRevistas.get(j).isDisponible())) {
+			if(!nombresRevistas.contains(listaRevistas.get(j).getNombre()) && (listaRevistas.get(j).isDisponible())) {
 				nombresRevistas.add(listaRevistas.get(j).getNombre());
 				listaRevistasDestacadas.add(listaRevistas.get(j));
 				j++;

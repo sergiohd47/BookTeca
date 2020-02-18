@@ -248,12 +248,12 @@ public class UsuarioController {
 			boolean visibleTablaRevistas=!listaRevistas.isEmpty();
 			model.addAttribute("visibleTablaRevistas",visibleTablaRevistas);
 			model.addAttribute("listaRevistas",listaRevistas);
-			SalaTrabajoGrupo STG=salasTrabajoGrupo.findByIdUsuario(usuario);
+			SalaTrabajoGrupo STG=salasTrabajoGrupo.findById(usuario.getPuestoInformatico().getId());
 			boolean visibleTablaSTG=STG!=null;
 			model.addAttribute("visibleTablaSTG",visibleTablaSTG);
 			model.addAttribute("STG",STG);
-			ArrayList<EquipoInformatico> listaEquipos=equiposInformaticos.findByIdUsuario(usuario);
-			boolean visibleTablaEquipos=!listaEquipos.isEmpty();
+			EquipoInformatico listaEquipos=equiposInformaticos.findById(usuario.getSalaTrabajo().getId());
+			boolean visibleTablaEquipos=listaEquipos!=null;
 			model.addAttribute("visibleTablaEquipos",visibleTablaEquipos);
 			model.addAttribute("listaEquipos",listaEquipos);
 		} else {
