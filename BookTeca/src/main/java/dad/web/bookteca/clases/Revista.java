@@ -23,8 +23,8 @@ public class Revista {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Usuario idUsuario;
-	/*@Column
-	private Date fecInicio;*/
+	@Column
+	private Date fecInicio;
 	@Column
 	private Date fecFin;
 	
@@ -38,7 +38,7 @@ public class Revista {
 		
 		this.disponible = true;
 		this.idUsuario = null;
-		//this.fecInicio = null;
+		this.fecInicio = null;
 		this.fecFin = null;
 	}
 	
@@ -70,9 +70,9 @@ public class Revista {
 		return idUsuario;
 	}
 	
-	/*public Date getFecInicio() {
+	public Date getFecInicio() {
 		return fecInicio;
-	}*/
+	}
 
 	public Date getFecFin() {
 		return fecFin;
@@ -81,14 +81,14 @@ public class Revista {
 	public void reservar(Usuario idUsuario, Date inicio, Date fin) {
 		this.disponible = false;
 		this.idUsuario = idUsuario;
-		//this.fecInicio = inicio;
+		this.fecInicio = inicio;
 		this.fecFin = fin;
 	}
 	
 	public void quitar() {
 		this.disponible = true;
 		this.idUsuario = null;
-		//this.fecInicio = null;
+		this.fecInicio = null;
 		this.fecFin = null;
 	}
 

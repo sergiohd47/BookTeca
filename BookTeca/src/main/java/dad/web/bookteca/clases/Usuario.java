@@ -153,7 +153,7 @@ public class Usuario {
 				Date inicio = Date.valueOf(java.time.LocalDate.now());
 				calendar.setTime(inicio); 
 			    calendar.add(Calendar.DAY_OF_YEAR , 7);
-				Date fin = inicio;
+				Date fin = (Date) inicio.clone();
 				fin.setTime(calendar.getTimeInMillis());
 				l.reservar(this, inicio, fin);
 				return true;
@@ -191,7 +191,7 @@ public class Usuario {
 				Date inicio = Date.valueOf(java.time.LocalDate.now());
 				calendar.setTime(inicio); 
 			    calendar.add(Calendar.DAY_OF_YEAR , 7);
-				Date fin = inicio;
+				Date fin = (Date) inicio.clone();
 				fin.setTime(calendar.getTimeInMillis());
 				r.reservar(this, inicio, fin);
 				return true;
