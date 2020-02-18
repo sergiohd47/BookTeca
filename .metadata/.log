@@ -5722,3 +5722,6 @@ Caused by: org.eclipse.lsp4j.jsonrpc.ResponseErrorException: Internal error.
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-18 15:20:23.350
 !MESSAGE executing callback sts4.classpath.zdDTcWzn SUCCESS [done]
+
+!ENTRY org.eclipse.core.jobs 2 2 2020-02-18 16:08:12.896
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.springframework.tooling.ls.eclipse.commons.STS4LanguageServerProcessStreamConnector$1
