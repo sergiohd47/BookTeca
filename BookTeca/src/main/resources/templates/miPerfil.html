@@ -84,11 +84,15 @@
 					</tr>
 					{{#listaLibros}}
 					<tr>
+						<form action="/libroReservaEliminado" method="post">
+						<td style="visibility:hidden"><input type="number" name="idRevista" value="{{id}}"/></td>
 						<td>{{nombre}}</td>
 						<td>{{autor}}</td>
 						<td>{{editorial}}</td>
 						<td>{{genero}}</td>
 						<td>{{fecFin}}</td>
+						<td style="border:hidden"><input type="submit" class="btn btn-success" value="ELIMINAR"/></td>
+						</form>
 					</tr>
 					{{/listaLibros}}
 				</table>
@@ -142,7 +146,7 @@
 				</table>
 				{{/visibleTablaSTG}}
 				<h1 class="mt-5"></h1>
-				<p class="lead">Equipos informticos reservados:</p>
+				<p class="lead">Equipos informaticos reservados:</p>
 				{{^listaEquipos}}
 				<p class="lead">Parece que no tienes equipos reservados.</p>
 				{{/listaEquipos}}
