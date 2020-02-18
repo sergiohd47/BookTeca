@@ -29,19 +29,10 @@ public class InicioController {
 	public static final int NUMERO_RECURSOS_MAIN=3; //NUMERO DE LIBROS Y REVISTAS QUE SE MUESTRAN EN LA PANTALLA DE INICIO
 
 	@Autowired
-	private EquipoInformaticoRepository equiposInformaticos;
-
-	@Autowired
 	private LibroRepository libros;
 
 	@Autowired
 	private RevistaRepository revistas;
-
-	@Autowired
-	private SalaTrabajoGrupoRepository salasTrabajoGrupo;
-
-	@Autowired
-	private UsuarioRepository usuarios;
 
 	public static ArrayList<Libro> listaLibrosDestacados;
 	public static ArrayList<Revista> listaRevistasDestacadas;
