@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -36,7 +36,7 @@
 				<h1 class="mt-5"></h1>
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
 				<h1 class="mt-5">Zona de administracion de los diferentes usuarios de BookTeca</h1>
-				<form action="/busquedaUsuarios" method="post">
+				<form th:action="@{/busquedaUsuarios}" method="post">
 					<div>
 						<label for="busquedaUsuario">Busqueda por email:</label> 
 						<input type="search" id="emailUsuario" name="emailUsuario" 
@@ -76,7 +76,7 @@
 						<td>SI</td>
 						{{/usuarioAdmin}}
 						{{#usuarioNoAdmin}}
-						<form action="/usuarioAdministrado" method="post">
+						<form th:action="@{/usuarioAdministrado}" method="post">
 							<td style="visibility:hidden"><input type="text" name="emailUsuario" value="{{email}}"/></td>
 							<td>{{nombre}}</td>
 							<td>{{apellidos}}</td>
