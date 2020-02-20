@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -36,7 +36,7 @@
 				<h1 class="mt-5"></h1>
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
 				<h1 class="mt-5">Modifique los campos que desee de su cuenta ya existente</h1>
-				<form id="edit" action="/perfilEditado" method="post">
+				<form id="edit" th:action="@{/perfilEditado}" method="post">
 					<div class="form-sesion">
 						<p>
 							<label><b> Nuevo Nombre</b></label><br> <input type="text" name="nuevoNombreUsuario" 
