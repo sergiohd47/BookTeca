@@ -9,7 +9,34 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		//PARTE PUBLICA
-		http.authorizeRequests().antMatchers("index").permitAll();
+		http.authorizeRequests().antMatchers("/").permitAll();
+		http.authorizeRequests().antMatchers("/iniciarSesion").permitAll();
+		http.authorizeRequests().antMatchers("/registro").permitAll();
+		http.authorizeRequests().antMatchers("/buscadorLibros").permitAll();
+		http.authorizeRequests().antMatchers("/busquedaLibros").permitAll();
+		http.authorizeRequests().antMatchers("/buscadorRevistas").permitAll();
+		http.authorizeRequests().antMatchers("/busquedaRevistas").permitAll();
+		http.authorizeRequests().antMatchers("/reservaSalaTrabajoGrupo").permitAll();
+		http.authorizeRequests().antMatchers("/reservaEquipoInformatico").permitAll();
+		
+		//PARTE PRIVADA
+		http.authorizeRequests().anyRequest().authenticated();
+		
+		//LOGIN
+		http.formLogin().loginPage("/iniciarSesion");
+		http.formLogin().usernameParameter("nombreUsuario");
+		http.formLogin().passwordParameter("contrasenya");
+		http.formLogin().defaultSuccessUrl("/sesionIniciada");
+		http.formLogin().failureUrl("/iniciarSesion");
+		
+		//LOGOUT
+		http.logout().logoutUrl("/cerrarSesion");
+		http.logout().logoutSuccessUrl("/");
+		
+		//CSRF
+		http.csrf().disable();
+		
 	}
+	
 
 }
