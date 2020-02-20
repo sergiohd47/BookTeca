@@ -130,5 +130,9 @@ public class InicioController {
 		model.addAttribute("visibleIniciarSesion",true);
 		return "index";
 	}
+	@RequestMapping("/cerrarSesion")
+	public String cerrarSesion(Model model) {
+		return "index";
+	}
 
 }
