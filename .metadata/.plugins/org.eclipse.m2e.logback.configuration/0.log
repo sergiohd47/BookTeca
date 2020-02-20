@@ -6908,3 +6908,42 @@ java.io.IOException: Invalid argument
 2020-02-20 12:21:01,715 [Worker-12: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 61 resources
 2020-02-20 12:21:01,719 [Worker-12: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2020-02-20 12:21:01,719 [Worker-12: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/BookTeca/src/test/resources
+2020-02-20 12:23:54,339 [Worker-10: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2020-02-20 12:23:54,809 [Worker-10: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: dad.web:BookTeca:0.0.1-SNAPSHOT @ /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/BookTeca/pom.xml.
+2020-02-20 12:23:55,361 [Worker-10: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /BookTeca/src/main/java
+2020-02-20 12:23:55,362 [Worker-10: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /BookTeca/src/main/resources
+2020-02-20 12:23:55,364 [Worker-10: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /BookTeca/src/main/resources
+2020-02-20 12:23:55,364 [Worker-10: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /BookTeca/src/test/java
+2020-02-20 12:23:55,614 [Worker-10: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 1 sec
+2020-02-20 12:23:56,309 [Worker-5: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-02-20 12:23:56,310 [Worker-5: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-02-20 12:23:56,343 [Worker-5: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 61 resources
+2020-02-20 12:23:56,608 [Worker-5: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-02-20 12:23:56,608 [Worker-5: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/BookTeca/src/test/resources
+2020-02-20 12:24:17,054 [Worker-14: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-02-20 12:24:17,058 [Worker-14: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-02-20 12:24:17,061 [Worker-14: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 61 resources
+2020-02-20 12:24:17,065 [Worker-14: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-02-20 12:24:17,065 [Worker-14: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/BookTeca/src/test/resources
+2020-02-20 12:24:47,271 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-02-20 12:24:47,274 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-02-20 12:24:47,277 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 61 resources
+2020-02-20 12:24:47,289 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-02-20 12:24:47,289 [Worker-15: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/BookTeca/src/test/resources
+2020-02-20 12:24:48,359 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-02-20 12:24:48,362 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-02-20 12:24:48,365 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 61 resources
+2020-02-20 12:24:48,367 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-02-20 12:24:48,368 [Worker-13: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/BookTeca/src/test/resources
+2020-02-20 12:25:00,404 [Worker-5: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2020-02-20 12:25:00,763 [Worker-5: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: dad.web:BookTeca:0.0.1-SNAPSHOT @ /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/BookTeca/pom.xml.
+2020-02-20 12:25:01,178 [Worker-5: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /BookTeca/src/main/java
+2020-02-20 12:25:01,178 [Worker-5: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /BookTeca/src/main/resources
+2020-02-20 12:25:01,179 [Worker-5: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /BookTeca/src/main/resources
+2020-02-20 12:25:01,180 [Worker-5: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /BookTeca/src/test/java
+2020-02-20 12:25:01,480 [Worker-5: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 1 sec
+2020-02-20 12:25:02,208 [Worker-0: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-02-20 12:25:02,208 [Worker-0: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-02-20 12:25:02,224 [Worker-0: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 61 resources
+2020-02-20 12:25:02,282 [Worker-0: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-02-20 12:25:02,282 [Worker-0: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/BookTeca/src/test/resources
