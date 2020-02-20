@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -44,7 +44,7 @@
 						href="reservaEquipoInformatico">Equipos Informaticos</a></li>
 					{{#visibleCerrarSesion}}
 					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi Perfil</a></li>
-					<li class="nav-item"><a class="nav-link" href="/">Cerrar Sesion</a></li>
+					<li class="nav-item"><a class="nav-link" href="sesionCerrada">Cerrar Sesion</a></li>
 					{{/visibleCerrarSesion}}
 					{{#visibleIniciarSesion}}
 					<li class="nav-item"><a class="nav-link" href="iniciarSesion">Iniciar Sesion</a></li>
@@ -97,7 +97,7 @@
 						{{/compartida}}
 						{{/visibleIniciarSesion}}
 						{{#visibleCerrarSesion}}
-						<form action="/salaReservada" method="post">
+						<form th:action="@{/salaReservada}" method="post">
 							<td style="visibility:hidden"><input type="number" name="idSala" value="{{id}}"/></td>
 							<td>{{capacidad}}</td>
 							<td>{{localizacion}}</td>

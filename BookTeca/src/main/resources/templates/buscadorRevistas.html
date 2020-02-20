@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -43,7 +43,7 @@
 						href="reservaEquipoInformatico">Equipos Informaticos</a></li>
 					{{#visibleCerrarSesion}}
 					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi Perfil</a></li>
-					<li class="nav-item"><a class="nav-link" href="/">Cerrar Sesion</a></li>
+					<li class="nav-item"><a class="nav-link" href="sesionCerrada">Cerrar Sesion</a></li>
 					{{/visibleCerrarSesion}}
 					{{#visibleIniciarSesion}}
 					<li class="nav-item"><a class="nav-link" href="iniciarSesion">Iniciar Sesion</a></li>
@@ -69,7 +69,7 @@
 				{{/visibleIniciarSesion}}
 				<p class="lead">Puedes buscar por el nombre, autor, genero o editorial de la revista</p>
 				<h1 class="mt-5"></h1>
-				<form action="/busquedaRevistas" method="post">
+				<form th:action="@{/busquedaRevistas}" method="post">
 					<div>
 						<label for="busquedaRevista">Busqueda: </label> <input type="search"
 							id="palabraClaveRevista" name="palabraClaveRevista"

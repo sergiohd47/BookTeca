@@ -164,7 +164,10 @@ public class UsuarioController {
 		
 	}
 	
-	
+	@RequestMapping("/sesionCerrada")
+	public String sesionCerrada(Model model) {
+		return "index";
+	}
 	
 	
 }

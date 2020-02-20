@@ -1,6 +1,7 @@
 package dad.web.bookteca.seguridad;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -30,12 +31,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http.formLogin().failureUrl("/iniciarSesion");
 		
 		//LOGOUT
-		http.logout().logoutUrl("/cerrarSesion");
+		http.logout().logoutUrl("/sesionCerrada");
 		http.logout().logoutSuccessUrl("/");
 		
 		//CSRF
 		http.csrf().disable();
-		
+	}
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+		//MIRAR DESPUES
 	}
 	
 
