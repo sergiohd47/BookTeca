@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -155,7 +155,7 @@
 					</tr>
 					{{#listaLibrosDestacados}}
 					<tr>
-						<form action="/libroReservado" method="post">
+						<form th:action="@{/libroReservado}" method="post">
 							<td style="visibility:hidden"><input type="number" name="idLibro" value="{{id}}"/></td>
 							<td>{{nombre}}</td>
 							<td>{{autor}}</td>
@@ -179,7 +179,7 @@
 					</tr>
 					{{#listaRevistasDestacadas}}
 					<tr>
-						<form action="/revistaReservada" method="post">
+						<form th:action="@{/revistaReservada}" method="post">
 							<td style="visibility:hidden"><input type="number" name="idRevista" value="{{id}}"/></td>
 							<td>{{nombre}}</td>
 							<td>{{editorial}}</td>
