@@ -34,6 +34,15 @@ public class InicioController {
 	@Autowired
 	private RevistaRepository revistas;
 
+	@Autowired
+	private SalaTrabajoGrupoRepository salasTrabajoGrupo;
+	
+	@Autowired
+	private EquipoInformaticoRepository equiposInformaticos;
+	
+	@Autowired
+	private UsuarioRepository usuarios;
+	
 	public static ArrayList<Libro> listaLibrosDestacados;
 	public static ArrayList<Revista> listaRevistasDestacadas;
 	public static boolean sesionNoIniciada;

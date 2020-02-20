@@ -119,11 +119,11 @@
 				</table>
 				{{/visibleTablaRevistas}}
 				<h1 class="mt-5"></h1>
-				<p class="lead">Salas de trabajo reservada:</p>
+				<p class="lead">Sala de trabajo reservada:</p>
 				{{^STG}}
-				<p class="lead">Parece que no tienes salas reservadas.</p>
+				<p class="lead">Parece que no tienes ninguna sala reservada.</p>
 				{{/STG}}
-				{{#visibleTablaSTG}}
+				{{#visibleSTG}}
 				<table border="1" class="lead" align="center">
 					<tr>
 						<th>CAPACIDAD</th>
@@ -135,33 +135,38 @@
 					<tr>
 							<td>{{capacidad}}</td>
 							<td>{{localizacion}}</td>
-							<td>{{compartida}}</td>
+							{{#compartida}}
+							<td>Si</td>
+							{{/compartida}}
+							{{^compartida}}
+							<td>No</td>
+							{{/compartida}}
 							<td>{{fechaReserva}}</td>
 					</tr>
 					{{/STG}}
 				</table>
-				{{/visibleTablaSTG}}
+				{{/visibleSTG}}
 				<h1 class="mt-5"></h1>
-				<p class="lead">Equipos informaticos reservados:</p>
-				{{^listaEquipos}}
-				<p class="lead">Parece que no tienes equipos reservados.</p>
-				{{/listaEquipos}}
-				{{#visibleTablaEquipos}}
+				<p class="lead">Equipo informatico reservado:</p>
+				{{^equipo}}
+				<p class="lead">Parece que no tienes nungún equipo reservado.</p>
+				{{/equipo}}
+				{{#visibleEquipo}}
 				<table border="1" class="lead" align="center">
 					<tr>
-											<th>SISTEMA OPERATIVO</th>
+						<th>SISTEMA OPERATIVO</th>
 						<th>LOCALIZACION</th>
 						<th>FIN DE RESERVA</th>
 					</tr>
-					{{#listaEquipos}}
+					{{#equipo}}
 					<tr>
-							<td>{{sistemaOperativo}}</td>
-							<td>{{localizacion}}</td>
-							<td>{{fechaReserva}}</td>
+						<td>{{sistemaOperativo}}</td>
+						<td>{{localizacion}}</td>
+						<td>{{fechaReserva}}</td>
 					</tr>
-					{{/listaEquipos}}
+					{{/equipo}}
 				</table>
-				{{/visibleTablaEquipos}}
+				{{/visibleEquipo}}
 				{{/usuario}}
 			</div>
 		</div>

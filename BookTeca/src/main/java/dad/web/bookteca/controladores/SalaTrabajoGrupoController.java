@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +38,11 @@ public class SalaTrabajoGrupoController {
 		} else {
 			model.addAttribute("visibleCerrarSesion",true);
 			if(!usuario.getAdministrador()) {
+				//SalaTrabajoGrupo STG = salasTrabajoGrupo.findByIdUsuario(usuario);
+				if(usuario.getSalaTrabajo()!= null)
+					model.addAttribute("salaElegida",true);
+				else
+					model.addAttribute("salaElegida",false);
 				listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findByDisponible(true);
 				model.addAttribute("visibleTabla",!listaSTG.isEmpty());
 				model.addAttribute("listaSTG",listaSTG);
@@ -43,16 +50,12 @@ public class SalaTrabajoGrupoController {
 		}
 		return "reservaSalaTrabajoGrupo";
 	}
-	@RequestMapping("/salaReservada")//reservarSalas
+	
+	@RequestMapping("/salaReservada")
 	public String salaReservada(Model model, HttpSession sesionUsuario, @RequestParam long idSala) {
-		//Optional<SalaTrabajoGrupo> oSala = salasTrabajoGrupo.findById(idSala);
 		SalaTrabajoGrupo sala = salasTrabajoGrupo.findById(idSala);
-		/*if (oSala.get() != null) {
-			sala = oSala.get();
-			return "";//reservaSalaTrabajoGrupo
-		}*/
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
-		if (usuario.reservarSalaTrabajoGrupo(sala)){
+		if(usuario.reservarSalaTrabajoGrupo(sala)){
 			salasTrabajoGrupo.save(sala);
 			usuarios.save(usuario);
 			sesionUsuario.setAttribute("infoUsuario",usuario);
@@ -61,8 +64,9 @@ public class SalaTrabajoGrupoController {
 		model.addAttribute("usuarioAdmin",false);
 		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
-		return "sesionIniciada";//reservaSalaTrabajoGrupo
+		return "sesionIniciada";
 	}
+	
 	/*
 	@RequestMapping("/salaReservaEliminada")
 	public String salaReservaEliminada(Model model, HttpSession sesionUsuario, @RequestParam long idSala) {

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -26,9 +27,11 @@ public class SalaTrabajoGrupo {
 	private boolean compartida;
 	@Column
 	private boolean disponible;
-		
+	
 	@OneToOne(mappedBy="salaTrabajo")
+	//@JoinColumn(name="SALAS_RESERVADAS")
 	private Usuario idUsuario;
+	
 	@Column
 	private Date fechaReserva;
 	

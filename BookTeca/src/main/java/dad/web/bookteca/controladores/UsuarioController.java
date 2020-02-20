@@ -124,19 +124,15 @@ public class UsuarioController {
 			model.addAttribute("visibleTablaRevistas",visibleTablaRevistas);
 			model.addAttribute("listaRevistas",listaRevistas);
 			SalaTrabajoGrupo STG=null;
-			if (usuario.getSalaTrabajo()!=null) {
+			if(usuario.getSalaTrabajo()!=null)
 				STG = salasTrabajoGrupo.findById(usuario.getSalaTrabajo().getId());
-			}
-			boolean visibleTablaSTG=STG!=null;
-			model.addAttribute("visibleTablaSTG",visibleTablaSTG);
+			model.addAttribute("visibleSTG",STG!=null);
 			model.addAttribute("STG",STG);
-			EquipoInformatico listaEquipos=null;
-			if (usuario.getPuestoInformatico()!=null) {
-				listaEquipos=equiposInformaticos.findById(usuario.getPuestoInformatico().getId());
-			}
-			boolean visibleTablaEquipos=listaEquipos!=null;
-			model.addAttribute("visibleTablaEquipos",visibleTablaEquipos);
-			model.addAttribute("listaEquipos",listaEquipos);
+			EquipoInformatico equipo=null;
+			if(usuario.getPuestoInformatico()!=null)
+				equipo = equiposInformaticos.findById(usuario.getPuestoInformatico().getId());
+			model.addAttribute("visibleEquipo",equipo!=null);
+			model.addAttribute("equipo",equipo);
 		} else {
 			model.addAttribute("nombre",usuario.getNombre());
 			model.addAttribute("usuarioAdmin",true);

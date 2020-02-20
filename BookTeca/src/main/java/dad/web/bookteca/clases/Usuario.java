@@ -33,7 +33,7 @@ public class Usuario {
 	@OneToOne(cascade = CascadeType.ALL)
 	private EquipoInformatico puestoInformatico;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private SalaTrabajoGrupo salaTrabajo;
 	
 	private boolean administrador;
@@ -219,13 +219,12 @@ public class Usuario {
 			this.setPuestoInformatico(null);
 			return true;
 		}
-		
 		return false;
 	}
 	
 	public boolean reservarSalaTrabajoGrupo(SalaTrabajoGrupo salaTrabajo) {
-		if (salaTrabajo.isDisponible()){
-			if (this.getPuestoInformatico()==null) {
+		if (salaTrabajo.isDisponible())	{
+			if (this.getSalaTrabajo()==null) {
 				this.setSalaTrabajoGrupo(salaTrabajo);			    
 				Date fecha = Date.valueOf(java.time.LocalDate.now());
 				salaTrabajo.reservar(this, fecha);
@@ -241,7 +240,6 @@ public class Usuario {
 			this.setSalaTrabajoGrupo(null);
 			return true;
 		}
-		
 		return false;
 	}
 	

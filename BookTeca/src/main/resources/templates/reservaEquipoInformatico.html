@@ -64,6 +64,9 @@
 				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu mano</h1>
 				<p class="lead">Aqui encontraras los diferentes equipos informaticos que tenemos disponibles</p>
 				<h1 class="mt-5"></h1>
+				{{#equipoElegido}}
+				<p class="lead"><b><i>¡HAS ALCANZADO EL LIMITE DE EQUIPOS RESERVADOS!</i></b></p>
+				{{/equipoElegido}}
 				<h1 class="mt-5">EQUIPOS LIBRES PARA SU UTILIZACION</h1>
 				{{^listaEquipo}}
 				<p class="lead">Lo sentimos, pero no disponemos de equipos libres :(</p>
@@ -91,7 +94,12 @@
 							<td style="visibility:hidden"><input type="number" name="idEquipo" value="{{id}}"/></td>
 							<td>{{sistemaOperativo}}</td>
 							<td>{{localizacion}}</td>
+							{{#equipoElegido}}
+							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR" disabled/></td>
+							{{/equipoElegido}}
+							{{^equipoElegido}}
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
+							{{/equipoElegido}}
 						</form>
 						{{/visibleCerrarSesion}}
 					</tr>

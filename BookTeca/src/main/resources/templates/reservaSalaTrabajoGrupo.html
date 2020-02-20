@@ -64,6 +64,9 @@
 				<h1 class="mt-5">Amplia coleccion de recursos al alcance de tu mano</h1>
 				<p class="lead">Aqui encontraras las diferentes salas de trabajo para grupos que tenemos disponibles</p>
 				<h1 class="mt-5"></h1>
+				{{#salaElegida}}
+				<p class="lead"><b><i>¡HAS ALCANZADO EL LIMITE DE SALAS RESERVADAS!</i></b></p>
+				{{/salaElegida}}
 				<h2 class="mt-5">SALAS LIBRES PARA SU UTILIZACION</h2>
 				{{^listaSTG}}
 				<p class="lead">Lo sentimos, pero no disponemos de salas libres :(</p>
@@ -104,7 +107,12 @@
 							{{^compartida}}
 							<td>No</td>
 							{{/compartida}}
+							{{#salaElegida}}
+							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR" disabled/></td>
+							{{/salaElegida}}
+							{{^salaElegida}}
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
+							{{/salaElegida}}
 						</form>
 						{{/visibleCerrarSesion}}
 

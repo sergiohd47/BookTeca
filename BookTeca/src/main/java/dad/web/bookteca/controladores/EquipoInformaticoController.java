@@ -34,6 +34,10 @@ public class EquipoInformaticoController {
 		} else {
 			model.addAttribute("visibleCerrarSesion",true);
 			if(!usuario.getAdministrador()) {
+				if(usuario.getPuestoInformatico() != null)
+					model.addAttribute("equipoElegido",true);
+				else
+					model.addAttribute("equipoElegido",false);
 				listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findByDisponible(true);
 				model.addAttribute("visibleTabla",!listaEquipo.isEmpty());
 				model.addAttribute("listaEquipo",listaEquipo);
@@ -41,7 +45,7 @@ public class EquipoInformaticoController {
 		}
 		return "reservaEquipoInformatico";
 	}
-	@RequestMapping("/equipoReservado")//reservarEquipos
+	@RequestMapping("/equipoReservado")
 	public String equipoReservado(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo) {
 		EquipoInformatico equipo = equiposInformaticos.findById(idEquipo);
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
@@ -54,7 +58,7 @@ public class EquipoInformaticoController {
 		model.addAttribute("usuarioAdmin",false);
 		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
-		return "sesionIniciada";//reservaEquipoInfromatico
+		return "sesionIniciada";
 	}
 	
 	/*@RequestMapping("/equipoReservaEliminado")//reservaEquipoInfromatico

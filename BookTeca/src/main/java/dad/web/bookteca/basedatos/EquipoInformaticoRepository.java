@@ -14,7 +14,7 @@ public interface EquipoInformaticoRepository extends JpaRepository<EquipoInforma
 	
 	ArrayList<EquipoInformatico> findBySistemaOperativo(String so);
 	
-	ArrayList<EquipoInformatico> findByIdUsuario(Usuario idUsuario);
+	EquipoInformatico findByIdUsuario(Usuario idUsuario);
 	
 	EquipoInformatico findById(long id);
 	

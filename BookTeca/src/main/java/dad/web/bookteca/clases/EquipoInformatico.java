@@ -17,9 +17,9 @@ public class EquipoInformatico {
 	@Column
 	private boolean disponible;
 	
-	
 	@OneToOne(mappedBy="puestoInformatico")
 	private Usuario idUsuario;
+	
 	@Column
 	private Date fechaReserva;
 	

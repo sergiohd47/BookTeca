@@ -59,44 +59,37 @@ public class LibroController {
 		}
 		return "busquedaLibros";
 	}
-	@RequestMapping("/libroReservado")//reservarLibros
+	@RequestMapping("/libroReservado")
 	public String libroReservado(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro) {
-		//Optional<Libro> oLibro = libros.findById(idLibro);
 		Libro libro = libros.findById(idLibro);
-		/*if (oLibro.get() != null) {
-			libro = oLibro.get();
-			return "";//buscadorLibros
-		}*/
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
-		boolean reservado = usuario.reservarLibro(libro);
-		if(reservado) {
-			model.addAttribute("reservado",true);
+		if(usuario.reservarLibro(libro)) {
 			libros.save(libro);
 			usuarios.save(usuario);
 			sesionUsuario.setAttribute("infoUsuario",usuario);
-			model.addAttribute("usuario",true);
-			model.addAttribute("usuarioAdmin",false);
-			InicioController.listaLibrosDestacados=new ArrayList<>();
-			ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
-			Collections.shuffle(listaLibros);
-			int i = 0;
-			int j = 0;
-			ArrayList<String> nombresLibros = new ArrayList<>(InicioController.NUMERO_RECURSOS_MAIN);
-			while((i < InicioController.NUMERO_RECURSOS_MAIN)&&(j<listaLibros.size())){
-				if(!nombresLibros.contains(listaLibros.get(j).getNombre()) && (listaLibros.get(j).isDisponible())) {
-					nombresLibros.add(listaLibros.get(j).getNombre());
-					InicioController.listaLibrosDestacados.add(listaLibros.get(j));
-					if(InicioController.listaLibrosDestacados.size()==InicioController.NUMERO_RECURSOS_MAIN) {
-						break;
-					}
-					j++;
-					i++;
-				} else
-					j++;
-			}
-			model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
-			model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		}
+		model.addAttribute("usuario",true);
+		model.addAttribute("usuarioAdmin",false);
+		InicioController.listaLibrosDestacados=new ArrayList<>();
+		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
+		Collections.shuffle(listaLibros);
+		int i = 0;
+		int j = 0;
+		ArrayList<String> nombresLibros = new ArrayList<>(InicioController.NUMERO_RECURSOS_MAIN);
+		while((i < InicioController.NUMERO_RECURSOS_MAIN)&&(j<listaLibros.size())){
+			if(!nombresLibros.contains(listaLibros.get(j).getNombre()) && (listaLibros.get(j).isDisponible())) {
+				nombresLibros.add(listaLibros.get(j).getNombre());
+				InicioController.listaLibrosDestacados.add(listaLibros.get(j));
+				if(InicioController.listaLibrosDestacados.size()==InicioController.NUMERO_RECURSOS_MAIN) {
+					break;
+				}
+				j++;
+				i++;
+			} else
+				j++;
+		}
+		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
+		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		return "sesionIniciada";
 	}
 	
