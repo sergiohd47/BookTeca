@@ -67,12 +67,7 @@ public class RevistaController {
 	}
 	@RequestMapping("/revistaReservada")
 	public String revistaReservada(Model model, HttpSession sesionUsuario, @RequestParam long idRevista) {
-		//Optional<Revista> oEquipo = revistas.findById(idRevista);
 		Revista revista = revistas.findById(idRevista);;
-		/*if (oRevista.get() != null) {
-			revista = oRevista.get();
-			return "";//busquedaRevistas
-		}*/
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if (usuario.reservarRevista(revista)){
 			revistas.save(revista);
@@ -104,20 +99,14 @@ public class RevistaController {
 		return "sesionIniciada";
 	}
 
-	/*@RequestMapping("/revistaReservaEliminada")
-	public String revistaReservaEliminada(Model model, HttpSession sesionUsuario, @RequestParam long idRevista)  {
-		//Optional<Revista> oEquipo = revistas.findById(idRevista);
+	@RequestMapping("/revistaDevuelta")
+	public String revistaDevuelta(Model model, HttpSession sesionUsuario, @RequestParam long idRevista)  {
 		Revista revista = revistas.findById(idRevista);
-		//if (oRevista.get() != null) {
-			//revista = oRevista.get();
-			//return "";//busquedaLibros
-		//}
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
-		if (usuario.quitarRevista(revista)){
-			revistas.save(revista);
-			usuarios.save(usuario);
-			sesionUsuario.setAttribute("infoUsuario",usuario);
-		}
+		usuario.quitarRevista(revista);
+		revistas.save(revista);
+		usuarios.save(usuario);
+		sesionUsuario.setAttribute("infoUsuario",usuario);
 		model.addAttribute("usuario",true);
 		model.addAttribute("usuarioAdmin",false);
 		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
@@ -141,5 +130,5 @@ public class RevistaController {
 		}
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		return "sesionIniciada";
-	}*/
+	}
 }

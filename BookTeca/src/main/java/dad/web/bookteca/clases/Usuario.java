@@ -24,10 +24,10 @@ public class Usuario {
 	@Column
 	private String contrasenya;
 	
-	@OneToMany( cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="idUsuario")
 	private List<Libro> librosReservados;
 	
-	@OneToMany( cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="idUsuario")
 	private List<Revista> revistasReservadas; 
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -164,25 +164,15 @@ public class Usuario {
 		return false;
 	}
 	
-	public boolean quitarLibro(Libro l) {
-		if (l.getIdUsuario()==this) {
-			l.quitar();
-			this.removeLibrosReservados(l);
-			return true;
-		}
-		
-		return false;
+	public void quitarLibro(Libro l) {
+		l.quitar();
+		this.removeLibrosReservados(l);
 	}
 	
 	
-	public boolean quitarRevista(Revista r) {
-		if (r.getIdUsuario()==this) {
-			r.quitar();
-			this.removeRevistasReservadas(r);
-			return true;
-		}
-		
-		return false;
+	public void quitarRevista(Revista r) {
+		r.quitar();
+		this.removeRevistasReservadas(r);
 	}
 	
 	public boolean reservarRevista(Revista r) {
@@ -202,7 +192,6 @@ public class Usuario {
 		return false;
 	}
 	
-
 	public boolean reservarPuestoInformatico(EquipoInformatico puestoInformatico) {
 		if (puestoInformatico.isDisponible()){
 			if (this.getPuestoInformatico()==null) {

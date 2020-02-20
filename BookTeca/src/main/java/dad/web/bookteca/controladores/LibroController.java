@@ -94,84 +94,37 @@ public class LibroController {
 	}
 	
 	
-	/*@RequestMapping("/libroReservaEliminado")
-	public String libroReservaEliminado(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro) {
-		//Optional<Libro> oLibro = libros.findById(idLibro);
+	@RequestMapping("/libroDevuelto")
+	public String libroDevuelto(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro) {
 		Libro libro = libros.findById(idLibro);
-		//if (oLibro.get() != null) {
-			//libro = oLibro.get();
-			//return "";//buscadorLibros
-		//}
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
-		if (usuario.quitarLibro(libro)) {
-			libro.setIsDisponible(true);
-			libros.save(libro);
-			usuarios.save(usuario);
-			sesionUsuario.setAttribute("infoUsuario",usuario);
-			model.addAttribute("nombre",usuario.getNombre());
-			model.addAttribute("usuario",true);
-			model.addAttribute("usuarioAdmin",false);
-			InicioController.listaLibrosDestacados=new ArrayList<>();
-			ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
-			Collections.shuffle(listaLibros);
-			int i = 0;
-			int j = 0;
-			ArrayList<String> nombresLibros = new ArrayList<>(InicioController.NUMERO_RECURSOS_MAIN);
-			while((i < InicioController.NUMERO_RECURSOS_MAIN)&&(j<listaLibros.size())){
-				if(!nombresLibros.contains(listaLibros.get(j).getNombre()) && (listaLibros.get(j).isDisponible())) {
-					nombresLibros.add(listaLibros.get(j).getNombre());
-					InicioController.listaLibrosDestacados.add(listaLibros.get(j));
-					if(InicioController.listaLibrosDestacados.size()==InicioController.NUMERO_RECURSOS_MAIN) {
-						break;
-					}
-					j++;
-					i++;
-				} else
-					j++;
-			}
-			model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
-			model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
+		usuario.quitarLibro(libro);
+		libros.save(libro);
+		usuarios.save(usuario);
+		sesionUsuario.setAttribute("infoUsuario",usuario);
+		model.addAttribute("nombre",usuario.getNombre());
+		model.addAttribute("usuario",true);
+		model.addAttribute("usuarioAdmin",false);
+		InicioController.listaLibrosDestacados=new ArrayList<>();
+		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
+		Collections.shuffle(listaLibros);
+		int i = 0;
+		int j = 0;
+		ArrayList<String> nombresLibros = new ArrayList<>(InicioController.NUMERO_RECURSOS_MAIN);
+		while((i < InicioController.NUMERO_RECURSOS_MAIN)&&(j<listaLibros.size())){
+			if(!nombresLibros.contains(listaLibros.get(j).getNombre()) && (listaLibros.get(j).isDisponible())) {
+				nombresLibros.add(listaLibros.get(j).getNombre());
+				InicioController.listaLibrosDestacados.add(listaLibros.get(j));
+				if(InicioController.listaLibrosDestacados.size()==InicioController.NUMERO_RECURSOS_MAIN) {
+					break;
+				}
+				j++;
+				i++;
+			} else
+				j++;
 		}
-		
-		return "sesion";
-	}*/
-	/*
-	@RequestMapping("/libroReservado")//reservarLibros
-	public String libroReservado(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro) {
-		//Optional<Libro> oLibro = libros.findById(idLibro);
-		Libro libro = libros.findById(idLibro);
-		//if (oLibro.get() != null) {
-		//	libro = oLibro.get();
-		//	return "";//buscadorLibros
-		//}
-		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
-		boolean reservado = serviciosUsuario.reservarLibro(usuario,libro);
-		if(reservado) {
-			model.addAttribute("reservado",true);
-			libros.save(libro);
-			usuarios.save(usuario);
-			sesionUsuario.setAttribute("infoUsuario",usuario);
-			model.addAttribute("usuario",true);
-			model.addAttribute("usuarioAdmin",false);
-			InicioController.listaLibrosDestacados=new ArrayList<>();
-			ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
-			Collections.shuffle(listaLibros);
-			int i = 0;
-			int j = 0;
-			ArrayList<String> nombresLibros = new ArrayList<>(InicioController.NUMERO_RECURSOS_MAIN);
-			do {
-				if(!nombresLibros.contains(listaLibros.get(j).getNombre()) && (listaLibros.get(j).isDisponible())) {
-					nombresLibros.add(listaLibros.get(j).getNombre());
-					InicioController.listaLibrosDestacados.add(listaLibros.get(j));
-					j++;
-					i++;
-				} else
-					j++;
-			} while(i < InicioController.NUMERO_RECURSOS_MAIN);
-			model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
-			model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
-		}
+		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
+		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		return "sesionIniciada";
 	}
-	*/
 }
