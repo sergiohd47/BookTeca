@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!-- <html lang="es"> -->
 
 <head>
 <meta charset="utf-8">
@@ -70,6 +71,7 @@
 				<p class="lead">Puedes buscar por el nombre, autor, genero o editorial del libro</p>
 				<h1 class="mt-5"></h1>
 				<form th:action="@{/busquedaLibros}" method="post">
+				<!-- <form action="/busquedaLibros" method="post"> -->
 					<div>
 						<label for="busquedaLibros">Busqueda: </label> <input type="search"
 							id="palabraClaveLibro" name="palabraClaveLibro"

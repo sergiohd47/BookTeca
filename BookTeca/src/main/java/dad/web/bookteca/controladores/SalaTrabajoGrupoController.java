@@ -67,28 +67,19 @@ public class SalaTrabajoGrupoController {
 		return "sesionIniciada";
 	}
 	
-	/*
-	@RequestMapping("/salaReservaEliminada")
-	public String salaReservaEliminada(Model model, HttpSession sesionUsuario, @RequestParam long idSala) {
-		//Optional<SalaTrabajoGrupo> oSala = salasTrabajoGrupo.findById(idSala);
+	@RequestMapping("/salaDesocupada")
+	public String salaDesocupada(Model model, HttpSession sesionUsuario, @RequestParam long idSala) {
 		SalaTrabajoGrupo sala = salasTrabajoGrupo.findById(idSala);
-		//if (oSala.get() != null) {
-			//sala = oSala.get();
-			//return "";//reservaSalaTrabajoGrupo
-		//}
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
-		if (usuario.quitarSalaTrabajoGrupo(sala)){
-			salasTrabajoGrupo.save(sala);
-			usuarios.save(usuario);
-			sesionUsuario.setAttribute("infoUsuario",usuario);
-		}
+		usuario.quitarSalaTrabajoGrupo(sala);
+		salasTrabajoGrupo.save(sala);
+		usuarios.save(usuario);
+		sesionUsuario.setAttribute("infoUsuario",usuario);
 		model.addAttribute("usuario",true);
 		model.addAttribute("usuarioAdmin",false);
 		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
-		return "sesionIniciada";//reservaSalaTrabajoGrupo
+		return "sesionIniciada";
 	}
-	*/
-
 	
 }

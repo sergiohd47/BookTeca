@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!-- <html lang="es"> -->
 
 <head>
 <meta charset="utf-8">
@@ -70,6 +71,7 @@
 				<p class="lead">Puedes buscar por el nombre, autor, genero o editorial de la revista</p>
 				<h1 class="mt-5"></h1>
 				<form th:action="@{/busquedaRevistas}" method="post">
+				<!-- <form action="/busquedaRevistas" method="post"> -->
 					<div>
 						<label for="busquedaRevista">Busqueda: </label> <input type="search"
 							id="palabraClaveRevista" name="palabraClaveRevista"

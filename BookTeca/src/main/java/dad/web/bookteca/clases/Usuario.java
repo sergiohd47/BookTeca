@@ -48,6 +48,8 @@ public class Usuario {
 		this.administrador = admin;
 		this.librosReservados = new ArrayList<>(MAX);
 		this.revistasReservadas = new ArrayList<>(MAX);
+		this.puestoInformatico = null;
+		this.salaTrabajo = null;
 	}
 	
 	public long getId() {
@@ -213,13 +215,9 @@ public class Usuario {
 		return false;
 	}
 	
-	public boolean quitarPuestoInformatico(EquipoInformatico puestoInformatico) {
-		if (puestoInformatico.getIdUsuario()==this) {
-			puestoInformatico.quitar();
-			this.setPuestoInformatico(null);
-			return true;
-		}
-		return false;
+	public void quitarPuestoInformatico(EquipoInformatico puestoInformatico) {
+		puestoInformatico.quitar();
+		this.setPuestoInformatico(null);
 	}
 	
 	public boolean reservarSalaTrabajoGrupo(SalaTrabajoGrupo salaTrabajo) {
@@ -234,13 +232,9 @@ public class Usuario {
 		return false;
 	}
 	
-	public boolean quitarSalaTrabajoGrupo(SalaTrabajoGrupo salaTrabajo) {
-		if (salaTrabajo.getIdUsuario()==this) {
-			salaTrabajo.quitar();
-			this.setSalaTrabajoGrupo(null);
-			return true;
-		}
-		return false;
+	public void quitarSalaTrabajoGrupo(SalaTrabajoGrupo salaTrabajo) {
+		salaTrabajo.quitar();
+		this.setSalaTrabajoGrupo(null);
 	}
 	
 	public boolean esContrasenya(String contrasenya) {
