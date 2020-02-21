@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!--<html lang="es" xmlns:th="http://www.thymeleaf.org">-->
+<html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, 
@@ -9,7 +10,7 @@
 </head>
 
 <body>
-	<form id="addroom" th:action="@{/salaAñadida}" method="post">
+	<form id="addroom" action="/salaAñadida" method="post">
 		<div class="form-sesion">
 			<p>
 				<label><b>Capacidad</b></label><br> 
@@ -23,6 +24,7 @@
 				<label for="comp"><b>Compartida</b></label><br>
 				<input type="checkbox" id="comp" name="compartida"/>
 			</p>
+			<input type="hidden" name="_csrf" value={{token}}>
 			<p><input id="button-addroom" type="submit" value="Añadir"></p>
 		</div>
 	</form>
