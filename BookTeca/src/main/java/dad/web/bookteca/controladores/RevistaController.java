@@ -3,6 +3,7 @@ package dad.web.bookteca.controladores;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class RevistaController {
 	private UsuarioRepository usuarios;
 	
 	@RequestMapping("/buscadorRevistas")
-	public String buscadorRevista(Model model, HttpSession usuarioSesion) {
+	public String buscadorRevista(Model model, HttpSession usuarioSesion, HttpServletRequest servlet) {
 		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<Revista> listaRevistasBusqueda=new ArrayList<>();
 		if(InicioController.sesionNoIniciada) {
@@ -42,7 +43,7 @@ public class RevistaController {
 		return "buscadorRevistas";
 	}
 	@RequestMapping("/busquedaRevistas")
-	public String busquedaRevistas(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveRevista") String info) {
+	public String busquedaRevistas(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveRevista") String info, HttpServletRequest servlet) {
 		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<Revista> listaRevistas=new ArrayList<>();
 		listaRevistas.addAll(revistas.findByNombreOrEditorialOrGenero(info,info,info));
@@ -66,7 +67,7 @@ public class RevistaController {
 		return "busquedaRevistas";
 	}
 	@RequestMapping("/revistaReservada")
-	public String revistaReservada(Model model, HttpSession sesionUsuario, @RequestParam long idRevista) {
+	public String revistaReservada(Model model, HttpSession sesionUsuario, @RequestParam long idRevista, HttpServletRequest servlet) {
 		Revista revista = revistas.findById(idRevista);;
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if (usuario.reservarRevista(revista)){
@@ -100,7 +101,7 @@ public class RevistaController {
 	}
 
 	@RequestMapping("/revistaDevuelta")
-	public String revistaDevuelta(Model model, HttpSession sesionUsuario, @RequestParam long idRevista)  {
+	public String revistaDevuelta(Model model, HttpSession sesionUsuario, @RequestParam long idRevista, HttpServletRequest servlet)  {
 		Revista revista = revistas.findById(idRevista);
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		usuario.quitarRevista(revista);

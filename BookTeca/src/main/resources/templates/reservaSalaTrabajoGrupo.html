@@ -115,6 +115,7 @@
 							{{^salaElegida}}
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
 							{{/salaElegida}}
+							<input type="hidden" name="_csrf" value={{token}}>
 						</form>
 						{{/visibleCerrarSesion}}
 

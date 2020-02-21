@@ -102,6 +102,7 @@
 							{{^equipoElegido}}
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
 							{{/equipoElegido}}
+							<input type="hidden" name="_csrf" value={{token}}>
 						</form>
 						{{/visibleCerrarSesion}}
 					</tr>

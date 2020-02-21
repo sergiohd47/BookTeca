@@ -1,5 +1,6 @@
 package dad.web.bookteca.controladores;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class AdministradorController {
 	private Usuario usuario;
 	
 	@RequestMapping("/añadirLibro")
-	public String añadirLibro(Model model,HttpSession sesionUsuario) {
+	public String añadirLibro(Model model,HttpSession sesionUsuario, HttpServletRequest servlet) {
 		sesionUsuario.getAttribute("infoUsuario");
 		return "añadirLibro";
 	}
@@ -48,7 +49,7 @@ public class AdministradorController {
 	@RequestMapping("/libroAñadido")
 	public String libroAñadido(Model model, @RequestParam("nombreLibro") String nombre, @RequestParam String autor, 
 			@RequestParam("editorialLibro") String editorial, @RequestParam("generoLibro") String genero, 
-			HttpSession sesionUsuario) {
+			HttpSession sesionUsuario, HttpServletRequest servlet) {
 		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
 		model.addAttribute("nombre",usuario.getNombre());
 		libros.save(new Libro(nombre,autor,editorial,genero));
@@ -56,7 +57,7 @@ public class AdministradorController {
 	}
 	
 	@RequestMapping("/añadirRevista")
-	public String añadirRevista(Model model,HttpSession sesionUsuario) {
+	public String añadirRevista(Model model,HttpSession sesionUsuario, HttpServletRequest servlet) {
 		sesionUsuario.getAttribute("infoUsuario");
 		return "añadirRevista";
 	}
@@ -64,7 +65,7 @@ public class AdministradorController {
 	@RequestMapping("/revistaAñadida")
 	public String revistaAñadida(Model model, @RequestParam("nombreRevista") String nombre, 
 			@RequestParam("editorialRevista") String editorial, @RequestParam int fasciculo, 
-			@RequestParam("generoRevista") String genero, HttpSession sesionUsuario) {
+			@RequestParam("generoRevista") String genero, HttpSession sesionUsuario, HttpServletRequest servlet) {
 		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
 		model.addAttribute("nombre",usuario.getNombre());
 		revistas.save(new Revista(nombre,editorial,fasciculo,genero));
@@ -72,7 +73,7 @@ public class AdministradorController {
 	}
 	
 	@RequestMapping("/añadirSalaTrabajoGrupo")
-	public String añadirSalaTrabajoGrupo(Model model, HttpSession sesionUsuario) {
+	public String añadirSalaTrabajoGrupo(Model model, HttpSession sesionUsuario, HttpServletRequest servlet) {
 		sesionUsuario.getAttribute("infoUsuario");
 		return "añadirSalaTrabajoGrupo";
 	}
@@ -80,7 +81,7 @@ public class AdministradorController {
 	@RequestMapping("/salaAñadida")
 	public String salaTrabajoGrupoAñadida(Model model, @RequestParam("capacidadSala") int capacidad, 
 			@RequestParam("localizacionSala") String localizacion, @RequestParam(defaultValue = "false") boolean compartida, 
-			HttpSession sesionUsuario) {
+			HttpSession sesionUsuario, HttpServletRequest servlet) {
 		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
 		model.addAttribute("nombre",usuario.getNombre());
 		salasTrabajoGrupo.save(new SalaTrabajoGrupo(capacidad,localizacion,compartida));
@@ -88,14 +89,14 @@ public class AdministradorController {
 	}
 
 	@RequestMapping("/añadirEquipoInformatico")
-	public String añadirEquipo(Model model, HttpSession sesionUsuario) {
+	public String añadirEquipo(Model model, HttpSession sesionUsuario, HttpServletRequest servlet) {
 		sesionUsuario.getAttribute("infoUsuario");
 		return "añadirEquipoInformatico";
 	}
 	
 	@RequestMapping("/equipoAñadido")
 	public String equipoAñadido(Model model, @RequestParam("soEquipo") String so, 
-			@RequestParam("localizacionEquipo") String localizacion, HttpSession sesionUsuario) {
+			@RequestParam("localizacionEquipo") String localizacion, HttpSession sesionUsuario, HttpServletRequest servlet) {
 		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
 		model.addAttribute("nombre",usuario.getNombre());
 		equiposInformaticos.save(new EquipoInformatico(so,localizacion));
@@ -103,14 +104,14 @@ public class AdministradorController {
 	}
 
 	@RequestMapping("/administrarUsuarios")
-	public String administrarUsuarios(Model model, HttpSession sesionUsuario) {
+	public String administrarUsuarios(Model model, HttpSession sesionUsuario, HttpServletRequest servlet) {
 		sesionUsuario.getAttribute("infoUsuario");
 		return "administrarUsuarios";
 	}
 	
 	@RequestMapping("/busquedaUsuarios")
 	public String busquedaUsuarios(Model model, @RequestParam("emailUsuario") String emailNuevoAdmin, 
-			HttpSession sesionUsuario) {
+			HttpSession sesionUsuario, HttpServletRequest servlet) {
 		sesionUsuario.getAttribute("infoUsuario");
 		usuario=usuarios.findByEmail(emailNuevoAdmin);
 		model.addAttribute("usuario",usuario);
@@ -127,7 +128,7 @@ public class AdministradorController {
 	}
 	
 	@RequestMapping("/usuarioAdministrado")
-	public String usuarioAdministrado(Model model, HttpSession sesionUsuario, @RequestParam String emailUsuario) {
+	public String usuarioAdministrado(Model model, HttpSession sesionUsuario, @RequestParam String emailUsuario, HttpServletRequest servlet) {
 		Usuario admin =(Usuario) sesionUsuario.getAttribute("infoUsuario");
 		model.addAttribute("nombre",admin.getNombre());
 		usuario = usuarios.findByEmail(emailUsuario);

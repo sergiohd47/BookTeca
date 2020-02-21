@@ -29,14 +29,12 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="inicio">Inicio</a></li>
-					{{#usuario}}
 					<li class="nav-item"><a class="nav-link" href="buscadorLibros">Libros</a></li>
 					<li class="nav-item"><a class="nav-link" href="buscadorRevistas">Revistas</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="reservaSalaTrabajoGrupo">Sala Trabajo En Grupo</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="reservaEquipoInformatico">Equipos Informaticos</a></li>
-					{{/usuario}}
 					<li class="nav-item active"><a class="nav-link" href="miPerfil">Mi Perfil
 						<span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="sesionCerrada">Cerrar Sesion</a></li> 
@@ -52,6 +50,7 @@
 				<h1 class="mt-5"></h1>
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
 				<h1 class="mt-5">Hola {{nombre}}</h1>
+				{{#usuario}}
 				<p class="lead">Desde aqui, puedes mirar el estado de tus reservas o editar tu perfil</p>
 				<a href="editarPerfil" class="btn btn-success">EDITAR PERFIL</a>
 				<h1 class="mt-5"></h1>
@@ -63,19 +62,27 @@
 				{{#visibleTablaLibros}}
 				<table border="1" class="lead" align="center">
 					<tr>
+						<th style="visibility:hidden">ID</th>
 						<th>NOMBRE</th>
 						<th>AUTOR</th>
 						<th>EDITORIAL</th>
 						<th>GENERO</th>
 						<th>FIN DE RESERVA</th>
+						<th style="visibility:hidden">DEVOLVER</th>
 					</tr>
 					{{#listaLibros}}
 					<tr>
-						<td>{{nombre}}</td>
-						<td>{{autor}}</td>
-						<td>{{editorial}}</td>
-						<td>{{genero}}</td>
-						<td>{{diaFinReserva}}</td>
+						<!-- <form th:action="@{/libroDevuelto}" method="post"> -->
+						<form action="/libroDevuelto" method="post">
+							<td style="visibility:hidden"><input type="number" name="idLibro" value="{{id}}"/></td>
+							<td>{{nombre}}</td>
+							<td>{{autor}}</td>
+							<td>{{editorial}}</td>
+							<td>{{genero}}</td>
+							<td>{{fecFin}}</td>
+							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DEVOLVER"/></td>
+							<input type="hidden" name="_csrf" value={{token}}>
+						</form>
 					</tr>
 					{{/listaLibros}}
 				</table>
@@ -88,70 +95,101 @@
 				{{#visibleTablaRevistas}}
 				<table border="1" class="lead" align="center">
 					<tr>
+						<th style="visibility:hidden">ID</th>
 						<th>NOMBRE</th>
 						<th>EDITORIAL</th>
 						<th>FASCICULOS</th>
 						<th>GENERO</th>
 						<th>FIN DE RESERVA</th>
+						<th style="visibility:hidden">DEVOLVER</th>
 					</tr>
 					{{#listaRevistas}}
 					<tr>
-						<td>{{nombre}}</td>
-						<td>{{editorial}}</td>
-						<td>{{fasciculo}}</td>
-						<td>{{genero}}</td>
-						<td>{{diaFinReserva}}</td>
+						<!-- <form th:action="@{/revistaDevuelta}" method="post"> -->
+						<form action="/revistaDevuelta" method="post">
+							<td style="visibility:hidden"><input type="number" name="idRevista" value="{{id}}"/></td>
+							<td>{{nombre}}</td>
+							<td>{{editorial}}</td>
+							<td>{{fasciculo}}</td>
+							<td>{{genero}}</td>
+							<td>{{fecFin}}</td>
+							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DEVOLVER"/></td>
+							<input type="hidden" name="_csrf" value={{token}}>
+						</form>
 					</tr>
 					{{/listaRevistas}}
 				</table>
 				{{/visibleTablaRevistas}}
 				<h1 class="mt-5"></h1>
-				<p class="lead">Salas de trabajo reservada:</p>
+				<p class="lead">Sala de trabajo reservada:</p>
 				{{^STG}}
-				<p class="lead">Parece que no tienes salas reservadas.</p>
+				<p class="lead">Parece que no tienes ninguna sala reservada.</p>
 				{{/STG}}
-				{{#visibleTablaSTG}}
+				{{#visibleSTG}}
 				<table border="1" class="lead" align="center">
 					<tr>
+						<th style="visibility:hidden">ID</th>
 						<th>CAPACIDAD</th>
 						<th>LOCALIZACION</th>
 						<th>COMPARTIDA</th>
 						<th>FIN DE RESERVA</th>
+						<th style="visibility:hidden">DEVOLVER</th>
 					</tr>
 					{{#STG}}
 					<tr>
-						<td>{{capacidad}}</td>
-						<td>{{localizacion}}</td>
-						<td>{{compartida}}</td>
-						<td>{{diaFinReserva}}</td>
+						<!-- <form th:action="@{/salaDesocupada}" method="post"> -->
+						<form action="/salaDesocupada" method="post">
+							<td style="visibility:hidden"><input type="number" name="idSala" value="{{id}}"/></td>
+							<td>{{capacidad}}</td>
+							<td>{{localizacion}}</td>
+							{{#compartida}}
+							<td>Si</td>
+							{{/compartida}}
+							{{^compartida}}
+							<td>No</td>
+							{{/compartida}}
+							<td>{{fechaReserva}}</td>
+							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DESOCUPAR"/></td>
+							<input type="hidden" name="_csrf" value={{token}}>
+						</form>
 					</tr>
 					{{/STG}}
 				</table>
-				{{/visibleTablaSTG}}
+				{{/visibleSTG}}
 				<h1 class="mt-5"></h1>
-				<p class="lead">Equipos informticos reservados:</p>
-				{{^listaEquipos}}
-				<p class="lead">Parece que no tienes equipos reservados.</p>
-				{{/listaEquipos}}
-				{{#visibleTablaEquipos}}
+				<p class="lead">Equipo informatico reservado:</p>
+				{{^equipo}}
+				<p class="lead">Parece que no tienes nungún equipo reservado.</p>
+				{{/equipo}}
+				{{#visibleEquipo}}
 				<table border="1" class="lead" align="center">
 					<tr>
+						<th style="visibility:hidden">ID</th>
 						<th>SISTEMA OPERATIVO</th>
 						<th>LOCALIZACION</th>
 						<th>FIN DE RESERVA</th>
+						<th style="visibility:hidden">DEVOLVER</th>
 					</tr>
-					{{#listaEquipos}}
+					{{#equipo}}
 					<tr>
-						<td>{{sistemaOperativo}}</td>
-						<td>{{localizacion}}</td>
-						<td>{{diaFinReserva}}</td>
+						<!-- <form th:action="@{/equipoDesocupado}" method="post"> -->
+						<form action="/equipoDesocupado" method="post">
+							<td style="visibility:hidden"><input type="number" name="idEquipo" value="{{id}}"/></td>
+							<td>{{sistemaOperativo}}</td>
+							<td>{{localizacion}}</td>
+							<td>{{fechaReserva}}</td>
+							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DESOCUPAR"/></td>
+							<input type="hidden" name="_csrf" value={{token}}>
+						</form>
 					</tr>
-					{{/listaEquipos}}
+					{{/equipo}}
 				</table>
-				{{/visibleTablaEquipos}}
+				{{/visibleEquipo}}
+				{{/usuario}}
 			</div>
 		</div>
 	</div>
+
 
 	<!-- Bootstrap core JavaScript -->
 	<script src="vendor/jquery/jquery.slim.min.js"></script>

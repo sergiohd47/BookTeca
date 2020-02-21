@@ -96,6 +96,7 @@
 							<td>{{genero}}</td>
 							<td>{{fecFin}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DEVOLVER"/></td>
+							<input type="hidden" name="_csrf" value={{token}}>
 						</form>
 					</tr>
 					{{/listaLibros}}
@@ -128,6 +129,7 @@
 							<td>{{genero}}</td>
 							<td>{{fecFin}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DEVOLVER"/></td>
+							<input type="hidden" name="_csrf" value={{token}}>
 						</form>
 					</tr>
 					{{/listaRevistas}}
@@ -163,6 +165,7 @@
 							{{/compartida}}
 							<td>{{fechaReserva}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DESOCUPAR"/></td>
+							<input type="hidden" name="_csrf" value={{token}}>
 						</form>
 					</tr>
 					{{/STG}}
@@ -191,6 +194,7 @@
 							<td>{{localizacion}}</td>
 							<td>{{fechaReserva}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DESOCUPAR"/></td>
+							<input type="hidden" name="_csrf" value={{token}}>
 						</form>
 					</tr>
 					{{/equipo}}

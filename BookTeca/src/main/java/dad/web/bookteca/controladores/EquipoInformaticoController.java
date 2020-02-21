@@ -2,6 +2,7 @@ package dad.web.bookteca.controladores;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class EquipoInformaticoController {
 	private UsuarioRepository usuarios;
 	
 	@RequestMapping("/reservaEquipoInformatico")
-	public String reservaEquipoInformatico(Model model, HttpSession usuarioSesion) {
+	public String reservaEquipoInformatico(Model model, HttpSession usuarioSesion, HttpServletRequest servlet) {
 		ArrayList<EquipoInformatico> listaEquipo=new ArrayList<>();
 		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
 		if(InicioController.sesionNoIniciada) {
@@ -46,7 +47,7 @@ public class EquipoInformaticoController {
 		return "reservaEquipoInformatico";
 	}
 	@RequestMapping("/equipoReservado")
-	public String equipoReservado(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo) {
+	public String equipoReservado(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo, HttpServletRequest servlet) {
 		EquipoInformatico equipo = equiposInformaticos.findById(idEquipo);
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if (usuario.reservarPuestoInformatico(equipo)){
@@ -62,7 +63,7 @@ public class EquipoInformaticoController {
 	}
 	
 	@RequestMapping("/equipoDesocupado")
-	public String equipoDesocupado(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo) {
+	public String equipoDesocupado(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo, HttpServletRequest servlet) {
 		EquipoInformatico equipo = equiposInformaticos.findById(idEquipo);
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		usuario.quitarPuestoInformatico(equipo);

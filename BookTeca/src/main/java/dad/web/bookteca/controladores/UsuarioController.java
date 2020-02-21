@@ -45,16 +45,16 @@ public class UsuarioController {
 	
 	
 	@RequestMapping("/iniciarSesion")
-	public String iniciarSesion(Model model) {
+	public String iniciarSesion(Model model,HttpServletRequest servlet) {
 		return "iniciarSesion";
 	}
 
 	@RequestMapping("/sesionIniciada")
 	public String sesionIniciada(Model model, @RequestParam("nombreUsuario") String email,@RequestParam String contrasenya, 
-			HttpSession usuarioSesion, HttpServletRequest request) {
+			HttpSession usuarioSesion, HttpServletRequest servlet) {
 		Usuario usuario=usuarios.findByEmailAndContrasenya(email,contrasenya);
 		if(usuario==null)
-			return iniciarSesion(model);
+			return iniciarSesion(model,servlet);
 		usuarioSesion.setAttribute("infoUsuario",usuario);
 		InicioController.sesionNoIniciada = false;
 		if(!usuario.getAdministrador()) {
@@ -77,7 +77,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/inicio")
-	public String inicio(Model model, HttpSession sesionUsuario) {
+	public String inicio(Model model, HttpSession sesionUsuario, HttpServletRequest servlet) {
 		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
 		InicioController.sesionNoIniciada = false;
 		if(!usuario.getAdministrador()) {
@@ -99,13 +99,13 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/registro")
-	public String registro(Model model) {
+	public String registro(Model model, HttpServletRequest servlet) {
 		return "registro";
 	}
 	@RequestMapping("/iniciarSesionTrasRegistro")
 	public String iniciarSesionTrasRegistro(Model model, @RequestParam("nombreUsuario") String nombre, 
 			@RequestParam("apellidosUsuario") String apellidos, @RequestParam String email,
-			@RequestParam("contrasenya") String contraseña) {
+			@RequestParam("contrasenya") String contraseña, HttpServletRequest servlet) {
 		usuarios.save(new Usuario(nombre,apellidos,contraseña,email,false));
 		model.addAttribute("email",email);
 		model.addAttribute("contraseña",contraseña);
@@ -113,7 +113,7 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/miPerfil")
-	public String miPerfil(Model model,HttpSession sesionUsuario) {
+	public String miPerfil(Model model,HttpSession sesionUsuario, HttpServletRequest servlet) {
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if(!usuario.getAdministrador()) {
 			model.addAttribute("nombre",usuario.getNombre());
@@ -144,7 +144,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/editarPerfil")
-	public String editarPerfil(Model model, HttpSession sesionUsuario ) {
+	public String editarPerfil(Model model, HttpSession sesionUsuario , HttpServletRequest servlet) {
 		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
 		model.addAttribute("nombre",usuario.getNombre());
 		model.addAttribute("apellidos",usuario.getApellidos());
@@ -154,21 +154,21 @@ public class UsuarioController {
 	
 	@RequestMapping("/perfilEditado")
 	public String perfilEditado(Model model, HttpSession sesionUsuario, @RequestParam("nuevoNombreUsuario") String nombre, 
-			@RequestParam("nuevosApellidosUsuario") String apellidos, @RequestParam("nuevaContrasenya") String contrasenya) {
+			@RequestParam("nuevosApellidosUsuario") String apellidos, @RequestParam("nuevaContrasenya") String contrasenya, HttpServletRequest servlet) {
 		Usuario usuarioEditado = (Usuario) sesionUsuario.getAttribute("infoUsuario");
 		usuarioEditado.setNombre(nombre);
 		usuarioEditado.setApellidos(apellidos);
 		usuarioEditado.setContrasenya(contrasenya);
 		usuarios.save(usuarioEditado);
 		sesionUsuario.setAttribute("infoUsuario",usuarioEditado);
-		//String nombreUsuario=usuarioEditado.getNombre()+" "+usuarioEditado.getApellidos();	
+		String nombreUsuario=usuarioEditado.getNombre();	
 		model.addAttribute("nombre",usuarioEditado.getNombre());
 		return "perfilEditado";
 		
 	}
 	
 	@RequestMapping("/sesionCerrada")
-	public String sesionCerrada(Model model) {
+	public String sesionCerrada(Model model, HttpServletRequest servlet) {
 		return "index";
 	}
 	

@@ -3,6 +3,7 @@ package dad.web.bookteca.controladores;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class LibroController {
 	private UsuarioRepository usuarios;
 	
 	@RequestMapping("/buscadorLibros")
-	public String buscadorLibros(Model model, HttpSession usuarioSesion) {
+	public String buscadorLibros(Model model, HttpSession usuarioSesion, HttpServletRequest servlet) {
 		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
 		if(InicioController.sesionNoIniciada)
 			model.addAttribute("visibleIniciarSesion",true);
@@ -36,7 +37,7 @@ public class LibroController {
 	}
 
 	@RequestMapping("/busquedaLibros")
-	public String busquedaLibros(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveLibro") String info) {
+	public String busquedaLibros(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveLibro") String info, HttpServletRequest servlet) {
 		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<Libro>listaLibros=new ArrayList<>();
 		listaLibros.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info,info,info,info));
@@ -60,7 +61,7 @@ public class LibroController {
 		return "busquedaLibros";
 	}
 	@RequestMapping("/libroReservado")
-	public String libroReservado(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro) {
+	public String libroReservado(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro, HttpServletRequest servlet) {
 		Libro libro = libros.findById(idLibro);
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if(usuario.reservarLibro(libro)) {
@@ -95,7 +96,7 @@ public class LibroController {
 	
 	
 	@RequestMapping("/libroDevuelto")
-	public String libroDevuelto(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro) {
+	public String libroDevuelto(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro, HttpServletRequest servlet) {
 		Libro libro = libros.findById(idLibro);
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		usuario.quitarLibro(libro);
