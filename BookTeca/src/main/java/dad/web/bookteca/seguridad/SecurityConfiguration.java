@@ -20,6 +20,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests().antMatchers("/reservaSalaTrabajoGrupo").permitAll();
 		http.authorizeRequests().antMatchers("/reservaEquipoInformatico").permitAll();
 		
+		http.authorizeRequests().antMatchers("/vendor/**").permitAll();
+		http.authorizeRequests().antMatchers("/css/**").permitAll();
+		http.authorizeRequests().antMatchers("/imagenes/**").permitAll();
+		http.authorizeRequests().antMatchers("/js/**").permitAll();
+		
 		//PARTE PRIVADA
 		http.authorizeRequests().anyRequest().authenticated();
 		

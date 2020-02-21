@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,8 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/sesionIniciada")
-	public String sesionIniciada(Model model, @RequestParam("nombreUsuario") String email,@RequestParam String contrasenya, HttpSession usuarioSesion) {
+	public String sesionIniciada(Model model, @RequestParam("nombreUsuario") String email,@RequestParam String contrasenya, 
+			HttpSession usuarioSesion, HttpServletRequest request) {
 		Usuario usuario=usuarios.findByEmailAndContrasenya(email,contrasenya);
 		if(usuario==null)
 			return iniciarSesion(model);
@@ -60,6 +62,7 @@ public class UsuarioController {
 			model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
 			model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		} else {
+			//model.addAttribute("usuarioAdmin",request.isUserInRole("ADMINISTRADOR"));
 			model.addAttribute("usuarioAdmin",true);
 			ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 			model.addAttribute("listaLibros",listaLibros);

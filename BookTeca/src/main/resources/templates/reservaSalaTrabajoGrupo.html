@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!-- <html xmlns:th="http://www.thymeleaf.org"> -->
+<html lang="es">
 
 <head>
 <meta charset="utf-8">
@@ -97,7 +98,8 @@
 						{{/compartida}}
 						{{/visibleIniciarSesion}}
 						{{#visibleCerrarSesion}}
-						<form th:action="@{/salaReservada}" method="post">
+						<!-- <form th:action="@{/salaReservada}" method="post"> -->
+						<form action="/salaReservada" method="post">
 							<td style="visibility:hidden"><input type="number" name="idSala" value="{{id}}"/></td>
 							<td>{{capacidad}}</td>
 							<td>{{localizacion}}</td>
