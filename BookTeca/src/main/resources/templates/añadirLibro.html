@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!--<html lang="es" xmlns:th="http://www.thymeleaf.org"> -->
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, 
@@ -9,26 +9,25 @@
 	<link rel="stylesheet" href="../css/addbookstyles.css">
 </head>
 <body>
-	<form id="addbook" action="/libroAñadido" method="post">
+	<form id="addbook" th:action="/libroAñadido" method="post">
 		<div class="form-sesion">
 			<p>
 				<label><b>Nombre</b></label><br>
-				<input type="text" name="nombreLibro" required>
+				<input type="text" name="nombreLibro" required/>
 			</p>
 			<p>
 				<label><b>Autor</b></label><br>
-				<input type="text" name="autor" required>
+				<input type="text" name="autor" required/>
 			</p>
 			<p>
 				<label><b>Editorial</b></label><br>
-				<input type="text" name="editorialLibro" required>
+				<input type="text" name="editorialLibro" required/>
 			</p>
 			<p>
 				<label><b>Genero</b></label><br>
-				<input type="text" name="generoLibro" required>
+				<input type="text" name="generoLibro" required/>
 			</p>
-			<input type="hidden" name="_csrf" value={{token}}>
-			<p><input id="button-addbook" type="submit" value="Añadir"></p>
+			<p><input id="button-addbook" type="submit" value="Añadir"/></p>
 		</div>
 	</form>
 </body>

@@ -1,7 +1,5 @@
-
 <!DOCTYPE html>
-<!--  <html lang="es" xmlns:th="http://www.thymeleaf.org">-->
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -39,16 +37,14 @@
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
 				<h1 class="mt-5">Zona Administracion de Usuarios</h1>
 				<p class="lead">Desde aqui puedes hacer administracion a los usuarios</p>
-				<form action="/busquedaUsuarios" method="post">
+				<form th:action="/busquedaUsuarios" method="post">
 					<div>
 						<label for="busquedaUsuario">Busqueda por email: </label> <input type="search"
 							id="emailUsuario" name="emailUsuario"
 							placeholder="Escribe el email del usuario" required
-							size="30">
-						<input type="hidden" name="_csrf" value={{token}}>
+							size="30"/>
 						<button>BUSCAR</button>
-						<span class="validity"></span>
-						
+						<span class="validity"></span>	
 					</div>
 				</form>
 			</div>

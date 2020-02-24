@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!-- <html xmlns:th="http://www.thymeleaf.org"> -->
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -157,14 +156,13 @@
 					{{#listaLibrosDestacados}}
 					<tr>
 						<!-- <form th:action="@{/libroReservado}" method="post"> -->
-						<form action="/libroReservado" method="post">
+						<form th:action="/libroReservado" method="post">
 							<td style="visibility:hidden"><input type="number" name="idLibro" value="{{id}}"/></td>
 							<td>{{nombre}}</td>
 							<td>{{autor}}</td>
 							<td>{{editorial}}</td>
 							<td>{{genero}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
-							<input type="hidden" name="_csrf" value={{token}}>
 						</form>
 					</tr>
 					{{/listaLibrosDestacados}}
@@ -183,14 +181,13 @@
 					{{#listaRevistasDestacadas}}
 					<tr>
 						<!-- <form th:action="@{/revistaReservada}" method="post"> -->
-						<form action="/revistaReservada" method="post">
+						<form th:action="/revistaReservada" method="post">
 							<td style="visibility:hidden"><input type="number" name="idRevista" value="{{id}}"/></td>
 							<td>{{nombre}}</td>
 							<td>{{editorial}}</td>
 							<td>{{fasciculo}}</td>
 							<td>{{genero}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
-							<input type="hidden" name="_csrf" value={{token}}>
 						</form>
 					</tr>
 					{{/listaRevistasDestacadas}}

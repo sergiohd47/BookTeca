@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!-- <html xmlns:th="http://www.thymeleaf.org"> -->
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -38,22 +37,21 @@
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
 				<h1 class="mt-5">Acceda  a Bookteca mediante su email y contraseña a su cuenta</h1>
 				<!-- <form id="signin" th:action="@{/sesionIniciada}" method="post"> -->
-				<form id="signin" action="/sesionIniciada" method="post">
+				<form id="signin" th:action="@{/sesionIniciada}" method="post">
 					<div class="form-sesion">
 						<p>
 							<label><b>Usuario</b></label><br> <input type="text"
-								placeholder="xxxxx@gmail.com" name="nombreUsuario" required>
+								placeholder="xxxxx@gmail.com" name="nombreUsuario" required/>
 						</p>
 						<p>
 							<label><b>Contraseña</b></label><br> <input type="password"
 								name="contrasenya"
 								pattern="[A-Za-z][A-Za-z0-9]*[0-9][A-Za-z0-9]*"
 								title="La contraseña debe contener almenos 1 letra mayuscula, 1 letra minuscula y 1 digito"
-								required>
+								required/>
 						</p>
 						<p>
-						<input type="hidden" name="_csrf" value={{token}}>
-							<input id="button-sesion" type="submit" value="Iniciar Sesion">
+							<input id="button-sesion" type="submit" value="Iniciar Sesion"/>
 						</p>
 					</div>
 				</form>

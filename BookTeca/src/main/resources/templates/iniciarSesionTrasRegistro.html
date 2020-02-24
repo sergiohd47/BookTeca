@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!-- <html xmlns:th="http://www.thymeleaf.org"> -->
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -38,19 +37,18 @@
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
 				<h1 class="mt-5">Acceda directamente a BookTeca con su nueva cuenta de usuario</h1>
 				<!-- <form id="signin" th:action="@{/sesionIniciada}" method="post"> -->
-				<form id="signin" action="/sesionIniciada" method="post">
+				<form id="signin" th:action="@{/sesionIniciada}" method="post">
 					<div class="form-sesion">
 						<p>
 							<label><b>Usuario</b></label><br> 
-							<input type="text" name="nombreUsuario" value="{{email}}" required>
+							<input type="text" name="nombreUsuario" value="{{email}}" required/>
 						</p>
 						<p>
 							<label><b>Contraseña</b></label><br> <input type="password" name="contrasenya" 
-							value="{{contraseña}}"required>
+							value="{{contraseña}}"required/>
 						</p>
 						<p>
-						<input type="hidden" name="_csrf" value={{token}}>
-							<input id="button-sesion" type="submit" value="Iniciar Sesion">
+						<input id="button-sesion" type="submit" value="Iniciar Sesion"/>
 						</p>
 					</div>
 				</form>

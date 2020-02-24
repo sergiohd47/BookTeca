@@ -26,14 +26,11 @@ public class UsuarioAuthProvider implements AuthenticationProvider{
 		// TODO Auto-generated method stub
 		String email=authentication.getName();
 		Usuario usuario=usuarios.findByEmail(email);
-		if (usuario == null) {
+		if(usuario == null)
 			 throw new BadCredentialsException("Usuario no encontrado");
-		 }
-		 
 		 String password = (String) authentication.getCredentials();
-		 if (!password.equals(usuario.getContrasenya())) {
+		 if (!password.equals(usuario.getContrasenya()))
 			 throw new BadCredentialsException("Contraseña incorrecta");
-		 }
 		 ArrayList<GrantedAuthority> listaRoles=new ArrayList<>();
 		 if(usuario.getAdministrador()) {
 			 listaRoles.add(new SimpleGrantedAuthority("ADMINISTRADOR"));

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!-- <html xmlns:th="http://www.thymeleaf.org"> -->
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -88,7 +87,7 @@
 					{{#listaLibros}}
 					<tr>
 						<!-- <form th:action="@{/libroDevuelto}" method="post"> -->
-						<form action="/libroDevuelto" method="post">
+						<form th:action="/libroDevuelto" method="post">
 							<td style="visibility:hidden"><input type="number" name="idLibro" value="{{id}}"/></td>
 							<td>{{nombre}}</td>
 							<td>{{autor}}</td>
@@ -96,7 +95,6 @@
 							<td>{{genero}}</td>
 							<td>{{fecFin}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DEVOLVER"/></td>
-							<input type="hidden" name="_csrf" value={{token}}>
 						</form>
 					</tr>
 					{{/listaLibros}}
@@ -121,7 +119,7 @@
 					{{#listaRevistas}}
 					<tr>
 						<!-- <form th:action="@{/revistaDevuelta}" method="post"> -->
-						<form action="/revistaDevuelta" method="post">
+						<form th:action="/revistaDevuelta" method="post">
 							<td style="visibility:hidden"><input type="number" name="idRevista" value="{{id}}"/></td>
 							<td>{{nombre}}</td>
 							<td>{{editorial}}</td>
@@ -129,7 +127,6 @@
 							<td>{{genero}}</td>
 							<td>{{fecFin}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DEVOLVER"/></td>
-							<input type="hidden" name="_csrf" value={{token}}>
 						</form>
 					</tr>
 					{{/listaRevistas}}
@@ -153,7 +150,7 @@
 					{{#STG}}
 					<tr>
 						<!-- <form th:action="@{/salaDesocupada}" method="post"> -->
-						<form action="/salaDesocupada" method="post">
+						<form th:action="/salaDesocupada" method="post">
 							<td style="visibility:hidden"><input type="number" name="idSala" value="{{id}}"/></td>
 							<td>{{capacidad}}</td>
 							<td>{{localizacion}}</td>
@@ -165,7 +162,6 @@
 							{{/compartida}}
 							<td>{{fechaReserva}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DESOCUPAR"/></td>
-							<input type="hidden" name="_csrf" value={{token}}>
 						</form>
 					</tr>
 					{{/STG}}
@@ -188,13 +184,12 @@
 					{{#equipo}}
 					<tr>
 						<!-- <form th:action="@{/equipoDesocupado}" method="post"> -->
-						<form action="/equipoDesocupado" method="post">
+						<form th:action="/equipoDesocupado" method="post">
 							<td style="visibility:hidden"><input type="number" name="idEquipo" value="{{id}}"/></td>
 							<td>{{sistemaOperativo}}</td>
 							<td>{{localizacion}}</td>
 							<td>{{fechaReserva}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DESOCUPAR"/></td>
-							<input type="hidden" name="_csrf" value={{token}}>
 						</form>
 					</tr>
 					{{/equipo}}

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!-- <html xmlns:th="http://www.thymeleaf.org"> -->
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -29,18 +28,17 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					{{#visibleIniciarSesion}}
-					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-					{{/visibleIniciarSesion}}
 					{{#visibleCerrarSesion}}
 					<li class="nav-item"><a class="nav-link" href="inicio">Inicio</a></li>
 					{{/visibleCerrarSesion}}
-					<li class="nav-item"><a class="nav-link" href="buscadorLibros">Libros</a></li>
+					{{#visibleIniciarSesion}}
+					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+					{{/visibleIniciarSesion}}
+					<li class="nav-item active"><a class="nav-link" href="buscadorLibros">Libros
+							<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="buscadorRevistas">Revistas</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="buscadorRevistas">Revistas</a></li>
-					<li class="nav-item active"><a class="nav-link"
-						href="reservaSalaTrabajoGrupo">Sala Trabajo En Grupo
-						<span class="sr-only">(current)</span></a></li>
+						href="reservaSalaTrabajoGrupo">Sala Trabajo En Grupo</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="reservaEquipoInformatico">Equipos Informaticos</a></li>
 					{{#visibleCerrarSesion}}
@@ -49,7 +47,7 @@
 					{{/visibleCerrarSesion}}
 					{{#visibleIniciarSesion}}
 					<li class="nav-item"><a class="nav-link" href="iniciarSesion">Iniciar Sesion</a></li>
-					<li class="nav-item"><a class="nav-link" href="registro">Registro</a></li>
+					<li class="nav-item"><a class="nav-link" href="registro">Registrate</a></li>
 					{{/visibleIniciarSesion}}
 				</ul>
 			</div>
@@ -99,7 +97,7 @@
 						{{/visibleIniciarSesion}}
 						{{#visibleCerrarSesion}}
 						<!-- <form th:action="@{/salaReservada}" method="post"> -->
-						<form action="/salaReservada" method="post">
+						<form th:action="/salaReservada" method="post">
 							<td style="visibility:hidden"><input type="number" name="idSala" value="{{id}}"/></td>
 							<td>{{capacidad}}</td>
 							<td>{{localizacion}}</td>
@@ -115,7 +113,6 @@
 							{{^salaElegida}}
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
 							{{/salaElegida}}
-							<input type="hidden" name="_csrf" value={{token}}>
 						</form>
 						{{/visibleCerrarSesion}}
 

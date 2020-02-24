@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"> <!--  xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -69,14 +69,13 @@
 				{{/visibleIniciarSesion}}
 				<p class="lead">Puedes buscar por el nombre, autor, genero o editorial del libro</p>
 				<h1 class="mt-5"></h1>
-				<form action="/busquedaLibros" method="post">
+				<form th:action="/busquedaLibros" method="post">
 					<div>
 						<label for="busquedaLibros">Busqueda: </label> <input type="search"
 							id="palabraClaveLibro" name="palabraClaveLibro"
 							placeholder="Por ejemplo: Anaya o Romantico o Constitucion Española.." required
-							size="30">
+							size="30"/>
 						<button>BUSCAR</button>
-						<input type="hidden" name="_csrf" value={{token}}>
 						<span class="validity"></span>
 					</div>
 				</form>

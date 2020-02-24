@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!-- <html lang="es" xmlns:th="http://www.thymeleaf.org"> -->
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, 
@@ -10,18 +10,17 @@
 </head>
 
 <body>
-	<form id="addpc" action="/equipoAñadido" method="post">
+	<form id="addpc" th:action="/equipoAñadido" method="post">
 		<div class="form-sesion">
 			<p>
 				<label><b>Sistema Operativo</b></label><br> 
-				<input type="text" name="soEquipo" required>
+				<input type="text" name="soEquipo" required/>
 			</p>
 			<p>
 				<label><b>Localizacion</b></label><br> 
-				<input type="text"name="localizacionEquipo" required placeholder="Equipo 29/14/...">
+				<input type="text"name="localizacionEquipo" required placeholder="Equipo 29/14/..."/>
 			</p>
-			<input type="hidden" name="_csrf" value={{token}}>
-			<p><input id="button-addpc" type="submit" value="Añadir"></p>
+			<p><input id="button-addpc" type="submit" value="Añadir"/></p>
 		</div>
 	</form>
 </body>

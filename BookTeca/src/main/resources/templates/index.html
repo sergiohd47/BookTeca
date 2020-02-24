@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="es"> <!--  xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -29,7 +28,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">Inicio
+					<li class="nav-item active"><a class="nav-link" href="/">Inicio
 							<span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="buscadorLibros">Libros</a></li>
 					<li class="nav-item"><a class="nav-link" href="buscadorRevistas">Revistas</a></li>
@@ -40,10 +39,6 @@
 					{{#visibleIniciarSesion}}
 					<li class="nav-item"><a class="nav-link" href="iniciarSesion">Iniciar Sesion</a></li>
 					<li class="nav-item"><a class="nav-link" href="registro">Registrate</a></li>
-					{{/visibleIniciarSesion}} 
-					{{^visibleIniciarSesion}}
-					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi Perfil</a></li>
-					<li class="nav-item"><a class="nav-link" href="/">Cerrar Sesion</a></li>
 					{{/visibleIniciarSesion}}
 				</ul>
 			</div>
@@ -73,9 +68,6 @@
 						<th>AUTOR</th>
 						<th>EDITORIAL</th>
 						<th>GENERO</th>
-						{{^visibleIniciarSesion}}
-						<th>RESERVAR</th>
-						{{/visibleIniciarSesion}}
 					</tr>
 					{{#listaLibrosDestacados}}
 					<tr>
@@ -83,9 +75,6 @@
 						<td>{{autor}}</td>
 						<td>{{editorial}}</td>
 						<td>{{genero}}</td>
-						{{^visibleIniciarSesion}}
-						<td href="reservar" class="btn btn-success">RESERVAR</td>
-						{{/visibleIniciarSesion}}
 					</tr>
 					{{/listaLibrosDestacados}}
 				</table>
@@ -97,9 +86,6 @@
 						<th>EDITORIAL</th>
 						<th>FASCICULO</th>
 						<th>GENERO</th>
-						{{^visibleIniciarSesion}}
-						<th>RESERVAR</th>
-						{{/visibleIniciarSesion}}
 					</tr>
 					{{#listaRevistasDestacadas}}
 					<tr>
@@ -107,9 +93,6 @@
 						<td>{{editorial}}</td>
 						<td>{{fasciculo}}</td>
 						<td>{{genero}}</td>
-						{{^visibleIniciarSesion}}
-						<td href="reservar" class="btn btn-success">RESERVAR</td>
-						{{/visibleIniciarSesion}}
 					</tr>
 					{{/listaRevistasDestacadas}}
 				</table>

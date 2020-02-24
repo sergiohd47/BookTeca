@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"> <!-- xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -28,12 +28,12 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					{{#visibleIniciarSesion}}
-					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-					{{/visibleIniciarSesion}}
 					{{#visibleCerrarSesion}}
 					<li class="nav-item"><a class="nav-link" href="inicio">Inicio</a></li>
 					{{/visibleCerrarSesion}}
+					{{#visibleIniciarSesion}}
+					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+					{{/visibleIniciarSesion}}
 					<li class="nav-item active"><a class="nav-link" href="buscadorLibros">Libros
 							<span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="buscadorRevistas">Revistas</a></li>
@@ -69,14 +69,13 @@
 				{{/visibleIniciarSesion}}
 				<p class="lead">Puedes buscar por el nombre, autor, genero o editorial del libro</p>
 				<h1 class="mt-5"></h1>
-				<form action="/busquedaLibros" method="post">
+				<form th:action="/busquedaLibros" method="post">
 					<div>
 						<label for="busquedaLibro">Busqueda: </label> <input type="search"
 							id="palabraClaveLibro" name="palabraClaveLibro"
 							placeholder="Por ejemplo: Anaya/Romantico/Constitucion Española.." required
-							size="30">
+							size="30"/>
 						<button>BUSCAR</button>
-						<input type="hidden" name="_csrf" value={{token}}>
 						<span class="validity"></span>
 					</div>
 				</form>
@@ -107,14 +106,13 @@
 						<td>{{genero}}</td>
 						{{/visibleIniciarSesion}}  <!-- 2 -->
 						{{#visibleCerrarSesion}}   <!-- 2 -->
-						<form action="/libroReservado" method="post">
+						<form th:action="/libroReservado" method="post">
 							<td style="visibility:hidden"><input type="number" name="idLibro" value="{{id}}"/></td>
 							<td>{{nombre}}</td>
 							<td>{{autor}}</td>
 							<td>{{editorial}}</td>
 							<td>{{genero}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
-							<input type="hidden" name="_csrf" value={{token}}>
 						</form>
 						{{/visibleCerrarSesion}} <!-- 2 -->
 					</tr>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"> <!-- xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -28,12 +28,12 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					{{#visibleIniciarSesion}}
-					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
-					{{/visibleIniciarSesion}}
 					{{#visibleCerrarSesion}}
 					<li class="nav-item"><a class="nav-link" href="inicio">Inicio</a></li>
 					{{/visibleCerrarSesion}}
+					{{#visibleIniciarSesion}}
+					<li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+					{{/visibleIniciarSesion}}
 					<li class="nav-item active"><a class="nav-link" href="buscadorLibros">Libros</a></li>
 					<li class="nav-item"><a class="nav-link" href="buscadorRevistas">Revistas
 						<span class="sr-only">(current)</span></a></li>
@@ -50,6 +50,7 @@
 					<li class="nav-item"><a class="nav-link" href="registro">Registrate</a></li>
 					{{/visibleIniciarSesion}}
 				</ul>
+				<input type="hidden" name="_csrf" value={{token}}/>
 			</div>
 		</div>
 	</nav>
@@ -69,14 +70,13 @@
 				{{/visibleIniciarSesion}}
 				<p class="lead">Puedes buscar por el nombre, genero o editorial de la revista</p>
 				<h1 class="mt-5"></h1>
-				<form action="/busquedaRevistas" method="post">
+				<form th:action="/busquedaRevistas" method="post">
 					<div>
 						<label for="busquedaRevista">Busqueda: </label> <input type="search"
 							id="palabraClaveRevista" name="palabraClaveRevista"
 							placeholder="Por ejemplo: GQ o Moda o Editorial ElMundo..." required
-							size="30">
+							size="30"/>
 						<button>BUSCAR</button>
-						<input type="hidden" name="_csrf" value={{token}}>
 						<span class="validity"></span>
 					</div>
 				</form>
@@ -107,7 +107,7 @@
 						<td>{{genero}}</td>
 						{{/visibleIniciarSesion}}
 						{{#visibleCerrarSesion}}
-						<form th:action="@{/revistaReservada}" method="post">
+						<form th:action="/revistaReservada" method="post">
 							<td style="visibility:hidden"><input type="number" name="idRevista" value="{{id}}"/></td>
 							<td>{{nombre}}</td>
 							<td>{{editorial}}</td>

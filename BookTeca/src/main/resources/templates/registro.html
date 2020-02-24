@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<!-- <html xmlns:th="http://www.thymeleaf.org"> -->
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -40,30 +39,29 @@
 				<p class="lead">Cree una cuenta para acceder a todas funcionalidades</p>
 				<p class="lead">Por favor, rellene el formulario para crear una cuenta</p>
 				<!-- <form id="signup" th:action="@{/iniciarSesionTrasRegistro}" method="post"> -->
-				<form id="signup" action="/iniciarSesionTrasRegistro" method="post">
+				<form id="signup" th:action="/iniciarSesionTrasRegistro" method="post">
 					<div class="form-sesion">
 						<p>
 							<label><b>Nombre</b></label><br> <input type="text"
-								placeholder="Nombre"name="nombreUsuario" required>
+								placeholder="Nombre" name="nombreUsuario" required/>
 						</p>
 						<p>
 							<label><b>Apellidos</b></label><br> <input type="text"
-								placeholder="Apellidos"name="apellidosUsuario" required>
+								placeholder="Apellidos" name="apellidosUsuario" required/>
 						</p>
 						<p>
 							<label><b>Email</b></label><br> <input type="text"
-								placeholder="xxx@ejemplo.com" name="email" required>
+								placeholder="xxx@ejemplo.com" name="email" required/>
 						</p>
 						<p>
 							<label><b>Contraseña</b></label><br> <input type="password"
 								name="contrasenya"
 								pattern="[A-Za-z][A-Za-z0-9]*[0-9][A-Za-z0-9]*"
 								title="La contraseña debe contener almenos 1 letra mayuscula, 1 letra minuscula y 1 digito"
-								required>
+								required/>
 						</p>
 						<p>
-							<input id="button-sesion" type="submit" value="Registrarse">
-							<input type="hidden" name="_csrf" value={{token}}>
+							<input id="button-sesion" type="submit" value="Registrarse"/>
 						</p>
 					</div>
 				</form>
