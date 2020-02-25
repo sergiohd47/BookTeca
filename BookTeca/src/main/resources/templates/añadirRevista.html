@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
 	<meta charset="UTF-8">
@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="../css/addmagazinestyles.css">
 </head>
 <body>
-	<form id="addmagazine" th:action="/revistaAñadida" method="post">
+	<form id="addmagazine" action="/revistaAñadida" method="post">
 		<div class="form-sesion">
 			<p>
 				<label><b>Nombre</b></label><br>
@@ -29,6 +29,7 @@
 			</p>
 			<p><input id="button-addmagazine" type="submit" value="Añadir"/></p>
 		</div>
+		<input type="hidden" name="_csrf" value="{{token}}"/>
 	</form>
 </body>
 </html>
