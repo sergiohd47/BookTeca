@@ -8803,3 +8803,128 @@ Java Model Exception: Java Model Status [busquedaUsuarios(Model, String, HttpSes
 	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:177)
 !SUBENTRY 1 org.eclipse.jdt.core 4 969 2020-02-21 12:47:22.277
 !MESSAGE busquedaUsuarios(Model, String, HttpSession) [in AdministradorController [in [Working copy] AdministradorController.java [in dad.web.bookteca.controladores [in src/main/java [in BookTeca]]]]] does not exist
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-21 12:58:25.334
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.xNZxaTDg
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-21 12:58:25.334
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.xNZxaTDg
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-21 12:58:25.336
+!MESSAGE subsribers = null
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-21 12:58:25.337
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.xNZxaTDg => OK
+!SESSION 2020-02-25 13:24:46.534 -----------------------------------------------
+eclipse.buildId=4.1.1.201901241133-RELEASE
+java.version=10.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=es_ES
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -keyring /Users/sergiohernandezdominguez/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.springframework.boot.ide.branding.sts4 -keyring /Users/sergiohernandezdominguez/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2020-02-25 13:25:05.006
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.jface 2 0 2020-02-25 13:25:06.178
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-02-25 13:25:06.178
+!MESSAGE A conflict occurred for COMMAND+SHIFT+T:
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@426bf2f2,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(COMMAND+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@2cfd9b0a,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:16.059
+!MESSAGE Entering DelegatingStreamConnectionProvider()
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:16.060
+!MESSAGE DelegatingStreamConnectionProvider classloader = org.eclipse.osgi.internal.loader.EquinoxClassLoader@3a69a36a[org.springframework.tooling.boot.ls:1.2.1.201901241129(id=615)]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:16.081
+!MESSAGE SpringBootLanguageServer exists!
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:17.052
+!MESSAGE Instantiating ReusableClasspathListenerHandler
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2020-02-25 13:25:17.501
+!MESSAGE Exception caught during execution of command '[git, --version]' in '/usr/bin', return code '1', error message 'xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun
+'
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:23.457
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.RWGZxJtv
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:23.476
+!MESSAGE subscribing to classpath changes: sts4.classpath.RWGZxJtv
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:23.477
+!MESSAGE Setting up ClasspathListenerManager
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:23.478
+!MESSAGE subsribers = [sts4.classpath.RWGZxJtv]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:23.478
+!MESSAGE Sending initial event for all projects ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:23.488
+!MESSAGE project BookTeca ...
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:23.489
+!MESSAGE Sending initial event for all projects DONE
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:23.489
+!MESSAGE Preparing classpath changed notification BookTeca
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:23.490
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:23.491
+!MESSAGE ClasspathListenerHandler addClasspathListener sts4.classpath.RWGZxJtv => OK
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:23.514
+!MESSAGE classpath=103 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:23.514
+!MESSAGE executing callback sts4.classpath.RWGZxJtv BookTeca false 103
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:23.661
+!MESSAGE executing callback sts4.classpath.RWGZxJtv SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:28.462
+!MESSAGE Preparing classpath changed notification BookTeca
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:28.463
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:28.466
+!MESSAGE classpath=107 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:28.466
+!MESSAGE executing callback sts4.classpath.RWGZxJtv BookTeca false 107
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:25:28.654
+!MESSAGE executing callback sts4.classpath.RWGZxJtv SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:35:12.469
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.RWGZxJtv
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:35:12.470
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.RWGZxJtv
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:35:12.471
+!MESSAGE subsribers = null
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-02-25 13:35:12.471
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.RWGZxJtv => OK

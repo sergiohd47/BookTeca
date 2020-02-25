@@ -34,9 +34,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		for(Usuario usuario : usuarios.findAll()) {
 			if(!usuario.getAdministrador())
-				auth.inMemoryAuthentication().withUser(usuario.getEmail()).password(usuario.getContrasenya()).roles("USUARIO");
+				auth.inMemoryAuthentication().withUser(usuario.getEmail()).password(usuario.getContrasenya()).roles("USER");
 			else
-				auth.inMemoryAuthentication().withUser(usuario.getEmail()).password(usuario.getContrasenya()).roles("ADMINISTRADOR");
+				auth.inMemoryAuthentication().withUser(usuario.getEmail()).password(usuario.getContrasenya()).roles("ADMIN");
 		}
 	}
 	
@@ -66,44 +66,44 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		//PARTE PRIVADA
 		
 		// -- USUARIO
-		http.authorizeRequests().antMatchers("/sesionIniciada").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/inicio").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/iniciarSesionTrasRegistro").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/miPerfil").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/editarPerfil").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/perfilEditado").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/sesionCerrada").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/buscadorLibros").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/busquedaLibros").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/buscadorRevistas").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/busquedaRevistas").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/libroReservado").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/revistaReservada").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/libroDevuelto").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/revistaDevuelta").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/reservaSalaTrabajoGrupo").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/reservaEquipoInformatico").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/equipoReservado").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/salaReservada").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/equipoDesocupado").hasAnyRole("USUARIO");
-		http.authorizeRequests().antMatchers("/salaDesocupada").hasAnyRole("USUARIO");
+		http.authorizeRequests().antMatchers("/sesionIniciada").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/inicio").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/iniciarSesionTrasRegistro").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/miPerfil").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/editarPerfil").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/perfilEditado").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/sesionCerrada").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/buscadorLibros").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/busquedaLibros").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/buscadorRevistas").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/busquedaRevistas").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/libroReservado").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/revistaReservada").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/libroDevuelto").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/revistaDevuelta").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/reservaSalaTrabajoGrupo").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/reservaEquipoInformatico").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/equipoReservado").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/salaReservada").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/equipoDesocupado").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/salaDesocupada").hasAnyRole("USER");
 		
 		// -- ADMINISTRADOR
-		http.authorizeRequests().antMatchers("/sesionIniciada").hasAnyRole("ADMINISTRADOR");
-		http.authorizeRequests().antMatchers("/inicio").hasAnyRole("ADMINISTRADOR");
-		http.authorizeRequests().antMatchers("/miPerfil").hasAnyRole("ADMINISTRADOR");
-		http.authorizeRequests().antMatchers("/sesionCerrada").hasAnyRole("ADMINISTRADOR");
-		http.authorizeRequests().antMatchers("/añadirLibro").hasAnyRole("ADMINISTRADOR");
-		http.authorizeRequests().antMatchers("/libroAñadido").hasAnyRole("ADMINISTRADOR");
-		http.authorizeRequests().antMatchers("/añadirRevista").hasAnyRole("ADMINISTRADOR");
-		http.authorizeRequests().antMatchers("/revistaAñadida").hasAnyRole("ADMINISTRADOR");
-		http.authorizeRequests().antMatchers("/añadirSalaTrabajoGrupo").hasAnyRole("ADMINISTRADOR");
-		http.authorizeRequests().antMatchers("/salaAñadida").hasAnyRole("ADMINISTRADOR");
-		http.authorizeRequests().antMatchers("/añadirEquipoInformatico").hasAnyRole("ADMINISTRADOR");
-		http.authorizeRequests().antMatchers("/equipoAñadido").hasAnyRole("ADMINISTRADOR");
-		http.authorizeRequests().antMatchers("/administrarUsuarios").hasAnyRole("ADMINISTRADOR");
-		http.authorizeRequests().antMatchers("/busquedaUsuarios").hasAnyRole("ADMINISTRADOR");
-		http.authorizeRequests().antMatchers("/usuarioAdministrado").hasAnyRole("ADMINISTRADOR");
+		http.authorizeRequests().antMatchers("/sesionIniciada").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/inicio").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/miPerfil").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/sesionCerrada").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/añadirLibro").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/libroAñadido").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/añadirRevista").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/revistaAñadida").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/añadirSalaTrabajoGrupo").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/salaAñadida").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/añadirEquipoInformatico").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/equipoAñadido").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/administrarUsuarios").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/busquedaUsuarios").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/usuarioAdministrado").hasAnyRole("ADMIN");
 
 		// -- LOGIN
 		http.formLogin().loginPage("/iniciarSesion");

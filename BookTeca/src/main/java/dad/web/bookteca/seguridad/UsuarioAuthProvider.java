@@ -33,9 +33,9 @@ public class UsuarioAuthProvider implements AuthenticationProvider{
 			 throw new BadCredentialsException("Contraseña incorrecta");
 		 ArrayList<GrantedAuthority> listaRoles=new ArrayList<>();
 		 if(usuario.getAdministrador()) {
-			 listaRoles.add(new SimpleGrantedAuthority("ADMINISTRADOR"));
+			 listaRoles.add(new SimpleGrantedAuthority("ADMIN"));
 		 }else {
-			 listaRoles.add(new SimpleGrantedAuthority("USUARIO"));
+			 listaRoles.add(new SimpleGrantedAuthority("USER"));
 		 }
 		 return new UsernamePasswordAuthenticationToken(usuario.getEmail(), password,listaRoles);
 	}	
