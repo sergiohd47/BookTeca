@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
 	<meta charset="UTF-8">
@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="../css/addbookstyles.css">
 </head>
 <body>
-	<form id="addbook" th:action="/libroAñadido" method="post">
+	<form id="addbook" action="/libroAñadido" method="post">
 		<div class="form-sesion">
 			<p>
 				<label><b>Nombre</b></label><br>
@@ -29,6 +29,7 @@
 			</p>
 			<p><input id="button-addbook" type="submit" value="Añadir"/></p>
 		</div>
+		<input type="hidden" name="_csrf" value="{{token}}"/>
 	</form>
 </body>
 </html>

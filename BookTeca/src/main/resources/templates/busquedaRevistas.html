@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
 <meta charset="utf-8">
@@ -50,7 +50,6 @@
 					<li class="nav-item"><a class="nav-link" href="registro">Registrate</a></li>
 					{{/visibleIniciarSesion}}
 				</ul>
-				<input type="hidden" name="_csrf" value={{token}}/>
 			</div>
 		</div>
 	</nav>
@@ -70,7 +69,7 @@
 				{{/visibleIniciarSesion}}
 				<p class="lead">Puedes buscar por el nombre, genero o editorial de la revista</p>
 				<h1 class="mt-5"></h1>
-				<form th:action="/busquedaRevistas" method="post">
+				<form action="/busquedaRevistas" method="post">
 					<div>
 						<label for="busquedaRevista">Busqueda: </label> <input type="search"
 							id="palabraClaveRevista" name="palabraClaveRevista"
@@ -79,6 +78,7 @@
 						<button>BUSCAR</button>
 						<span class="validity"></span>
 					</div>
+					<input type="hidden" name="_csrf" value="{{token}}"/>
 				</form>
 				<h2 class="mt-5">RESULTADOS ENCONTRADOS DE SU BUSQUEDA</h2>
 				{{^listaRevistasBusqueda}}
@@ -107,13 +107,14 @@
 						<td>{{genero}}</td>
 						{{/visibleIniciarSesion}}
 						{{#visibleCerrarSesion}}
-						<form th:action="/revistaReservada" method="post">
+						<form action="/revistaReservada" method="post">
 							<td style="visibility:hidden"><input type="number" name="idRevista" value="{{id}}"/></td>
 							<td>{{nombre}}</td>
 							<td>{{editorial}}</td>
 							<td>{{fasciculo}}</td>
 							<td>{{genero}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
+							<input type="hidden" name="_csrf" value="{{token}}"/>
 						</form>
 						{{/visibleCerrarSesion}}
 					</tr>

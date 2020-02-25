@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
 	<meta charset="UTF-8">
@@ -10,7 +10,7 @@
 </head>
 
 <body>
-	<form id="addroom" th:action="/salaAñadida" method="post">
+	<form id="addroom" action="/salaAñadida" method="post">
 		<div class="form-sesion">
 			<p>
 				<label><b>Capacidad</b></label><br> 
@@ -26,6 +26,7 @@
 			</p>
 			<p><input id="button-addroom" type="submit" value="Añadir"/></p>
 		</div>
+		<input type="hidden" name="_csrf" value="{{token}}"/>
 	</form>
 </body>
 </html>
