@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
 <meta charset="utf-8">
@@ -90,7 +90,7 @@
 						{{/visibleIniciarSesion}}
 						{{#visibleCerrarSesion}}
 						<!-- <form th:action="@{/equipoReservado}" method="post"> -->
-						<form th:action="/equipoReservado" method="post">
+						<form action="/equipoReservado" method="post">
 							<td style="visibility:hidden"><input type="number" name="idEquipo" value="{{id}}"/></td>
 							<td>{{sistemaOperativo}}</td>
 							<td>{{localizacion}}</td>
@@ -100,6 +100,7 @@
 							{{^equipoElegido}}
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
 							{{/equipoElegido}}
+							<input type="hidden" name="_csrf" value="{{token}}"/>
 						</form>
 						{{/visibleCerrarSesion}}
 					</tr>

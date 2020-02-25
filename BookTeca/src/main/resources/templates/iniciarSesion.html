@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 
 <head>
 <meta charset="utf-8">
@@ -37,7 +37,7 @@
 				<img src="imagenes/logoBookTeca.png" width="600" height="341">
 				<h1 class="mt-5">Acceda  a Bookteca mediante su email y contraseña a su cuenta</h1>
 				<!-- <form id="signin" th:action="@{/sesionIniciada}" method="post"> -->
-				<form id="signin" th:action="@{/sesionIniciada}" method="post">
+				<form id="signin" action="/sesionIniciada" method="post">
 					<div class="form-sesion">
 						<p>
 							<label><b>Usuario</b></label><br> <input type="text"
@@ -54,6 +54,7 @@
 							<input id="button-sesion" type="submit" value="Iniciar Sesion"/>
 						</p>
 					</div>
+					<input type="hidden" name="_csrf" value="{{token}}"/>
 				</form>
 			</div>
 		</div>
