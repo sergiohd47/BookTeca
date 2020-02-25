@@ -52,6 +52,7 @@ public class UsuarioController {
 	@RequestMapping("/sesionIniciada")
 	public String sesionIniciada(Model model, @RequestParam("nombreUsuario") String email,@RequestParam String contrasenya, 
 			HttpSession usuarioSesion, HttpServletRequest servlet) {
+		//System.out.println("Entro al controlador");
 		Usuario usuario=usuarios.findByEmailAndContrasenya(email,contrasenya);
 		if(usuario==null)
 			return iniciarSesion(model,servlet);

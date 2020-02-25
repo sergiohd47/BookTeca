@@ -40,10 +40,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		}
 	}
 	
-	@Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/resources/**");
-    }
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
@@ -64,8 +60,45 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/js/**").permitAll();
 			
 		//PARTE PRIVADA
+		http.authorizeRequests().antMatchers("/sesionIniciada").authenticated();
+		http.authorizeRequests().antMatchers("/inicio").authenticated();
+		http.authorizeRequests().antMatchers("/iniciarSesionTrasRegistro").authenticated();
+		http.authorizeRequests().antMatchers("/miPerfil").authenticated();
+		http.authorizeRequests().antMatchers("/editarPerfil").authenticated();
+		http.authorizeRequests().antMatchers("/perfilEditado").authenticated();
+		http.authorizeRequests().antMatchers("/sesionCerrada").authenticated();
+		http.authorizeRequests().antMatchers("/buscadorLibros").authenticated();
+		http.authorizeRequests().antMatchers("/busquedaLibros").authenticated();
+		http.authorizeRequests().antMatchers("/buscadorRevistas").authenticated();
+		http.authorizeRequests().antMatchers("/busquedaRevistas").authenticated();
+		http.authorizeRequests().antMatchers("/libroReservado").authenticated();
+		http.authorizeRequests().antMatchers("/revistaReservada").authenticated();
+		http.authorizeRequests().antMatchers("/libroDevuelto").authenticated();
+		http.authorizeRequests().antMatchers("/revistaDevuelta").authenticated();
+		http.authorizeRequests().antMatchers("/reservaSalaTrabajoGrupo").authenticated();
+		http.authorizeRequests().antMatchers("/reservaEquipoInformatico").authenticated();
+		http.authorizeRequests().antMatchers("/equipoReservado").authenticated();
+		http.authorizeRequests().antMatchers("/salaReservada").authenticated();
+		http.authorizeRequests().antMatchers("/equipoDesocupado").authenticated();
+		http.authorizeRequests().antMatchers("/salaDesocupada").authenticated();
+		http.authorizeRequests().antMatchers("/sesionIniciada").authenticated();
+		http.authorizeRequests().antMatchers("/inicio").authenticated();
+		http.authorizeRequests().antMatchers("/miPerfil").authenticated();
+		http.authorizeRequests().antMatchers("/sesionCerrada").authenticated();
+		http.authorizeRequests().antMatchers("/añadirLibro").authenticated();
+		http.authorizeRequests().antMatchers("/libroAñadido").authenticated();
+		http.authorizeRequests().antMatchers("/añadirRevista").authenticated();
+		http.authorizeRequests().antMatchers("/revistaAñadida").authenticated();
+		http.authorizeRequests().antMatchers("/añadirSalaTrabajoGrupo").authenticated();
+		http.authorizeRequests().antMatchers("/salaAñadida").authenticated();
+		http.authorizeRequests().antMatchers("/añadirEquipoInformatico").authenticated();
+		http.authorizeRequests().antMatchers("/equipoAñadido").authenticated();
+		http.authorizeRequests().antMatchers("/administrarUsuarios").authenticated();
+		http.authorizeRequests().antMatchers("/busquedaUsuarios").authenticated();
+		http.authorizeRequests().antMatchers("/usuarioAdministrado").authenticated();
 		
-		// -- USUARIO
+		
+		// ROL USUARIO
 		http.authorizeRequests().antMatchers("/sesionIniciada").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/inicio").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/iniciarSesionTrasRegistro").hasAnyRole("USER");
@@ -88,7 +121,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/equipoDesocupado").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/salaDesocupada").hasAnyRole("USER");
 		
-		// -- ADMINISTRADOR
+		// ROL ADMINISTRADOR
 		http.authorizeRequests().antMatchers("/sesionIniciada").hasAnyRole("ADMIN");
 		http.authorizeRequests().antMatchers("/inicio").hasAnyRole("ADMIN");
 		http.authorizeRequests().antMatchers("/miPerfil").hasAnyRole("ADMIN");
@@ -118,8 +151,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		// -- CSRF
 		//http.csrf().disable();
-		
-		http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
 		
 	}
 }
