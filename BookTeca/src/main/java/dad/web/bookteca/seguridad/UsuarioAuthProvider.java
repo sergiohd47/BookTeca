@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import dad.web.bookteca.basedatos.UsuarioRepository;
@@ -23,24 +24,22 @@ public class UsuarioAuthProvider implements AuthenticationProvider{
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		String email=authentication.getName();
-		Usuario usuario=usuarios.findByEmail(email);
+		Usuario usuario=usuarios.findByEmail(authentication.getName());
 		if(usuario == null)
 			 throw new BadCredentialsException("Usuario no encontrado");
 		 String password = authentication.getCredentials().toString();
-		 if(!password.equals(usuario.getContrasenya()))
+		 if(!new BCryptPasswordEncoder().matches(password,usuario.getContrasenya()))
 			 throw new BadCredentialsException("Contraseña incorrecta");
-		 ArrayList<GrantedAuthority> listaRoles=new ArrayList<>();
+		 ArrayList<GrantedAuthority> roles=new ArrayList<>();
 		 if(usuario.getAdministrador())
-			 listaRoles.add(new SimpleGrantedAuthority("ADMIN"));
+			 roles.add(0,new SimpleGrantedAuthority("ADMIN"));
 		 else
-			 listaRoles.add(new SimpleGrantedAuthority("USER"));
-		 return new UsernamePasswordAuthenticationToken(email, password,listaRoles);
+			roles.add(0,new SimpleGrantedAuthority("USER"));
+		 return new UsernamePasswordAuthenticationToken(usuario.getEmail(),password,roles);
 	}	
 
 	@Override
 	public boolean supports(Class<?> authentication) {
-		// TODO Auto-generated method stub
 		return authentication.equals(UsernamePasswordAuthenticationToken.class);
 	}
 }

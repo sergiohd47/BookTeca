@@ -44,7 +44,6 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioRepository usuarios;
 	
-	
 	@RequestMapping("/iniciarSesion")
 	public String iniciarSesion(Model model, HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");

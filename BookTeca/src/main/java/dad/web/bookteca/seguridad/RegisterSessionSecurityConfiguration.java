@@ -1,22 +1,21 @@
 package dad.web.bookteca.seguridad;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-@Configuration
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
+public class RegisterSessionSecurityConfiguration extends WebSecurityConfigurerAdapter {
+
 	@Autowired
 	private UsuarioAuthProvider authenticationProvider;
-		
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		//PARTE PUBLICA
 		http.authorizeRequests().antMatchers("/").permitAll();
-		http.authorizeRequests().antMatchers("/iniciarSesion").permitAll();
+		//http.authorizeRequests().antMatchers("/iniciarSesion").permitAll();
+		http.authorizeRequests().antMatchers("/iniciarSesionTrasRegistro").permitAll();
 		http.authorizeRequests().antMatchers("/registro").permitAll();
 		http.authorizeRequests().antMatchers("/buscadorLibros").permitAll();
 		http.authorizeRequests().antMatchers("/busquedaLibros").permitAll();
@@ -33,7 +32,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		//PARTE PRIVADA
 		http.authorizeRequests().antMatchers("/sesionIniciada").authenticated();
 		http.authorizeRequests().antMatchers("/inicio").authenticated();
-		http.authorizeRequests().antMatchers("/iniciarSesionTrasRegistro").authenticated();
+		//http.authorizeRequests().antMatchers("/iniciarSesionTrasRegistro").authenticated();
 		http.authorizeRequests().antMatchers("/miPerfil").authenticated();
 		http.authorizeRequests().antMatchers("/editarPerfil").authenticated();
 		http.authorizeRequests().antMatchers("/perfilEditado").authenticated();
@@ -72,7 +71,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// ROL USUARIO
 		http.authorizeRequests().antMatchers("/sesionIniciada").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/inicio").hasAnyRole("USER");
-		http.authorizeRequests().antMatchers("/iniciarSesionTrasRegistro").hasAnyRole("USER");
+		//http.authorizeRequests().antMatchers("/iniciarSesionTrasRegistro").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/miPerfil").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/editarPerfil").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/perfilEditado").hasAnyRole("USER");
@@ -110,7 +109,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/usuarioAdministrado").hasAnyRole("ADMIN");
 
 		// -- LOGIN
-		http.formLogin().loginPage("/iniciarSesion");
+		//http.formLogin().loginPage("/iniciarSesion");
+		http.formLogin().loginPage("/iniciarSesionTrasRegistro");
 		http.formLogin().usernameParameter("nombreUsuario");
 		http.formLogin().passwordParameter("contrasenya");
 		http.formLogin().defaultSuccessUrl("/sesionIniciada");
