@@ -15,36 +15,32 @@ import org.springframework.stereotype.Component;
 import dad.web.bookteca.basedatos.UsuarioRepository;
 import dad.web.bookteca.clases.Usuario;
 
-
 @Component
 public class UsuarioAuthProvider implements AuthenticationProvider{
 	
 	@Autowired
 	private UsuarioRepository usuarios;
+	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		// TODO Auto-generated method stub
 		String email=authentication.getName();
 		Usuario usuario=usuarios.findByEmail(email);
 		if(usuario == null)
 			 throw new BadCredentialsException("Usuario no encontrado");
-		 String password = (String) authentication.getCredentials();
-		 if (!password.equals(usuario.getContrasenya()))
+		 String password = authentication.getCredentials().toString();
+		 if(!password.equals(usuario.getContrasenya()))
 			 throw new BadCredentialsException("Contraseña incorrecta");
 		 ArrayList<GrantedAuthority> listaRoles=new ArrayList<>();
-		 if(usuario.getAdministrador()) {
+		 if(usuario.getAdministrador())
 			 listaRoles.add(new SimpleGrantedAuthority("ADMIN"));
-		 }else {
+		 else
 			 listaRoles.add(new SimpleGrantedAuthority("USER"));
-		 }
-		 return new UsernamePasswordAuthenticationToken(usuario.getEmail(), password,listaRoles);
+		 return new UsernamePasswordAuthenticationToken(email, password,listaRoles);
 	}	
 
 	@Override
 	public boolean supports(Class<?> authentication) {
 		// TODO Auto-generated method stub
-		return true;
+		return authentication.equals(UsernamePasswordAuthenticationToken.class);
 	}
-	
-
 }

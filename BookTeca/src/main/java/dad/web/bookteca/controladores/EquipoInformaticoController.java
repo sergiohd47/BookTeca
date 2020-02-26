@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ public class EquipoInformaticoController {
 	private UsuarioRepository usuarios;
 	
 	@RequestMapping("/reservaEquipoInformatico")
-	public String reservaEquipoInformatico(Model model, HttpSession usuarioSesion, HttpServletRequest servlet) {
+	public String reservaEquipoInformatico(Model model, HttpSession usuarioSesion, HttpServletRequest request) {
 		ArrayList<EquipoInformatico> listaEquipo=new ArrayList<>();
 		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
 		if(InicioController.sesionNoIniciada) {
@@ -37,8 +38,11 @@ public class EquipoInformaticoController {
 			if(!usuario.getAdministrador()) {
 				if(usuario.getPuestoInformatico() != null)
 					model.addAttribute("equipoElegido",true);
-				else
+				else {
+					CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+					model.addAttribute("token",token.getToken());
 					model.addAttribute("equipoElegido",false);
+				}
 				listaEquipo=(ArrayList<EquipoInformatico>) equiposInformaticos.findByDisponible(true);
 				model.addAttribute("visibleTabla",!listaEquipo.isEmpty());
 				model.addAttribute("listaEquipo",listaEquipo);
@@ -47,7 +51,8 @@ public class EquipoInformaticoController {
 		return "reservaEquipoInformatico";
 	}
 	@RequestMapping("/equipoReservado")
-	public String equipoReservado(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo, HttpServletRequest servlet) {
+	public String equipoReservado(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo, 
+			HttpServletRequest request) {
 		EquipoInformatico equipo = equiposInformaticos.findById(idEquipo);
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if (usuario.reservarPuestoInformatico(equipo)){
@@ -57,13 +62,18 @@ public class EquipoInformaticoController {
 		}
 		model.addAttribute("usuario",true);
 		model.addAttribute("usuarioAdmin",false);
+		CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("tokenLibro",tokenLibro.getToken());
 		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
+		CsrfToken tokenRevista = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("tokenRevista",tokenRevista.getToken());
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		return "sesionIniciada";
 	}
 	
 	@RequestMapping("/equipoDesocupado")
-	public String equipoDesocupado(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo, HttpServletRequest servlet) {
+	public String equipoDesocupado(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo, 
+			HttpServletRequest request) {
 		EquipoInformatico equipo = equiposInformaticos.findById(idEquipo);
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		usuario.quitarPuestoInformatico(equipo);
@@ -72,7 +82,11 @@ public class EquipoInformaticoController {
 		sesionUsuario.setAttribute("infoUsuario",usuario);
 		model.addAttribute("usuario",true);
 		model.addAttribute("usuarioAdmin",false);
+		CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("tokenLibro",tokenLibro.getToken());
 		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
+		CsrfToken tokenRevista = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("tokenRevista",tokenRevista.getToken());
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		return "sesionIniciada";
 	}

@@ -1,46 +1,17 @@
 package dad.web.bookteca.seguridad;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import dad.web.bookteca.basedatos.UsuarioRepository;
-import dad.web.bookteca.clases.Usuario;
-
 @Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	private UsuarioRepository usuarios;
-
-	@Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-	
-	@Override    
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		for(Usuario usuario : usuarios.findAll()) {
-			if(!usuario.getAdministrador())
-				auth.inMemoryAuthentication().withUser(usuario.getEmail()).password(usuario.getContrasenya()).roles("USER");
-			else
-				auth.inMemoryAuthentication().withUser(usuario.getEmail()).password(usuario.getContrasenya()).roles("ADMIN");
-		}
-	}
-	
-	
+	private UsuarioAuthProvider authenticationProvider;
+		
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		//PARTE PUBLICA
@@ -67,24 +38,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/editarPerfil").authenticated();
 		http.authorizeRequests().antMatchers("/perfilEditado").authenticated();
 		http.authorizeRequests().antMatchers("/sesionCerrada").authenticated();
-		http.authorizeRequests().antMatchers("/buscadorLibros").authenticated();
-		http.authorizeRequests().antMatchers("/busquedaLibros").authenticated();
-		http.authorizeRequests().antMatchers("/buscadorRevistas").authenticated();
-		http.authorizeRequests().antMatchers("/busquedaRevistas").authenticated();
+		//http.authorizeRequests().antMatchers("/buscadorLibros").authenticated();
+		//http.authorizeRequests().antMatchers("/busquedaLibros").authenticated();
+		//http.authorizeRequests().antMatchers("/buscadorRevistas").authenticated();
+		//http.authorizeRequests().antMatchers("/busquedaRevistas").authenticated();
 		http.authorizeRequests().antMatchers("/libroReservado").authenticated();
 		http.authorizeRequests().antMatchers("/revistaReservada").authenticated();
 		http.authorizeRequests().antMatchers("/libroDevuelto").authenticated();
 		http.authorizeRequests().antMatchers("/revistaDevuelta").authenticated();
-		http.authorizeRequests().antMatchers("/reservaSalaTrabajoGrupo").authenticated();
-		http.authorizeRequests().antMatchers("/reservaEquipoInformatico").authenticated();
+		//http.authorizeRequests().antMatchers("/reservaSalaTrabajoGrupo").authenticated();
+		//http.authorizeRequests().antMatchers("/reservaEquipoInformatico").authenticated();
 		http.authorizeRequests().antMatchers("/equipoReservado").authenticated();
 		http.authorizeRequests().antMatchers("/salaReservada").authenticated();
 		http.authorizeRequests().antMatchers("/equipoDesocupado").authenticated();
 		http.authorizeRequests().antMatchers("/salaDesocupada").authenticated();
 		http.authorizeRequests().antMatchers("/sesionIniciada").authenticated();
-		http.authorizeRequests().antMatchers("/inicio").authenticated();
-		http.authorizeRequests().antMatchers("/miPerfil").authenticated();
-		http.authorizeRequests().antMatchers("/sesionCerrada").authenticated();
+		//http.authorizeRequests().antMatchers("/inicio").authenticated();
+		//http.authorizeRequests().antMatchers("/miPerfil").authenticated();
+		//http.authorizeRequests().antMatchers("/sesionCerrada").authenticated();
 		http.authorizeRequests().antMatchers("/añadirLibro").authenticated();
 		http.authorizeRequests().antMatchers("/libroAñadido").authenticated();
 		http.authorizeRequests().antMatchers("/añadirRevista").authenticated();
@@ -106,16 +77,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/editarPerfil").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/perfilEditado").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/sesionCerrada").hasAnyRole("USER");
-		http.authorizeRequests().antMatchers("/buscadorLibros").hasAnyRole("USER");
-		http.authorizeRequests().antMatchers("/busquedaLibros").hasAnyRole("USER");
-		http.authorizeRequests().antMatchers("/buscadorRevistas").hasAnyRole("USER");
-		http.authorizeRequests().antMatchers("/busquedaRevistas").hasAnyRole("USER");
+		//http.authorizeRequests().antMatchers("/buscadorLibros").hasAnyRole("USER");
+		//http.authorizeRequests().antMatchers("/busquedaLibros").hasAnyRole("USER");
+		//http.authorizeRequests().antMatchers("/buscadorRevistas").hasAnyRole("USER");
+		//http.authorizeRequests().antMatchers("/busquedaRevistas").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/libroReservado").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/revistaReservada").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/libroDevuelto").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/revistaDevuelta").hasAnyRole("USER");
-		http.authorizeRequests().antMatchers("/reservaSalaTrabajoGrupo").hasAnyRole("USER");
-		http.authorizeRequests().antMatchers("/reservaEquipoInformatico").hasAnyRole("USER");
+		//http.authorizeRequests().antMatchers("/reservaSalaTrabajoGrupo").hasAnyRole("USER");
+		//http.authorizeRequests().antMatchers("/reservaEquipoInformatico").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/equipoReservado").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/salaReservada").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/equipoDesocupado").hasAnyRole("USER");
@@ -152,5 +123,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// -- CSRF
 		//http.csrf().disable();
 		
+	}
+	
+	@Override    
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.authenticationProvider(authenticationProvider);
 	}
 }

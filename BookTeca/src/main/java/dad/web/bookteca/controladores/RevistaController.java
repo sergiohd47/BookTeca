@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,26 +26,26 @@ public class RevistaController {
 	private UsuarioRepository usuarios;
 	
 	@RequestMapping("/buscadorRevistas")
-	public String buscadorRevista(Model model, HttpSession usuarioSesion, HttpServletRequest servlet) {
+	public String buscadorRevista(Model model, HttpSession usuarioSesion, HttpServletRequest request) {
 		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
-		ArrayList<Revista> listaRevistasBusqueda=new ArrayList<>();
-		if(InicioController.sesionNoIniciada) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token",token.getToken());
+		if(InicioController.sesionNoIniciada)
 			model.addAttribute("visibleIniciarSesion",true);
-			model.addAttribute("listaRevistasBusqueda",listaRevistasBusqueda);
-			model.addAttribute("visibleTabla",!listaRevistasBusqueda.isEmpty());
-		} else {
+		else {
 			model.addAttribute("visibleCerrarSesion",true);
-			if(!usuario.getAdministrador()) {
+			if(!usuario.getAdministrador())
 				model.addAttribute("nombre",usuario.getNombre());
-				model.addAttribute("listaRevistasBusqueda",listaRevistasBusqueda);
-				model.addAttribute("visibleTabla",!listaRevistasBusqueda.isEmpty());
-			}
 		}
 		return "buscadorRevistas";
 	}
+	
 	@RequestMapping("/busquedaRevistas")
-	public String busquedaRevistas(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveRevista") String info, HttpServletRequest servlet) {
+	public String busquedaRevistas(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveRevista") String info, 
+			HttpServletRequest request) {
 		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token",token.getToken());
 		ArrayList<Revista> listaRevistas=new ArrayList<>();
 		listaRevistas.addAll(revistas.findByNombreOrEditorialOrGenero(info,info,info));
 		if(InicioController.sesionNoIniciada) {
@@ -60,6 +61,8 @@ public class RevistaController {
 					if(r.isDisponible())
 						listaRevistasBusqueda.add(r);
 				}
+				CsrfToken tokenRevista = (CsrfToken) request.getAttribute("_csrf");
+				model.addAttribute("tokenRevista",tokenRevista.getToken());
 				model.addAttribute("listaRevistasBusqueda",listaRevistasBusqueda);
 				model.addAttribute("visibleTabla",!listaRevistasBusqueda.isEmpty());
 			}
@@ -67,7 +70,8 @@ public class RevistaController {
 		return "busquedaRevistas";
 	}
 	@RequestMapping("/revistaReservada")
-	public String revistaReservada(Model model, HttpSession sesionUsuario, @RequestParam long idRevista, HttpServletRequest servlet) {
+	public String revistaReservada(Model model, HttpSession sesionUsuario, @RequestParam long idRevista, 
+			HttpServletRequest request) {
 		Revista revista = revistas.findById(idRevista);;
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if (usuario.reservarRevista(revista)){
@@ -77,6 +81,8 @@ public class RevistaController {
 		}
 		model.addAttribute("usuario",true);
 		model.addAttribute("usuarioAdmin",false);
+		CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("tokenLibro",tokenLibro.getToken());
 		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
 		InicioController.listaRevistasDestacadas=new ArrayList<>();
 		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
@@ -96,12 +102,15 @@ public class RevistaController {
 			} else
 				j++;
 		} 
+		CsrfToken tokenRevista = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("tokenRevista",tokenRevista.getToken());
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		return "sesionIniciada";
 	}
 
 	@RequestMapping("/revistaDevuelta")
-	public String revistaDevuelta(Model model, HttpSession sesionUsuario, @RequestParam long idRevista, HttpServletRequest servlet)  {
+	public String revistaDevuelta(Model model, HttpSession sesionUsuario, @RequestParam long idRevista, 
+			HttpServletRequest request)  {
 		Revista revista = revistas.findById(idRevista);
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		usuario.quitarRevista(revista);
@@ -110,6 +119,8 @@ public class RevistaController {
 		sesionUsuario.setAttribute("infoUsuario",usuario);
 		model.addAttribute("usuario",true);
 		model.addAttribute("usuarioAdmin",false);
+		CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("tokenLibro",tokenLibro.getToken());
 		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
 		InicioController.listaRevistasDestacadas=new ArrayList<>();
 		ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
@@ -129,6 +140,8 @@ public class RevistaController {
 			} else
 				j++;
 		}
+		CsrfToken tokenRevista = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("tokenRevista",tokenRevista.getToken());
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		return "sesionIniciada";
 	}

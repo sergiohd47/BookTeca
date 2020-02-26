@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,10 @@ public class LibroController {
 	private UsuarioRepository usuarios;
 	
 	@RequestMapping("/buscadorLibros")
-	public String buscadorLibros(Model model, HttpSession usuarioSesion, HttpServletRequest servlet) {
+	public String buscadorLibros(Model model, HttpSession usuarioSesion, HttpServletRequest request) {
 		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token",token.getToken());
 		if(InicioController.sesionNoIniciada)
 			model.addAttribute("visibleIniciarSesion",true);
 		else {
@@ -37,8 +40,11 @@ public class LibroController {
 	}
 
 	@RequestMapping("/busquedaLibros")
-	public String busquedaLibros(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveLibro") String info, HttpServletRequest servlet) {
+	public String busquedaLibros(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveLibro") String info, 
+			HttpServletRequest request) {
 		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token",token.getToken());
 		ArrayList<Libro>listaLibros=new ArrayList<>();
 		listaLibros.addAll(libros.findByNombreOrAutorOrEditorialOrGenero(info,info,info,info));
 		if(InicioController.sesionNoIniciada) {
@@ -54,6 +60,8 @@ public class LibroController {
 					if(l.isDisponible())
 						listaLibrosBusqueda.add(l);
 				}
+				CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");
+				model.addAttribute("tokenLibro",tokenLibro.getToken());
 				model.addAttribute("listaLibrosBusqueda",listaLibrosBusqueda);
 				model.addAttribute("visibleTabla",!listaLibrosBusqueda.isEmpty());
 			}
@@ -61,7 +69,8 @@ public class LibroController {
 		return "busquedaLibros";
 	}
 	@RequestMapping("/libroReservado")
-	public String libroReservado(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro, HttpServletRequest servlet) {
+	public String libroReservado(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro, 
+			HttpServletRequest request) {
 		Libro libro = libros.findById(idLibro);
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if(usuario.reservarLibro(libro)) {
@@ -89,14 +98,19 @@ public class LibroController {
 			} else
 				j++;
 		}
-		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
+		CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("tokenLibro",tokenLibro.getToken());
+		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);	
+		CsrfToken tokenRevista = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("tokenRevista",tokenRevista.getToken());
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		return "sesionIniciada";
 	}
 	
 	
 	@RequestMapping("/libroDevuelto")
-	public String libroDevuelto(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro, HttpServletRequest servlet) {
+	public String libroDevuelto(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro, 
+			HttpServletRequest request) {
 		Libro libro = libros.findById(idLibro);
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		usuario.quitarLibro(libro);
@@ -124,7 +138,11 @@ public class LibroController {
 			} else
 				j++;
 		}
+		CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("tokenLibro",tokenLibro.getToken());
 		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
+		CsrfToken tokenRevista = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("tokenRevista",tokenRevista.getToken());
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		return "sesionIniciada";
 	}

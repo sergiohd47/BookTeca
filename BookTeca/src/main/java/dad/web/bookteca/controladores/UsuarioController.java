@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,24 +46,31 @@ public class UsuarioController {
 	
 	
 	@RequestMapping("/iniciarSesion")
-	public String iniciarSesion(Model model) {
+	public String iniciarSesion(Model model, HttpServletRequest request) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token",token.getToken());
 		return "iniciarSesion";
 	}
 
 	@RequestMapping("/sesionIniciada")
 	public String sesionIniciada(Model model, @RequestParam("nombreUsuario") String email,@RequestParam String contrasenya, 
-			HttpSession usuarioSesion) {
+			HttpSession usuarioSesion, HttpServletRequest request) {
 		Usuario usuario=usuarios.findByEmailAndContrasenya(email,contrasenya);
 		if(usuario==null)
-			return iniciarSesion(model);
+			return iniciarSesion(model,request);
 		usuarioSesion.setAttribute("infoUsuario",usuario);
 		InicioController.sesionNoIniciada = false;
 		if(!usuario.getAdministrador()) {
+			//model.addAttribute("usuario",request.isUserInRole("USER"));
 			model.addAttribute("usuario",true);
+			CsrfToken tokenLibros = (CsrfToken) request.getAttribute("_csrf");
+			model.addAttribute("tokenLibros",tokenLibros.getToken());
 			model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
+			CsrfToken tokenRevistas = (CsrfToken) request.getAttribute("_csrf");
+			model.addAttribute("tokenRevistas",tokenRevistas.getToken());
 			model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		} else {
-			//model.addAttribute("usuarioAdmin",request.isUserInRole("ADMINISTRADOR"));
+			//model.addAttribute("usuarioAdmin",request.isUserInRole("ADMIN"));
 			model.addAttribute("usuarioAdmin",true);
 			ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 			model.addAttribute("listaLibros",listaLibros);
@@ -99,38 +107,54 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/registro")
-	public String registro(Model model, HttpServletRequest servlet) {
+	public String registro(Model model, HttpServletRequest request) {
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token",token.getToken());
 		return "registro";
 	}
 	@RequestMapping("/iniciarSesionTrasRegistro")
 	public String iniciarSesionTrasRegistro(Model model, @RequestParam("nombreUsuario") String nombre, 
 			@RequestParam("apellidosUsuario") String apellidos, @RequestParam String email,
-			@RequestParam("contrasenya") String contraseña, HttpServletRequest servlet) {
+			@RequestParam("contrasenya") String contraseña, HttpServletRequest request) {
 		usuarios.save(new Usuario(nombre,apellidos,contraseña,email,false));
 		model.addAttribute("email",email);
 		model.addAttribute("contraseña",contraseña);
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token",token.getToken());
 		return "iniciarSesionTrasRegistro";
 	}
 
 	@RequestMapping("/miPerfil")
-	public String miPerfil(Model model,HttpSession sesionUsuario, HttpServletRequest servlet) {
+	public String miPerfil(Model model,HttpSession sesionUsuario, HttpServletRequest request) {
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if(!usuario.getAdministrador()) {
 			model.addAttribute("nombre",usuario.getNombre());
 			model.addAttribute("usuario",true);
+			
+			CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");
+			model.addAttribute("tokenLibro",tokenLibro.getToken());
 			ArrayList<Libro> listaLibros=libros.findByIdUsuario(usuario);
 			boolean visibleTablaLibros=!listaLibros.isEmpty();
 			model.addAttribute("visibleTablaLibros",visibleTablaLibros);
 			model.addAttribute("listaLibros",listaLibros);
+			
+			CsrfToken tokenRevista = (CsrfToken) request.getAttribute("_csrf");
+			model.addAttribute("tokenRevista",tokenRevista.getToken());
 			ArrayList<Revista> listaRevistas=revistas.findByIdUsuario(usuario);
 			boolean visibleTablaRevistas=!listaRevistas.isEmpty();
 			model.addAttribute("visibleTablaRevistas",visibleTablaRevistas);
 			model.addAttribute("listaRevistas",listaRevistas);
+			
+			CsrfToken tokenSTG = (CsrfToken) request.getAttribute("_csrf");
+			model.addAttribute("tokenSTG",tokenSTG.getToken());
 			SalaTrabajoGrupo STG=null;
 			if(usuario.getSalaTrabajo()!=null)
 				STG = salasTrabajoGrupo.findById(usuario.getSalaTrabajo().getId());
 			model.addAttribute("visibleSTG",STG!=null);
 			model.addAttribute("STG",STG);
+			
+			CsrfToken tokenEquipo = (CsrfToken) request.getAttribute("_csrf");
+			model.addAttribute("tokenEquipo",tokenEquipo.getToken());
 			EquipoInformatico equipo=null;
 			if(usuario.getPuestoInformatico()!=null)
 				equipo = equiposInformaticos.findById(usuario.getPuestoInformatico().getId());
@@ -144,31 +168,34 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/editarPerfil")
-	public String editarPerfil(Model model, HttpSession sesionUsuario , HttpServletRequest servlet) {
+	public String editarPerfil(Model model, HttpSession sesionUsuario , HttpServletRequest request) {
 		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
 		model.addAttribute("nombre",usuario.getNombre());
 		model.addAttribute("apellidos",usuario.getApellidos());
 		model.addAttribute("contraseña",usuario.getContrasenya());
+		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+		model.addAttribute("token",token.getToken());
 		return "editarPerfil";
 	}
 	
 	@RequestMapping("/perfilEditado")
 	public String perfilEditado(Model model, HttpSession sesionUsuario, @RequestParam("nuevoNombreUsuario") String nombre, 
-			@RequestParam("nuevosApellidosUsuario") String apellidos, @RequestParam("nuevaContrasenya") String contrasenya, HttpServletRequest servlet) {
+			@RequestParam("nuevosApellidosUsuario") String apellidos, @RequestParam("nuevaContrasenya") String contrasenya, 
+			HttpServletRequest request) {
 		Usuario usuarioEditado = (Usuario) sesionUsuario.getAttribute("infoUsuario");
 		usuarioEditado.setNombre(nombre);
 		usuarioEditado.setApellidos(apellidos);
 		usuarioEditado.setContrasenya(contrasenya);
 		usuarios.save(usuarioEditado);
 		sesionUsuario.setAttribute("infoUsuario",usuarioEditado);
-		String nombreUsuario=usuarioEditado.getNombre();	
+		//String nombreUsuario=usuarioEditado.getNombre();	
 		model.addAttribute("nombre",usuarioEditado.getNombre());
 		return "perfilEditado";
 		
 	}
 	
 	@RequestMapping("/sesionCerrada")
-	public String sesionCerrada(Model model, HttpServletRequest servlet) {
+	public String sesionCerrada(Model model, HttpServletRequest request) {
 		return "index";
 	}
 	

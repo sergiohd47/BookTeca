@@ -95,7 +95,7 @@
 							<td>{{genero}}</td>
 							<td>{{fecFin}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DEVOLVER"/></td>
-							<input type="hidden" name="_csrf" value="{{token}}"/>
+							<input type="hidden" name="_csrf" value="{{tokenLibro}}"/>
 						</form>
 					</tr>
 					{{/listaLibros}}
@@ -128,7 +128,7 @@
 							<td>{{genero}}</td>
 							<td>{{fecFin}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DEVOLVER"/></td>
-							<input type="hidden" name="_csrf" value="{{token}}"/>
+							<input type="hidden" name="_csrf" value="{{tokenRevista}}"/>
 						</form>
 					</tr>
 					{{/listaRevistas}}
@@ -164,7 +164,7 @@
 							{{/compartida}}
 							<td>{{fechaReserva}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DESOCUPAR"/></td>
-							<input type="hidden" name="_csrf" value="{{token}}"/>
+							<input type="hidden" name="_csrf" value="{{tokenSTG}}"/>
 						</form>
 					</tr>
 					{{/STG}}
@@ -193,7 +193,7 @@
 							<td>{{localizacion}}</td>
 							<td>{{fechaReserva}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="DESOCUPAR"/></td>
-							<input type="hidden" name="_csrf" value="{{token}}"/>
+							<input type="hidden" name="_csrf" value="{{tokenEquipo}}"/>
 						</form>
 					</tr>
 					{{/equipo}}
