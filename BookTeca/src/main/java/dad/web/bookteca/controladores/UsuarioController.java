@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +48,7 @@ public class UsuarioController {
 	
 	@RequestMapping("/iniciarSesion")
 	public String iniciarSesion(Model model, HttpServletRequest request) {
+		//SecurityContextHolder.getContext().getAuthentication();
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		return "iniciarSesion";
@@ -57,6 +60,7 @@ public class UsuarioController {
 		Usuario usuario=usuarios.findByEmailAndContrasenya(email,contrasenya);
 		if(usuario==null)
 			return iniciarSesion(model,request);
+		//SecurityContextHolder.getContext().getAuthentication();
 		usuarioSesion.setAttribute("infoUsuario",usuario);
 		InicioController.sesionNoIniciada = false;
 		if(!usuario.getAdministrador()) {
@@ -86,7 +90,7 @@ public class UsuarioController {
 	@RequestMapping("/inicio")
 	public String inicio(Model model, HttpSession sesionUsuario, HttpServletRequest servlet) {
 		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
-		InicioController.sesionNoIniciada = false;
+		//InicioController.sesionNoIniciada = false;
 		if(!usuario.getAdministrador()) {
 			model.addAttribute("usuario",true);
 			model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
@@ -168,6 +172,7 @@ public class UsuarioController {
 	
 	@RequestMapping("/editarPerfil")
 	public String editarPerfil(Model model, HttpSession sesionUsuario , HttpServletRequest request) {
+		SecurityContextHolder.getContext().getAuthentication();
 		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
 		model.addAttribute("nombre",usuario.getNombre());
 		model.addAttribute("apellidos",usuario.getApellidos());
@@ -195,6 +200,7 @@ public class UsuarioController {
 	
 	@RequestMapping("/sesionCerrada")
 	public String sesionCerrada(Model model, HttpServletRequest request) {
+		InicioController.sesionNoIniciada = true;
 		return "index";
 	}
 	

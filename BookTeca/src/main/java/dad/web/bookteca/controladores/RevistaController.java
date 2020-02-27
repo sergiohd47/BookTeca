@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,7 +73,7 @@ public class RevistaController {
 	@RequestMapping("/revistaReservada")
 	public String revistaReservada(Model model, HttpSession sesionUsuario, @RequestParam long idRevista, 
 			HttpServletRequest request) {
-		Revista revista = revistas.findById(idRevista);;
+		Revista revista = revistas.findById(idRevista);
 		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
 		if (usuario.reservarRevista(revista)){
 			revistas.save(revista);

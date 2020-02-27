@@ -6,6 +6,8 @@ import java.util.List;
 import java.sql.Date;
 import javax.persistence.*;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 @Entity
 @Table(name = "usuario")
 public class Usuario {
@@ -43,7 +45,7 @@ public class Usuario {
 	public Usuario(String nombre, String apellidos, String contrasenya, String email, boolean admin) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
-		this.contrasenya = contrasenya;
+		this.contrasenya = new BCryptPasswordEncoder().encode(contrasenya);
 		this.email = email;
 		this.administrador = admin;
 		this.librosReservados = new ArrayList<>(MAX);
@@ -230,6 +232,12 @@ public class Usuario {
 		return this.contrasenya == contrasenya;
 	}
 	
+	public String getRole() {
+		if(this.administrador)
+			return "ADMIN";
+		return "USER";
+	}
+	
 	public void cambiarRol() {
 		this.administrador = !this.administrador;
 	}
@@ -255,6 +263,10 @@ public class Usuario {
 			cambiarRol();
 		}
 	}
+	
+	public boolean usuarioCorrecto(String email, String contrasenya) {
+        return ((this.email.equals(email)) && (this.contrasenya.equals(contrasenya)));
+    }
 	
 	@Override
 	public String toString() {

@@ -1,6 +1,8 @@
 package dad.web.bookteca.seguridad;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -22,20 +24,20 @@ public class UsuarioAuthProvider implements AuthenticationProvider{
 	@Autowired
 	private UsuarioRepository usuarios;
 	
+	private static List<Usuario> listaUsuarios = new ArrayList<>();
+	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		Usuario usuario=usuarios.findByEmail(authentication.getName());
+		String correo = authentication.getName();
+		Usuario usuario = usuarios.findByEmail(correo);
 		if(usuario == null)
-			 throw new BadCredentialsException("Usuario no encontrado");
-		 String password = authentication.getCredentials().toString();
-		 if(!new BCryptPasswordEncoder().matches(password,usuario.getContrasenya()))
-			 throw new BadCredentialsException("Contraseña incorrecta");
-		 ArrayList<GrantedAuthority> roles=new ArrayList<>();
-		 if(usuario.getAdministrador())
-			 roles.add(0,new SimpleGrantedAuthority("ADMIN"));
-		 else
-			roles.add(0,new SimpleGrantedAuthority("USER"));
-		 return new UsernamePasswordAuthenticationToken(usuario.getEmail(),password,roles);
+			throw new BadCredentialsException("Usuario no encontrado");
+		String contraseña = (String) authentication.getCredentials();
+		if(!(new BCryptPasswordEncoder().matches(contraseña,usuario.getContrasenya())))
+			throw new BadCredentialsException("Contraseña incorrecta");
+		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        grantedAuthorities.add(new SimpleGrantedAuthority(usuario.getRole()));
+        return new UsernamePasswordAuthenticationToken(correo,contraseña,grantedAuthorities);
 	}	
 
 	@Override
