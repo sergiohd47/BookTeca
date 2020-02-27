@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table
 public class SalaTrabajoGrupo {
@@ -28,8 +30,8 @@ public class SalaTrabajoGrupo {
 	@Column
 	private boolean disponible;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy="salaTrabajo")
-	//@JoinColumn(name="SALAS_RESERVADAS")
 	private Usuario idUsuario;
 	
 	@Column

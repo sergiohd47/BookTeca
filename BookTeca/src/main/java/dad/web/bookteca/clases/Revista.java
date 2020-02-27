@@ -3,6 +3,8 @@ package dad.web.bookteca.clases;
 import java.sql.*;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "revista")
 public class Revista {
@@ -21,6 +23,7 @@ public class Revista {
 	@Column
 	private boolean disponible;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Usuario idUsuario;
 	@Column
