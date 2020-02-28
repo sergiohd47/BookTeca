@@ -58,7 +58,8 @@ public class Usuario {
 	public Usuario(String nombre, String apellidos, String contrasenya, String email, boolean admin) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
-		this.contrasenya = new BCryptPasswordEncoder().encode(contrasenya);
+		//this.contrasenya = new BCryptPasswordEncoder().encode(contrasenya);
+		this.contrasenya = contrasenya;
 		this.email = email;
 		this.administrador = admin;
 		this.librosReservados = new ArrayList<>(MAX);
@@ -276,10 +277,6 @@ public class Usuario {
 			cambiarRol();
 		}
 	}
-	
-	public boolean usuarioCorrecto(String email, String contrasenya) {
-        return ((this.email.equals(email)) && (this.contrasenya.equals(contrasenya)));
-    }
 	
 	@Override
 	public String toString() {

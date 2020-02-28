@@ -11,7 +11,7 @@ import dad.web.bookteca.clases.Usuario;
 @Component
 public class UsuarioService {
 	
-	public boolean reservarLibro(Usuario usuario,Libro l) {
+	/*public boolean reservarLibro(Usuario usuario,Libro l) {
 		if (l.isDisponible()){
 			if (usuario.getLibrosReservados().size() < 3) {
 				usuario.getLibrosReservados().add(l);
@@ -25,5 +25,18 @@ public class UsuarioService {
 			}
 		}
 		return false;
+	}*/
+	private Usuario usuario;
+
+	public Usuario getUsuarioLogueado() {
+		return usuario;
+	}
+
+	public void setUsuarioLogueado(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public boolean estaLogueado() {
+		return (this.usuario != null);
 	}
 }
