@@ -32,7 +32,7 @@
 					<li class="nav-item active"><a class="nav-link" href="inicio">Inicio
 							<span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi Perfil</a></li>
-					<li class="nav-item"><a class="nav-link" href="sesionCerrada">Cerrar Sesion</a></li> 
+					<li class="nav-item"><a class="nav-link" href="/">Cerrar Sesion</a></li> 
 					{{/usuarioAdmin}}
 					{{#usuario}}
 					<li class="nav-item active"><a class="nav-link" href="inicio">Inicio
@@ -44,7 +44,7 @@
 					<li class="nav-item"><a class="nav-link"
 						href="reservaEquipoInformatico">Equipos Informaticos</a></li> 
 					<li class="nav-item"><a class="nav-link" href="miPerfil">Mi Perfil</a></li>
-					<li class="nav-item"><a class="nav-link" href="sesionCerrada">Cerrar Sesion</a></li> 
+					<li class="nav-item"><a class="nav-link" href="/">Cerrar Sesion</a></li> 
 					{{/usuario}}
 				</ul>
 			</div>
@@ -163,7 +163,7 @@
 							<td>{{editorial}}</td>
 							<td>{{genero}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
-							<input type="hidden" name="_csrf" value="{{tokenLibros}}"/>
+							<input type="hidden" name="_csrf" value="{{tokenLibro}}"/>
 						</form>
 					</tr>
 					{{/listaLibrosDestacados}}
@@ -189,7 +189,7 @@
 							<td>{{fasciculo}}</td>
 							<td>{{genero}}</td>
 							<td style="border:hidden"><input type="submit" class="btn btn-success" value="RESERVAR"/></td>
-							<input type="hidden" name="_csrf" value="{{tokenRevistas}}"/>
+							<input type="hidden" name="_csrf" value="{{tokenRevista}}"/>
 						</form>
 					</tr>
 					{{/listaRevistasDestacadas}}

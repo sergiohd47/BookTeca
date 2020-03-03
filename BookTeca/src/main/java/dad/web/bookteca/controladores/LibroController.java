@@ -26,13 +26,13 @@ public class LibroController {
 	private UsuarioRepository usuarios;
 	
 	@RequestMapping("/buscadorLibros")
-	public String buscadorLibros(Model model, HttpSession usuarioSesion, HttpServletRequest request) {
-		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
+	public String buscadorLibros(Model model, HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		if(InicioController.sesionNoIniciada)
 			model.addAttribute("visibleIniciarSesion",true);
 		else {
+			Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 			model.addAttribute("visibleCerrarSesion",true);
 			if(!usuario.getAdministrador())
 				model.addAttribute("nombre",usuario.getNombre());
@@ -43,7 +43,6 @@ public class LibroController {
 	@RequestMapping("/busquedaLibros")
 	public String busquedaLibros(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveLibro") String info, 
 			HttpServletRequest request) {
-		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		ArrayList<Libro>listaLibros=new ArrayList<>();
@@ -53,6 +52,7 @@ public class LibroController {
 			model.addAttribute("listaLibrosBusqueda",listaLibros);
 			model.addAttribute("visibleTabla",!listaLibros.isEmpty());
 		} else {
+			Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 			ArrayList<Libro> listaLibrosBusqueda=new ArrayList<>();
 			model.addAttribute("visibleCerrarSesion",true);
 			if(!usuario.getAdministrador()) {
@@ -70,17 +70,16 @@ public class LibroController {
 		return "busquedaLibros";
 	}
 	@RequestMapping("/libroReservado")
-	public String libroReservado(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro, 
+	public String libroReservado(Model model, HttpSession sesionUsuario, @RequestParam long idLibro, 
 			HttpServletRequest request) {
 		Libro libro = libros.findById(idLibro);
-		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
+		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 		if(usuario.reservarLibro(libro)) {
 			libros.save(libro);
 			usuarios.save(usuario);
-			sesionUsuario.setAttribute("infoUsuario",usuario);
 		}
-		model.addAttribute("usuario",true);
-		model.addAttribute("usuarioAdmin",false);
+		model.addAttribute("usuario",request.isUserInRole("USER"));
+		model.addAttribute("usuarioAdmin",!request.isUserInRole("USER"));
 		InicioController.listaLibrosDestacados=new ArrayList<>();
 		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 		Collections.shuffle(listaLibros);

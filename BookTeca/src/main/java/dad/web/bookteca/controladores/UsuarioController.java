@@ -7,8 +7,13 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
@@ -31,6 +36,8 @@ import dad.web.bookteca.servicios.UsuarioService;
 @Controller
 public class UsuarioController {
 
+	private static final Logger LOGUEO = LoggerFactory.getLogger(UsuarioController.class);
+	
 	@Autowired
 	private EquipoInformaticoRepository equiposInformaticos;
 
@@ -46,6 +53,9 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioRepository usuarios;
 	
+	@Autowired
+	private UsuarioService servicio;
+	
 	@RequestMapping("/iniciarSesion")
 	public String iniciarSesion(Model model, HttpServletRequest request) {
 		//SecurityContextHolder.getContext().getAuthentication();
@@ -53,29 +63,13 @@ public class UsuarioController {
 		model.addAttribute("token",token.getToken());
 		return "iniciarSesion";
 	}
-
+	
 	@RequestMapping("/sesionIniciada")
-	public String sesionIniciada(Model model, HttpSession usuarioSesion, HttpServletRequest request) {
-		System.out.println("AQUI");
-		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
-		//System.out.println("AQUI 2");
-		if(usuario==null)
-			return iniciarSesion(model,request);
-		//SecurityContextHolder.getContext().getAuthentication();
-		usuarioSesion.setAttribute("infoUsuario",usuario);
+	public String sesionIniciada(Model model, HttpServletRequest request) {
+		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 		InicioController.sesionNoIniciada = false;
-		if(!usuario.getAdministrador()) {
-			//model.addAttribute("usuario",request.isUserInRole("USER"));
-			model.addAttribute("usuario",true);
-			CsrfToken tokenLibros = (CsrfToken) request.getAttribute("_csrf");
-			model.addAttribute("tokenLibros",tokenLibros.getToken());
-			model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
-			CsrfToken tokenRevistas = (CsrfToken) request.getAttribute("_csrf");
-			model.addAttribute("tokenRevistas",tokenRevistas.getToken());
-			model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
-		} else {
-			//model.addAttribute("usuarioAdmin",request.isUserInRole("ADMIN"));
-			model.addAttribute("usuarioAdmin",true);
+		if(usuario.getAdministrador()) {
+			model.addAttribute("usuarioAdmin",request.isUserInRole("ADMIN"));
 			ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 			model.addAttribute("listaLibros",listaLibros);
 			ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
@@ -84,20 +78,27 @@ public class UsuarioController {
 			model.addAttribute("listaSTGs",listaSTGs);
 			ArrayList<EquipoInformatico> listaEquipos=(ArrayList<EquipoInformatico>) equiposInformaticos.findAll();
 			model.addAttribute("listaEquipos",listaEquipos);
+		} else {
+			model.addAttribute("usuario",request.isUserInRole("USER"));
+			CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");
+			model.addAttribute("tokenLibro",tokenLibro.getToken());
+			model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
+			CsrfToken tokenRevista = (CsrfToken) request.getAttribute("_csrf");
+			model.addAttribute("tokenRevista",tokenRevista.getToken());
+			model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		}
 		return "sesionIniciada";
 	}
 	
 	@RequestMapping("/inicio")
-	public String inicio(Model model, HttpSession sesionUsuario, HttpServletRequest servlet) {
-		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
-		//InicioController.sesionNoIniciada = false;
+	public String inicio(Model model, HttpSession sesionUsuario, HttpServletRequest request) {
+		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 		if(!usuario.getAdministrador()) {
-			model.addAttribute("usuario",true);
+			model.addAttribute("usuario",request.isUserInRole("USER"));
 			model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
 			model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		} else {
-			model.addAttribute("usuarioAdmin",true);
+			model.addAttribute("usuarioAdmin",request.isUserInRole("ADMIN"));
 			ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 			model.addAttribute("listaLibros",listaLibros);
 			ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
@@ -130,7 +131,7 @@ public class UsuarioController {
 
 	@RequestMapping("/miPerfil")
 	public String miPerfil(Model model,HttpSession sesionUsuario, HttpServletRequest request) {
-		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
+		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 		if(!usuario.getAdministrador()) {
 			model.addAttribute("nombre",usuario.getNombre());
 			model.addAttribute("usuario",true);
@@ -173,8 +174,7 @@ public class UsuarioController {
 	
 	@RequestMapping("/editarPerfil")
 	public String editarPerfil(Model model, HttpSession sesionUsuario , HttpServletRequest request) {
-		SecurityContextHolder.getContext().getAuthentication();
-		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
+		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 		model.addAttribute("nombre",usuario.getNombre());
 		model.addAttribute("apellidos",usuario.getApellidos());
 		model.addAttribute("contraseña",usuario.getContrasenya());
@@ -187,26 +187,14 @@ public class UsuarioController {
 	public String perfilEditado(Model model, HttpSession sesionUsuario, @RequestParam("nuevoNombreUsuario") String nombre, 
 			@RequestParam("nuevosApellidosUsuario") String apellidos, @RequestParam("nuevaContrasenya") String contrasenya, 
 			HttpServletRequest request) {
-		Usuario usuarioEditado = (Usuario) sesionUsuario.getAttribute("infoUsuario");
+		Usuario usuarioEditado = usuarios.findByEmail(request.getUserPrincipal().getName());
 		usuarioEditado.setNombre(nombre);
 		usuarioEditado.setApellidos(apellidos);
 		usuarioEditado.setContrasenya(contrasenya);
 		usuarios.save(usuarioEditado);
 		sesionUsuario.setAttribute("infoUsuario",usuarioEditado);
-		//String nombreUsuario=usuarioEditado.getNombre();	
 		model.addAttribute("nombre",usuarioEditado.getNombre());
 		return "perfilEditado";
 		
-	}
-	
-	@RequestMapping("/sesionCerrada")
-	public String sesionCerrada(Model model, HttpServletRequest request) {
-		InicioController.sesionNoIniciada = true;
-		model.addAttribute("visibleIniciarSesion",true);
-		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
-		model.addAttribute("listaRevistasDescadas",InicioController.listaRevistasDestacadas);
-		return "index";
-	}
-	
-	
+	}	
 }

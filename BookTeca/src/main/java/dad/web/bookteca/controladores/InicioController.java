@@ -77,6 +77,10 @@ public class InicioController {
 		usuarios.save(new Usuario("Borja","Martin Alonso","G07martin","bormaral13@gmail.com",false));
 		usuarios.save(new Usuario("Sergio","Hernandez Dominguez","Pass1","sergiohd47@gmail.com",true));
 		usuarios.save(new Usuario("Daniel","Molina Ballesteros","Daany10","dmolinaballesteros@gmail.com",false));
+		usuarios.save(new Usuario("Pablo","Picapleitos","Pablo90","borrego90@gmail.com",false));
+		usuarios.save(new Usuario("Alvaro","Diaz","Pass2","adiaz@gmail.com",true));
+		usuarios.save(new Usuario("Pepe","Prueba","Pepe13","pep@gmail.com",false));
+		usuarios.save(new Usuario("Nicolas","Muñoz","Nico56","nick@gmail.com",false));
 		*/
 	}
 

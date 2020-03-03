@@ -248,8 +248,8 @@ public class Usuario {
 	
 	public String getRole() {
 		if(this.administrador)
-			return "ADMIN";
-		return "USER";
+			return "ROLE_ADMIN";
+		return "ROLE_USER";
 	}
 	
 	public void cambiarRol() {

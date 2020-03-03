@@ -28,12 +28,12 @@ public class RevistaController {
 	
 	@RequestMapping("/buscadorRevistas")
 	public String buscadorRevista(Model model, HttpSession usuarioSesion, HttpServletRequest request) {
-		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		if(InicioController.sesionNoIniciada)
 			model.addAttribute("visibleIniciarSesion",true);
 		else {
+			Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 			model.addAttribute("visibleCerrarSesion",true);
 			if(!usuario.getAdministrador())
 				model.addAttribute("nombre",usuario.getNombre());
@@ -44,7 +44,6 @@ public class RevistaController {
 	@RequestMapping("/busquedaRevistas")
 	public String busquedaRevistas(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveRevista") String info, 
 			HttpServletRequest request) {
-		Usuario usuario=(Usuario) usuarioSesion.getAttribute("infoUsuario");
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		ArrayList<Revista> listaRevistas=new ArrayList<>();
@@ -54,6 +53,7 @@ public class RevistaController {
 			model.addAttribute("listaRevistasBusqueda",listaRevistas);
 			model.addAttribute("visibleTabla",!listaRevistas.isEmpty());
 		} else {
+			Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 			ArrayList<Revista> listaRevistasBusqueda=new ArrayList<>();
 			model.addAttribute("visibleCerrarSesion",true);
 			if(!usuario.getAdministrador()) {
@@ -74,14 +74,13 @@ public class RevistaController {
 	public String revistaReservada(Model model, HttpSession sesionUsuario, @RequestParam long idRevista, 
 			HttpServletRequest request) {
 		Revista revista = revistas.findById(idRevista);
-		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
+		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 		if (usuario.reservarRevista(revista)){
 			revistas.save(revista);
 			usuarios.save(usuario);
-			sesionUsuario.setAttribute("infoUsuario",usuario);
 		}
-		model.addAttribute("usuario",true);
-		model.addAttribute("usuarioAdmin",false);
+		model.addAttribute("usuario",request.isUserInRole("USER"));
+		model.addAttribute("usuarioAdmin",!request.isUserInRole("USER"));
 		CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("tokenLibro",tokenLibro.getToken());
 		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
