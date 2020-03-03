@@ -177,5 +177,5 @@ public class SecurityConfiguration {
 	@Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
-    }*/
+    }
 }
