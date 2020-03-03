@@ -1,18 +1,21 @@
 package dad.web.bookteca.seguridad;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import dad.web.bookteca.basedatos.UsuarioRepository;
 import dad.web.bookteca.clases.Usuario;
-
+@SpringBootApplication
+@EnableWebSecurity
 @Configuration
 public class SecurityConfiguration {
 	
@@ -39,6 +42,7 @@ public class SecurityConfiguration {
 			http.authorizeRequests().antMatchers("/busquedaRevistas").permitAll();
 			http.authorizeRequests().antMatchers("/reservaSalaTrabajoGrupo").permitAll();
 			http.authorizeRequests().antMatchers("/reservaEquipoInformatico").permitAll();
+			http.authorizeRequests().antMatchers("/sesionCerrada").permitAll();
 			
 			http.authorizeRequests().antMatchers("/vendor/**").permitAll();
 			http.authorizeRequests().antMatchers("/css/**").permitAll();
@@ -46,7 +50,7 @@ public class SecurityConfiguration {
 			http.authorizeRequests().antMatchers("/js/**").permitAll();
 				
 			//PARTE PRIVADA
-			/*http.authorizeRequests().antMatchers("/sesionIniciada").authenticated();
+			http.authorizeRequests().antMatchers("/sesionIniciada").authenticated();
 			http.authorizeRequests().antMatchers("/inicio").authenticated();
 			http.authorizeRequests().antMatchers("/miPerfil").authenticated();
 			http.authorizeRequests().antMatchers("/editarPerfil").authenticated();
@@ -71,7 +75,7 @@ public class SecurityConfiguration {
 			http.authorizeRequests().antMatchers("/equipoAñadido").authenticated();
 			http.authorizeRequests().antMatchers("/administrarUsuarios").authenticated();
 			http.authorizeRequests().antMatchers("/busquedaUsuarios").authenticated();
-			http.authorizeRequests().antMatchers("/usuarioAdministrado").authenticated();*/
+			http.authorizeRequests().antMatchers("/usuarioAdministrado").authenticated();
 			
 			
 			// ROL USUARIO
@@ -112,7 +116,7 @@ public class SecurityConfiguration {
 			http.formLogin().usernameParameter("nombreUsuario");
 			http.formLogin().passwordParameter("contrasenya");
 			http.formLogin().defaultSuccessUrl("/sesionIniciada");
-			http.formLogin().failureUrl("/iniciarSesion");
+			http.formLogin().failureUrl("/registro");
 			
 			// -- LOGOUT
 			http.logout().logoutUrl("/sesionCerrada");
@@ -166,7 +170,7 @@ public class SecurityConfiguration {
 			http.authorizeRequests().antMatchers("/js/**").permitAll();
 				
 			//PARTE PRIVADA
-			/*http.authorizeRequests().antMatchers("/sesionIniciada").authenticated();
+			http.authorizeRequests().antMatchers("/sesionIniciada").authenticated();
 			http.authorizeRequests().antMatchers("/inicio").authenticated();
 			http.authorizeRequests().antMatchers("/miPerfil").authenticated();
 			http.authorizeRequests().antMatchers("/editarPerfil").authenticated();
@@ -191,7 +195,7 @@ public class SecurityConfiguration {
 			http.authorizeRequests().antMatchers("/equipoAñadido").authenticated();
 			http.authorizeRequests().antMatchers("/administrarUsuarios").authenticated();
 			http.authorizeRequests().antMatchers("/busquedaUsuarios").authenticated();
-			http.authorizeRequests().antMatchers("/usuarioAdministrado").authenticated();*/
+			http.authorizeRequests().antMatchers("/usuarioAdministrado").authenticated();
 			
 			
 			// ROL USUARIO
@@ -232,7 +236,7 @@ public class SecurityConfiguration {
 			http.formLogin().usernameParameter("nombreUsuario");
 			http.formLogin().passwordParameter("contrasenya");
 			http.formLogin().defaultSuccessUrl("/sesionIniciada");
-			http.formLogin().failureUrl("/iniciarSesionTrasRegistro");
+			http.formLogin().failureUrl("/registro");
 			
 			// -- LOGOUT
 			http.logout().logoutUrl("/sesionCerrada");

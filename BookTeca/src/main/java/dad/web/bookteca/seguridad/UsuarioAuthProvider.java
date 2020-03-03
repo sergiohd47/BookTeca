@@ -26,46 +26,24 @@ public class UsuarioAuthProvider implements AuthenticationProvider{
 	@Autowired
 	private UsuarioRepository usuarios;
 	
-	@Autowired
-	private UsuarioService servicioUsuario;
 	
 	//public static List<UsuarioRol> listaUsuariosRol = new ArrayList<>();
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		String email = authentication.getName();
-        String password = authentication.getCredentials().toString();
-        if ("externaluser".equals(email) && "pass".equals(password))
-            return new UsernamePasswordAuthenticationToken(email, password,Collections.emptyList());
-        else
-            throw new BadCredentialsException("External system authentication failed");
-        
-		/*
-		String email = authentication.getName();
-        Object credentials = authentication.getCredentials();
-        if(!(credentials instanceof String))
-            return null;
-        String password = credentials.toString();
-        Optional<UsuarioRol> usuarioRolOpt = listaUsuariosRol.stream().filter(u -> u.match(email,password)).findFirst();
-        if(!usuarioRolOpt.isPresent())
-            throw new BadCredentialsException("Autenticacion fallida");
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(usuarioRolOpt.get().rol));
-        return new UsernamePasswordAuthenticationToken(email,password,grantedAuthorities);
-        */
-		/*
-		String correo = authentication.getName();
-		Usuario usuario = usuarios.findByEmail(correo);
-		if(usuario == null)
-			throw new BadCredentialsException("Usuario no encontrado");
-		String contraseña = (String) authentication.getCredentials();
-		if(!(new BCryptPasswordEncoder().matches(contraseña,usuario.getContrasenya())))
-			throw new BadCredentialsException("Contraseña incorrecta");
-		servicioUsuario.setUsuarioLogueado(usuario);
-		List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(usuario.getRole()));
-        return new UsernamePasswordAuthenticationToken(correo,contraseña,grantedAuthorities);
-        */
+		String email = authentication.getName(); //getEmail
+		Usuario usuario = usuarios.findByEmail(email); 
+		if (usuario == null) {
+			throw new BadCredentialsException("User not found");
+		}
+			 
+		String password = (String) authentication.getCredentials();
+		/*if (!new BCryptPasswordEncoder().matches(password, usuario.getContrasenya())) {
+			 throw new BadCredentialsException("Wrong password");	
+		}*/
+		List<GrantedAuthority> roles = new ArrayList<>();
+		roles.add(new SimpleGrantedAuthority(usuario.getRole()));
+		return new UsernamePasswordAuthenticationToken(usuario.getEmail(), password, roles);
 	}	
 
 	@Override

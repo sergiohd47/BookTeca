@@ -55,9 +55,10 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/sesionIniciada")
-	public String sesionIniciada(Model model, @RequestParam("nombreUsuario") String email,@RequestParam String contrasenya, 
-			HttpSession usuarioSesion, HttpServletRequest request) {
-		Usuario usuario=usuarios.findByEmailAndContrasenya(email,contrasenya);
+	public String sesionIniciada(Model model, HttpSession usuarioSesion, HttpServletRequest request) {
+		System.out.println("AQUI");
+		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
+		//System.out.println("AQUI 2");
 		if(usuario==null)
 			return iniciarSesion(model,request);
 		//SecurityContextHolder.getContext().getAuthentication();
@@ -201,6 +202,9 @@ public class UsuarioController {
 	@RequestMapping("/sesionCerrada")
 	public String sesionCerrada(Model model, HttpServletRequest request) {
 		InicioController.sesionNoIniciada = true;
+		model.addAttribute("visibleIniciarSesion",true);
+		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
+		model.addAttribute("listaRevistasDescadas",InicioController.listaRevistasDestacadas);
 		return "index";
 	}
 	
