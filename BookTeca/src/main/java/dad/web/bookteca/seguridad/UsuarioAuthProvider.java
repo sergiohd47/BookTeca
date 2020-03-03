@@ -31,8 +31,11 @@ public class UsuarioAuthProvider implements AuthenticationProvider{
 	
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+		//System.out.println("ENTRO EN AUTHENTICATE");
 		String email = authentication.getName(); //getEmail
+		//System.out.println("ENTRO EN AUTHENTICATE 2");
 		Usuario usuario = usuarios.findByEmail(email); 
+		//System.out.println("ENTRO EN AUTHENTICATE 3");
 		if (usuario == null) {
 			throw new BadCredentialsException("User not found");
 		}
@@ -43,12 +46,14 @@ public class UsuarioAuthProvider implements AuthenticationProvider{
 		}*/
 		List<GrantedAuthority> roles = new ArrayList<>();
 		roles.add(new SimpleGrantedAuthority(usuario.getRole()));
+		//System.out.println("SALGO DEL AUTHENTICATE");
+		//System.out.println(usuario.getRole());
 		return new UsernamePasswordAuthenticationToken(usuario.getEmail(), password, roles);
 	}	
 
 	@Override
 	public boolean supports(Class<?> authentication) {
-		return authentication.equals(UsernamePasswordAuthenticationToken.class);
+		return true;
 	}
 	/*
 	public static class UsuarioRol {

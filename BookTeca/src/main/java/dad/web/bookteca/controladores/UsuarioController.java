@@ -64,9 +64,9 @@ public class UsuarioController {
 		//SecurityContextHolder.getContext().getAuthentication();
 		usuarioSesion.setAttribute("infoUsuario",usuario);
 		InicioController.sesionNoIniciada = false;
-		if(!usuario.getAdministrador()) {
+		if(request.isUserInRole("USER")) {
 			//model.addAttribute("usuario",request.isUserInRole("USER"));
-			model.addAttribute("usuario",true);
+			model.addAttribute("usuario",request.isUserInRole("USER"));
 			CsrfToken tokenLibros = (CsrfToken) request.getAttribute("_csrf");
 			model.addAttribute("tokenLibros",tokenLibros.getToken());
 			model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
@@ -75,7 +75,7 @@ public class UsuarioController {
 			model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		} else {
 			//model.addAttribute("usuarioAdmin",request.isUserInRole("ADMIN"));
-			model.addAttribute("usuarioAdmin",true);
+			model.addAttribute("usuarioAdmin",request.isUserInRole("ADMIN"));
 			ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 			model.addAttribute("listaLibros",listaLibros);
 			ArrayList<Revista> listaRevistas=(ArrayList<Revista>) revistas.findAll();
