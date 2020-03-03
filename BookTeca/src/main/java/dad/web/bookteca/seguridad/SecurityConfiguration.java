@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,8 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import dad.web.bookteca.basedatos.UsuarioRepository;
+import dad.web.bookteca.clases.Usuario;
 
-@EnableWebSecurity
 @Configuration
 public class SecurityConfiguration {
 	
@@ -60,7 +61,7 @@ public class SecurityConfiguration {
 			http.authorizeRequests().antMatchers("/salaReservada").hasRole("USER");
 			http.authorizeRequests().antMatchers("/equipoDesocupado").hasRole("USER");
 			http.authorizeRequests().antMatchers("/salaDesocupada").hasRole("USER");
-			
+
 			// ROL ADMINISTRADOR
 			//http.authorizeRequests().antMatchers("/sesionCerrada").hasRole("ADMIN");
 			http.authorizeRequests().antMatchers("/añadirLibro").hasRole("ADMIN");
@@ -176,5 +177,5 @@ public class SecurityConfiguration {
 	@Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
-    }
+    }*/
 }
