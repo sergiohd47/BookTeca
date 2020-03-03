@@ -6,9 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +27,6 @@ public class SalaTrabajoGrupoController {
 	
 	@RequestMapping("/reservaSalaTrabajoGrupo")
 	public String reservaSalaTrabajoGrupo(Model model, HttpSession usuarioSesion, HttpServletRequest request) {
-		Usuario usuario=(Usuario)usuarioSesion.getAttribute("infoUsuario");
 		ArrayList<SalaTrabajoGrupo> listaSTG=new ArrayList<>();
 		if(InicioController.sesionNoIniciada) {
 			model.addAttribute("visibleIniciarSesion",true);
@@ -39,16 +35,15 @@ public class SalaTrabajoGrupoController {
 			model.addAttribute("visibleTabla",visibleTabla);
 			model.addAttribute("listaSTG",listaSTG);
 		} else {
+			Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 			model.addAttribute("visibleCerrarSesion",true);
 			if(!usuario.getAdministrador()) {
-				//SalaTrabajoGrupo STG = salasTrabajoGrupo.findByIdUsuario(usuario);
+				CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+				model.addAttribute("token",token.getToken());
 				if(usuario.getSalaTrabajo()!= null)
 					model.addAttribute("salaElegida",true);
-				else {
-					CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-					model.addAttribute("token",token.getToken());
+				else
 					model.addAttribute("salaElegida",false);
-				}
 				listaSTG=(ArrayList<SalaTrabajoGrupo>) salasTrabajoGrupo.findByDisponible(true);
 				model.addAttribute("visibleTabla",!listaSTG.isEmpty());
 				model.addAttribute("listaSTG",listaSTG);
@@ -61,14 +56,13 @@ public class SalaTrabajoGrupoController {
 	public String salaReservada(Model model, HttpSession sesionUsuario, @RequestParam long idSala, 
 			HttpServletRequest request) {
 		SalaTrabajoGrupo sala = salasTrabajoGrupo.findById(idSala);
-		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
+		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 		if(usuario.reservarSalaTrabajoGrupo(sala)){
 			salasTrabajoGrupo.save(sala);
 			usuarios.save(usuario);
-			sesionUsuario.setAttribute("infoUsuario",usuario);
 		}
-		model.addAttribute("usuario",true);
-		model.addAttribute("usuarioAdmin",false);
+		model.addAttribute("usuario",request.isUserInRole("USER"));
+		model.addAttribute("usuarioAdmin",!request.isUserInRole("USER"));
 		CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("tokenLibro",tokenLibro.getToken());
 		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
@@ -82,13 +76,12 @@ public class SalaTrabajoGrupoController {
 	public String salaDesocupada(Model model, HttpSession sesionUsuario, @RequestParam long idSala, 
 			HttpServletRequest request) {
 		SalaTrabajoGrupo sala = salasTrabajoGrupo.findById(idSala);
-		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
+		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 		usuario.quitarSalaTrabajoGrupo(sala);
 		salasTrabajoGrupo.save(sala);
 		usuarios.save(usuario);
-		sesionUsuario.setAttribute("infoUsuario",usuario);
-		model.addAttribute("usuario",true);
-		model.addAttribute("usuarioAdmin",false);
+		model.addAttribute("usuario",request.isUserInRole("USER"));
+		model.addAttribute("usuarioAdmin",!request.isUserInRole("USER"));
 		CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("tokenLibro",tokenLibro.getToken());
 		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);
