@@ -111,13 +111,12 @@ public class RevistaController {
 	public String revistaDevuelta(Model model, HttpSession sesionUsuario, @RequestParam long idRevista, 
 			HttpServletRequest request)  {
 		Revista revista = revistas.findById(idRevista);
-		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
+		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 		usuario.quitarRevista(revista);
 		revistas.save(revista);
 		usuarios.save(usuario);
-		sesionUsuario.setAttribute("infoUsuario",usuario);
-		model.addAttribute("usuario",true);
-		model.addAttribute("usuarioAdmin",false);
+		model.addAttribute("usuario",request.isUserInRole("USER"));
+		model.addAttribute("usuarioAdmin",!request.isUserInRole("USER"));
 		CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("tokenLibro",tokenLibro.getToken());
 		model.addAttribute("listaLibrosDestacados",InicioController.listaLibrosDestacados);

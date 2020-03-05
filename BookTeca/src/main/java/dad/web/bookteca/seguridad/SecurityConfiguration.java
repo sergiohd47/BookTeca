@@ -73,7 +73,7 @@ public class SecurityConfiguration {
 			http.formLogin().usernameParameter("nombreUsuario");
 			http.formLogin().passwordParameter("contrasenya");
 			http.formLogin().defaultSuccessUrl("/sesionIniciada");
-			http.formLogin().failureUrl("/registro");
+			http.formLogin().failureUrl("/iniciarSesion");
 			
 			// -- LOGOUT
 			//http.logout().logoutUrl("/sesionCerrada");

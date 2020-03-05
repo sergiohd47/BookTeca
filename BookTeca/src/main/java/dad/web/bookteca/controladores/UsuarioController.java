@@ -175,7 +175,7 @@ public class UsuarioController {
 		Usuario usuarioEditado = usuarios.findByEmail(request.getUserPrincipal().getName());
 		usuarioEditado.setNombre(nombre);
 		usuarioEditado.setApellidos(apellidos);
-		usuarioEditado.setContrasenya(contrasenya);
+		usuarioEditado.setContrasenya((String) new BCryptPasswordEncoder().encode(contrasenya));
 		usuarios.save(usuarioEditado);
 		sesionUsuario.setAttribute("infoUsuario",usuarioEditado);
 		model.addAttribute("nombre",usuarioEditado.getNombre());
