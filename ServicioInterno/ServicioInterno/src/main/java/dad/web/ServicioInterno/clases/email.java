@@ -12,7 +12,11 @@ public class Email {
 		this.idUsuario = usuario;
 	}
 	
-	public String comprobarLibros() {
+	public Usuario getUsuario() {
+		return this.idUsuario;
+	}
+	
+	public void comprobarLibros() {
 		String mensaje = "";
 		Date hoy = new Date();
 		for(Libro libro: this.idUsuario.getLibrosReservados()) {
@@ -25,10 +29,14 @@ public class Email {
 			}
 		}
 		this.mensaje=mensaje;
-		return mensaje;
+
 	}
 	
-	public String comprobarRevistas() {
+	public void libroReservado(Libro libro) {
+		this.mensaje = "Ha reservado el libro "+ libro.getNombre() +" con éxito";
+	}
+	
+	public void comprobarRevistas() {
 		String mensaje = "";
 		Date hoy = new Date();
 		for(Revista revista: this.idUsuario.getRevistasReservadas()) {
@@ -41,10 +49,15 @@ public class Email {
 			}
 		}
 		this.mensaje=mensaje;
-		return mensaje;
+		
 	}
 	
-	public String comprobarSala() {
+	public void revistaReservada(Revista revista) {
+		this.mensaje = "Ha reservado la revista "+ revista.getNombre() +" con éxito";
+	}
+	
+	
+	public void comprobarSala() {
 		String mensaje = "";
 		Date hoy = new Date();
 		if(idUsuario.getSalaTrabajo() != null) {
@@ -53,10 +66,15 @@ public class Email {
 			}
 		}
 		this.mensaje=mensaje;
-		return mensaje;
+
 	}
 	
-	public String comprobarEquipo() {
+	public void equipoReservado(EquipoInformatico equipo) {
+		this.mensaje = "Ha reservado el equipo "+ equipo.getLocalizacion() +" con éxito";
+	}
+	
+	
+	public void comprobarEquipo() {
 		String mensaje = "";
 		Date hoy = new Date();
 		if(idUsuario.getPuestoInformatico() != null) {
@@ -65,8 +83,19 @@ public class Email {
 			}
 		}
 		this.mensaje=mensaje;
-		return mensaje;
+		
 	}
 	
+	public void salaReservada(SalaTrabajoGrupo sala) {
+		this.mensaje = "Ha reservado la sala "+ sala.getLocalizacion() +" con éxito";
+	}
+	
+	public void mensajeError() {
+		this.mensaje = "Lo sentimos " + idUsuario.getNombre() + " ha habido un fallo al reservar.";
+	}
+	
+	public String getMensaje() {
+		return this.mensaje;
+	}
 
 }
