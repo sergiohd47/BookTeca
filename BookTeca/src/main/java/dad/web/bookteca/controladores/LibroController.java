@@ -111,14 +111,13 @@ public class LibroController {
 	public String libroDevuelto(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro, 
 			HttpServletRequest request) {
 		Libro libro = libros.findById(idLibro);
-		Usuario usuario=(Usuario)sesionUsuario.getAttribute("infoUsuario");
+		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 		usuario.quitarLibro(libro);
 		libros.save(libro);
 		usuarios.save(usuario);
-		sesionUsuario.setAttribute("infoUsuario",usuario);
 		model.addAttribute("nombre",usuario.getNombre());
-		model.addAttribute("usuario",true);
-		model.addAttribute("usuarioAdmin",false);
+		model.addAttribute("usuario",request.isUserInRole("USER"));
+		model.addAttribute("usuarioAdmin",!request.isUserInRole("USER"));
 		InicioController.listaLibrosDestacados=new ArrayList<>();
 		ArrayList<Libro> listaLibros=(ArrayList<Libro>) libros.findAll();
 		Collections.shuffle(listaLibros);
