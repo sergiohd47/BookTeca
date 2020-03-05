@@ -26,7 +26,7 @@ public class RevistaController {
 	private UsuarioRepository usuarios;
 	
 	@RequestMapping("/buscadorRevistas")
-	public String buscadorRevista(Model model, HttpSession usuarioSesion, HttpServletRequest request) {
+	public String buscadorRevista(Model model, HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		if(InicioController.sesionNoIniciada)
@@ -41,7 +41,7 @@ public class RevistaController {
 	}
 	
 	@RequestMapping("/busquedaRevistas")
-	public String busquedaRevistas(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveRevista") String info, 
+	public String busquedaRevistas(Model model, @RequestParam("palabraClaveRevista") String info, 
 			HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
@@ -70,7 +70,7 @@ public class RevistaController {
 		return "busquedaRevistas";
 	}
 	@RequestMapping("/revistaReservada")
-	public String revistaReservada(Model model, HttpSession sesionUsuario, @RequestParam long idRevista, 
+	public String revistaReservada(Model model, @RequestParam long idRevista, 
 			HttpServletRequest request) {
 		Revista revista = revistas.findById(idRevista);
 		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
@@ -108,7 +108,7 @@ public class RevistaController {
 	}
 
 	@RequestMapping("/revistaDevuelta")
-	public String revistaDevuelta(Model model, HttpSession sesionUsuario, @RequestParam long idRevista, 
+	public String revistaDevuelta(Model model, @RequestParam long idRevista, 
 			HttpServletRequest request)  {
 		Revista revista = revistas.findById(idRevista);
 		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());

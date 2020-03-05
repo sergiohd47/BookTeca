@@ -43,8 +43,8 @@ public class AdministradorController {
 	private Usuario usuario;
 	
 	@RequestMapping("/añadirLibro")
-	public String añadirLibro(Model model,HttpSession sesionUsuario, HttpServletRequest request) {
-		sesionUsuario.getAttribute("infoUsuario");
+	public String añadirLibro(Model model, HttpServletRequest request) {
+		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		return "añadirLibro";
@@ -53,16 +53,16 @@ public class AdministradorController {
 	@RequestMapping("/libroAñadido")
 	public String libroAñadido(Model model, @RequestParam("nombreLibro") String nombre, @RequestParam String autor, 
 			@RequestParam("editorialLibro") String editorial, @RequestParam("generoLibro") String genero, 
-			HttpSession sesionUsuario, HttpServletRequest request) {
-		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
+			HttpServletRequest request) {
+		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
 		model.addAttribute("nombre",usuario.getNombre());
 		libros.save(new Libro(nombre,autor,editorial,genero));
 		return "recursoAñadido";
 	}
 	
 	@RequestMapping("/añadirRevista")
-	public String añadirRevista(Model model,HttpSession sesionUsuario, HttpServletRequest request) {
-		sesionUsuario.getAttribute("infoUsuario");
+	public String añadirRevista(Model model,HttpServletRequest request) {
+		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		return "añadirRevista";
@@ -71,17 +71,16 @@ public class AdministradorController {
 	@RequestMapping("/revistaAñadida")
 	public String revistaAñadida(Model model, @RequestParam("nombreRevista") String nombre, 
 			@RequestParam("editorialRevista") String editorial, @RequestParam int fasciculo, 
-			@RequestParam("generoRevista") String genero, HttpSession sesionUsuario, HttpServletRequest request) {
-		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
+			@RequestParam("generoRevista") String genero, HttpServletRequest request) {
+		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
 		model.addAttribute("nombre",usuario.getNombre());
 		revistas.save(new Revista(nombre,editorial,fasciculo,genero));
 		return "recursoAñadido";
 	}
 	
 	@RequestMapping("/añadirSalaTrabajoGrupo")
-	public String añadirSalaTrabajoGrupo(Model model, HttpSession sesionUsuario, HttpServletRequest request) {
-		SecurityContextHolder.getContext().getAuthentication();
-		sesionUsuario.getAttribute("infoUsuario");
+	public String añadirSalaTrabajoGrupo(Model model, HttpServletRequest request) {
+		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		return "añadirSalaTrabajoGrupo";
@@ -90,16 +89,16 @@ public class AdministradorController {
 	@RequestMapping("/salaAñadida")
 	public String salaTrabajoGrupoAñadida(Model model, @RequestParam("capacidadSala") int capacidad, 
 			@RequestParam("localizacionSala") String localizacion, @RequestParam(defaultValue = "false") boolean compartida, 
-			HttpSession sesionUsuario, HttpServletRequest request) {
-		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
+			HttpServletRequest request) {
+		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
 		model.addAttribute("nombre",usuario.getNombre());
 		salasTrabajoGrupo.save(new SalaTrabajoGrupo(capacidad,localizacion,compartida));
 		return "recursoAñadido";
 	}
 
 	@RequestMapping("/añadirEquipoInformatico")
-	public String añadirEquipo(Model model, HttpSession sesionUsuario, HttpServletRequest request) {
-		sesionUsuario.getAttribute("infoUsuario");
+	public String añadirEquipo(Model model, HttpServletRequest request) {
+		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		return "añadirEquipoInformatico";
@@ -107,18 +106,17 @@ public class AdministradorController {
 	
 	@RequestMapping("/equipoAñadido")
 	public String equipoAñadido(Model model, @RequestParam("soEquipo") String so, 
-			@RequestParam("localizacionEquipo") String localizacion, HttpSession sesionUsuario, 
+			@RequestParam("localizacionEquipo") String localizacion, 
 			HttpServletRequest request) {
-		Usuario usuario = (Usuario) sesionUsuario.getAttribute("infoUsuario");
+		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
 		model.addAttribute("nombre",usuario.getNombre());
 		equiposInformaticos.save(new EquipoInformatico(so,localizacion));
 		return "recursoAñadido";
 	}
 
 	@RequestMapping("/administrarUsuarios")
-	public String administrarUsuarios(Model model, HttpSession sesionUsuario, HttpServletRequest request) {
-		SecurityContextHolder.getContext().getAuthentication();
-		sesionUsuario.getAttribute("infoUsuario");
+	public String administrarUsuarios(Model model, HttpServletRequest request) {
+		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		return "administrarUsuarios";
@@ -126,8 +124,8 @@ public class AdministradorController {
 	
 	@RequestMapping("/busquedaUsuarios")
 	public String busquedaUsuarios(Model model, @RequestParam("emailUsuario") String emailNuevoAdmin, 
-			HttpSession sesionUsuario, HttpServletRequest request) {
-		sesionUsuario.getAttribute("infoUsuario");
+			HttpServletRequest request) {
+		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		usuario=usuarios.findByEmail(emailNuevoAdmin);
@@ -150,8 +148,8 @@ public class AdministradorController {
 	@RequestMapping("/usuarioAdministrado")
 	public String usuarioAdministrado(Model model, HttpSession sesionUsuario, @RequestParam String emailUsuario, 
 			HttpServletRequest request) {
-		Usuario admin =(Usuario) sesionUsuario.getAttribute("infoUsuario");
-		model.addAttribute("nombre",admin.getNombre());
+		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
+		model.addAttribute("nombre",usuario.getNombre());
 		usuario = usuarios.findByEmail(emailUsuario);
 		if(!usuario.getAdministrador())
 			usuario.setAdministrador(true);

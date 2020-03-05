@@ -25,7 +25,7 @@ public class EquipoInformaticoController {
 	private UsuarioRepository usuarios;
 	
 	@RequestMapping("/reservaEquipoInformatico")
-	public String reservaEquipoInformatico(Model model, HttpSession usuarioSesion, HttpServletRequest request) {
+	public String reservaEquipoInformatico(Model model, HttpServletRequest request) {
 		ArrayList<EquipoInformatico> listaEquipo=new ArrayList<>();
 		if(InicioController.sesionNoIniciada) {
 			model.addAttribute("visibleIniciarSesion",true);
@@ -50,8 +50,7 @@ public class EquipoInformaticoController {
 		return "reservaEquipoInformatico";
 	}
 	@RequestMapping("/equipoReservado")
-	public String equipoReservado(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo, 
-			HttpServletRequest request) {
+	public String equipoReservado(Model model, @RequestParam long idEquipo, HttpServletRequest request) {
 		EquipoInformatico equipo = equiposInformaticos.findById(idEquipo);
 		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 		if (usuario.reservarPuestoInformatico(equipo)){
@@ -70,14 +69,13 @@ public class EquipoInformaticoController {
 	}
 	
 	@RequestMapping("/equipoDesocupado")
-	public String equipoDesocupado(Model model, HttpSession sesionUsuario, @RequestParam long idEquipo, 
+	public String equipoDesocupado(Model model, @RequestParam long idEquipo, 
 			HttpServletRequest request) {
 		EquipoInformatico equipo = equiposInformaticos.findById(idEquipo);
 		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 		usuario.quitarPuestoInformatico(equipo);
 		equiposInformaticos.save(equipo);
 		usuarios.save(usuario);
-		sesionUsuario.setAttribute("infoUsuario",usuario);
 		model.addAttribute("usuario",request.isUserInRole("USER"));
 		model.addAttribute("usuarioAdmin",!request.isUserInRole("USER"));
 		CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");

@@ -40,7 +40,7 @@ public class LibroController {
 	}
 
 	@RequestMapping("/busquedaLibros")
-	public String busquedaLibros(Model model, HttpSession usuarioSesion, @RequestParam("palabraClaveLibro") String info, 
+	public String busquedaLibros(Model model, @RequestParam("palabraClaveLibro") String info, 
 			HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
@@ -69,7 +69,7 @@ public class LibroController {
 		return "busquedaLibros";
 	}
 	@RequestMapping("/libroReservado")
-	public String libroReservado(Model model, HttpSession sesionUsuario, @RequestParam long idLibro, 
+	public String libroReservado(Model model,@RequestParam long idLibro, 
 			HttpServletRequest request) {
 		Libro libro = libros.findById(idLibro);
 		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
@@ -108,7 +108,7 @@ public class LibroController {
 	
 	
 	@RequestMapping("/libroDevuelto")
-	public String libroDevuelto(Model model, HttpSession sesionUsuario,  @RequestParam long idLibro, 
+	public String libroDevuelto(Model model,@RequestParam long idLibro, 
 			HttpServletRequest request) {
 		Libro libro = libros.findById(idLibro);
 		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());

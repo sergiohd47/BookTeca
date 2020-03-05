@@ -26,7 +26,7 @@ public class SalaTrabajoGrupoController {
 	private UsuarioRepository usuarios;
 	
 	@RequestMapping("/reservaSalaTrabajoGrupo")
-	public String reservaSalaTrabajoGrupo(Model model, HttpSession usuarioSesion, HttpServletRequest request) {
+	public String reservaSalaTrabajoGrupo(Model model, HttpServletRequest request) {
 		ArrayList<SalaTrabajoGrupo> listaSTG=new ArrayList<>();
 		if(InicioController.sesionNoIniciada) {
 			model.addAttribute("visibleIniciarSesion",true);
@@ -53,7 +53,7 @@ public class SalaTrabajoGrupoController {
 	}
 	
 	@RequestMapping("/salaReservada")
-	public String salaReservada(Model model, HttpSession sesionUsuario, @RequestParam long idSala, 
+	public String salaReservada(Model model, @RequestParam long idSala, 
 			HttpServletRequest request) {
 		SalaTrabajoGrupo sala = salasTrabajoGrupo.findById(idSala);
 		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
@@ -73,7 +73,7 @@ public class SalaTrabajoGrupoController {
 	}
 	
 	@RequestMapping("/salaDesocupada")
-	public String salaDesocupada(Model model, HttpSession sesionUsuario, @RequestParam long idSala, 
+	public String salaDesocupada(Model model, @RequestParam long idSala, 
 			HttpServletRequest request) {
 		SalaTrabajoGrupo sala = salasTrabajoGrupo.findById(idSala);
 		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());

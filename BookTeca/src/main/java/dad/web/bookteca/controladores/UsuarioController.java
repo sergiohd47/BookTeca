@@ -76,7 +76,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/inicio")
-	public String inicio(Model model, HttpSession sesionUsuario, HttpServletRequest request) {
+	public String inicio(Model model, HttpServletRequest request) {
 		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 		if(!usuario.getAdministrador()) {
 			model.addAttribute("usuario",request.isUserInRole("USER"));
@@ -119,7 +119,7 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/miPerfil")
-	public String miPerfil(Model model,HttpSession sesionUsuario, HttpServletRequest request) {
+	public String miPerfil(Model model,HttpServletRequest request) {
 		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 		if(!usuario.getAdministrador()) {
 			model.addAttribute("nombre",usuario.getNombre());
@@ -158,7 +158,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/editarPerfil")
-	public String editarPerfil(Model model, HttpSession sesionUsuario , HttpServletRequest request) {
+	public String editarPerfil(Model model, HttpServletRequest request) {
 		Usuario usuario = usuarios.findByEmail(request.getUserPrincipal().getName());
 		model.addAttribute("nombre",usuario.getNombre());
 		model.addAttribute("apellidos",usuario.getApellidos());
@@ -169,7 +169,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/perfilEditado")
-	public String perfilEditado(Model model, HttpSession sesionUsuario, @RequestParam("nuevoNombreUsuario") String nombre, 
+	public String perfilEditado(Model model,@RequestParam("nuevoNombreUsuario") String nombre, 
 			@RequestParam("nuevosApellidosUsuario") String apellidos, @RequestParam("nuevaContrasenya") String contrasenya, 
 			HttpServletRequest request) {
 		Usuario usuarioEditado = usuarios.findByEmail(request.getUserPrincipal().getName());
@@ -177,7 +177,6 @@ public class UsuarioController {
 		usuarioEditado.setApellidos(apellidos);
 		usuarioEditado.setContrasenya((String) new BCryptPasswordEncoder().encode(contrasenya));
 		usuarios.save(usuarioEditado);
-		sesionUsuario.setAttribute("infoUsuario",usuarioEditado);
 		model.addAttribute("nombre",usuarioEditado.getNombre());
 		return "perfilEditado";
 		
