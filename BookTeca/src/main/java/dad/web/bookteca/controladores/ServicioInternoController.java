@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller	
 public class ServicioInternoController {
 
-	private static final String url = "http://localhost/8080/getMensaje/";
+	private static final String url = "https://localhost/8443/getMensaje/";
 	
 	@GetMapping("/correo/libro")
 	public String getAvisoLibro(@RequestParam String emailUsuario, HttpServletResponse respuesta) {
@@ -67,12 +67,12 @@ public class ServicioInternoController {
 		return mensaje;
 	}
 	
-	@GetMapping("/correo/sala")
-	public String getAvisoSala(@RequestParam String emailUsuario, HttpServletResponse respuesta) {
+	@GetMapping("/salaReservada")
+	public String getAvisoSala(@RequestParam String emailUsuario, @RequestParam long idSala, HttpServletResponse respuesta) {
 		RestTemplate rest = new RestTemplate();
 		String mensaje = "";
 		try {
-				ResponseEntity<String> response = rest.getForEntity(url + "/" + emailUsuario, String.class);
+				ResponseEntity<String> response = rest.getForEntity(url + "/" + emailUsuario + "/" + idSala, String.class);
 				if (response.getStatusCode().equals(HttpStatus.OK)) {
 					mensaje = response.toString();
 				}
