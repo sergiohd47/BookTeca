@@ -1,10 +1,15 @@
 package dad.web.ServicioInterno.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.json.*;
 
 import dad.web.ServicioInterno.clases.Usuario;
 import dad.web.ServicioInterno.clases.Libro;
@@ -37,11 +42,11 @@ public class CorreoController {
 	@Autowired
 	private UsuarioRepository usuarios;
 	
-	@GetMapping(value= "/getMensaje/{correo}/{idLibro}")
-	public String emailLibro(@PathVariable String correo, @PathVariable int idLibro) {
+	@PutMapping(value= "/getMensaje/libro/{reserva}")
+	public ResponseEntity<String> emailLibro(@PathVariable JSONObject reserva) {
 		
-		Libro libro = libros.findById(idLibro);
-		Usuario usuario = usuarios.findByEmail(correo);
+		Libro libro = libros.findById(reserva.getLong("idLibro"));
+		Usuario usuario = usuarios.findByEmail(reserva.getString("correo"));
 		Email email = new Email(usuario);
 		
 		if(usuario.reservarLibro(libro)) {
@@ -50,16 +55,17 @@ public class CorreoController {
 			email.libroReservado(libro);
 		} else {
 			email.mensajeError();
+			return new ResponseEntity<String>(email.getMensaje(), HttpStatus.NOT_FOUND);
 		}
 		
-		return email.getMensaje();
+		return new ResponseEntity<String>(email.getMensaje(), HttpStatus.OK);
 	}
 	
-	@GetMapping(value= "/revista/{correo}/{idRevista}")
-	public String emailRevista(@PathVariable String correo, @PathVariable int idRevista) {
+	@PutMapping(value= "/getMensaje/revista/{reserva}")
+	public ResponseEntity<String> emailRevista(@PathVariable JSONObject reserva) {
 		
-		Revista revista = revistas.findById(idRevista);
-		Usuario usuario = usuarios.findByEmail(correo);
+		Revista revista = revistas.findById(reserva.getLong("idRevista"));
+		Usuario usuario = usuarios.findByEmail(reserva.getString("correo"));
 		Email email = new Email(usuario);
 
 		if(usuario.reservarRevista(revista)) {
@@ -68,16 +74,17 @@ public class CorreoController {
 			email.revistaReservada(revista);
 		} else {
 			email.mensajeError();
+			return new ResponseEntity<String>(email.getMensaje(), HttpStatus.NOT_FOUND);
 		}
 		
-		return email.getMensaje();
+		return new ResponseEntity<String>(email.getMensaje(), HttpStatus.OK);
 	}
 	
-	@GetMapping(value= "/sala/{correo}/{idSala}")
-	public String emailSala(@PathVariable String correo, @PathVariable int idSala) {
+	@PutMapping(value= "/getMensaje/sala/{reserva}")
+	public ResponseEntity<String> emailSala(@PathVariable JSONObject reserva) {
 		
-		SalaTrabajoGrupo sala = salasTrabajoGrupo.findById(idSala);
-		Usuario usuario = usuarios.findByEmail(correo);
+		SalaTrabajoGrupo sala = salasTrabajoGrupo.findById(reserva.getLong("idSala"));
+		Usuario usuario = usuarios.findByEmail(reserva.getString("correo"));
 		Email email = new Email(usuario);
 
 		if(usuario.reservarSalaTrabajoGrupo(sala)) {
@@ -86,15 +93,16 @@ public class CorreoController {
 			email.salaReservada(sala);
 		} else {
 			email.mensajeError();
+			return new ResponseEntity<String>(email.getMensaje(), HttpStatus.NOT_FOUND);
 		}
 		
-		return email.getMensaje();
+		return new ResponseEntity<String>(email.getMensaje(), HttpStatus.OK);
 	}
-	@GetMapping(value= "/equipo/{correo}/{idEquipo}")
-	public String emailEquipo(@PathVariable String correo, @PathVariable int idEquipo) {
+	@PutMapping(value= "/getMensaje/equipo/{reserva}")
+	public ResponseEntity<String> emailEquipo(@PathVariable JSONObject reserva) {
 		
-		EquipoInformatico equipo = equiposInformaticos.findById(idEquipo);
-		Usuario usuario = usuarios.findByEmail(correo);
+		EquipoInformatico equipo = equiposInformaticos.findById(reserva.getLong("idEquipo"));
+		Usuario usuario = usuarios.findByEmail(reserva.getString("correo"));
 		Email email = new Email(usuario);
 
 		if(usuario.reservarPuestoInformatico(equipo)) {
@@ -103,8 +111,9 @@ public class CorreoController {
 			email.equipoReservado(equipo);
 		} else {
 			email.mensajeError();
+			return new ResponseEntity<String>(email.getMensaje(), HttpStatus.NOT_FOUND);
 		}
 		
-		return email.getMensaje();
+		return new ResponseEntity<String>(email.getMensaje(), HttpStatus.OK);
 	}
 }

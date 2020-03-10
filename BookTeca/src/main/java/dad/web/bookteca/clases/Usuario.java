@@ -11,20 +11,15 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Entity
 @Table(name = "usuario")
 public class Usuario {
-	
-	interface Reservas{}
-	interface Libros{}
-	interface Revistas{}
+
 	
 	private final int MAX = 3;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@JsonView(Reservas.class)
 	private long id;
 	
 	@Column
-	@JsonView(Reservas.class)
 	private String email;
 	
 	@Column
@@ -37,11 +32,9 @@ public class Usuario {
 	private String contrasenya;
 	
 	@OneToMany(mappedBy="idUsuario")
-	@JsonView(Libros.class)
 	private List<Libro> librosReservados;
 	
 	@OneToMany(mappedBy="idUsuario")
-	@JsonView(Revistas.class)
 	private List<Revista> revistasReservadas; 
 	
 	@OneToOne(cascade = CascadeType.ALL)
