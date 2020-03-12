@@ -125,5 +125,9 @@ public class InicioController {
 		model.addAttribute("visibleIniciarSesion",true);
 		return "index";
 	}
+	@RequestMapping("/errorBookteca")
+	public String error(Model model) {
+		return "error";
+	}
 
 }
