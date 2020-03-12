@@ -26,6 +26,4 @@ public interface LibroRepository extends JpaRepository<Libro, Long> {
 	Libro findById(long id);
 	
 	ArrayList<Libro> findByIdUsuario(Usuario idUsuario);
-	
-	
 }

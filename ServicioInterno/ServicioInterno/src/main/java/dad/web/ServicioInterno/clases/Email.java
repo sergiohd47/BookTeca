@@ -22,7 +22,7 @@ public class Email {
 		for(Libro libro: this.idUsuario.getLibrosReservados()) {
 			if (libro.getFecFin().getTime()<hoy.getTime()) {
 				if (mensaje != "") {
-					mensaje = "Tiene libros sin devolver: " + libro.getNombre() + "("+ libro.getId() +")";
+					mensaje = "Libro sin devolver: " + libro.getNombre() + "("+ libro.getId() +")";
 				}else {
 					mensaje.concat(", " + libro.getNombre()+ "("+ libro.getId() +")");
 				}
@@ -42,7 +42,7 @@ public class Email {
 		for(Revista revista: this.idUsuario.getRevistasReservadas()) {
 			if (revista.getFecFin().getTime()<hoy.getTime()) {
 				if (mensaje != "") {
-					mensaje = "Tiene libros sin devolver: " + revista.getNombre() + "("+ revista.getId() +")";
+					mensaje = "Revista sin devolver: " + revista.getNombre() + "("+ revista.getId() +")";
 				}else {
 					mensaje.concat(", " + revista.getNombre()+ "("+ revista.getId() +")");
 				}
@@ -70,7 +70,7 @@ public class Email {
 	}
 	
 	public void equipoReservado(EquipoInformatico equipo) {
-		this.mensaje = "Ha reservado el equipo "+ equipo.getLocalizacion() +" con éxito";
+		this.mensaje = "Ha reservado el equipo " + equipo.getLocalizacion() +" con éxito";
 	}
 	
 	
@@ -87,11 +87,11 @@ public class Email {
 	}
 	
 	public void salaReservada(SalaTrabajoGrupo sala) {
-		this.mensaje = "Ha reservado la sala "+ sala.getLocalizacion() +" con éxito";
+		this.mensaje = "Ha reservado la sala " + sala.getLocalizacion() +" con éxito";
 	}
 	
 	public void mensajeError() {
-		this.mensaje = "Lo sentimos " + idUsuario.getNombre() + " ha habido un fallo al reservar.";
+		this.mensaje = "Lo sentimos " + idUsuario.getNombre() + " se ha producido un fallo al reservar este recurso";
 	}
 	
 	public String getMensaje() {

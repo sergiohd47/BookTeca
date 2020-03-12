@@ -3,11 +3,8 @@ package dad.web.ServicioInterno.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.json.*;
 
@@ -44,11 +41,9 @@ public class CorreoController {
 	
 	@PutMapping(value= "/getMensaje/libro/{reserva}")
 	public ResponseEntity<String> emailLibro(@PathVariable JSONObject reserva) {
-		
 		Libro libro = libros.findById(reserva.getLong("idLibro"));
 		Usuario usuario = usuarios.findByEmail(reserva.getString("correo"));
 		Email email = new Email(usuario);
-		
 		if(usuario.reservarLibro(libro)) {
 			libros.save(libro);
 			usuarios.save(usuario);
@@ -57,17 +52,14 @@ public class CorreoController {
 			email.mensajeError();
 			return new ResponseEntity<String>(email.getMensaje(), HttpStatus.NOT_FOUND);
 		}
-		
 		return new ResponseEntity<String>(email.getMensaje(), HttpStatus.OK);
 	}
 	
 	@PutMapping(value= "/getMensaje/revista/{reserva}")
 	public ResponseEntity<String> emailRevista(@PathVariable JSONObject reserva) {
-		
 		Revista revista = revistas.findById(reserva.getLong("idRevista"));
 		Usuario usuario = usuarios.findByEmail(reserva.getString("correo"));
 		Email email = new Email(usuario);
-
 		if(usuario.reservarRevista(revista)) {
 			revistas.save(revista);
 			usuarios.save(usuario);
@@ -76,17 +68,14 @@ public class CorreoController {
 			email.mensajeError();
 			return new ResponseEntity<String>(email.getMensaje(), HttpStatus.NOT_FOUND);
 		}
-		
 		return new ResponseEntity<String>(email.getMensaje(), HttpStatus.OK);
 	}
 	
 	@PutMapping(value= "/getMensaje/sala/{reserva}")
 	public ResponseEntity<String> emailSala(@PathVariable JSONObject reserva) {
-		
 		SalaTrabajoGrupo sala = salasTrabajoGrupo.findById(reserva.getLong("idSala"));
 		Usuario usuario = usuarios.findByEmail(reserva.getString("correo"));
 		Email email = new Email(usuario);
-
 		if(usuario.reservarSalaTrabajoGrupo(sala)) {
 			salasTrabajoGrupo.save(sala);
 			usuarios.save(usuario);
@@ -95,16 +84,14 @@ public class CorreoController {
 			email.mensajeError();
 			return new ResponseEntity<String>(email.getMensaje(), HttpStatus.NOT_FOUND);
 		}
-		
 		return new ResponseEntity<String>(email.getMensaje(), HttpStatus.OK);
 	}
+	
 	@PutMapping(value= "/getMensaje/equipo/{reserva}")
 	public ResponseEntity<String> emailEquipo(@PathVariable JSONObject reserva) {
-		
 		EquipoInformatico equipo = equiposInformaticos.findById(reserva.getLong("idEquipo"));
 		Usuario usuario = usuarios.findByEmail(reserva.getString("correo"));
 		Email email = new Email(usuario);
-
 		if(usuario.reservarPuestoInformatico(equipo)) {
 			equiposInformaticos.save(equipo);
 			usuarios.save(usuario);
@@ -113,7 +100,6 @@ public class CorreoController {
 			email.mensajeError();
 			return new ResponseEntity<String>(email.getMensaje(), HttpStatus.NOT_FOUND);
 		}
-		
 		return new ResponseEntity<String>(email.getMensaje(), HttpStatus.OK);
 	}
 }
