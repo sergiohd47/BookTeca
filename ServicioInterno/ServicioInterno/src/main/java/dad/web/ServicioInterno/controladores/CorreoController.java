@@ -1,4 +1,4 @@
-package dad.web.ServicioInterno.controller;
+package dad.web.ServicioInterno.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.json.*;
 
-import dad.web.ServicioInterno.clases.Usuario;
-import dad.web.ServicioInterno.clases.Libro;
-import dad.web.ServicioInterno.clases.Revista;
-import dad.web.ServicioInterno.clases.SalaTrabajoGrupo;
-import dad.web.ServicioInterno.clases.EquipoInformatico;
 import dad.web.ServicioInterno.clases.Email;
-import dad.web.ServicioInterno.basedatos.LibroRepository;
-import dad.web.ServicioInterno.basedatos.RevistaRepository;
-import dad.web.ServicioInterno.basedatos.SalaTrabajoGrupoRepository;
-import dad.web.ServicioInterno.basedatos.EquipoInformaticoRepository;
-import dad.web.ServicioInterno.basedatos.UsuarioRepository;
 
+import dad.web.bookteca.clases.Usuario;
+import dad.web.bookteca.basedatos.EquipoInformaticoRepository;
+import dad.web.bookteca.basedatos.LibroRepository;
+import dad.web.bookteca.basedatos.RevistaRepository;
+import dad.web.bookteca.basedatos.SalaTrabajoGrupoRepository;
+import dad.web.bookteca.basedatos.UsuarioRepository;
+import dad.web.bookteca.clases.EquipoInformatico;
+import dad.web.bookteca.clases.Libro;
+import dad.web.bookteca.clases.Revista;
+import dad.web.bookteca.clases.SalaTrabajoGrupo;
 
 @RestController
 public class CorreoController {
@@ -39,7 +39,7 @@ public class CorreoController {
 	@Autowired
 	private UsuarioRepository usuarios;
 	
-	@PutMapping(value= "/getMensaje/libro/{reserva}")
+	@PutMapping(value= "/libro/{reserva}")
 	public ResponseEntity<String> emailLibro(@PathVariable JSONObject reserva) {
 		Libro libro = libros.findById(reserva.getLong("idLibro"));
 		Usuario usuario = usuarios.findByEmail(reserva.getString("correo"));
@@ -55,7 +55,7 @@ public class CorreoController {
 		return new ResponseEntity<String>(email.getMensaje(), HttpStatus.OK);
 	}
 	
-	@PutMapping(value= "/getMensaje/revista/{reserva}")
+	@PutMapping(value= "/revista/{reserva}")
 	public ResponseEntity<String> emailRevista(@PathVariable JSONObject reserva) {
 		Revista revista = revistas.findById(reserva.getLong("idRevista"));
 		Usuario usuario = usuarios.findByEmail(reserva.getString("correo"));
@@ -71,7 +71,7 @@ public class CorreoController {
 		return new ResponseEntity<String>(email.getMensaje(), HttpStatus.OK);
 	}
 	
-	@PutMapping(value= "/getMensaje/sala/{reserva}")
+	@PutMapping(value= "/sala/{reserva}")
 	public ResponseEntity<String> emailSala(@PathVariable JSONObject reserva) {
 		SalaTrabajoGrupo sala = salasTrabajoGrupo.findById(reserva.getLong("idSala"));
 		Usuario usuario = usuarios.findByEmail(reserva.getString("correo"));
@@ -87,7 +87,7 @@ public class CorreoController {
 		return new ResponseEntity<String>(email.getMensaje(), HttpStatus.OK);
 	}
 	
-	@PutMapping(value= "/getMensaje/equipo/{reserva}")
+	@PutMapping(value= "/equipo/{reserva}")
 	public ResponseEntity<String> emailEquipo(@PathVariable JSONObject reserva) {
 		EquipoInformatico equipo = equiposInformaticos.findById(reserva.getLong("idEquipo"));
 		Usuario usuario = usuarios.findByEmail(reserva.getString("correo"));

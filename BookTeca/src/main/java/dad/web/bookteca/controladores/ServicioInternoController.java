@@ -1,5 +1,6 @@
 package dad.web.bookteca.controladores;
 
+/*
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +50,7 @@ public class ServicioInternoController {
 	public String getCorreoLibro(@RequestParam long idLibro, HttpServletResponse respuesta) {
 		RestTemplate rest = new RestTemplate();
 		String mensaje = "";
-		/*try {
+		try {
 			JSONObject reserva = new JSONObject();
 			reserva.put("correo", usuario.getEmail());
 			reserva.put("idLibro", idLibro);
@@ -59,14 +60,6 @@ public class ServicioInternoController {
 			
 		}catch (Exception error){
 			
-		}*/
-		Optional<Libro> libroOpt = libros.findById((Long)idLibro);
-		if(libroOpt.isPresent()) {
-			Libro libro = libroOpt.get();
-			ResponseEntity<String> response = rest.getForEntity(URL + "/libroReservado/" + idLibro + "::" + 
-					libro.getIdUsuario().getEmail(), String.class);
-			if(response.getStatusCode().equals(HttpStatus.OK))
-				mensaje+=response.toString();
 		}
 		return mensaje;
 	}
@@ -129,4 +122,4 @@ public class ServicioInternoController {
 	}
 	
 	
-}
+}*/

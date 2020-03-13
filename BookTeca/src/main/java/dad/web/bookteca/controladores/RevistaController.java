@@ -6,12 +6,14 @@ import java.util.Collections;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 import dad.web.bookteca.basedatos.RevistaRepository;
 import dad.web.bookteca.basedatos.UsuarioRepository;
@@ -77,6 +79,15 @@ public class RevistaController {
 		if (usuario.reservarRevista(revista)){
 			revistas.save(revista);
 			usuarios.save(usuario);
+			RestTemplate rest = new RestTemplate();
+			try {
+				JSONObject reserva = new JSONObject();
+				reserva.put("correo", usuario.getEmail());
+				reserva.put("idRevista", idRevista);
+				rest.getForEntity(InicioController.URL_APIREST + "/revista/" + reserva, String.class);
+			} catch(Exception error) {
+				return "error";
+			}
 		}
 		model.addAttribute("usuario",request.isUserInRole("USER"));
 		model.addAttribute("usuarioAdmin",!request.isUserInRole("USER"));
