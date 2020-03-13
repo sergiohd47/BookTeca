@@ -2,11 +2,11 @@ package dad.web.ServicioInterno.clases;
 
 import java.util.Date;
 
-import dad.web.bookteca.clases.Usuario;
-import dad.web.bookteca.clases.EquipoInformatico;
-import dad.web.bookteca.clases.Libro;
-import dad.web.bookteca.clases.Revista;
-import dad.web.bookteca.clases.SalaTrabajoGrupo;
+import dad.web.ServicioInterno.clases.Usuario;
+import dad.web.ServicioInterno.clases.EquipoInformatico;
+import dad.web.ServicioInterno.clases.Libro;
+import dad.web.ServicioInterno.clases.Revista;
+import dad.web.ServicioInterno.clases.SalaTrabajoGrupo;
 
 
 public class Email {

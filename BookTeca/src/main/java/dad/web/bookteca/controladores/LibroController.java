@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-import dad.web.ServicioInterno.clases.Email;
+//import dad.web.ServicioInterno.clases.Email;
 import dad.web.bookteca.basedatos.LibroRepository;
 import dad.web.bookteca.basedatos.UsuarioRepository;
 import dad.web.bookteca.clases.Libro;

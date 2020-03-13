@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.json.*;
 
+import dad.web.ServicioInterno.basedatos.EquipoInformaticoRepository;
+import dad.web.ServicioInterno.basedatos.LibroRepository;
+import dad.web.ServicioInterno.basedatos.RevistaRepository;
+import dad.web.ServicioInterno.basedatos.SalaTrabajoGrupoRepository;
+import dad.web.ServicioInterno.basedatos.UsuarioRepository;
 import dad.web.ServicioInterno.clases.Email;
 
-import dad.web.bookteca.clases.Usuario;
-import dad.web.bookteca.basedatos.EquipoInformaticoRepository;
-import dad.web.bookteca.basedatos.LibroRepository;
-import dad.web.bookteca.basedatos.RevistaRepository;
-import dad.web.bookteca.basedatos.SalaTrabajoGrupoRepository;
-import dad.web.bookteca.basedatos.UsuarioRepository;
-import dad.web.bookteca.clases.EquipoInformatico;
-import dad.web.bookteca.clases.Libro;
-import dad.web.bookteca.clases.Revista;
-import dad.web.bookteca.clases.SalaTrabajoGrupo;
+import dad.web.ServicioInterno.clases.Usuario;
+import dad.web.ServicioInterno.clases.EquipoInformatico;
+import dad.web.ServicioInterno.clases.Libro;
+import dad.web.ServicioInterno.clases.Revista;
+import dad.web.ServicioInterno.clases.SalaTrabajoGrupo;
 
 @RestController
 public class CorreoController {
