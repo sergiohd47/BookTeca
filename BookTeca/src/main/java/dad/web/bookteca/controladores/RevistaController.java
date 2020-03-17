@@ -80,7 +80,7 @@ public class RevistaController {
 			revistas.save(revista);
 			usuarios.save(usuario);
 			//PARTE SERVICIO INTERNO
-			String urlCorreo="http://localhost:8070/mail/";
+			String urlCorreo="http://localhost:8070/mail/revista/";
 			Email email=new Email(usuario.getEmail(),idRevista,"reserva");
 			RestTemplate rest=new RestTemplate();
 			rest.postForObject(urlCorreo,email,Email.class);
@@ -125,7 +125,7 @@ public class RevistaController {
 		revistas.save(revista);
 		usuarios.save(usuario);
 		//PARTE SERVICIO INTERNO
-		String urlCorreo="http://localhost:8070/mail/";
+		String urlCorreo="http://localhost:8070/mail/revista/";
 		Email email=new Email(usuario.getEmail(),idRevista,"devolucion");
 		RestTemplate rest=new RestTemplate();
 		rest.postForObject(urlCorreo,email,Email.class);

@@ -79,7 +79,7 @@ public class LibroController {
 			libros.save(libro);
 			usuarios.save(usuario);
 			//PARTE SERVICIO INTERNO
-			String urlCorreo="http://localhost:8070/mail/";
+			String urlCorreo="http://localhost:8070/mail/libro/";
 			Email email=new Email(usuario.getEmail(),idLibro,"reserva");
 			RestTemplate rest=new RestTemplate();
 			rest.postForObject(urlCorreo, email, Email.class);
@@ -125,7 +125,7 @@ public class LibroController {
 		libros.save(libro);
 		usuarios.save(usuario);
 		//PARTE SERVICIO INTERNO
-		String urlCorreo="http://localhost:8070/mail/";
+		String urlCorreo="http://localhost:8070/mail/libro/";
 		Email email=new Email(usuario.getEmail(),idLibro,"devolucion");
 		RestTemplate rest=new RestTemplate();
 		rest.postForObject(urlCorreo,email,Email.class);

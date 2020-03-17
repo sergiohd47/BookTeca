@@ -64,7 +64,7 @@ public class SalaTrabajoGrupoController {
 			usuarios.save(usuario);
 			//PARTE SERVICIO INTERNO
 			Email email=new Email(usuario.getEmail(),idSala,"reserva");
-			String urlCorreo="http://localhost:8070/mail/";
+			String urlCorreo="http://localhost:8070/mail/salaTrabajoGrupo/";
 			RestTemplate rest=new RestTemplate();
 			rest.postForObject(urlCorreo,email,Email.class);
 			System.out.println("Datos reserva enviados: "+usuario.getEmail());
@@ -91,7 +91,7 @@ public class SalaTrabajoGrupoController {
 		usuarios.save(usuario);
 		//PARTE SERVICIO INTERNO
 		Email email=new Email(usuario.getEmail(),idSala,"devolucion");
-		String urlCorreo="http://localhost:8070/mail/";
+		String urlCorreo="http://localhost:8070/mail/salaTrabajoGrupo/";
 		RestTemplate rest=new RestTemplate();
 		rest.postForObject(urlCorreo,email,Email.class);
 		System.out.println("Datos devolucion enviados: "+usuario.getEmail());
