@@ -6,10 +6,7 @@ import java.util.Collections;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
-//import dad.web.ServicioInterno.clases.Email;
 import dad.web.bookteca.basedatos.LibroRepository;
 import dad.web.bookteca.basedatos.UsuarioRepository;
+import dad.web.bookteca.clases.Email;
 import dad.web.bookteca.clases.Libro;
 import dad.web.bookteca.clases.Usuario;
 @Controller
@@ -81,16 +78,14 @@ public class LibroController {
 		if(usuario.reservarLibro(libro)) {
 			libros.save(libro);
 			usuarios.save(usuario);
-			RestTemplate rest = new RestTemplate();
-			try {
-				JSONObject reserva = new JSONObject();
-				reserva.put("correo", usuario.getEmail());
-				reserva.put("idLibro", idLibro);
-				rest.getForEntity(InicioController.URL_APIREST + "/libro/" + reserva, String.class);
-			} catch(Exception error) {
-				return "error";
-			}
+			//PARTE SERVICIO INTERNO
+			String urlCorreo="http://localhost:8070/mail/";
+			Email email=new Email(usuario.getEmail(),idLibro,"reserva");
+			RestTemplate rest=new RestTemplate();
+			rest.postForObject(urlCorreo, email, Email.class);
+			System.out.println("Datos reserva enviados: "+usuario.getEmail());
 		}
+		
 		model.addAttribute("usuario",request.isUserInRole("USER"));
 		model.addAttribute("usuarioAdmin",!request.isUserInRole("USER"));
 		InicioController.listaLibrosDestacados=new ArrayList<>();
@@ -129,6 +124,13 @@ public class LibroController {
 		usuario.quitarLibro(libro);
 		libros.save(libro);
 		usuarios.save(usuario);
+		//PARTE SERVICIO INTERNO
+		String urlCorreo="http://localhost:8070/mail/";
+		Email email=new Email(usuario.getEmail(),idLibro,"devolucion");
+		RestTemplate rest=new RestTemplate();
+		rest.postForObject(urlCorreo,email,Email.class);
+		System.out.println("Datos devolucion enviados: "+usuario.getEmail());
+		
 		model.addAttribute("nombre",usuario.getNombre());
 		model.addAttribute("usuario",request.isUserInRole("USER"));
 		model.addAttribute("usuarioAdmin",!request.isUserInRole("USER"));

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
@@ -16,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import dad.web.bookteca.basedatos.SalaTrabajoGrupoRepository;
 import dad.web.bookteca.basedatos.UsuarioRepository;
+import dad.web.bookteca.clases.Email;
 import dad.web.bookteca.clases.SalaTrabajoGrupo;
 import dad.web.bookteca.clases.Usuario;
 
@@ -62,16 +62,14 @@ public class SalaTrabajoGrupoController {
 		if(usuario.reservarSalaTrabajoGrupo(sala)){
 			salasTrabajoGrupo.save(sala);
 			usuarios.save(usuario);
-			RestTemplate rest = new RestTemplate();
-			try {
-				JSONObject reserva = new JSONObject();
-				reserva.put("correo", usuario.getEmail());
-				reserva.put("idSala", idSala);
-				rest.getForEntity(InicioController.URL_APIREST + "/sala/" + reserva, String.class);
-			} catch(Exception error) {
-				return "error";
-			}
+			//PARTE SERVICIO INTERNO
+			Email email=new Email(usuario.getEmail(),idSala,"reserva");
+			String urlCorreo="http://localhost:8070/mail/";
+			RestTemplate rest=new RestTemplate();
+			rest.postForObject(urlCorreo,email,Email.class);
+			System.out.println("Datos reserva enviados: "+usuario.getEmail());
 		}
+		
 		model.addAttribute("usuario",request.isUserInRole("USER"));
 		model.addAttribute("usuarioAdmin",!request.isUserInRole("USER"));
 		CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");
@@ -91,6 +89,13 @@ public class SalaTrabajoGrupoController {
 		usuario.quitarSalaTrabajoGrupo(sala);
 		salasTrabajoGrupo.save(sala);
 		usuarios.save(usuario);
+		//PARTE SERVICIO INTERNO
+		Email email=new Email(usuario.getEmail(),idSala,"devolucion");
+		String urlCorreo="http://localhost:8070/mail/";
+		RestTemplate rest=new RestTemplate();
+		rest.postForObject(urlCorreo,email,Email.class);
+		System.out.println("Datos devolucion enviados: "+usuario.getEmail());
+		
 		model.addAttribute("usuario",request.isUserInRole("USER"));
 		model.addAttribute("usuarioAdmin",!request.isUserInRole("USER"));
 		CsrfToken tokenLibro = (CsrfToken) request.getAttribute("_csrf");
