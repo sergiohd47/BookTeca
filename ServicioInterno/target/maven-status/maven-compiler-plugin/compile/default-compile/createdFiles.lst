@@ -1,0 +1,13 @@
+dad/web/ServicioInterno/ServicioInternoApp.class
+dad/web/ServicioInterno/basedatos/UsuarioRepository.class
+dad/web/ServicioInterno/basedatos/SalaTrabajoGrupoRepository.class
+dad/web/ServicioInterno/clases/EquipoInformatico.class
+dad/web/ServicioInterno/clases/Libro.class
+dad/web/ServicioInterno/basedatos/RevistaRepository.class
+dad/web/ServicioInterno/clases/Usuario.class
+dad/web/ServicioInterno/clases/SalaTrabajoGrupo.class
+dad/web/ServicioInterno/basedatos/LibroRepository.class
+dad/web/ServicioInterno/clases/Revista.class
+dad/web/ServicioInterno/controller/CorreoController.class
+dad/web/ServicioInterno/clases/Email.class
+dad/web/ServicioInterno/basedatos/EquipoInformaticoRepository.class

@@ -18,7 +18,7 @@ import dad.web.bookteca.basedatos.*;
 public class InicioController {
 
 	public static final int NUMERO_RECURSOS_MAIN=3; //NUMERO DE LIBROS Y REVISTAS QUE SE MUESTRAN EN LA PANTALLA DE INICIO
-	public static final String URL_APIREST="http://localhost:8080/";
+	public static final String URL_APIREST="http://localhost:8419/";
 	
 	@Autowired
 	private LibroRepository libros;
