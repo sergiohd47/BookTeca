@@ -8841,3 +8841,14 @@ java.io.IOException: Invalid argument
 2020-03-17 16:52:54,724 [Worker-7: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 60 resources
 2020-03-17 16:52:54,727 [Worker-7: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2020-03-17 16:52:54,727 [Worker-7: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/BookTeca/src/test/resources
+2020-03-17 16:53:38,916 [Worker-7: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-03-17 16:53:38,919 [Worker-7: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-03-17 16:53:38,928 [Worker-7: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 60 resources
+2020-03-17 16:53:38,932 [Worker-7: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-03-17 16:53:38,932 [Worker-7: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/BookTeca/src/test/resources
+2020-03-17 16:57:56,818 [main] INFO  o.e.m2e.actions.ExecutePomAction - Creating new launch configuration
+2020-03-17 16:58:01,804 [Worker-0: Launching BookTeca (2)] INFO  o.e.m.i.launch.MavenLaunchDelegate - /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/BookTeca
+2020-03-17 16:58:01,804 [Worker-0: Launching BookTeca (2)] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -Ppom.xml -B clean package
+2020-03-17 16:58:21,447 [main] INFO  o.e.m2e.actions.ExecutePomAction - Creating new launch configuration
+2020-03-17 16:58:25,162 [Worker-16: Launching BookTeca (3)] INFO  o.e.m.i.launch.MavenLaunchDelegate - /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/BookTeca
+2020-03-17 16:58:25,162 [Worker-16: Launching BookTeca (3)] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -Ppom.xml -B clean package

@@ -11678,3 +11678,30 @@ java.lang.Exception: The project description file (.project) for 'ServicioIntern
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-03-17 16:51:04.209
 !MESSAGE executing callback sts4.classpath.iuoHxVXv SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-03-17 16:52:52.781
+!MESSAGE Preparing classpath changed notification BookTeca
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-03-17 16:52:52.783
+!MESSAGE exists = true open = true => deleted = false
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-03-17 16:52:52.787
+!MESSAGE classpath=105 entries
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-03-17 16:52:52.788
+!MESSAGE executing callback sts4.classpath.iuoHxVXv BookTeca false 105
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-03-17 16:52:52.859
+!MESSAGE executing callback sts4.classpath.iuoHxVXv SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-03-17 16:54:15.135
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.iuoHxVXv
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-03-17 16:54:15.136
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.iuoHxVXv
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-03-17 16:54:15.141
+!MESSAGE subsribers = null
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-03-17 16:54:15.141
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.iuoHxVXv => OK
