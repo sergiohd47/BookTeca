@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="dad.web.ServicioInterno.ServicioInternoAppTest" time="0.003" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="dad.web.ServicioInterno.ServicioInternoAppTest" time="0.004" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="10.0.2+13"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk-10.0.2.jdk/Contents/Home/lib"/>
     <property name="gopherProxySet" value="false"/>
-    <property name="maven.multiModuleProjectDirectory" value="/Users/sergiohernandezdominguez/Desktop/pruebasBookteca/ServicioInterno/ServicioInterno"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/ServicioInterno"/>
     <property name="java.vm.vendor" value="&quot;Oracle Corporation&quot;"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
+    <property name="java.rmi.server.randomIDs" value="true"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
     <property name="path.separator" value=":"/>
     <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
@@ -16,7 +17,7 @@
     <property name="user.country" value="ES"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/Users/sergiohernandezdominguez/Desktop/pruebasBookteca/ServicioInterno/ServicioInterno"/>
+    <property name="user.dir" value="/Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/ServicioInterno"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="java.runtime.version" value="10.0.2+13"/>
     <property name="java.awt.graphicsenv" value="sun.awt.CGraphicsEnvironment"/>
@@ -26,7 +27,7 @@
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/Users/sergiohernandezdominguez/Desktop/pruebasBookteca/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf16577269648780780142.tmp"/>
+    <property name="classworlds.conf" value="/Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf10719061265339248093.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/sergiohernandezdominguez/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="jdk.debug" value="release"/>
@@ -41,7 +42,7 @@
     <property name="file.encoding" value="UTF-8"/>
     <property name="java.specification.version" value="10"/>
     <property name="user.name" value="sergiohernandezdominguez"/>
-    <property name="java.class.path" value="/private/var/folders/l1/vbh8w19n2wq3tmyldc3w56_80000gn/T/AppTranslocation/80C1B568-9C95-40D7-8394-8B13867B66BB/d/SpringToolSuite4.app/Contents/Eclipse/plugins/org.eclipse.m2e.maven.runtime_1.10.0.20181127-2120/jars/plexus-classworlds-2.5.2.jar"/>
+    <property name="java.class.path" value="/private/var/folders/l1/vbh8w19n2wq3tmyldc3w56_80000gn/T/AppTranslocation/509B5E74-FB2F-4494-8F48-9CCE91D4135C/d/SpringToolSuite4.app/Contents/Eclipse/plugins/org.eclipse.m2e.maven.runtime_1.10.0.20181127-2120/jars/plexus-classworlds-2.5.2.jar"/>
     <property name="java.vm.specification.version" value="10"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B clean package"/>
@@ -52,7 +53,7 @@
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.version" value="10.0.2"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="maven.home" value="/Users/sergiohernandezdominguez/Desktop/pruebasBookteca/ServicioInterno/ServicioInterno/EMBEDDED"/>
+    <property name="maven.home" value="/Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/ServicioInterno/EMBEDDED"/>
     <property name="file.separator" value="/"/>
     <property name="java.version.date" value="2018-07-17"/>
     <property name="java.vendor.url.bug" value="http://bugreport.java.com/bugreport/"/>
@@ -63,5 +64,5 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="dad.web.ServicioInterno.ServicioInternoAppTest" name="testApp" time="0.003"/>
+  <testcase classname="dad.web.ServicioInterno.ServicioInternoAppTest" name="testApp" time="0.004"/>
 </testsuite>
