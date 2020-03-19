@@ -197,7 +197,7 @@ En este diagrama se puede observar la organizacion que tendra nuestra aplicacion
   <img width="800" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/diagramaNavegacionSeguridad.png">
 </p>
 
-Como aclaracion, hemos añadido una pantalla de error para el caso de que salga error tanto en el ***servicio interno*** como en la ***pagina web***, desde donde podremos volver a la pantalla de inicio de sesion.
+Como aclaracion, hemos añadido una pantalla de error para el caso de que salga error tanto en el ***servicio interno*** como en la ***pagina web***, desde donde podremos volver a la pantalla de inicio de la pagina web.
 
 #### Virtualizacion<a name="id13"></a>
 Como primera aclaracion, esta parte ha sido realizada en una maquina con sistema operativo macOS Mojave x64.
