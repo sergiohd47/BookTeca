@@ -205,9 +205,9 @@ Primeramente, descargamos tanto ***VirtualBox*** como ***Vagrant*** en los sigui
 
 Una vez descargado lo anterior, abrimos un terminal en la maquina local, y crearemos la maquina virtual. Iremos a la carpeta ***Vagrant*** donde se encuentran las maquinas virtual y creamos nuestra nueva maquina virtual:
 
-`mkdir -p ~/vagrant/bookteca`
+`mkdir -p ~/vagrant/bookteca
 
-`cd ~/vagrant/bookteca`
+ cd ~/vagrant/bookteca`
 
 Creamos la maquina virtual Linux de 64 bits
 
@@ -219,13 +219,13 @@ Una vez creada, se creara automaticamente un fichero ***Vagrantfile*** donde ten
 
 Ademas de esto, dentro del mismo ***Vagrantfile***, añadimos las siguientes lineas de codigo, con el fin de darle a la maquina virtual creada 2GB de memoria RAM.
 
-`config.vm.provider "virtualbox" do |v|`
+`config.vm.provider "virtualbox" do |v|
 
-      `v.memory = 2048`
+      v.memory = 2048
       
-      `v.cpus = 2`
+      v.cpus = 2
       
- `end`
+ end`
  
  Antes de arrancar la maquina virtual debemos tener copiados en esa carpeta ***bookteca*** de Vagrant, el siguiente material:
  - booktecaBBDD.sql
