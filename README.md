@@ -250,4 +250,51 @@ Y nos conectamos a ella mediante:
 
 Una vez dentro de la maquina virtual (lo sabremos viendo el terminal), necesitaremos instalar java, introduciendo:
 
+`sudo apt-get update`
+
+`sudo apt-get install default-jdk`
+
+Nos movemos a la carpeta ***vagrant*** de la maquina y aqui veremos que tenemos los ficheros compartidos entre la maquina fisica y la virtual.
+
+Seguidamente, instalamos mysql-server:
+
+`sudo apt-get install mysql-server`
+
+Una vez instalado el server de mysql, necesitamos crear nuestra base de datos, por lo tanto, accedemos a consola propia de mysql:
+
+`mysql -u root -p`
+
+Introducimos la contraseña y accederemos a la consola especifica de mysql. Aqui dentro:
+
+`CREATE DATABASE bookteca;`
+
+Ya hemos creado la base de datos para nuestra aplicacion, salimos e introducimos:
+
+`mysql -u root -p bookteca < booktecaBBDD.sql`
+
+De esta manera, volcaremos nuestro fichero ***.sql*** en la base de datos virtualizada, quedandose creadas las diferentes tablas y el esquema igual al que teniamos anteriormente en local.
+
+Por ultimo, para evitar fallos de seguridad en el servicio interno, ya que se debe conectar pos SSL, introducimos:
+
+`sudo apt-get install -y ca-certificates-java`
+
+En caso de que nos salga error, porque ya estan presentes esos certificados, introducimos:
+
+`sudo mkdir /etc/ssl/certs/java/`
+
+Si falla, es porque ya los tenemos, entonces solo debemos actualizar esos certificados:
+
+`sudo update-ca-certificates -f`
+
+Finalmente, ejecutamos nuestros ficheros ***.jar*** :
+
+`java -jar ServicioInterno-0.0.1-SNAPSHOT.jar & java -jar BookTeca-0.0.1-SNAPSHOT.jar`
+
+Para comprobar el correcto funcionamiento de la app, nos vamos al navegador de nuestra maquina local y en la barra de busqueda ponemos lo siguiente:
+
+`https://192.168.33.10:8443`
+
+Si todo sale correcto, deberia aparecernos nuestra pagina principal de la pagina web.
+
+
 
