@@ -14260,3 +14260,15 @@ java.lang.InterruptedException
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-03-19 13:40:26.060
 !MESSAGE executing callback sts4.classpath.KTckRgVz SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-03-19 14:08:08.599
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.KTckRgVz
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-03-19 14:08:08.600
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.KTckRgVz
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-03-19 14:08:08.600
+!MESSAGE subsribers = null
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2020-03-19 14:08:08.601
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.KTckRgVz => OK
