@@ -194,5 +194,5 @@ En este diagrama se puede observar la organizacion que tendra nuestra aplicacion
  - Una zona de color naranja solido, la cual representa una zona totalmente privada
  - Una zona de color degradado naranja-azul, donde se añaden funcionalidades en funcion de si estamos o no logeados en la           pagina 
 <p align="center">
-  <img width="800" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/imagenesWeb/diagrama_clases_BookTeca.png">
+  <img width="800" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/diagramaNavegacionSeguridad.png">
 </p>
