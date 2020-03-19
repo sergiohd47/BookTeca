@@ -196,3 +196,58 @@ En este diagrama se puede observar la organizacion que tendra nuestra aplicacion
 <p align="center">
   <img width="800" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/diagramaNavegacionSeguridad.png">
 </p>
+
+#### Virtualizacion<a name="id13"></a>
+Como primera aclaracion, esta parte ha sido realizada en una maquina con sistema operativo macOS Mojave x64.
+Primeramente, descargamos tanto ***VirtualBox*** como ***Vagrant*** en los siguientes link:
+ - <https://www.virtualbox.org/wiki/Downloads>
+ - <https://www.vagrantup.com/downloads.html>
+
+Una vez descargado lo anterior, abrimos un terminal en la maquina local, y crearemos la maquina virtual. Iremos a la carpeta ***Vagrant*** donde se encuentran las maquinas virtual y creamos nuestra nueva maquina virtual:
+
+`mkdir -p ~/vagrant/bookteca`
+
+`cd ~/vagrant/bookteca`
+
+Creamos la maquina virtual Linux de 64 bits
+
+`vagrant init ubuntu/trusty64`
+
+Una vez creada, se creara automaticamente un fichero ***Vagrantfile*** donde tendremos que descomentar la siguiente linea:
+
+`config.vm.network "private_network", ip: “192.168.33.10"`
+
+Ademas de esto, dentro del mismo ***Vagrantfile***, añadimos las siguientes lineas de codigo, con el fin de darle a la maquina virtual creada 2GB de memoria RAM.
+
+`config.vm.provider "virtualbox" do |v|
+      v.memory = 2048
+      v.cpus = 2
+ end`
+ 
+ Antes de arrancar la maquina virtual debemos tener copiados en esa carpeta ***bookteca*** de Vagrant, el siguiente material:
+ - booktecaBBDD.sql
+ - ServicioInterno-0.0.1-SNAPSHOT.jar
+ - BookTeca-0.0.1-SNAPSHOT.jar
+ 
+Primeramente, el fichero con extension ***.sql*** se consigue exportando desde el MySQLWorkBench el esquema de nuestra base datos creada en local, para posteriormente incluirla en nuestra maquina virtual.
+En nuestro caos, debimos cambiar una linea del fichero ***.sql*** debido a fallos en la codificacion UTF-8 especifica, cambiando la linea:
+
+`ENGINE=InnoDB DEFAULT CHARSET=utf8-especial....;`
+ 
+ por la siguiente linea:
+ 
+ `ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;`
+
+Para crear ambos ficheros ***.jar***, desde dentro del STS, click derecho en cada proyecto y Run As>Maven build...>Goals: clean package. Posteriormente, dentro de la carpeta ***target*** de cada proyecto, tendremos los diferentes ficheros.
+
+Una vez creada la maquina virtual y teniendo todos los ficheros necesarios copiados en la carpeta ***bookteca*** de Vagrant, arrancamos la maquina virtual:
+
+`vagrant up`
+
+Y nos conectamos a ella mediante:
+
+`vagrant ssh`
+
+Una vez dentro de la maquina virtual (lo sabremos viendo el terminal), necesitaremos instalar java, introduciendo:
+
+
