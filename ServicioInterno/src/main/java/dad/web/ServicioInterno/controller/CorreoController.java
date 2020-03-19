@@ -57,12 +57,14 @@ public class CorreoController {
 	@PostMapping(value= "/mail/libro/")
 	public void enviarEmailLibro(@RequestBody Email email) {
 		Properties properties=System.getProperties();
-		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+		properties.setProperty("mail.smtps.host", "smtp.gmail.com");
 		properties.setProperty("mail.smtp.user", correoBookteca);
 		properties.setProperty("mail.smtp.clave", contraseñaBookteca);
-		properties.setProperty("mail.smtp.port", "587");
-		properties.setProperty("mail.smtp.auth", "true");
-		properties.setProperty("mail.smtp.starttls.enable", "true");
+		properties.setProperty("mail.smtp.socketFactory.fallback", "false");
+		properties.setProperty("mail.smtp.port", "465");
+		properties.setProperty("mail.smtp.socketFactory.port", "465");
+		properties.setProperty("mail.smtps.auth", "true");
+		properties.setProperty("mail.smtps.quitwait","false");
 		
 		Session sesion=Session.getDefaultInstance(properties);
 		final MimeMessage mensaje=new MimeMessage(sesion);
@@ -87,7 +89,7 @@ public class CorreoController {
 							+"\t"+"Genero: "+libroCorreo.getGenero()+"\n"
 							+"\t"+"Fecha final reserva: "+libroCorreo.getFecFin()+"\n"
 							+"Esperamos que le guste :)\nUn saludo, Bookteca","utf-8");
-					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtp");
+					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);
 					t.sendMessage(mensaje, mensaje.getAllRecipients());
 					t.close();
@@ -100,7 +102,7 @@ public class CorreoController {
 							+"\t"+"Editorial: "+libroCorreo.getEditorial()+"\n"
 							+"\t"+"Genero: "+libroCorreo.getGenero()+"\n"
 							+"Esperamos que le haya gustado :)\nUn saludo, Bookteca","utf-8");
-					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtp");
+					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);
 					t.sendMessage(mensaje, mensaje.getAllRecipients());
 					t.close();
@@ -116,12 +118,14 @@ public class CorreoController {
 	@PostMapping(value= "/mail/revista/")
 	public void enviarEmailRevista(@RequestBody Email email) {
 		Properties properties=System.getProperties();
-		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+		properties.setProperty("mail.smtps.host", "smtp.gmail.com");
 		properties.setProperty("mail.smtp.user", correoBookteca);
 		properties.setProperty("mail.smtp.clave", contraseñaBookteca);
-		properties.setProperty("mail.smtp.port", "587");
-		properties.setProperty("mail.smtp.auth", "true");
-		properties.setProperty("mail.smtp.starttls.enable", "true");
+		properties.setProperty("mail.smtp.socketFactory.fallback", "false");
+		properties.setProperty("mail.smtp.port", "465");
+		properties.setProperty("mail.smtp.socketFactory.port", "465");
+		properties.setProperty("mail.smtps.auth", "true");
+		properties.setProperty("mail.smtps.quitwait","false");
 		
 		Session sesion=Session.getDefaultInstance(properties);
 		final MimeMessage mensaje=new MimeMessage(sesion);
@@ -146,7 +150,7 @@ public class CorreoController {
 							+"\t"+"Genero: "+revistaCorreo.getGenero()+"\n"
 							+"\t"+"Fecha final reserva: "+revistaCorreo.getFecFin()+"\n"
 							+"Esperamos que le guste :)\nUn saludo, Bookteca","utf-8");
-					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtp");
+					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);
 					t.sendMessage(mensaje, mensaje.getAllRecipients());
 					t.close();
@@ -159,7 +163,7 @@ public class CorreoController {
 							+"\t"+"Fasciculo: "+revistaCorreo.getFasciculo()+"\n"
 							+"\t"+"Genero: "+revistaCorreo.getGenero()+"\n"
 							+"Esperamos que le haya gustado :)\nUn saludo, Bookteca","utf-8");
-					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtp");
+					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);
 					t.sendMessage(mensaje, mensaje.getAllRecipients());
 					t.close();
@@ -173,12 +177,14 @@ public class CorreoController {
 	@PostMapping(value= "/mail/salaTrabajoGrupo/")
 	public void enviarEmailSalaTrabajoGrupo(@RequestBody Email email) {
 		Properties properties=System.getProperties();
-		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+		properties.setProperty("mail.smtps.host", "smtp.gmail.com");
 		properties.setProperty("mail.smtp.user", correoBookteca);
 		properties.setProperty("mail.smtp.clave", contraseñaBookteca);
-		properties.setProperty("mail.smtp.port", "587");
-		properties.setProperty("mail.smtp.auth", "true");
-		properties.setProperty("mail.smtp.starttls.enable", "true");
+		properties.setProperty("mail.smtp.socketFactory.fallback", "false");
+		properties.setProperty("mail.smtp.port", "465");
+		properties.setProperty("mail.smtp.socketFactory.port", "465");
+		properties.setProperty("mail.smtps.auth", "true");
+		properties.setProperty("mail.smtps.quitwait","false");
 		
 		Session sesion=Session.getDefaultInstance(properties);
 		final MimeMessage mensaje=new MimeMessage(sesion);
@@ -208,7 +214,7 @@ public class CorreoController {
 							+"\t"+"Compartida: "+compartida+"\n"
 							+"\t"+"Fecha final reserva: "+salaCorreo.getFechaReserva()+"\n"
 							+"Esperamos que le guste :)\nUn saludo, Bookteca","utf-8");
-					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtp");
+					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);
 					t.sendMessage(mensaje, mensaje.getAllRecipients());
 					t.close();
@@ -221,7 +227,7 @@ public class CorreoController {
 							+"\t"+"Compartida: "+compartida+"\n"
 							+"\t"+"Fecha final reserva: "+salaCorreo.getFechaReserva()+"\n"
 							+"Esperamos que le haya gustado :)\nUn saludo, Bookteca","utf-8");
-					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtp");
+					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);
 					t.sendMessage(mensaje, mensaje.getAllRecipients());
 					t.close();
@@ -235,12 +241,14 @@ public class CorreoController {
 	@PostMapping(value= "/mail/equipoInformatico/")
 	public void enviarEmailEquipoInformatico(@RequestBody Email email) {
 		Properties properties=System.getProperties();
-		properties.setProperty("mail.smtp.host", "smtp.gmail.com");
+		properties.setProperty("mail.smtps.host", "smtp.gmail.com");
 		properties.setProperty("mail.smtp.user", correoBookteca);
 		properties.setProperty("mail.smtp.clave", contraseñaBookteca);
-		properties.setProperty("mail.smtp.port", "587");
-		properties.setProperty("mail.smtp.auth", "true");
-		properties.setProperty("mail.smtp.starttls.enable", "true");
+		properties.setProperty("mail.smtp.socketFactory.fallback", "false");
+		properties.setProperty("mail.smtp.port", "465");
+		properties.setProperty("mail.smtp.socketFactory.port", "465");
+		properties.setProperty("mail.smtps.auth", "true");
+		properties.setProperty("mail.smtps.quitwait","false");
 		
 		Session sesion=Session.getDefaultInstance(properties);
 		final MimeMessage mensaje=new MimeMessage(sesion);
@@ -263,7 +271,7 @@ public class CorreoController {
 							+"\t"+ "Sistema Operativo: "+equipoCorreo.getSistemaOperativo()+"\n"
 							+"\t"+"Fecha final reserva: "+equipoCorreo.getFechaReserva()+"\n"
 							+"Esperamos que le guste :)\nUn saludo, Bookteca","utf-8");
-					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtp");
+					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);
 					t.sendMessage(mensaje, mensaje.getAllRecipients());
 					t.close();
@@ -275,7 +283,7 @@ public class CorreoController {
 							+"\t"+"Sistema Operativo: "+equipoCorreo.getSistemaOperativo()+"\n"
 							+"\t"+"Fecha final reserva: "+equipoCorreo.getFechaReserva()+"\n"
 							+"Esperamos que le haya gustado :)\nUn saludo, Bookteca","utf-8");
-					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtp");
+					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);
 					t.sendMessage(mensaje, mensaje.getAllRecipients());
 					t.close();
