@@ -14,6 +14,10 @@
     - [Capturas pantalla](#id8)
     - [Diagrama Navegacion](#id9)
     - [Modelo Datos](#id10)
+- [Tercera fase](#id11)
+    - [Diagrama Navegacion](#id12)
+    - [Virtualizacion](#id13)
+    - [Servicio Interno](#id14)
  ### Introduccion<a name="id1"></a>
 La pagina web BookTeca consiste en una pagina para la administracion de los recursos de nuestra biblioteca, la cual cuenta con el clasico servicio de prestamo de libros y revistas o peliculas, reserva de salas de trabajo en grupo o de equipos informaticos.
 Los usuarios podran hacer reservas previas de libros, hacer un seguimiento de su prestamo o incluso reservar tanto equipos como salas desde su casa.
@@ -177,6 +181,18 @@ Como aclaracion, las relaciones entre pantallas son bidireccionales, es decir, d
 
 #### Modelo Datos<a name="id10"></a>
 En cuanto al modelo de datos, el diagrama relacionado con las diferentes clases de nuestro proyecto, es el siguiente:
+<p align="center">
+  <img width="800" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/imagenesWeb/diagrama_clases_BookTeca.png">
+</p>
+
+### Tercera Fase<a name="id11"></a>
+
+#### Diagrama Navegacion<a name="id12"></a>
+En esta parte de la practica, hemos incluido seguridad y autenticacion a nuestra pagina, con el fin de actualizar y crear una pagina completamente segura.
+En este diagrama se puede observar la organizacion que tendra nuestra aplicacion:
+ - Una zona de color azul solido, la cual representa una zona totalmente publica
+ - Una zona de color naranja solido, la cual representa una zona totalmente privada
+ - Una zona de color degradado naranja-azul, donde se añaden funcionalidades en funcion de si estamos o no logeados en la           pagina 
 <p align="center">
   <img width="800" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/imagenesWeb/diagrama_clases_BookTeca.png">
 </p>
