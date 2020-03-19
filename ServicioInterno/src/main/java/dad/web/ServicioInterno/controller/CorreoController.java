@@ -1,5 +1,7 @@
 package dad.web.ServicioInterno.controller;
 
+import java.security.Security;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -10,6 +12,7 @@ import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.aspectj.lang.annotation.SuppressAjWarnings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,24 +54,11 @@ public class CorreoController {
 	private EquipoInformaticoRepository equiposInformaticos;
 	
 	//CORREO BOOKTECA GMAIL
-	private final String correoBookteca= "booktecadad";
+	private final String correoBookteca= "booktecadad@gmail.com";
 	private final String contraseñaBookteca="bookteca123";
 	
 	@PostMapping(value= "/mail/libro/")
 	public void enviarEmailLibro(@RequestBody Email email) {
-		Properties properties=System.getProperties();
-		properties.setProperty("mail.smtps.host", "smtp.gmail.com");
-		properties.setProperty("mail.smtp.user", correoBookteca);
-		properties.setProperty("mail.smtp.clave", contraseñaBookteca);
-		properties.setProperty("mail.smtp.socketFactory.fallback", "false");
-		properties.setProperty("mail.smtp.port", "465");
-		properties.setProperty("mail.smtp.socketFactory.port", "465");
-		properties.setProperty("mail.smtps.auth", "true");
-		properties.setProperty("mail.smtps.quitwait","false");
-		
-		Session sesion=Session.getDefaultInstance(properties);
-		final MimeMessage mensaje=new MimeMessage(sesion);
-		
 		String direccionCorreo=email.getNombreEmail();
 		String tipoAccion=email.getTipoAccion();
 		long idRecurso=email.getIdRecurso();
@@ -78,8 +68,24 @@ public class CorreoController {
 			System.out.println("Fallo en el correo (no se encuentra recurso)");
 		}else {
 			try {
+				Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+				final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+
+				
+				Properties properties = System.getProperties();
+				properties.setProperty("mail.smtps.host", "smtp.gmail.com");
+				properties.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+				properties.setProperty("mail.smtp.socketFactory.fallback", "false");
+				properties.setProperty("mail.smtp.port", "465");
+				properties.setProperty("mail.smtp.socketFactory.port", "465");
+				properties.setProperty("mail.smtps.auth", "true");
+				properties.put("mail.smtps.quitwait", "false");
+				
+				Session sesion=Session.getDefaultInstance(properties,null);
+				final MimeMessage mensaje=new MimeMessage(sesion);
+				
 				mensaje.setFrom(new InternetAddress(correoBookteca));
-				mensaje.addRecipients(Message.RecipientType.TO, direccionCorreo);
+				mensaje.addRecipients(Message.RecipientType.TO, InternetAddress.parse(direccionCorreo,false));
 				if(tipoAccion.equals("reserva")) {
 					mensaje.setSubject("Reserva de libro");
 					mensaje.setText("Hola, usted acaba de reservar el siguiente libro: "+"\n"
@@ -89,6 +95,7 @@ public class CorreoController {
 							+"\t"+"Genero: "+libroCorreo.getGenero()+"\n"
 							+"\t"+"Fecha final reserva: "+libroCorreo.getFecFin()+"\n"
 							+"Esperamos que le guste :)\nUn saludo, Bookteca","utf-8");
+					mensaje.setSentDate(new Date());
 					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);
 					t.sendMessage(mensaje, mensaje.getAllRecipients());
@@ -102,6 +109,7 @@ public class CorreoController {
 							+"\t"+"Editorial: "+libroCorreo.getEditorial()+"\n"
 							+"\t"+"Genero: "+libroCorreo.getGenero()+"\n"
 							+"Esperamos que le haya gustado :)\nUn saludo, Bookteca","utf-8");
+					mensaje.setSentDate(new Date());
 					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);
 					t.sendMessage(mensaje, mensaje.getAllRecipients());
@@ -117,19 +125,6 @@ public class CorreoController {
 	}
 	@PostMapping(value= "/mail/revista/")
 	public void enviarEmailRevista(@RequestBody Email email) {
-		Properties properties=System.getProperties();
-		properties.setProperty("mail.smtps.host", "smtp.gmail.com");
-		properties.setProperty("mail.smtp.user", correoBookteca);
-		properties.setProperty("mail.smtp.clave", contraseñaBookteca);
-		properties.setProperty("mail.smtp.socketFactory.fallback", "false");
-		properties.setProperty("mail.smtp.port", "465");
-		properties.setProperty("mail.smtp.socketFactory.port", "465");
-		properties.setProperty("mail.smtps.auth", "true");
-		properties.setProperty("mail.smtps.quitwait","false");
-		
-		Session sesion=Session.getDefaultInstance(properties);
-		final MimeMessage mensaje=new MimeMessage(sesion);
-		
 		String direccionCorreo=email.getNombreEmail();
 		String tipoAccion=email.getTipoAccion();
 		long idRecurso=email.getIdRecurso();
@@ -139,8 +134,24 @@ public class CorreoController {
 			System.out.println("Fallo en el correo (no se encuentra recurso)");	
 		}else {
 			try {
+				Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+				final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+
+				
+				Properties properties = System.getProperties();
+				properties.setProperty("mail.smtps.host", "smtp.gmail.com");
+				properties.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+				properties.setProperty("mail.smtp.socketFactory.fallback", "false");
+				properties.setProperty("mail.smtp.port", "465");
+				properties.setProperty("mail.smtp.socketFactory.port", "465");
+				properties.setProperty("mail.smtps.auth", "true");
+				properties.put("mail.smtps.quitwait", "false");
+				
+				Session sesion=Session.getDefaultInstance(properties,null);
+				final MimeMessage mensaje=new MimeMessage(sesion);
+				
 				mensaje.setFrom(new InternetAddress(correoBookteca));
-				mensaje.addRecipients(Message.RecipientType.TO, direccionCorreo);
+				mensaje.addRecipients(Message.RecipientType.TO, InternetAddress.parse(direccionCorreo,false));
 				if(tipoAccion.equals("reserva")) {
 					mensaje.setSubject("Reserva de revista");
 					mensaje.setText("Hola, usted acaba de reservar la siguiente revista: "+"\n"
@@ -150,6 +161,7 @@ public class CorreoController {
 							+"\t"+"Genero: "+revistaCorreo.getGenero()+"\n"
 							+"\t"+"Fecha final reserva: "+revistaCorreo.getFecFin()+"\n"
 							+"Esperamos que le guste :)\nUn saludo, Bookteca","utf-8");
+					mensaje.setSentDate(new Date());
 					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);
 					t.sendMessage(mensaje, mensaje.getAllRecipients());
@@ -176,19 +188,6 @@ public class CorreoController {
 	}
 	@PostMapping(value= "/mail/salaTrabajoGrupo/")
 	public void enviarEmailSalaTrabajoGrupo(@RequestBody Email email) {
-		Properties properties=System.getProperties();
-		properties.setProperty("mail.smtps.host", "smtp.gmail.com");
-		properties.setProperty("mail.smtp.user", correoBookteca);
-		properties.setProperty("mail.smtp.clave", contraseñaBookteca);
-		properties.setProperty("mail.smtp.socketFactory.fallback", "false");
-		properties.setProperty("mail.smtp.port", "465");
-		properties.setProperty("mail.smtp.socketFactory.port", "465");
-		properties.setProperty("mail.smtps.auth", "true");
-		properties.setProperty("mail.smtps.quitwait","false");
-		
-		Session sesion=Session.getDefaultInstance(properties);
-		final MimeMessage mensaje=new MimeMessage(sesion);
-		
 		String direccionCorreo=email.getNombreEmail();
 		String tipoAccion=email.getTipoAccion();
 		long idRecurso=email.getIdRecurso();
@@ -204,8 +203,23 @@ public class CorreoController {
 				compartida="No";
 			}
 			try {
+				Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+				final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+
+				
+				Properties properties = System.getProperties();
+				properties.setProperty("mail.smtps.host", "smtp.gmail.com");
+				properties.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+				properties.setProperty("mail.smtp.socketFactory.fallback", "false");
+				properties.setProperty("mail.smtp.port", "465");
+				properties.setProperty("mail.smtp.socketFactory.port", "465");
+				properties.setProperty("mail.smtps.auth", "true");
+				properties.put("mail.smtps.quitwait", "false");
+				
+				Session sesion=Session.getDefaultInstance(properties,null);
+				final MimeMessage mensaje=new MimeMessage(sesion);
 				mensaje.setFrom(new InternetAddress(correoBookteca));
-				mensaje.addRecipients(Message.RecipientType.TO, direccionCorreo);
+				mensaje.addRecipients(Message.RecipientType.TO, InternetAddress.parse(direccionCorreo,false));
 				if(tipoAccion.equals("reserva")) {
 					mensaje.setSubject("Reserva de sala");
 					mensaje.setText("Hola, usted acaba de reservar la siguiente sala de trabajo: "+"\n"
@@ -214,6 +228,7 @@ public class CorreoController {
 							+"\t"+"Compartida: "+compartida+"\n"
 							+"\t"+"Fecha final reserva: "+salaCorreo.getFechaReserva()+"\n"
 							+"Esperamos que le guste :)\nUn saludo, Bookteca","utf-8");
+					mensaje.setSentDate(new Date());
 					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);
 					t.sendMessage(mensaje, mensaje.getAllRecipients());
@@ -240,19 +255,6 @@ public class CorreoController {
 	}
 	@PostMapping(value= "/mail/equipoInformatico/")
 	public void enviarEmailEquipoInformatico(@RequestBody Email email) {
-		Properties properties=System.getProperties();
-		properties.setProperty("mail.smtps.host", "smtp.gmail.com");
-		properties.setProperty("mail.smtp.user", correoBookteca);
-		properties.setProperty("mail.smtp.clave", contraseñaBookteca);
-		properties.setProperty("mail.smtp.socketFactory.fallback", "false");
-		properties.setProperty("mail.smtp.port", "465");
-		properties.setProperty("mail.smtp.socketFactory.port", "465");
-		properties.setProperty("mail.smtps.auth", "true");
-		properties.setProperty("mail.smtps.quitwait","false");
-		
-		Session sesion=Session.getDefaultInstance(properties);
-		final MimeMessage mensaje=new MimeMessage(sesion);
-		
 		String direccionCorreo=email.getNombreEmail();
 		String tipoAccion=email.getTipoAccion();
 		long idRecurso=email.getIdRecurso();
@@ -262,8 +264,23 @@ public class CorreoController {
 			System.out.println("Fallo en el correo (no se encuentra recurso)");
 		}else {
 			try {
+				Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+				final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+
+				
+				Properties properties = System.getProperties();
+				properties.setProperty("mail.smtps.host", "smtp.gmail.com");
+				properties.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+				properties.setProperty("mail.smtp.socketFactory.fallback", "false");
+				properties.setProperty("mail.smtp.port", "465");
+				properties.setProperty("mail.smtp.socketFactory.port", "465");
+				properties.setProperty("mail.smtps.auth", "true");
+				properties.put("mail.smtps.quitwait", "false");
+				
+				Session sesion=Session.getDefaultInstance(properties,null);
+				final MimeMessage mensaje=new MimeMessage(sesion);
 				mensaje.setFrom(new InternetAddress(correoBookteca));
-				mensaje.addRecipients(Message.RecipientType.TO, direccionCorreo);
+				mensaje.addRecipients(Message.RecipientType.TO, InternetAddress.parse(direccionCorreo,false));
 				if(tipoAccion.equals("reserva")) {
 					mensaje.setSubject("Reserva de equipo informatico");
 					mensaje.setText("Hola, usted acaba de reservar el siguiente equipo informatico: "+"\n"
@@ -271,6 +288,7 @@ public class CorreoController {
 							+"\t"+ "Sistema Operativo: "+equipoCorreo.getSistemaOperativo()+"\n"
 							+"\t"+"Fecha final reserva: "+equipoCorreo.getFechaReserva()+"\n"
 							+"Esperamos que le guste :)\nUn saludo, Bookteca","utf-8");
+					mensaje.setSentDate(new Date());
 					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);
 					t.sendMessage(mensaje, mensaje.getAllRecipients());
@@ -283,6 +301,7 @@ public class CorreoController {
 							+"\t"+"Sistema Operativo: "+equipoCorreo.getSistemaOperativo()+"\n"
 							+"\t"+"Fecha final reserva: "+equipoCorreo.getFechaReserva()+"\n"
 							+"Esperamos que le haya gustado :)\nUn saludo, Bookteca","utf-8");
+					mensaje.setSentDate(new Date());
 					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);
 					t.sendMessage(mensaje, mensaje.getAllRecipients());
