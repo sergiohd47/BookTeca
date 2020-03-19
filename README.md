@@ -219,10 +219,13 @@ Una vez creada, se creara automaticamente un fichero ***Vagrantfile*** donde ten
 
 Ademas de esto, dentro del mismo ***Vagrantfile***, añadimos las siguientes lineas de codigo, con el fin de darle a la maquina virtual creada 2GB de memoria RAM.
 
-`config.vm.provider "virtualbox" do |v|
-      v.memory = 2048
-      v.cpus = 2
- end`
+`config.vm.provider "virtualbox" do |v|`
+
+      `v.memory = 2048`
+      
+      `v.cpus = 2`
+      
+ `end`
  
  Antes de arrancar la maquina virtual debemos tener copiados en esa carpeta ***bookteca*** de Vagrant, el siguiente material:
  - booktecaBBDD.sql
