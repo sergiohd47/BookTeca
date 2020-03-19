@@ -309,6 +309,13 @@ El servicio interno de esta pagina web consiste en el envio automatico de correo
  
  Adicionalemente, tambien se realizara un envio de correo electronico cuando un administrador de nuestra pagina, haga administrador a ese usuario en cuestion.
  
+<p align="center">
+        <img width="700" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/CorreoBooktecaUsuario.PNG">
+        <img width="200" height="300" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/capturaReservaLibro.jpeg">
+      </p>
+
+
+ 
  
 
 
