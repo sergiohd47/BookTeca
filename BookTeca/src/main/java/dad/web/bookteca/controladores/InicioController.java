@@ -10,8 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import dad.web.bookteca.clases.Libro;
-import dad.web.bookteca.clases.Revista;
+import dad.web.bookteca.clases.*;
 import dad.web.bookteca.basedatos.*;
 
 @Controller
@@ -24,7 +23,7 @@ public class InicioController {
 
 	@Autowired
 	private RevistaRepository revistas;
-	/*
+	
 	@Autowired
 	private SalaTrabajoGrupoRepository salasTrabajoGrupo;
 	
@@ -33,7 +32,7 @@ public class InicioController {
 	
 	@Autowired
 	private UsuarioRepository usuarios;
-	*/
+	
 	public static ArrayList<Libro> listaLibrosDestacados;
 	public static ArrayList<Revista> listaRevistasDestacadas;
 	public static boolean sesionNoIniciada;

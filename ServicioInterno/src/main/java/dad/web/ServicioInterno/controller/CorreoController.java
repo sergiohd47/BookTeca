@@ -2,6 +2,7 @@ package dad.web.ServicioInterno.controller;
 
 import java.security.Security;
 import java.util.Date;
+import java.util.Optional;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -29,6 +30,7 @@ import com.sun.mail.smtp.SMTPTransport;
 import dad.web.ServicioInterno.clases.Libro;
 import dad.web.ServicioInterno.clases.Revista;
 import dad.web.ServicioInterno.clases.SalaTrabajoGrupo;
+import dad.web.ServicioInterno.clases.Usuario;
 import dad.web.ServicioInterno.clases.EquipoInformatico;
 import dad.web.ServicioInterno.clases.Email;
 import dad.web.ServicioInterno.basedatos.LibroRepository;
@@ -40,6 +42,9 @@ import dad.web.ServicioInterno.basedatos.UsuarioRepository;
 
 @RestController
 public class CorreoController {
+	
+	@Autowired 
+	private UsuarioRepository usuarios;
 	
 	@Autowired
 	private LibroRepository libros;
@@ -301,6 +306,56 @@ public class CorreoController {
 							+"\t"+"Sistema Operativo: "+equipoCorreo.getSistemaOperativo()+"\n"
 							+"\t"+"Fecha final reserva: "+equipoCorreo.getFechaReserva()+"\n"
 							+"Esperamos que le haya gustado :)\nUn saludo, Bookteca","utf-8");
+					mensaje.setSentDate(new Date());
+					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
+					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);
+					t.sendMessage(mensaje, mensaje.getAllRecipients());
+					t.close();
+					System.out.println("Correo enviado con exito");
+				}
+			}catch (MessagingException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+	
+	@PostMapping(value= "/mail/cambioRol/")
+	public void enviarEmailAdministrador(@RequestBody Email email) {
+		String direccionCorreo=email.getNombreEmail();
+		String tipoAccion=email.getTipoAccion();
+		long idRecurso=email.getIdRecurso();
+		System.out.println("Datos recibidos de: "+direccionCorreo+" para la accion: "+tipoAccion);
+		Optional<Usuario> usuarioCambio=usuarios.findById(idRecurso);
+		if(usuarioCambio==null) {
+			System.out.println("Fallo en el correo (no se encuentra al usuario)");
+		}else {
+			try {
+				Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+				final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+					
+				
+				Properties properties = System.getProperties();
+				properties.setProperty("mail.smtps.host", "smtp.gmail.com");
+				properties.setProperty("mail.smtp.socketFactory.class", SSL_FACTORY);
+				properties.setProperty("mail.smtp.socketFactory.fallback", "false");
+				properties.setProperty("mail.smtp.port", "465");
+				properties.setProperty("mail.smtp.socketFactory.port", "465");
+				properties.setProperty("mail.smtps.auth", "true");
+				properties.put("mail.smtps.quitwait", "false");
+				
+				Session sesion=Session.getDefaultInstance(properties,null);
+				final MimeMessage mensaje=new MimeMessage(sesion);
+				mensaje.setFrom(new InternetAddress(correoBookteca));
+				mensaje.addRecipients(Message.RecipientType.TO, InternetAddress.parse(direccionCorreo,false));
+				if(tipoAccion.equals("cambioRol")) {
+					mensaje.setSubject("Cambio de rol de usuario: ");
+					String rol = "usuario";
+					if (usuarioCambio.get().getAdministrador()) {
+						rol="administrador";
+					}
+					mensaje.setText("Hola, ha usted le acaban de cambiar de rol a: "+"\n"
+							+"\t"+rol+".\n"
+							+"Esperamos que se sienta cómodo en nuestra comunidad:)\nUn saludo, Bookteca","utf-8");
 					mensaje.setSentDate(new Date());
 					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);

@@ -10,12 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 import dad.web.bookteca.basedatos.EquipoInformaticoRepository;
 import dad.web.bookteca.basedatos.LibroRepository;
 import dad.web.bookteca.basedatos.RevistaRepository;
 import dad.web.bookteca.basedatos.SalaTrabajoGrupoRepository;
 import dad.web.bookteca.basedatos.UsuarioRepository;
+import dad.web.bookteca.clases.Email;
 import dad.web.bookteca.clases.EquipoInformatico;
 import dad.web.bookteca.clases.Libro;
 import dad.web.bookteca.clases.Revista;
@@ -151,8 +153,16 @@ public class AdministradorController {
 		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
 		model.addAttribute("nombre",usuario.getNombre());
 		usuario = usuarios.findByEmail(emailUsuario);
-		if(!usuario.getAdministrador())
+		if(!usuario.getAdministrador()) {
 			usuario.setAdministrador(true);
+			//PARTE SERVICIO INTERNO
+			Email email=new Email(usuario.getEmail(),usuario.getId(),"cambioRol");
+			String urlCorreo="http://localhost:8070/mail/cambioRol/";
+			RestTemplate rest=new RestTemplate();
+			rest.postForObject(urlCorreo,email,Email.class);
+			System.out.println("Datos reserva enviados: "+usuario.getEmail());
+		}
+			
 		usuarios.save(usuario);
 		return "recursoAñadido";
 	}	
