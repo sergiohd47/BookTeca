@@ -349,13 +349,9 @@ public class CorreoController {
 				mensaje.addRecipients(Message.RecipientType.TO, InternetAddress.parse(direccionCorreo,false));
 				if(tipoAccion.equals("cambioRol")) {
 					mensaje.setSubject("Cambio de rol de usuario: ");
-					String rol = "usuario";
-					if (usuarioCambio.get().getAdministrador()) {
-						rol="administrador";
-					}
 					mensaje.setText("Hola, ha usted le acaban de cambiar de rol a: "+"\n"
-							+"\t"+rol+".\n"
-							+"Esperamos que se sienta cómodo en nuestra comunidad:)\nUn saludo, Bookteca","utf-8");
+							+"\t"+"Administrador"+".\n"
+							+"Esperamos que se sienta cómodo en nuestra comunidad :)\nUn saludo, Bookteca","utf-8");
 					mensaje.setSentDate(new Date());
 					SMTPTransport t=(SMTPTransport)sesion.getTransport("smtps");
 					t.connect("smtp.gmail.com",correoBookteca,contraseñaBookteca);

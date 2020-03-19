@@ -197,6 +197,8 @@ En este diagrama se puede observar la organizacion que tendra nuestra aplicacion
   <img width="800" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWeb/diagramaNavegacionSeguridad.png">
 </p>
 
+Como aclaracion, hemos añadido una pantalla de error para el caso de que salga error tanto en el ***servicio interno*** como en la ***pagina web***, desde donde podremos volver a la pantalla de inicio de sesion.
+
 #### Virtualizacion<a name="id13"></a>
 Como primera aclaracion, esta parte ha sido realizada en una maquina con sistema operativo macOS Mojave x64.
 Primeramente, descargamos tanto ***VirtualBox*** como ***Vagrant*** en los siguientes link:
@@ -207,7 +209,7 @@ Una vez descargado lo anterior, abrimos un terminal en la maquina local, y crear
 
 `mkdir -p ~/vagrant/bookteca`
 
-`cd ~/vagrant/bookteca`
+ `cd ~/vagrant/bookteca`
 
 Creamos la maquina virtual Linux de 64 bits
 
@@ -296,5 +298,17 @@ Para comprobar el correcto funcionamiento de la app, nos vamos al navegador de n
 
 Si todo sale correcto, deberia aparecernos nuestra pagina principal de la pagina web.
 
+#### Servicio Interno<a name="id14"></a>
+
+El servicio interno de esta pagina web consiste en el envio automatico de correos a la hora de realizar cada una de las siguientes acciones:
+
+ - Reserva/devolucion de un libro
+ - Reserva/devolucion de una revista
+ - Reserva/devolucion de una sala de trabajo en grupo
+ - Reserva/devolucion de un equipo informatico
+ 
+ Adicionalemente, tambien se realizara un envio de correo electronico cuando un administrador de nuestra pagina, haga administrador a ese usuario en cuestion.
+ 
+ 
 
 
