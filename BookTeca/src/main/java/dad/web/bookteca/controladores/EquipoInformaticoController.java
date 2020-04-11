@@ -60,7 +60,7 @@ public class EquipoInformaticoController {
 			usuarios.save(usuario);
 			//PARTE SERVICIO INTERNO
 			Email email=new Email(usuario.getEmail(),idEquipo,"reserva");
-			String urlCorreo="http://localhost:8070/mail/equipoInformatico/";
+			String urlCorreo="http://0.0.0.0:5000/mail/equipoInformatico/";
 			RestTemplate rest=new RestTemplate();
 			rest.postForObject(urlCorreo,email,Email.class);
 			System.out.println("Datos reserva enviados: "+usuario.getEmail());
@@ -87,7 +87,7 @@ public class EquipoInformaticoController {
 		usuarios.save(usuario);
 		//PARTE SERVICIO INTERNO
 		Email email=new Email(usuario.getEmail(),idEquipo,"devolucion");
-		String urlCorreo="http://localhost:8070/mail/equipoInformatico/";
+		String urlCorreo="http://0.0.0.0:5000/mail/equipoInformatico/";
 		RestTemplate rest=new RestTemplate();
 		rest.postForObject(urlCorreo,email,Email.class);
 		System.out.println("Datos devolucion enviados: "+usuario.getEmail());

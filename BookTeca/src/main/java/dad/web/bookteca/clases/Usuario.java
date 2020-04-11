@@ -6,6 +6,8 @@ import java.util.List;
 import java.sql.Date;
 import javax.persistence.*;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity

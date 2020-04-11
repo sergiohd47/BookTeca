@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
-Built-By: sergiohernandezdominguez
-Build-Jdk: 10.0.2
+Built-By: borjiitaa2317
+Build-Jdk: 11.0.4
 Implementation-Title: ServicioInterno
 Implementation-Version: 0.0.1-SNAPSHOT
 Implementation-Vendor-Id: dad.web
