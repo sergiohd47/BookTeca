@@ -3,7 +3,6 @@ package dad.web.bookteca.controladores;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -178,7 +177,7 @@ public class UsuarioController {
 		usuarioEditado.setContrasenya((String) new BCryptPasswordEncoder().encode(contrasenya));
 		usuarios.save(usuarioEditado);
 		model.addAttribute("nombre",usuarioEditado.getNombre());
-		return "perfilEditado";
-		
-	}	
+		return "perfilEditado";		
+	}
+	
 }

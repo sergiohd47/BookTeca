@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +26,6 @@ import dad.web.bookteca.clases.Usuario;
 @Controller
 public class AdministradorController {
 	
-	private final String URL = "http://172.17.0.3:5000/mail/cambioRol/";
-	//private final String URL = "localhost:8070/mail/cambioRol/";
-		
 	@Autowired
 	private LibroRepository libros;
 	
@@ -45,11 +41,12 @@ public class AdministradorController {
 	@Autowired
 	private UsuarioRepository usuarios;
 	
-	private Usuario usuario;
+	//public static String URL_REST = "http://172.17.0.3:5000/mail/";
+	private String URL = "http://localhost:8070/mail/cambioRol/";
 	
 	@RequestMapping("/añadirLibro")
 	public String añadirLibro(Model model, HttpServletRequest request) {
-		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
+		usuarios.findByEmail(request.getUserPrincipal().getName());
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		return "añadirLibro";
@@ -67,7 +64,7 @@ public class AdministradorController {
 	
 	@RequestMapping("/añadirRevista")
 	public String añadirRevista(Model model,HttpServletRequest request) {
-		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
+		usuarios.findByEmail(request.getUserPrincipal().getName());
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		return "añadirRevista";
@@ -85,7 +82,7 @@ public class AdministradorController {
 	
 	@RequestMapping("/añadirSalaTrabajoGrupo")
 	public String añadirSalaTrabajoGrupo(Model model, HttpServletRequest request) {
-		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
+		usuarios.findByEmail(request.getUserPrincipal().getName());
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		return "añadirSalaTrabajoGrupo";
@@ -103,7 +100,7 @@ public class AdministradorController {
 
 	@RequestMapping("/añadirEquipoInformatico")
 	public String añadirEquipo(Model model, HttpServletRequest request) {
-		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
+		usuarios.findByEmail(request.getUserPrincipal().getName());
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		return "añadirEquipoInformatico";
@@ -121,7 +118,7 @@ public class AdministradorController {
 
 	@RequestMapping("/administrarUsuarios")
 	public String administrarUsuarios(Model model, HttpServletRequest request) {
-		Usuario usuario=usuarios.findByEmail(request.getUserPrincipal().getName());
+		usuarios.findByEmail(request.getUserPrincipal().getName());
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
 		model.addAttribute("token",token.getToken());
 		return "administrarUsuarios";
@@ -160,13 +157,12 @@ public class AdministradorController {
 			usuario.setAdministrador(true);
 			//PARTE SERVICIO INTERNO
 			Email email=new Email(usuario.getEmail(),usuario.getId(),"cambioRol");
-			String urlCorreo= URL ;
 			RestTemplate rest=new RestTemplate();
-			rest.postForObject(urlCorreo,email,Email.class);
+			rest.postForObject(URL,email,Email.class);
 			System.out.println("Datos reserva enviados: "+usuario.getEmail());
-		}
-			
+		}	
 		usuarios.save(usuario);
 		return "recursoAñadido";
-	}	
+	}
+	
 }

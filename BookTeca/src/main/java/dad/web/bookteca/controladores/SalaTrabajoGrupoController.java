@@ -3,7 +3,6 @@ package dad.web.bookteca.controladores;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -21,15 +20,16 @@ import dad.web.bookteca.clases.Usuario;
 
 @Controller
 public class SalaTrabajoGrupoController {
-	private final String URL ="http://172.17.0.3:5000/mail/salaTrabajoGrupo/";
-	//private final String URL ="http://localhost:8070/mail/salaTrabajoGrupo/";
 	
 	@Autowired
 	private SalaTrabajoGrupoRepository salasTrabajoGrupo;
 	
 	@Autowired
 	private UsuarioRepository usuarios;
-		
+	
+	//private final String URL ="http://172.17.0.3:5000/mail/salaTrabajoGrupo/";
+	private final String URL ="http://localhost:8070/mail/salaTrabajoGrupo/";
+	
 	@RequestMapping("/reservaSalaTrabajoGrupo")
 	public String reservaSalaTrabajoGrupo(Model model, HttpServletRequest request) {
 		ArrayList<SalaTrabajoGrupo> listaSTG=new ArrayList<>();
@@ -67,9 +67,8 @@ public class SalaTrabajoGrupoController {
 			usuarios.save(usuario);
 			//PARTE SERVICIO INTERNO
 			Email email=new Email(usuario.getEmail(),idSala,"reserva");
-			String urlCorreo= URL ;
 			RestTemplate rest=new RestTemplate();
-			rest.postForObject(urlCorreo,email,Email.class);
+			rest.postForObject(URL,email,Email.class);
 			System.out.println("Datos reserva enviados: "+usuario.getEmail());
 		}
 		
@@ -94,9 +93,8 @@ public class SalaTrabajoGrupoController {
 		usuarios.save(usuario);
 		//PARTE SERVICIO INTERNO
 		Email email=new Email(usuario.getEmail(),idSala,"devolucion");
-		String urlCorreo = URL ;
 		RestTemplate rest=new RestTemplate();
-		rest.postForObject(urlCorreo,email,Email.class);
+		rest.postForObject(URL,email,Email.class);
 		System.out.println("Datos devolucion enviados: "+usuario.getEmail());
 		
 		model.addAttribute("usuario",request.isUserInRole("USER"));

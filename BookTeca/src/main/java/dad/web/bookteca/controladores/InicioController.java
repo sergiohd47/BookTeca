@@ -17,7 +17,7 @@ import dad.web.bookteca.basedatos.*;
 public class InicioController {
 
 	public static final int NUMERO_RECURSOS_MAIN=3; //NUMERO DE LIBROS Y REVISTAS QUE SE MUESTRAN EN LA PANTALLA DE INICIO
-
+	
 	@Autowired
 	private LibroRepository libros;
 
@@ -124,6 +124,7 @@ public class InicioController {
 		model.addAttribute("visibleIniciarSesion",true);
 		return "index";
 	}
+	
 	@RequestMapping("/errorBookteca")
 	public String error(Model model) {
 		return "error";

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -22,13 +21,15 @@ import dad.web.bookteca.clases.Usuario;
 
 @Controller
 public class RevistaController {
-	private final String URL = "http://172.17.0.3:5000/mail/revista/";
-	//private String URL = "http://localhost:8070/mail/revista/";
 	
 	@Autowired
 	private RevistaRepository revistas;
+	
 	@Autowired
 	private UsuarioRepository usuarios;
+	
+	//private final String URL ="http://172.17.0.3:5000/mail/revista/";
+	private final String URL ="http://localhost:8070/mail/revista/";
 		
 	@RequestMapping("/buscadorRevistas")
 	public String buscadorRevista(Model model, HttpServletRequest request) {
@@ -83,10 +84,9 @@ public class RevistaController {
 			revistas.save(revista);
 			usuarios.save(usuario);
 			//PARTE SERVICIO INTERNO
-			String urlCorreo= URL ;
 			Email email=new Email(usuario.getEmail(),idRevista,"reserva");
 			RestTemplate rest=new RestTemplate();
-			rest.postForObject(urlCorreo,email,Email.class);
+			rest.postForObject(URL,email,Email.class);
 			System.out.println("Datos reserva enviados: "+usuario.getEmail());
 		}
 		
@@ -128,10 +128,9 @@ public class RevistaController {
 		revistas.save(revista);
 		usuarios.save(usuario);
 		//PARTE SERVICIO INTERNO
-		String urlCorreo= URL ;
 		Email email=new Email(usuario.getEmail(),idRevista,"devolucion");
 		RestTemplate rest=new RestTemplate();
-		rest.postForObject(urlCorreo,email,Email.class);
+		rest.postForObject(URL,email,Email.class);
 		System.out.println("Datos devolucion enviados: "+usuario.getEmail());
 		
 	
@@ -163,4 +162,5 @@ public class RevistaController {
 		model.addAttribute("listaRevistasDestacadas",InicioController.listaRevistasDestacadas);
 		return "sesionIniciada";
 	}
+	
 }

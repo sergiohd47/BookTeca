@@ -1,4 +1,4 @@
-package dad.web.bookteca.controladores;
+package dad.web.ServicioInterno.controller;
 
 import java.util.Map;
 
