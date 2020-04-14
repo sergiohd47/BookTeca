@@ -22,11 +22,14 @@ import dad.web.bookteca.clases.Usuario;
 
 @Controller
 public class RevistaController {
+	private final String URL = "http://172.17.0.3:5000/mail/revista/";
+	//private String URL = "http://localhost:8070/mail/revista/";
+	
 	@Autowired
 	private RevistaRepository revistas;
 	@Autowired
 	private UsuarioRepository usuarios;
-	
+		
 	@RequestMapping("/buscadorRevistas")
 	public String buscadorRevista(Model model, HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
@@ -80,7 +83,7 @@ public class RevistaController {
 			revistas.save(revista);
 			usuarios.save(usuario);
 			//PARTE SERVICIO INTERNO
-			String urlCorreo="http://172.17.0.3:5000/mail/revista/";
+			String urlCorreo= URL ;
 			Email email=new Email(usuario.getEmail(),idRevista,"reserva");
 			RestTemplate rest=new RestTemplate();
 			rest.postForObject(urlCorreo,email,Email.class);
@@ -125,7 +128,7 @@ public class RevistaController {
 		revistas.save(revista);
 		usuarios.save(usuario);
 		//PARTE SERVICIO INTERNO
-		String urlCorreo="http://172.17.0.3:5000/mail/revista/";
+		String urlCorreo= URL ;
 		Email email=new Email(usuario.getEmail(),idRevista,"devolucion");
 		RestTemplate rest=new RestTemplate();
 		rest.postForObject(urlCorreo,email,Email.class);

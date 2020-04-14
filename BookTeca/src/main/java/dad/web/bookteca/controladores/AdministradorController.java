@@ -26,6 +26,9 @@ import dad.web.bookteca.clases.Usuario;
 
 @Controller
 public class AdministradorController {
+	
+	private final String URL = "http://172.17.0.3:5000/mail/cambioRol/";
+	//private final String URL = "localhost:8070/mail/cambioRol/";
 		
 	@Autowired
 	private LibroRepository libros;
@@ -157,7 +160,7 @@ public class AdministradorController {
 			usuario.setAdministrador(true);
 			//PARTE SERVICIO INTERNO
 			Email email=new Email(usuario.getEmail(),usuario.getId(),"cambioRol");
-			String urlCorreo="http://172.17.0.3:5000/mail/cambioRol/";
+			String urlCorreo= URL ;
 			RestTemplate rest=new RestTemplate();
 			rest.postForObject(urlCorreo,email,Email.class);
 			System.out.println("Datos reserva enviados: "+usuario.getEmail());

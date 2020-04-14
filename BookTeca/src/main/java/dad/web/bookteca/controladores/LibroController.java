@@ -21,11 +21,14 @@ import dad.web.bookteca.clases.Libro;
 import dad.web.bookteca.clases.Usuario;
 @Controller
 public class LibroController {
+	private final String URL ="http://172.17.0.3:5000/mail/libro/";
+	//private final String URL ="http://localhost:8070/mail/libro/";
+	
 	@Autowired
 	private LibroRepository libros;
 	@Autowired
 	private UsuarioRepository usuarios;
-	
+		
 	@RequestMapping("/buscadorLibros")
 	public String buscadorLibros(Model model, HttpServletRequest request) {
 		CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
@@ -79,7 +82,7 @@ public class LibroController {
 			libros.save(libro);
 			usuarios.save(usuario);
 			//PARTE SERVICIO INTERNO
-			String urlCorreo="http://172.17.0.3:5000/mail/libro/";
+			String urlCorreo= URL ;
 			Email email=new Email(usuario.getEmail(),idLibro,"reserva");
 			RestTemplate rest=new RestTemplate();
 			rest.postForObject(urlCorreo, email, Email.class);
@@ -125,7 +128,7 @@ public class LibroController {
 		libros.save(libro);
 		usuarios.save(usuario);
 		//PARTE SERVICIO INTERNO
-		String urlCorreo="http://172.17.0.3:5000/mail/libro/";
+		String urlCorreo= URL ;
 		Email email=new Email(usuario.getEmail(),idLibro,"devolucion");
 		RestTemplate rest=new RestTemplate();
 		rest.postForObject(urlCorreo,email,Email.class);

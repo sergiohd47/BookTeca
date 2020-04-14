@@ -21,12 +21,15 @@ import dad.web.bookteca.clases.Usuario;
 
 @Controller
 public class SalaTrabajoGrupoController {
+	private final String URL ="http://172.17.0.3:5000/mail/salaTrabajoGrupo/";
+	//private final String URL ="http://localhost:8070/mail/salaTrabajoGrupo/";
+	
 	@Autowired
 	private SalaTrabajoGrupoRepository salasTrabajoGrupo;
 	
 	@Autowired
 	private UsuarioRepository usuarios;
-	
+		
 	@RequestMapping("/reservaSalaTrabajoGrupo")
 	public String reservaSalaTrabajoGrupo(Model model, HttpServletRequest request) {
 		ArrayList<SalaTrabajoGrupo> listaSTG=new ArrayList<>();
@@ -64,7 +67,7 @@ public class SalaTrabajoGrupoController {
 			usuarios.save(usuario);
 			//PARTE SERVICIO INTERNO
 			Email email=new Email(usuario.getEmail(),idSala,"reserva");
-			String urlCorreo="http://172.17.0.3:5000/mail/salaTrabajoGrupo/";
+			String urlCorreo= URL ;
 			RestTemplate rest=new RestTemplate();
 			rest.postForObject(urlCorreo,email,Email.class);
 			System.out.println("Datos reserva enviados: "+usuario.getEmail());
@@ -91,7 +94,7 @@ public class SalaTrabajoGrupoController {
 		usuarios.save(usuario);
 		//PARTE SERVICIO INTERNO
 		Email email=new Email(usuario.getEmail(),idSala,"devolucion");
-		String urlCorreo="http://172.17.0.3:5000/mail/salaTrabajoGrupo/";
+		String urlCorreo = URL ;
 		RestTemplate rest=new RestTemplate();
 		rest.postForObject(urlCorreo,email,Email.class);
 		System.out.println("Datos devolucion enviados: "+usuario.getEmail());
