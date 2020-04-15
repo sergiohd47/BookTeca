@@ -1,6 +1,7 @@
 package dad.web.bookteca;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,8 +10,12 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
+import org.springframework.session.hazelcast.config.annotation.web.http.EnableHazelcastHttpSession;
+import com.hazelcast.config.Config;
+import com.hazelcast.config.JoinConfig;
 
 @EnableCaching
+@EnableHazelcastHttpSession
 @SpringBootApplication
 public class BookTecaApplication {
 
@@ -18,6 +23,14 @@ public class BookTecaApplication {
 		SpringApplication.run(BookTecaApplication.class, args);
 	}
 	
+	@Bean
+	public Config config() {
+		Config configuration=new Config();
+		JoinConfig joinConfiguration=configuration.getNetworkConfig().getJoin();
+		joinConfiguration.getMulticastConfig().setEnabled(false);
+		joinConfiguration.getTcpIpConfig().setEnabled(true).setMembers(Collections.singletonList("127.0.0.1"));
+		return configuration;
+	}
 	@Bean
     public CacheManager cacheManager() {
         SimpleCacheManager scmBookTeca = new SimpleCacheManager();
