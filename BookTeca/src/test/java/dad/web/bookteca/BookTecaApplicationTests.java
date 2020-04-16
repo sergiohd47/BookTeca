@@ -4,10 +4,10 @@ import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BookTecaApplicationTests {
-
+public class BookTecaApplicationTests {
+	public BookTecaApplicationTests() {}
 	@Test
-	void contextLoads() {
+	public void contextLoads() {
 	}
 
 }
