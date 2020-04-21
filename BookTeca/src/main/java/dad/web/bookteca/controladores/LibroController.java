@@ -27,8 +27,8 @@ public class LibroController {
 	@Autowired
 	private UsuarioRepository usuarios;
 	
-	//private final String URL ="http://172.17.0.3:5000/mail/libro/";
-	private final String URL ="http://localhost:8070/mail/libro/";
+	private final String URL ="http://172.17.0.3:8070/mail/libro/";
+	//private final String URL ="http://localhost:8070/mail/libro/";
 		
 	@RequestMapping("/buscadorLibros")
 	public String buscadorLibros(Model model, HttpServletRequest request) {

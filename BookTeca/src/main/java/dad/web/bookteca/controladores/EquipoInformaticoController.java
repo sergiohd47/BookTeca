@@ -27,8 +27,8 @@ public class EquipoInformaticoController {
 	@Autowired
 	private UsuarioRepository usuarios;
 	
-	//private final String URL ="http://172.17.0.3:5000/mail/equipoInformatico/";
-	private final String URL ="http://localhost:8070/mail/equipoInformatico/";
+	private final String URL ="http://172.17.0.3:8070/mail/equipoInformatico/";
+	//private final String URL ="http://localhost:8070/mail/equipoInformatico/";
 	
 	@RequestMapping("/reservaEquipoInformatico")
 	public String reservaEquipoInformatico(Model model, HttpServletRequest request) {

@@ -28,8 +28,8 @@ public class RevistaController {
 	@Autowired
 	private UsuarioRepository usuarios;
 	
-	//private final String URL ="http://172.17.0.3:5000/mail/revista/";
-	private final String URL ="http://localhost:8070/mail/revista/";
+	private final String URL ="http://172.17.0.3:8070/mail/revista/";
+	//private final String URL ="http://localhost:8070/mail/revista/";
 		
 	@RequestMapping("/buscadorRevistas")
 	public String buscadorRevista(Model model, HttpServletRequest request) {
