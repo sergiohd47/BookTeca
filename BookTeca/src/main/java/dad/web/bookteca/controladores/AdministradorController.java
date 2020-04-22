@@ -41,7 +41,7 @@ public class AdministradorController {
 	@Autowired
 	private UsuarioRepository usuarios;
 	
-	public static String URL = "http://172.17.0.3:8070/mail/";
+	public static String URL = "http://172.17.0.3:7000/mail/";
 	//private String URL = "http://localhost:8070/mail/cambioRol/";
 	
 	@RequestMapping("/añadirLibro")
