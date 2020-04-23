@@ -1,0 +1,42 @@
+version: "2"
+services:
+  webapp1:
+    build:
+      context: ./proxyWeb
+      dockerfile: Dockerfile
+    ports:
+      - "8444:8444"
+      
+  webapp2:
+    build:
+      context: ./proxyWeb
+      dockerfile: Dockerfile
+    ports:
+      - "8445:8445"
+
+  servicio_interno:
+    build:
+      context: ./proxyServicioInterno
+      dockerfile: Dockerfile
+    ports:
+      - "8070:8070"
+      
+  servicio_interno2:
+    build:
+      context: ./proxyServicioInterno
+      dockerfile: Dockerfile
+    ports:
+      - "8071:8071" 
+  
+  basedatos:
+    build:
+      context: ./baseDatos
+      dockerfile: Dockerfile
+    volumes:
+      - bookteca:/var/lib/mysql/
+    enviroment:
+      MYSQL_ROOT_PASSWORD: bookteca
+      MYSQL_DATABASE: bookteca_db
+    ports:
+      - "3306:3306"
+      
