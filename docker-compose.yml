@@ -8,16 +8,15 @@ services:
         - red_bookteca
     ports:
         - "8443:8443"
-        - "7777:7777"
+        - "8477:8477"
     volumes:
         - /Users/sergiohernandezdominguez/Desktop/dockerVolumes/proxyWeb/configuracion/:/usr/local/etc/haproxy/
 
   web1:
     build: /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/Bookteca/Bookteca/.
-    image: imagen_web
     container_name: contenedor_web1
-    expose:
-        - "8443"
+    #expose:
+        #- "8443"
     networks:
         - red_bookteca
     links:
@@ -30,9 +29,8 @@ services:
   web2:
     build: /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/Bookteca/Bookteca/.
     container_name: contenedor_web2
-    image: imagen_web
-    expose:
-        - "8443"
+    #expose:
+        #- "8443"
     networks:
         - red_bookteca
     links:
@@ -45,8 +43,8 @@ services:
   base_datos_bookteca:
     image: mysql
     container_name: contenedor_bd_bookteca
-    expose:
-        - "33306"
+    #expose:
+        #- "33306"
     networks:
         - red_bookteca
     security_opt:
@@ -61,10 +59,9 @@ services:
 
   servicio_interno1:
     build: /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/Bookteca/ServicioInterno/.
-    image: imagen_servicio_interno
     container_name: contenedor_sinterno1
-    expose:
-        - "8070"
+    #expose:
+        #- "8070"
     networks:
         - red_bookteca
     links:
@@ -75,10 +72,9 @@ services:
 
   servicio_interno2:
     build: /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/Bookteca/ServicioInterno/.
-    image: imagen_servicio_interno
     container_name: contenedor_sinterno2
-    expose:
-      - "8070"
+    #expose:
+      #- "8070"
     networks:
         - red_bookteca
     links:
