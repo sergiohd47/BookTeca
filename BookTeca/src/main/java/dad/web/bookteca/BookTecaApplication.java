@@ -1,7 +1,9 @@
 package dad.web.bookteca;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,7 +30,10 @@ public class BookTecaApplication {
 		Config configuration=new Config();
 		JoinConfig joinConfiguration=configuration.getNetworkConfig().getJoin();
 		joinConfiguration.getMulticastConfig().setEnabled(false);
-		joinConfiguration.getTcpIpConfig().setEnabled(true).setMembers(Collections.singletonList("127.0.0.1"));
+		List<String> listaIPDocker=new ArrayList<String>();
+		listaIPDocker.add("172.19.0.7");
+		listaIPDocker.add("172.19.0.6"); 
+		joinConfiguration.getTcpIpConfig().setEnabled(true).setMembers(listaIPDocker);
 		return configuration;
 	}
 	@Bean

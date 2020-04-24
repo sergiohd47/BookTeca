@@ -1,3 +1,3 @@
 FROM haproxy:1.7
 COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
-COPY xip.io.pem /etc/ssl/xip.io/xip.io.pem
+COPY xip.io.pem /usr/local/etc/ssl/xip.io/xip.io.pem
