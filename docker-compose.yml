@@ -1,0 +1,94 @@
+version: "3.7"
+services:
+
+  proxy_web_sinterno:
+    image: haproxy:latest
+    container_name: contenedor_proxy_web_sinterno
+    networks:
+        - red_bookteca
+    ports:
+        - "8443:8443"
+        - "8404:8404"
+    volumes:
+        - /Users/sergiohernandezdominguez/Desktop/dockerVolumes/proxyWeb/configuracion/:/usr/local/etc/haproxy/
+
+  web1:
+    build: /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/Bookteca/Bookteca/.
+    image: imagen_web
+    container_name: contenedor_web1
+    expose:
+        - "8443"
+    networks:
+        - red_bookteca
+    links:
+        - base_datos_bookteca
+        - servicio_interno1
+    environment:
+        - SPRING.DATASOURCE.URL=jdbc:mysql://base_datos_bookteca/bookteca?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        - SPRING.DATASOURCE.PASSWORD=booktecan
+
+  web2:
+    build: /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/Bookteca/Bookteca/.
+    container_name: contenedor_web2
+    image: imagen_web
+    expose:
+        - "8443"
+    networks:
+        - red_bookteca
+    links:
+        - base_datos_bookteca
+        - servicio_interno1
+    environment:
+        - SPRING.DATASOURCE.URL=jdbc:mysql://base_datos_bookteca/bookteca?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        - SPRING.DATASOURCE.PASSWORD=booktecan
+        
+  base_datos_bookteca:
+    image: mysql
+    container_name: contenedor_bd_bookteca
+    expose:
+        - "33306"
+    networks:
+        - red_bookteca
+    security_opt:
+        - seccomp=unconfined
+    volumes:
+        - /Users/sergiohernandezdominguez/Desktop/dockerVolumes/mysql/:/var/lib/mysql/
+    environment:
+        - MYSQL_ROOT_PASSWORD=booktecan
+        - MYSQL_DATABASE=bookteca 
+        - MYSQL_USER=root 
+        - MYSQL_PASSWORD=booktecan 
+
+  servicio_interno1:
+    build: /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/Bookteca/ServicioInterno/.
+    image: imagen_servicio_interno
+    container_name: contenedor_sinterno1
+    expose:
+        - "8070"
+    networks:
+        - red_bookteca
+    links:
+        - base_datos_bookteca
+    environment:
+        - SPRING.DATASOURCE.URL=jdbc:mysql://base_datos_bookteca/bookteca?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        - SPRING.DATASOURCE.PASSWORD=booktecan
+
+  servicio_interno2:
+    build: /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/Bookteca/ServicioInterno/.
+    image: imagen_servicio_interno
+    container_name: contenedor_sinterno2
+    expose:
+      - "8070"
+    networks:
+        - red_bookteca
+    links:
+        - base_datos_bookteca
+    environment:
+        - SPRING.DATASOURCE.URL=jdbc:mysql://base_datos_bookteca/bookteca?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        - SPRING.DATASOURCE.PASSWORD=booktecan
+
+networks:
+  red_bookteca:
+    driver: bridge
+  
+
