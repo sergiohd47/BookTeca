@@ -8,7 +8,7 @@ services:
         - red_bookteca
     ports:
         - "8443:8443"
-        - "8404:8404"
+        - "7777:7777"
     volumes:
         - /Users/sergiohernandezdominguez/Desktop/dockerVolumes/proxyWeb/configuracion/:/usr/local/etc/haproxy/
 
@@ -41,7 +41,7 @@ services:
     environment:
         - SPRING.DATASOURCE.URL=jdbc:mysql://base_datos_bookteca/bookteca?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
         - SPRING.DATASOURCE.PASSWORD=booktecan
-        
+
   base_datos_bookteca:
     image: mysql
     container_name: contenedor_bd_bookteca
@@ -55,9 +55,9 @@ services:
         - /Users/sergiohernandezdominguez/Desktop/dockerVolumes/mysql/:/var/lib/mysql/
     environment:
         - MYSQL_ROOT_PASSWORD=booktecan
-        - MYSQL_DATABASE=bookteca 
-        - MYSQL_USER=root 
-        - MYSQL_PASSWORD=booktecan 
+        - MYSQL_DATABASE=bookteca
+        - MYSQL_USER=root
+        - MYSQL_PASSWORD=booktecan
 
   servicio_interno1:
     build: /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/Bookteca/ServicioInterno/.
@@ -90,5 +90,3 @@ services:
 networks:
   red_bookteca:
     driver: bridge
-  
-

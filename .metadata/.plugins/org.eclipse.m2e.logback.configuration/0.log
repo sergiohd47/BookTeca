@@ -15307,3 +15307,8 @@ Caused by: java.io.EOFException: null
 2020-04-24 14:02:54,355 [main] INFO  o.e.m2e.actions.ExecutePomAction - Creating new launch configuration
 2020-04-24 14:02:58,094 [Worker-0: Launching BookTeca (28)] INFO  o.e.m.i.launch.MavenLaunchDelegate - /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/BookTeca
 2020-04-24 14:02:58,095 [Worker-0: Launching BookTeca (28)] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -Ppom.xml -B clean package
+2020-04-24 14:16:39,115 [Worker-5: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-04-24 14:16:39,116 [Worker-5: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-04-24 14:16:39,119 [Worker-5: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-04-24 14:16:39,121 [Worker-5: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-04-24 14:16:39,121 [Worker-5: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/BookTeca/ServicioInterno/src/test/resources
