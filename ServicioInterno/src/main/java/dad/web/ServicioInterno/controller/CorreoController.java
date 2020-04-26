@@ -300,7 +300,7 @@ public class CorreoController {
 					t.close();
 					System.out.println("Correo enviado con exito");
 				}else {
-					mensaje.setSubject("Devolucion de sala");
+					mensaje.setSubject("Devolucion de equipo informatico");
 					mensaje.setText("Hola, usted acaba de devolver el siguiente equipo informatico: "+"\n"
 							+"\t"+"Localizacion: "+equipoCorreo.getLocalizacion()+"\n"
 							+"\t"+"Sistema Operativo: "+equipoCorreo.getSistemaOperativo()+"\n"
@@ -348,7 +348,7 @@ public class CorreoController {
 				mensaje.setFrom(new InternetAddress(correoBookteca));
 				mensaje.addRecipients(Message.RecipientType.TO, InternetAddress.parse(direccionCorreo,false));
 				if(tipoAccion.equals("cambioRol")) {
-					mensaje.setSubject("Cambio de rol de usuario: ");
+					mensaje.setSubject("Cambio de rol de usuario");
 					mensaje.setText("Hola, ha usted le acaban de cambiar de rol a: "+"\n"
 							+"\t"+"Administrador"+".\n"
 							+"Esperamos que se sienta cómodo en nuestra comunidad :)\nUn saludo, Bookteca","utf-8");

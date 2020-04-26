@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +28,7 @@ public class SalaTrabajoGrupoController {
 	@Autowired
 	private UsuarioRepository usuarios;
 	
-	private final String URL ="http://172.19.0.4:8070/mail/salaTrabajoGrupo/";
+	private String URL = "http://172.19.0.3:7000/mail/salaTrabajoGrupo/";
 	//private final String URL ="http://localhost:8070/mail/salaTrabajoGrupo/";
 	
 	@RequestMapping("/reservaSalaTrabajoGrupo")
