@@ -339,7 +339,9 @@ Primeramente, instalamos el ***Docker Desktop*** del siguiente link:
  
 Una vez lo tengamos instalado, nos aparecera un menu como el siguiente, donde podremos ver que en realidad esta funcionando correctamente.
 
-***IMAGEN MENU DOCKER***
+<p align="center">
+  <img width="400" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWebDocker/capturaDockerDesktop.png">
+</p>
 
 Como nota muy importante a tener en cuenta, a la hora de descargarte el ***Docker Desktop***, viene incluido tanto el propio Docker como la funcionalidad de ***Docker Compose***, la cual nos sera muy util mas adelante.
 Primeramente mostrar la estructura que tendra nuestro proyecto, el cual se encontrara formado por:
@@ -352,7 +354,9 @@ Primeramente mostrar la estructura que tendra nuestro proyecto, el cual se encon
  
  A continuacion podremos ver una representacion grafica de esta estructura:
 
-***IMAGEN GRAFICA DEL PROYECTO***
+<p align="center">
+  <img width="800" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWebDocker/esquemaGraficoProyecto.png">
+</p>
 
 Tras la explicacion de la estructura, nos pondremos con las instrucciones de docker. Primeramente, deberemos generar los ***.jar*** tanto de la web como del servicio interno, como fue explicado en la fase anterior, ademas de tener disponible el fichero ***.sql*** de la base de datos
 
@@ -456,6 +460,10 @@ A pesar de esto, nuestra app seguira funcionando correctamente, al igual que el 
 <p align="center">
   <img width="800" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWebDocker/capturaFuncionandoSInterno.png">
 </p>
+
+### Video Explicativo<a name="id19"></a>
+
+En esta parte, se podra acceder a un video donde se explica el funcionamiento de nuestra pagina web, tanto el funcionamiento basico como la parte de la tolerancia a fallos.
 
 
  
