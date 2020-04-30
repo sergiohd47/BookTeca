@@ -1,0 +1,103 @@
+version: "3.7"
+services:
+    proxy_web:
+        image: haproxy:latest
+        container_name: contenedor_proxy_web
+        networks:
+            red_bookteca:
+                ipv4_address: 172.19.0.4
+        ports:
+            - "8443:8443"
+            - "7777:7777"
+        links:
+            - web1
+            - web2
+        volumes:
+            - /Users/sergiohernandezdominguez/Desktop/dockerVolumes/proxyWeb/configuracion/:/usr/local/etc/haproxy/
+    proxy_sinterno:
+        image: haproxy:latest
+        container_name: contenedor_proxy_sinterno
+        networks:
+            red_bookteca:
+                ipv4_address: 172.19.0.3
+        ports:
+            - "7000:7000"
+            - "9999:9999"
+        links:
+            - servicio_interno1
+            - servicio_interno2
+        volumes:
+            - /Users/sergiohernandezdominguez/Desktop/dockerVolumes/proxyServicioInterno/configuracion/:/usr/local/etc/haproxy/
+
+    web1:
+        build: /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/Bookteca/Bookteca/.
+        container_name: contenedor_web1
+        networks:
+            red_bookteca:
+                ipv4_address: 172.19.0.7
+        links:
+            - base_datos_bookteca
+            - proxy_sinterno
+        environment:
+            - SPRING.DATASOURCE.URL=jdbc:mysql://172.19.0.2/bookteca?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+            - SPRING.DATASOURCE.PASSWORD=booktecan
+
+    web2:
+        build: /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/Bookteca/Bookteca/.
+        container_name: contenedor_web2
+        networks:
+            red_bookteca:
+                ipv4_address: 172.19.0.5
+        links:
+            - base_datos_bookteca
+            - proxy_sinterno
+        environment:
+            - SPRING.DATASOURCE.URL=jdbc:mysql://172.19.0.2/bookteca?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+            - SPRING.DATASOURCE.PASSWORD=booktecan
+
+    base_datos_bookteca:
+        image: mysql
+        container_name: contenedor_bd_bookteca
+        networks:
+            red_bookteca:
+                ipv4_address: 172.19.0.2
+        security_opt:
+            - seccomp=unconfined
+        volumes:
+            - /Users/sergiohernandezdominguez/Desktop/dockerVolumes/mysql/:/var/lib/mysql/
+        environment:
+            - MYSQL_ROOT_PASSWORD=booktecan
+            - MYSQL_DATABASE=bookteca
+            - MYSQL_USER=root
+            - MYSQL_PASSWORD=booktecan
+
+    servicio_interno1:
+        build: /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/Bookteca/ServicioInterno/.
+        container_name: contenedor_sinterno1
+        networks:
+            red_bookteca:
+                ipv4_address: 172.19.0.6
+        links:
+            - base_datos_bookteca
+        environment:
+            - SPRING.DATASOURCE.URL=jdbc:mysql://172.19.0.2/bookteca?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+            - SPRING.DATASOURCE.PASSWORD=booktecan
+
+    servicio_interno2:
+        build: /Users/sergiohernandezdominguez/Desktop/universidad/cuarto/dad2/Bookteca/ServicioInterno/.
+        container_name: contenedor_sinterno2
+        networks:
+            red_bookteca:
+                ipv4_address: 172.19.0.8
+        links:
+            - base_datos_bookteca
+        environment:
+            - SPRING.DATASOURCE.URL=jdbc:mysql://172.19.0.2/bookteca?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+            - SPRING.DATASOURCE.PASSWORD=booktecan
+
+networks:
+    red_bookteca:
+        ipam:
+            driver: bridge
+            config:
+                - subnet: "172.19.0.0/16"
