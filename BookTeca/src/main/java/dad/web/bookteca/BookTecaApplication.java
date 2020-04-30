@@ -31,8 +31,8 @@ public class BookTecaApplication {
 		JoinConfig joinConfiguration=configuration.getNetworkConfig().getJoin();
 		joinConfiguration.getMulticastConfig().setEnabled(false);
 		List<String> listaIPDocker=new ArrayList<String>();
-		listaIPDocker.add("172.19.0.7");
-		listaIPDocker.add("172.19.0.6"); 
+		listaIPDocker.add("172.19.0.7"); //contenedor_web 1
+		listaIPDocker.add("172.19.0.5"); //contenedor_web 2
 		joinConfiguration.getTcpIpConfig().setEnabled(true).setMembers(listaIPDocker);
 		return configuration;
 	}
