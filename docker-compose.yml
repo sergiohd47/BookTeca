@@ -40,7 +40,7 @@ services:
             - proxy_sinterno
         environment:
             - SPRING.DATASOURCE.URL=jdbc:mysql://172.19.0.2/bookteca?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-            - SPRING.DATASOURCE.PASSWORD=bookteca
+            - SPRING.DATASOURCE.PASSWORD=booktecan
 
     web2:
         build: ./Bookteca/.
@@ -53,7 +53,7 @@ services:
             - proxy_sinterno
         environment:
             - SPRING.DATASOURCE.URL=jdbc:mysql://172.19.0.2/bookteca?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-            - SPRING.DATASOURCE.PASSWORD=bookteca
+            - SPRING.DATASOURCE.PASSWORD=booktecan
 
     base_datos_bookteca:
         image: mysql
@@ -66,10 +66,10 @@ services:
         volumes:
             - ./mysql/:/var/lib/mysql/
         environment:
-            - MYSQL_ROOT_PASSWORD=bookteca
+            - MYSQL_ROOT_PASSWORD=booktecan
             - MYSQL_DATABASE=bookteca
             - MYSQL_USER=root
-            - MYSQL_PASSWORD=bookteca
+            - MYSQL_PASSWORD=booktecan
 
     servicio_interno1:
         build: ./ServicioInterno/.
@@ -81,7 +81,7 @@ services:
             - base_datos_bookteca
         environment:
             - SPRING.DATASOURCE.URL=jdbc:mysql://172.19.0.2/bookteca?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-            - SPRING.DATASOURCE.PASSWORD=bookteca
+            - SPRING.DATASOURCE.PASSWORD=booktecan
 
     servicio_interno2:
         build: ./ServicioInterno/.
@@ -93,7 +93,7 @@ services:
             - base_datos_bookteca
         environment:
             - SPRING.DATASOURCE.URL=jdbc:mysql://172.19.0.2/bookteca?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-            - SPRING.DATASOURCE.PASSWORD=bookteca
+            - SPRING.DATASOURCE.PASSWORD=booktecan
 
 networks:
     red_bookteca:
