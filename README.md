@@ -4,6 +4,7 @@
 </p>
 
 ## Indice
+- [Video Explicativo](#id19) 
 - [Introduccion](#id1)
 - [Primera fase](#id2) 
     - [Segmentacion del acceso](#id3) 
@@ -22,7 +23,13 @@
     - [Caches](#id16)
     - [Docker](#id17)
     - [Docker-Compose](#id18)
-- [Video explicativo](#id19)
+    
+### Video Explicativo<a name="id19"></a>
+
+En esta parte, se podra acceder a un video donde se explica el funcionamiento de nuestra pagina web, tanto el funcionamiento basico como la parte de la tolerancia a fallos.
+
+<https://youtu.be/EmsmuqtaAa0>
+
  ### Introduccion<a name="id1"></a>
 La pagina web BookTeca consiste en una pagina para la administracion de los recursos de nuestra biblioteca, la cual cuenta con el clasico servicio de prestamo de libros y revistas o peliculas, reserva de salas de trabajo en grupo o de equipos informaticos.
 Los usuarios podran hacer reservas previas de libros, hacer un seguimiento de su prestamo o incluso reservar tanto equipos como salas desde su casa.
@@ -460,10 +467,5 @@ A pesar de esto, nuestra app seguira funcionando correctamente, al igual que el 
 <p align="center">
   <img width="800" height="500" src="https://github.com/sergiohd47/BookTeca/blob/master/capturasWebDocker/capturaFuncionandoSInterno.png">
 </p>
-
-### Video Explicativo<a name="id19"></a>
-
-En esta parte, se podra acceder a un video donde se explica el funcionamiento de nuestra pagina web, tanto el funcionamiento basico como la parte de la tolerancia a fallos.
-
 
  
